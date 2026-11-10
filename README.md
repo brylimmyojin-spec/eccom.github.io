@@ -10,9 +10,9 @@ A modern, responsive multi-page web application built with **Bootstrap 5** to ca
 
 Instead of an overcrowded single page, the application is divided into dedicated, clean pages:
 
-1. **[Pricing Simulator](index.html):** Focused simulator with cost inputs, bundle sizing, target net margin solver, fee deductions, and live visual result cards for Shopee, TikTok Shop, and Lazada.
+1. **[Pricing Simulator](index.html):** Focused simulator with cost inputs, bundle sizing, target net margin solver, category fee deductions, and live visual result cards for Shopee, TikTok Shop, and Lazada.
 2. **[Platform Comparison](comparison.html):** Full side-by-side economics table comparing regular SRP, campaign pricing, total deductions, take-home pay, profit, net margin, and markup, with one-click **CSV Export** and print view.
-3. **[Business Profile & Allotments](profile.html):** Configure store tax registration (Non-VAT 3% vs. VAT 12%), BIR Form 2307 withholding rules, and separate per-platform ad budgets and operating overhead allotments.
+3. **[Expenses & Platform Allotments](expenses.html):** Dedicated manager to separate and configure baseline packaging costs, per-platform ad spend budgets (Shopee Ads, TikTok Ads, Lazada Sponsored Solutions), operating overheads, and store tax registration, saved locally to your device via `localStorage`.
 4. **[Fee Reference & Rate Cards](fee-reference.html):** Comprehensive searchable and filterable database of category commissions, transaction fees, shipping caps, and official Seller Center links.
 5. **[Tax & BIR Guide](tax-guide.html):** In-depth educational guide on BIR regulations (RR 16-2023 creditable 0.5% withholding tax), Non-VAT (3%), VAT-registered (12%), Output VAT formulas (`12/112`), and input VAT credits on fees.
 
@@ -29,7 +29,8 @@ Instead of an overcrowded single page, the application is divided into dedicated
   - Optional Input VAT credit on platform fees
   - BIR Creditable Withholding Tax (0.5% per RR 16-2023)
 - **All-in Cost & Expenses:** Include product cost, unit bundles, packaging cost, operating expenses, and ad spend.
-- **Target ROAS Tracking:** Calculate ad spend capacity and estimated Return on Ad Spend (ROAS).
+- **Richmond Tan ROAS Framework:** Accurate Break-Even ROAS and Target ROAS computation based on real marketplace unit economics (`Price ÷ Pre-Ad Gross Profit`), revealing the true advertising floor and maximum allowable ad spend per order.
+- **Target ROAS Tracking:** Calculate ad spend capacity, allowable CPA ceiling, and real-time campaign health status (Loss, Break-Even, Target Met).
 - **Comprehensive Fee Reference:** Live searchable directory of category commission rates, transaction fees, shipping caps, and official Seller Center documentation links.
 - **CSV Data Export:** One-click export of comparison calculations for bookkeeping and spreadsheet analysis.
 - **Unified State Across Pages:** All inputs are automatically synchronized across pages on your device via `localStorage`.

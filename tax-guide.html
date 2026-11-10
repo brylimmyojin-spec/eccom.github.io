@@ -17,18 +17,21 @@
 
   <!-- Navigation Bar -->
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-xl app-navbar sticky-top shadow-sm py-2">
       <div class="container-xl">
-        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-          <span class="fs-4">🇵🇭</span>
-          <span>PH Marketplace Calculator</span>
+        <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none" href="index.html">
+          <span class="brand-flag">🇵🇭</span>
+          <div class="d-flex flex-column lh-1">
+            <span class="brand-title fw-bold">PH Marketplace</span>
+            <span class="brand-subtitle text-body-secondary">Fee &amp; Margin Calculator</span>
+          </div>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler border-0 shadow-none px-2 py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navMenu">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-xl-0 ms-xl-2">
             <li class="nav-item">
               <a class="nav-link" href="index.html"><i class="bi bi-calculator me-1"></i>Pricing Simulator</a>
             </li>
@@ -36,7 +39,7 @@
               <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line me-1"></i>Comparison</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="profile.html"><i class="bi bi-shop me-1"></i>Business Profile</a>
+              <a class="nav-link" href="expenses.html"><i class="bi bi-cash-coin me-1"></i>Expenses &amp; Allotments</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="fee-reference.html"><i class="bi bi-journal-bookmark me-1"></i>Fee Reference</a>
@@ -46,14 +49,14 @@
             </li>
           </ul>
 
-          <div class="d-flex align-items-center gap-2">
+          <div class="d-flex align-items-center gap-2 pt-2 pt-xl-0 border-top border-xl-0">
             <!-- Theme Toggle -->
-            <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1" id="themeToggle" type="button" title="Toggle dark/light mode">
+            <button class="btn btn-outline-secondary btn-sm rounded-pill d-flex align-items-center gap-1.5 px-3 py-1.5" id="themeToggle" type="button" title="Toggle dark/light mode">
               <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
-              <span class="d-none d-md-inline" id="themeText">Theme</span>
+              <span id="themeText">Theme</span>
             </button>
             <!-- GitHub Link -->
-            <a class="btn btn-outline-secondary btn-sm text-light" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub">
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub" style="width: 34px; height: 34px;">
               <i class="bi bi-github"></i>
             </a>
           </div>
@@ -279,6 +282,23 @@
             </div>
           </div>
 
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq4">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                How do BIR taxes and fees determine my true Break-Even ROAS (Richmond Tan model)?
+              </button>
+            </h2>
+            <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#taxFaqAccordion">
+              <div class="accordion-body small text-body-secondary">
+                Many online sellers falsely assume their Break-Even ROAS is simply <code>Selling Price &divide; Product Cost</code>. In Philippine marketplaces, you must first subtract Output VAT (12/112) or Percentage Tax (3%), BIR 0.5% withholding tax, platform commissions, transaction fees, and shipping subsidies to find your <strong>true pre-ad gross profit</strong>. As e-commerce educator Richmond Tan emphasizes:
+                <div class="p-2 my-2 bg-body-tertiary border rounded font-monospace">
+                  True Break-Even ROAS = Selling Price &divide; (Platform Net Payout &minus; COGS &minus; Packaging &minus; Opex)
+                </div>
+                If your Shopee Ads or TikTok GMV Max dashboard reports a ROAS below this floor, you are losing money on every single conversion.
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -294,7 +314,7 @@
       <div class="d-flex gap-3">
         <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
         <a href="comparison.html" class="text-decoration-none text-body-secondary">Comparison</a>
-        <a href="profile.html" class="text-decoration-none text-body-secondary">Business Profile</a>
+        <a href="expenses.html" class="text-decoration-none text-body-secondary">Expenses &amp; Allotments</a>
         <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
       </div>
     </div>

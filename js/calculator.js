@@ -143,6 +143,9 @@ function calc(p, o) {
       L.push([F.pn + ' (' + pe(F.promo) + ', max ₱' + F.pcap + ')', Math.min(pr * F.promo, F.pcap), F.mand ? 0 : 1]);
     }
 
+    const nonAdCost = productCost + pack + opex;
+    const cost = nonAdCost + adcost;
+
     const fe = L.reduce((a, x) => a + x[1], 0);
     const vat = pr * vs;
     const iv = fe * (1 - k);
@@ -151,6 +154,51 @@ function calc(p, o) {
     const net = pr - vat;
     const take = pr - vat - fe + iv - wh - tx;
     const profit = take - cost;
+
+    // --- Richmond Tan ROAS Computation Model ---
+    const preAdProfit = take - nonAdCost;
+    const preAdMargin = net > 0 ? (preAdProfit / net) : 0;
+
+    // Break-Even ROAS = Selling Price / Gross Profit before Ads
+    const breakEvenRoas = preAdProfit > 0 ? (pr / preAdProfit) : null;
+    const breakEvenAdSpend = Math.max(0, preAdProfit);
+
+    // Target ROAS = Selling Price / (Pre-Ad Profit - Target Net Profit)
+    const targetProfitAmount = net * (o.m || 0);
+    const maxAdSpendAtTarget = Math.max(0, preAdProfit - targetProfitAmount);
+    const targetRoasCalculated = maxAdSpendAtTarget > 0 ? (pr / maxAdSpendAtTarget) : null;
+
+    // Realized / Current ROAS from active ad spend input:
+    const realizedRoas = adcost > 0 ? (pr / adcost) : null;
+
+    // ROAS Health Evaluation
+    let roasHealth = 'none';
+    let roasHealthLabel = 'No Ads Entered';
+    let roasBadgeClass = 'bg-secondary-subtle text-secondary-emphasis';
+
+    if (preAdProfit <= 0) {
+      roasHealth = 'negative';
+      roasHealthLabel = 'Negative Pre-Ad Margin';
+      roasBadgeClass = 'bg-danger text-white';
+    } else if (adcost > 0) {
+      if (adcost > breakEvenAdSpend) {
+        roasHealth = 'loss';
+        roasHealthLabel = 'Losing Money on Ads';
+        roasBadgeClass = 'bg-danger-subtle text-danger-emphasis border border-danger-subtle';
+      } else if (Math.abs(adcost - breakEvenAdSpend) < 0.1) {
+        roasHealth = 'breakeven';
+        roasHealthLabel = 'Break-Even (₱0 Net)';
+        roasBadgeClass = 'bg-warning-subtle text-warning-emphasis border border-warning-subtle';
+      } else if (targetRoasCalculated && realizedRoas >= targetRoasCalculated) {
+        roasHealth = 'optimal';
+        roasHealthLabel = 'Target Margin Met';
+        roasBadgeClass = 'bg-success-subtle text-success-emphasis border border-success-subtle';
+      } else {
+        roasHealth = 'profitable';
+        roasHealthLabel = 'Profitable (< Target)';
+        roasBadgeClass = 'bg-info-subtle text-info-emphasis border border-info-subtle';
+      }
+    }
 
     return {
       F,
@@ -164,12 +212,23 @@ function calc(p, o) {
       take,
       profit,
       cost,
+      nonAdCost,
       productCost,
       pack,
       opex,
       adcost,
-      roas: adcost > 0 ? (pr / adcost) : null,
-      maxAdSpend: targetRoas > 0 ? (pr / targetRoas) : 0,
+      preAdProfit,
+      preAdMargin,
+      breakEvenRoas,
+      breakEvenAdSpend,
+      targetRoasCalculated,
+      maxAdSpendAtTarget,
+      realizedRoas,
+      roas: realizedRoas,
+      maxAdSpend: maxAdSpendAtTarget > 0 ? maxAdSpendAtTarget : (targetRoas > 0 ? (pr / targetRoas) : 0),
+      roasHealth,
+      roasHealthLabel,
+      roasBadgeClass,
       net,
       ded: pr - take,
       mg: net > 0 ? (profit / net) : 0,
