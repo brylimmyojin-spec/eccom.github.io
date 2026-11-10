@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Philippine E-Commerce Tax &amp; BIR Guide | PH Marketplace Calculator</title>
+  <meta name="description" content="Guide to BIR withholding taxes (RR 16-2023), Non-VAT (3%), and VAT (12%) for Shopee, TikTok Shop, and Lazada sellers in the Philippines.">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="./css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+      <div class="container-xl">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <span class="fs-4">🇵🇭</span>
+          <span>PH Marketplace Calculator</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html"><i class="bi bi-calculator me-1"></i>Pricing Simulator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line me-1"></i>Comparison</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html"><i class="bi bi-shop me-1"></i>Business Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="fee-reference.html"><i class="bi bi-journal-bookmark me-1"></i>Fee Reference</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="tax-guide.html"><i class="bi bi-bank me-1"></i>Tax &amp; BIR Guide</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2">
+            <!-- Theme Toggle -->
+            <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1" id="themeToggle" type="button" title="Toggle dark/light mode">
+              <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+              <span class="d-none d-md-inline" id="themeText">Theme</span>
+            </button>
+            <!-- GitHub Link -->
+            <a class="btn btn-outline-secondary btn-sm text-light" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-xl py-4 flex-grow-1">
+
+    <!-- Header Section -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
+      <div>
+        <h1 class="h2 mb-1 fw-bold">Philippine E-Commerce Tax Guide</h1>
+        <p class="text-body-secondary mb-0">
+          Understanding BIR regulations, withholding tax rules (RR 16-2023), and VAT vs. Non-VAT accounting.
+        </p>
+      </div>
+      <div>
+        <a href="index.html" class="btn btn-primary btn-sm">
+          <i class="bi bi-calculator me-1"></i>Test in Pricing Simulator
+        </a>
+      </div>
+    </div>
+
+    <!-- 3 Key Pillars of Marketplace Taxes in PH -->
+    <div class="row g-4 mb-4">
+      
+      <!-- 1: BIR Withholding Tax -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-header bg-primary-subtle text-primary-emphasis fw-bold py-3">
+            <i class="bi bi-file-earmark-text me-2"></i>1. BIR RR 16-2023 (0.5% WHT)
+          </div>
+          <div class="card-body p-4">
+            <h5 class="h6 fw-bold">Creditable Withholding Tax</h5>
+            <p class="small text-body-secondary mb-3">
+              The Bureau of Internal Revenue requires e-marketplace operators (Shopee, Lazada, TikTok) to withhold <strong>0.5%</strong> of gross remittances to online sellers.
+            </p>
+            <ul class="small ps-3 mb-3 text-body-secondary">
+              <li><strong>Exemption:</strong> Annual gross remittances under ₱500,000 or qualifying BMBE accounts.</li>
+              <li><strong>Credit Form:</strong> Marketplaces issue <strong>BIR Form 2307</strong> quarterly, which you claim as a tax credit against your income tax liability.</li>
+            </ul>
+            <div class="badge bg-primary-subtle text-primary-emphasis">Creditable against annual tax</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2: Non-VAT Sellers -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-header bg-warning-subtle text-warning-emphasis fw-bold py-3">
+            <i class="bi bi-percent me-2"></i>2. Non-VAT Taxpayers (3%)
+          </div>
+          <div class="card-body p-4">
+            <h5 class="h6 fw-bold">Percentage Tax (Sec. 116)</h5>
+            <p class="small text-body-secondary mb-3">
+              Small business owners whose annual gross sales do not exceed the ₱3,000,000 threshold generally file under the 3% percentage tax regime.
+            </p>
+            <ul class="small ps-3 mb-3 text-body-secondary">
+              <li><strong>Pricing Rule:</strong> You do not break down output VAT on invoices.</li>
+              <li><strong>Model Treatment:</strong> A 3% provision is deducted in the calculator as tax expense when pricing items.</li>
+              <li><strong>No Input VAT:</strong> Non-VAT sellers cannot credit input VAT billed on marketplace fees.</li>
+            </ul>
+            <div class="badge bg-warning-subtle text-warning-emphasis">Standard small seller regime</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3: VAT Registered Sellers -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-header bg-success-subtle text-success-emphasis fw-bold py-3">
+            <i class="bi bi-receipt-cutoff me-2"></i>3. VAT-Registered Sellers (12%)
+          </div>
+          <div class="card-body p-4">
+            <h5 class="h6 fw-bold">Output VAT &amp; Input VAT Credits</h5>
+            <p class="small text-body-secondary mb-3">
+              Mandatory for sellers with annual sales exceeding ₱3,000,000 (or voluntary registration).
+            </p>
+            <ul class="small ps-3 mb-3 text-body-secondary">
+              <li><strong>Output VAT Formula:</strong> Consumer prices in the PH are VAT-inclusive: <code>Price × (12 ÷ 112)</code>.</li>
+              <li><strong>Input VAT on Fees:</strong> Marketplaces charge 12% VAT on their commission and transaction fees. You can claim this as input VAT credit against your output VAT!</li>
+            </ul>
+            <div class="badge bg-success-subtle text-success-emphasis">Eligible for input VAT credits</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Formula Cheat Sheet & Worked Example -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-body-tertiary fw-bold py-3">
+        <i class="bi bi-calculator-fill me-2 text-success"></i>Marketplace Math: Step-by-Step Worked Example
+      </div>
+      <div class="card-body p-4">
+        <p class="small text-body-secondary">
+          Suppose you sell an item for <strong>₱500.00</strong> on Shopee under the <em>Food &amp; Beverages</em> category (9.5% commission).
+        </p>
+
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle small mb-0">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Component</th>
+                <th scope="col">Non-VAT Seller (3%)</th>
+                <th scope="col">VAT-Registered Seller (12%)</th>
+                <th scope="col">Formula / Rule</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold">Gross Selling Price (SRP)</td>
+                <td class="fw-semibold">₱500.00</td>
+                <td class="fw-semibold">₱500.00</td>
+                <td>Advertised retail price in marketplace</td>
+              </tr>
+              <tr>
+                <td>Output VAT</td>
+                <td class="text-muted">₱0.00</td>
+                <td class="text-danger fw-semibold">-₱53.57</td>
+                <td><code>₱500.00 × (12 ÷ 112)</code></td>
+              </tr>
+              <tr>
+                <td>Net Sales (Tax Base)</td>
+                <td class="fw-semibold">₱500.00</td>
+                <td class="fw-semibold">₱446.43</td>
+                <td>Gross Price minus Output VAT</td>
+              </tr>
+              <tr>
+                <td>Commission Fee (9.5%)</td>
+                <td class="text-danger">-₱47.50</td>
+                <td class="text-danger">-₱47.50</td>
+                <td><code>₱500.00 × 9.5%</code></td>
+              </tr>
+              <tr>
+                <td>Transaction / Payment Fee (2.24%)</td>
+                <td class="text-danger">-₱11.20</td>
+                <td class="text-danger">-₱11.20</td>
+                <td><code>₱500.00 × 2.24%</code></td>
+              </tr>
+              <tr>
+                <td>Shipping Platform Fee (5.6%, max ₱100)</td>
+                <td class="text-danger">-₱28.00</td>
+                <td class="text-danger">-₱28.00</td>
+                <td><code>₱500.00 × 5.6%</code></td>
+              </tr>
+              <tr>
+                <td>Order Processing Fee</td>
+                <td class="text-danger">-₱5.00</td>
+                <td class="text-danger">-₱5.00</td>
+                <td>Fixed ₱5.00 per order</td>
+              </tr>
+              <tr>
+                <td>Input VAT Credit on Marketplace Fees</td>
+                <td class="text-muted">₱0.00 (N/A)</td>
+                <td class="text-success fw-semibold">+₱9.83</td>
+                <td>12/112 of total marketplace fees</td>
+              </tr>
+              <tr>
+                <td>Withholding Tax (0.5% Creditable)</td>
+                <td class="text-danger">-₱2.50</td>
+                <td class="text-danger">-₱2.50</td>
+                <td><code>₱500.00 × 0.5%</code> (Credited via 2307)</td>
+              </tr>
+              <tr class="table-light">
+                <td class="fw-bold">Net Remitted / Take-Home Pay</td>
+                <td class="fw-bold fs-6 text-primary">₱390.80</td>
+                <td class="fw-bold fs-6 text-primary">₱362.06</td>
+                <td>Actual cash received in seller wallet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frequently Asked Questions -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-body-tertiary fw-bold py-3">
+        <i class="bi bi-question-circle-fill me-2 text-primary"></i>Frequently Asked Questions for PH Sellers
+      </div>
+      <div class="card-body p-4">
+        <div class="accordion" id="taxFaqAccordion">
+          
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq1">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                Is the 0.5% withholding tax an extra cost or an advance payment?
+              </button>
+            </h2>
+            <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#taxFaqAccordion">
+              <div class="accordion-body small text-body-secondary">
+                The 0.5% withholding tax is <strong>not a platform fee or an expense</strong>. It is a <em>creditable withholding tax</em> remitted directly to the BIR on your behalf. At the end of each quarter, Shopee, TikTok Shop, and Lazada issue a digital <strong>BIR Form 2307 (Certificate of Creditable Tax Withheld at Source)</strong>. When filing your quarterly or annual income tax return (BIR Form 1701 or 1702), you deduct this amount directly from your final income tax payable.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq2">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                Why does Lazada have a 2.24% Payment Fee instead of a separate shipping platform fee?
+              </button>
+            </h2>
+            <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#taxFaqAccordion">
+              <div class="accordion-body small text-body-secondary">
+                Lazada bundles payment processing into a 2.24% payment fee (2.0% + 12% VAT). However, Lazada sellers typically enroll in <strong>Promo Pass</strong> which levies a 5.8% fee (capped at ₱100) to cover platform shipping discount subsidies and voucher visibility.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq3">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                How does the goal-seek target margin solver work?
+              </button>
+            </h2>
+            <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#taxFaqAccordion">
+              <div class="accordion-body small text-body-secondary">
+                Because fees in Philippine marketplaces are interdependent (some fees are fixed percentages of price, others have caps like ₱100 or ₱200, and VAT is subtracted before margin is calculated), finding the exact price by algebra alone can be complex. The calculator uses a binary-search solver to determine the precise price down to two decimal places that guarantees your desired target net margin.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary py-4 border-top mt-auto">
+    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+      <div>
+        <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
+      </div>
+      <div class="d-flex gap-3">
+        <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
+        <a href="comparison.html" class="text-decoration-none text-body-secondary">Comparison</a>
+        <a href="profile.html" class="text-decoration-none text-body-secondary">Business Profile</a>
+        <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Engine for theme -->
+  <script src="./js/calculator.js"></script>
+  <script>
+    initTheme();
+  </script>
+</body>
+</html>

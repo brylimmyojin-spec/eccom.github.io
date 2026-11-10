@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pricing Simulator | PH Marketplace Fee &amp; Margin Calculator</title>
+  <meta name="description" content="Simulate selling prices, calculate deductions, and see take-home pay across Shopee Philippines, TikTok Shop, and Lazada.">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="./css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+      <div class="container-xl">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <span class="fs-4">🇵🇭</span>
+          <span>PH Marketplace Calculator</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html"><i class="bi bi-calculator me-1"></i>Pricing Simulator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line me-1"></i>Comparison</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html"><i class="bi bi-shop me-1"></i>Business Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="fee-reference.html"><i class="bi bi-journal-bookmark me-1"></i>Fee Reference</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tax-guide.html"><i class="bi bi-bank me-1"></i>Tax &amp; BIR Guide</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2">
+            <!-- Theme Toggle -->
+            <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1" id="themeToggle" type="button" title="Toggle dark/light mode">
+              <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+              <span class="d-none d-md-inline" id="themeText">Theme</span>
+            </button>
+            <!-- GitHub Link -->
+            <a class="btn btn-outline-secondary btn-sm text-light" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-xl py-4 flex-grow-1">
+
+    <!-- Hero Title -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <h1 class="h2 mb-0 fw-bold">Marketplace Pricing Simulator</h1>
+          <span class="badge bg-body-tertiary text-body-secondary border px-2.5 py-1.5" id="profilePill" style="font-size:0.75rem;">
+            <i class="bi bi-shop me-1 text-primary"></i><span id="profileNameDisplay">Store</span> (<span id="profileTaxDisplay">Non-VAT</span>)
+            <a href="profile.html" class="ms-1 text-primary text-decoration-none" title="Configure Profile"><i class="bi bi-pencil-square"></i></a>
+          </span>
+        </div>
+        <p class="text-body-secondary mb-0">
+          Enter product costs and target margins to simulate exact selling prices and net take-home pay.
+        </p>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge bg-secondary-subtle text-secondary-emphasis border px-3 py-2" id="save-status">
+          <i class="bi bi-check2-circle text-success me-1"></i>Settings saved on device
+        </span>
+        <a href="comparison.html" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-bar-chart-line me-1"></i>View Full Table
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Simulator Grid: Inputs on Left, Real-Time Result Cards on Right -->
+    <div class="row g-4">
+      
+      <!-- Left Column: Input Form Controls -->
+      <div class="col-lg-5 col-xl-4">
+        <div class="card shadow-sm border-0 sticky-lg-top" style="top: 80px; z-index: 10;">
+          
+          <!-- Card Header Tabs -->
+          <div class="card-header bg-body-tertiary border-bottom-0 pb-0 pt-3">
+            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="product-tab" data-bs-toggle="tab" data-bs-target="#product-panel" type="button" role="tab" aria-controls="product-panel" aria-selected="true">
+                  <i class="bi bi-box-seam me-1"></i>Pricing
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="expense-tab" data-bs-toggle="tab" data-bs-target="#expense-panel" type="button" role="tab" aria-controls="expense-panel" aria-selected="false">
+                  <i class="bi bi-receipt me-1"></i>Expenses &amp; Ads
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-body p-3 p-md-4">
+            <div class="tab-content">
+              
+              <!-- Tab 1: Product & Pricing -->
+              <div class="tab-pane fade show active" id="product-panel" role="tabpanel" aria-labelledby="product-tab">
+                <div class="row g-3">
+                  
+                  <!-- Tax Registration -->
+                  <div class="col-12">
+                    <label class="form-label fw-semibold small mb-1">BIR Tax Registration</label>
+                    <div class="btn-group w-100" role="group">
+                      <input type="radio" class="btn-check" name="tx" id="nv" autocomplete="off" checked>
+                      <label class="btn btn-outline-primary btn-sm" for="nv">Non-VAT (3%)</label>
+
+                      <input type="radio" class="btn-check" name="tx" id="vat" autocomplete="off">
+                      <label class="btn btn-outline-primary btn-sm" for="vat">VAT (12%)</label>
+                    </div>
+                  </div>
+
+                  <!-- Base Cost -->
+                  <div class="col-sm-6 col-lg-12">
+                    <label for="cost" class="form-label fw-semibold small mb-1">Base Cost Per Unit</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control" id="cost" value="100" min="0" step="0.01">
+                    </div>
+                    <div class="form-text" style="font-size:0.75rem;">Wholesale or direct product cost</div>
+                  </div>
+
+                  <!-- Units per Bundle -->
+                  <div class="col-sm-6 col-lg-12">
+                    <label for="units" class="form-label fw-semibold small mb-1">Units Per Bundle</label>
+                    <div class="input-group input-group-sm">
+                      <input type="number" class="form-control" id="units" value="1" min="1" step="1">
+                      <span class="input-group-text">pcs</span>
+                    </div>
+                  </div>
+
+                  <!-- Target Margin -->
+                  <div class="col-sm-6 col-lg-12">
+                    <label for="mg" class="form-label fw-semibold small mb-1">Target Net Margin</label>
+                    <div class="input-group input-group-sm">
+                      <input type="number" class="form-control" id="mg" value="20" min="0" max="80" step="0.5">
+                      <span class="input-group-text">%</span>
+                    </div>
+                    <div class="form-text" style="font-size:0.75rem;">Profit target (% of net sales)</div>
+                  </div>
+
+                  <!-- Fixed Selling Price (Optional) -->
+                  <div class="col-sm-6 col-lg-12">
+                    <label for="srp" class="form-label fw-semibold small mb-1">Fixed Price Override (Optional)</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control" id="srp" placeholder="Leave empty to solve" min="0" step="1">
+                    </div>
+                    <div class="form-text" style="font-size:0.75rem;">Overrides auto margin pricing</div>
+                  </div>
+
+                  <!-- Categories -->
+                  <div class="col-12">
+                    <hr class="my-2">
+                    <div class="mb-2">
+                      <label for="cs" class="form-label fw-semibold small mb-1 text-danger">Shopee Category</label>
+                      <select class="form-select form-select-sm" id="cs"></select>
+                    </div>
+                    <div class="mb-2">
+                      <label for="ct" class="form-label fw-semibold small mb-1 text-danger-emphasis">TikTok Shop Category</label>
+                      <select class="form-select form-select-sm" id="ct"></select>
+                    </div>
+                    <div class="mb-1">
+                      <label for="cl" class="form-label fw-semibold small mb-1 text-primary">Lazada Category</label>
+                      <select class="form-select form-select-sm" id="cl"></select>
+                    </div>
+                  </div>
+
+                  <!-- Switches -->
+                  <div class="col-12">
+                    <hr class="my-2">
+                    <div class="form-check form-switch small mb-2">
+                      <input class="form-check-input" type="checkbox" id="osh">
+                      <label class="form-check-label" for="osh">Shopee Mega Voucher (4–5%)</label>
+                    </div>
+                    <div class="form-check form-switch small mb-2">
+                      <input class="form-check-input" type="checkbox" id="ott">
+                      <label class="form-check-label" for="ott">TikTok Mega Discount (4–5%)</label>
+                    </div>
+                    <div class="form-check form-switch small mb-2">
+                      <input class="form-check-input" type="checkbox" id="camp">
+                      <label class="form-check-label" for="camp">Campaign / Sale Day (9.9, etc.)</label>
+                    </div>
+                    <div class="form-check form-switch small mb-2">
+                      <input class="form-check-input" type="checkbox" id="wht" checked>
+                      <label class="form-check-label" for="wht">Withholding Tax (0.5% BIR)</label>
+                    </div>
+                    <div class="form-check form-switch small">
+                      <input class="form-check-input" type="checkbox" id="claim" disabled>
+                      <label class="form-check-label" for="claim">Claim Input VAT Credit (VAT only)</label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Tab 2: Packaging, Ads & Expenses -->
+              <div class="tab-pane fade" id="expense-panel" role="tabpanel" aria-labelledby="expense-tab">
+                <div class="row g-3">
+                  <div class="col-12">
+                    <label for="pack" class="form-label fw-semibold small mb-1">Packaging Cost Per Order</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control" id="pack" value="0" min="0" step="0.01">
+                    </div>
+                    <div class="form-text" style="font-size:0.75rem;">Bubble wrap, box, pouch, thermal paper</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="opex" class="form-label fw-semibold small mb-1">Operating Overhead Per Order</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control" id="opex" value="0" min="0" step="0.01">
+                    </div>
+                    <div class="form-text" style="font-size:0.75rem;">Packing labor, storage, fulfillment</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="adcost" class="form-label fw-semibold small mb-1">Ad Spend Per Order</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control" id="adcost" value="0" min="0" step="0.01">
+                    </div>
+                    <div class="form-text" style="font-size:0.75rem;">Shopee Ads, TikTok Ads, GMV Max</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="target-roas" class="form-label fw-semibold small mb-1">Target ROAS Multiplier</label>
+                    <div class="input-group input-group-sm">
+                      <input type="number" class="form-control" id="target-roas" value="3" min="0.1" step="0.1">
+                      <span class="input-group-text">×</span>
+                    </div>
+                    <div class="form-text" style="font-size:0.75rem;">Return on Ad Spend goal</div>
+                  </div>
+                </div>
+
+                <div class="alert alert-info py-2 px-3 mt-3 mb-0" style="font-size:0.75rem;">
+                  <i class="bi bi-info-circle me-1"></i>Expenses and ads are added directly to your <strong>All-in Cost</strong> for true profit calculation.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Quick Action Footer -->
+          <div class="card-footer bg-body-tertiary d-flex justify-content-between align-items-center py-2 px-3">
+            <button class="btn btn-link btn-sm text-body-secondary text-decoration-none p-0" id="resetDefaultsBtn">
+              <i class="bi bi-arrow-counterclockwise me-1"></i>Reset Defaults
+            </button>
+            <a href="comparison.html" class="btn btn-sm btn-primary">
+              <i class="bi bi-table me-1"></i>Compare Tables
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Column: Real-Time Platform Result Cards -->
+      <div class="col-lg-7 col-xl-8">
+        
+        <!-- Summary Callout -->
+        <div class="alert alert-primary d-flex align-items-center justify-content-between shadow-sm mb-4 py-3 px-4 border-0" id="bestPlatformAlert">
+          <div class="d-flex align-items-center gap-3">
+            <div class="fs-2 text-primary"><i class="bi bi-trophy-fill"></i></div>
+            <div>
+              <div class="fw-bold fs-6" id="bestPlatformTitle">Calculating best platform...</div>
+              <div class="small opacity-75" id="bestPlatformSubtitle">Real-time take-home pay and profit estimation</div>
+            </div>
+          </div>
+          <div>
+            <a href="comparison.html" class="btn btn-sm btn-outline-primary d-none d-sm-inline-block">Full Table &rarr;</a>
+          </div>
+        </div>
+
+        <!-- 3 Platform Cards Grid -->
+        <div class="row g-4" id="cards">
+          <!-- Rendered dynamically -->
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary py-4 border-top mt-auto">
+    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+      <div>
+        <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
+      </div>
+      <div class="d-flex gap-3">
+        <a href="comparison.html" class="text-decoration-none text-body-secondary">Comparison</a>
+        <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
+        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax Guide</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Data & Engine -->
+  <script src="./js/data.js"></script>
+  <script src="./js/calculator.js"></script>
+
+  <!-- Page Script -->
+  <script>
+    const $ = s => document.querySelector(s);
+
+    // Populate Category Dropdowns
+    DEFAULT_CATEGORIES.forEach(([p, def]) => {
+      const s = $('#c' + (p === 'sh' ? 's' : p === 'tt' ? 't' : 'l'));
+      if (!s) return;
+      s.innerHTML = '';
+      D[p].forEach((c, i) => s.add(new Option(c[0], i)));
+      const idx = D[p].findIndex(c => c[0] === def);
+      s.value = idx >= 0 ? idx : 0;
+    });
+
+    function restoreConfig() {
+      const saved = getStoredConfig();
+      CONFIG_IDS.forEach(id => {
+        if (!(id in saved)) return;
+        const el = document.getElementById(id);
+        if (!el) return;
+        const val = saved[id];
+        if (el.type === 'checkbox' || el.type === 'radio') {
+          el.checked = val === true;
+        } else if (el.tagName === 'SELECT') {
+          if (Array.from(el.options).some(opt => opt.value === String(val))) {
+            el.value = String(val);
+          }
+        } else if (val !== undefined && val !== null) {
+          el.value = val;
+        }
+      });
+
+      if (saved.activeTab === 'expenses') {
+        const expenseTabTrigger = document.querySelector('#expense-tab');
+        if (expenseTabTrigger) {
+          bootstrap.Tab.getOrCreateInstance(expenseTabTrigger).show();
+        }
+      }
+    }
+
+    function saveCurrentConfig() {
+      const saved = {};
+      CONFIG_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          saved[id] = (el.type === 'checkbox' || el.type === 'radio') ? el.checked : el.value;
+        }
+      });
+      const activeTabEl = document.querySelector('#expense-tab.active');
+      saved.activeTab = activeTabEl ? 'expenses' : 'product';
+      saveConfigToStorage(saved);
+      $('#save-status').innerHTML = '<i class="bi bi-check2-circle text-success me-1"></i>Saved locally';
+    }
+
+    function rowHtml(label, val, isTotal = false) {
+      return `<div class="breakdown-row ${isTotal ? 'total' : ''}">
+        <span class="text-body-secondary">${label}</span>
+        <span class="fw-semibold">${P(val)}</span>
+      </div>`;
+    }
+
+    function cardHtml(p, r, isBest, o) {
+      const pl = PL[p];
+      const t = r.price > 0 ? r.price : 1;
+      const cp = Math.min(100, Math.max(0, (r.cost / t) * 100));
+      const dp = Math.max(0, Math.min(100 - cp, (r.ded / t) * 100));
+      const pp = Math.max(0, 100 - cp - dp);
+
+      const mandatoryFees = r.L.filter(x => !x[2]);
+      const optFees = r.L.filter(x => x[2]);
+
+      return `
+      <div class="col-md-6 col-xl-4">
+        <div class="card h-100 shadow-sm ${pl.borderClass} ${isBest ? 'card-best' : ''}">
+          <div class="card-body d-flex flex-column p-3 p-xl-4">
+            
+            <!-- Platform Header -->
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span class="badge ${pl.badgeClass} fs-6 px-2.5 py-1.5 fw-bold">
+                ${pl.n}
+              </span>
+              ${isBest ? '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle fw-bold"><i class="bi bi-trophy-fill me-1"></i>Highest Profit</span>' : ''}
+            </div>
+
+            <small class="text-body-secondary text-truncate mb-3" title="${r.F.cat}">
+              ${r.F.cat}
+            </small>
+
+            <!-- Price & Take-home Banner -->
+            <div class="bg-body-tertiary rounded-3 p-3 mb-3 border">
+              <div class="d-flex justify-content-between align-items-baseline mb-1">
+                <span class="text-body-secondary small fw-medium">${o.srp > 0 ? 'Your Price' : 'Suggested Price'}:</span>
+                <span class="fw-bold fs-5">${P(r.price)}</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-baseline">
+                <span class="text-body-secondary small fw-medium">Net Take-Home:</span>
+                <span class="take-home-display">${P(r.take)}</span>
+              </div>
+            </div>
+
+            <!-- Stacked Progress Bar -->
+            <div class="mb-3">
+              <div class="progress-stacked" style="height: 10px; border-radius: 6px;">
+                <div class="progress" role="progressbar" style="width: ${cp}%" aria-valuenow="${cp}" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="background-color: var(--cost-color);"></div>
+                </div>
+                <div class="progress" role="progressbar" style="width: ${dp}%" aria-valuenow="${dp}" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="background-color: var(--ded-color);"></div>
+                </div>
+                <div class="progress" role="progressbar" style="width: ${pp}%" aria-valuenow="${pp}" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" style="background-color: var(--profit-color);"></div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between text-body-secondary small mt-1" style="font-size: 0.72rem;">
+                <div><span class="legend-indicator" style="background-color: var(--cost-color);"></span>Cost: ${(cp).toFixed(0)}%</div>
+                <div><span class="legend-indicator" style="background-color: var(--ded-color);"></span>Fees: ${(dp).toFixed(0)}%</div>
+                <div><span class="legend-indicator" style="background-color: var(--profit-color);"></span>Profit: ${(pp).toFixed(0)}%</div>
+              </div>
+            </div>
+
+            <!-- Detailed Breakdown -->
+            <div class="flex-grow-1">
+              <div class="fw-bold text-uppercase text-body-secondary small mb-1 mt-2" style="font-size:0.75rem;">
+                Mandatory Platform Fees
+              </div>
+              ${mandatoryFees.map(x => rowHtml(x[0], x[1])).join('')}
+
+              ${optFees.length ? `
+                <div class="fw-bold text-uppercase text-body-secondary small mb-1 mt-3" style="font-size:0.75rem;">
+                  Opt-In Programs
+                </div>
+                ${optFees.map(x => rowHtml(x[0], x[1])).join('')}
+              ` : ''}
+
+              <div class="fw-bold text-uppercase text-body-secondary small mb-1 mt-3" style="font-size:0.75rem;">
+                Philippine Taxes
+              </div>
+              ${o.vat ? 
+                rowHtml('Output VAT (12/112 of price)', r.vat) + 
+                (r.iv ? rowHtml('Input VAT credit on fees', -r.iv) : '') : 
+                rowHtml('Non-VAT Percentage Tax (3%)', r.tx)
+              }
+              ${rowHtml('Withholding Tax (0.5%)', r.wh)}
+
+              ${rowHtml('Total Deductions', r.ded, true)}
+
+              <div class="fw-bold text-uppercase text-body-secondary small mb-1 mt-3" style="font-size:0.75rem;">
+                Costs &amp; Profit
+              </div>
+              ${rowHtml('Product Cost (' + o.units + ' unit' + (o.units > 1 ? 's' : '') + ')', r.productCost)}
+              ${r.pack > 0 ? rowHtml('Packaging Cost', r.pack) : ''}
+              ${r.opex > 0 ? rowHtml('Overhead (' + pl.n + ')', r.opex) : ''}
+              ${r.adcost > 0 ? rowHtml('Ad Spend (' + pl.n + ')', r.adcost) : ''}
+              ${rowHtml('All-in Cost', r.cost, true)}
+              ${rowHtml('Net Profit', r.profit, true)}
+            </div>
+
+            <!-- Margin & ROAS Badges Footer -->
+            <div class="pt-3 mt-3 border-top">
+              <div class="row g-2 text-center">
+                <div class="col-6">
+                  <div class="p-1.5 p-xl-2 border rounded bg-body-tertiary">
+                    <small class="text-body-secondary d-block" style="font-size:0.72rem;">Net Margin</small>
+                    <span class="fw-bold text-success">${(r.mg * 100).toFixed(1)}%</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-1.5 p-xl-2 border rounded bg-body-tertiary">
+                    <small class="text-body-secondary d-block" style="font-size:0.72rem;">Markup</small>
+                    <span class="fw-bold">${(r.mk * 100).toFixed(1)}%</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-1.5 p-xl-2 border rounded bg-body-tertiary">
+                    <small class="text-body-secondary d-block" style="font-size:0.72rem;">Est. ROAS</small>
+                    <span class="fw-bold">${r.roas === null ? '—' : r.roas.toFixed(2) + '×'}</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-1.5 p-xl-2 border rounded bg-body-tertiary">
+                    <small class="text-body-secondary d-block" style="font-size:0.72rem;">Max Ad Spend</small>
+                    <span class="fw-bold">${P(r.maxAdSpend)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function render() {
+      const profile = getStoredProfile();
+      if ($('#profileNameDisplay')) $('#profileNameDisplay').textContent = profile.shopName || 'Store';
+      if ($('#profileTaxDisplay')) $('#profileTaxDisplay').textContent = profile.taxStatus === 'vat' ? 'VAT' : 'Non-VAT';
+
+      const vatChecked = $('#vat').checked;
+      $('#claim').disabled = !vatChecked;
+
+      const o = {
+        vat: vatChecked,
+        cost: Math.max(0, +$('#cost').value || 0),
+        units: Math.max(1, +$('#units').value || 1),
+        pack: Math.max(0, +$('#pack').value || (profile.packagingCost || 0)),
+        opex: Math.max(0, +$('#opex').value || 0),
+        adcost: Math.max(0, +$('#adcost').value || 0),
+        targetRoas: Math.max(0.1, +$('#target-roas').value || 3),
+        m: Math.max(0, Math.min(0.8, (+$('#mg').value || 0) / 100)),
+        srp: Math.max(0, +$('#srp').value || 0),
+        wht: $('#wht').checked,
+        claim: vatChecked && $('#claim').checked,
+        camp: $('#camp').checked,
+        opt: {
+          sh: $('#osh').checked,
+          tt: $('#ott').checked
+        },
+        cat: {
+          sh: +$('#cs').value || 0,
+          tt: +$('#ct').value || 0,
+          lz: +$('#cl').value || 0
+        },
+        platformAllotments: profile.platforms || {}
+      };
+
+      const R = ['sh', 'tt', 'lz'].map(p => [p, calc(p, o)]);
+      const best = Math.max(...R.map(r => r[1].profit));
+      const bestItem = R.find(r => r[1].profit === best);
+
+      if (bestItem) {
+        const bestPlatformName = PL[bestItem[0]].n;
+        const bestProfit = P(bestItem[1].profit);
+        const bestMargin = (bestItem[1].mg * 100).toFixed(1) + '%';
+        $('#bestPlatformTitle').innerHTML = `Best Platform: <span class="text-primary fw-bolder">${bestPlatformName}</span>`;
+        $('#bestPlatformSubtitle').innerHTML = `Highest net profit: <strong>${bestProfit}</strong> (${bestMargin} net margin on suggested SRP of ${P(bestItem[1].price)}).`;
+      }
+
+      $('#cards').innerHTML = R.map(([p, r]) => cardHtml(p, r, r.profit === best, o)).join('');
+
+      saveCurrentConfig();
+    }
+
+    function resetDefaults() {
+      if (!confirm('Reset all values to default settings?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      $('#nv').checked = true;
+      $('#vat').checked = false;
+      $('#cost').value = '100';
+      $('#units').value = '1';
+      $('#mg').value = '20';
+      $('#srp').value = '';
+      $('#pack').value = '0';
+      $('#opex').value = '0';
+      $('#adcost').value = '0';
+      $('#target-roas').value = '3';
+      $('#osh').checked = false;
+      $('#ott').checked = false;
+      $('#camp').checked = false;
+      $('#wht').checked = true;
+      $('#claim').checked = false;
+
+      DEFAULT_CATEGORIES.forEach(([p, def]) => {
+        const s = $('#c' + (p === 'sh' ? 's' : p === 'tt' ? 't' : 'l'));
+        if (!s) return;
+        const idx = D[p].findIndex(c => c[0] === def);
+        s.value = idx >= 0 ? idx : 0;
+      });
+
+      render();
+    }
+
+    // Initialize
+    restoreConfig();
+    initTheme();
+
+    document.querySelectorAll('input, select').forEach(e => {
+      e.addEventListener('input', render);
+      e.addEventListener('change', render);
+    });
+
+    $('#resetDefaultsBtn').addEventListener('click', resetDefaults);
+
+    document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(tabEl => {
+      tabEl.addEventListener('shown.bs.tab', saveCurrentConfig);
+    });
+
+    render();
+  </script>
+</body>
+</html>

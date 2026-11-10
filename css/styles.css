@@ -1,0 +1,138 @@
+:root {
+  --shopee-color: #ee4d2d;
+  --tiktok-color: #fe2c55;
+  --lazada-color: #0f146d;
+  --cost-color: #6c757d;
+  --ded-color: #fd7e14;
+  --profit-color: #198754;
+}
+
+[data-bs-theme="dark"] {
+  --lazada-color: #4c6ef5;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+/* Navbar */
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.nav-link {
+  font-weight: 500;
+  transition: color 0.15s ease-in-out;
+}
+.nav-link.active {
+  font-weight: 700 !important;
+  color: #fff !important;
+  border-bottom: 2px solid var(--bs-primary);
+}
+
+/* Platform Headers & Badges */
+.border-shopee {
+  border-top: 4px solid var(--shopee-color) !important;
+}
+.border-tiktok {
+  border-top: 4px solid var(--tiktok-color) !important;
+}
+.border-lazada {
+  border-top: 4px solid var(--lazada-color) !important;
+}
+
+.badge-shopee {
+  background-color: #fff0ed;
+  color: var(--shopee-color);
+  border: 1px solid rgba(238, 77, 45, 0.3);
+}
+[data-bs-theme="dark"] .badge-shopee {
+  background-color: rgba(238, 77, 45, 0.15);
+  color: #ff7854;
+}
+
+.badge-tiktok {
+  background-color: #fff0f3;
+  color: var(--tiktok-color);
+  border: 1px solid rgba(254, 44, 85, 0.3);
+}
+[data-bs-theme="dark"] .badge-tiktok {
+  background-color: rgba(254, 44, 85, 0.15);
+  color: #ff6584;
+}
+
+.badge-lazada {
+  background-color: #f0f2ff;
+  color: var(--lazada-color);
+  border: 1px solid rgba(15, 20, 109, 0.3);
+}
+[data-bs-theme="dark"] .badge-lazada {
+  background-color: rgba(76, 110, 245, 0.15);
+  color: #748ffc;
+}
+
+/* Card Best */
+.card-best {
+  border: 2px solid var(--profit-color) !important;
+  box-shadow: 0 0.5rem 1.25rem rgba(25, 135, 84, 0.18) !important;
+}
+
+/* Large numbers */
+.take-home-display {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--profit-color);
+}
+
+.metric-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Breakdown rows */
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.3rem 0;
+  font-size: 0.85rem;
+  border-bottom: 1px dashed var(--bs-border-color-translucent);
+}
+.breakdown-row:last-child {
+  border-bottom: none;
+}
+.breakdown-row.total {
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--bs-border-color);
+  border-bottom: none;
+  padding-top: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+/* Legend Indicator */
+.legend-indicator {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  margin-right: 4px;
+}
+
+/* Table Best Row */
+.table-best-row {
+  background-color: rgba(25, 135, 84, 0.08) !important;
+  font-weight: 600;
+}
+
+/* Smooth transitions */
+.card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Business Profile &amp; Expense Allotments | PH Marketplace Fee Calculator</title>
+  <meta name="description" content="Configure your seller tax profile (VAT/Non-VAT) and platform-specific expense and ad spend allotments for Shopee, TikTok Shop, and Lazada.">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="./css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+      <div class="container-xl">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <span class="fs-4">🇵🇭</span>
+          <span>PH Marketplace Calculator</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html"><i class="bi bi-calculator me-1"></i>Pricing Simulator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line me-1"></i>Comparison</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="profile.html"><i class="bi bi-shop me-1"></i>Business Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="fee-reference.html"><i class="bi bi-journal-bookmark me-1"></i>Fee Reference</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tax-guide.html"><i class="bi bi-bank me-1"></i>Tax &amp; BIR Guide</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2">
+            <!-- Theme Toggle -->
+            <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1" id="themeToggle" type="button" title="Toggle dark/light mode">
+              <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+              <span class="d-none d-md-inline" id="themeText">Theme</span>
+            </button>
+            <!-- GitHub Link -->
+            <a class="btn btn-outline-secondary btn-sm text-light" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-xl py-4 flex-grow-1">
+
+    <!-- Header Section -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
+      <div>
+        <h1 class="h2 mb-1 fw-bold">Seller Business Profile &amp; Expense Allotments</h1>
+        <p class="text-body-secondary mb-0">
+          Configure your BIR tax status, packaging baseline, and separate advertising and operating expenses for each marketplace.
+        </p>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle px-3 py-2" id="saveBadge">
+          <i class="bi bi-shield-check me-1"></i>Profile active &amp; synced
+        </span>
+        <button class="btn btn-primary btn-sm" id="saveProfileBtn" type="button">
+          <i class="bi bi-floppy me-1"></i>Save Profile
+        </button>
+      </div>
+    </div>
+
+    <!-- Alert Banner -->
+    <div class="alert alert-info d-flex align-items-center justify-content-between shadow-sm mb-4 py-3 px-4 border-0">
+      <div class="d-flex align-items-center gap-3">
+        <div class="fs-2 text-info"><i class="bi bi-lightbulb-fill"></i></div>
+        <div>
+          <div class="fw-bold fs-6">Personalized Marketplace Economics</div>
+          <div class="small opacity-75">
+            Different platforms incur different marketing and fulfillment costs (e.g. TikTok Live studio and creator samples vs. Shopee Search Ads). Settings configured here will automatically populate your <strong>Pricing Simulator</strong> and <strong>Comparison Table</strong>.
+          </div>
+        </div>
+      </div>
+      <div>
+        <a href="index.html" class="btn btn-sm btn-outline-primary d-none d-md-inline-block">Go to Simulator &rarr;</a>
+      </div>
+    </div>
+
+    <form id="profileForm">
+      
+      <!-- Section 1: Business Identity & BIR Tax Profile -->
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-body-tertiary fw-bold py-3">
+          <i class="bi bi-building me-2 text-primary"></i>1. Store Identity &amp; Tax Registration
+        </div>
+        <div class="card-body p-4">
+          <div class="row g-3">
+            
+            <!-- Shop Name -->
+            <div class="col-md-6">
+              <label for="shopName" class="form-label fw-semibold">Store / Business Name</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-shop"></i></span>
+                <input type="text" class="form-control" id="shopName" placeholder="e.g. Manila E-Store PH" value="My Online Store">
+              </div>
+              <div class="form-text">Used to label reports and comparison exports.</div>
+            </div>
+
+            <!-- Default Margin -->
+            <div class="col-md-3">
+              <label for="defaultMargin" class="form-label fw-semibold">Default Target Margin</label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="defaultMargin" value="20" min="0" max="80" step="0.5">
+                <span class="input-group-text">%</span>
+              </div>
+              <div class="form-text">Baseline profit target.</div>
+            </div>
+
+            <!-- Base Packaging Cost -->
+            <div class="col-md-3">
+              <label for="packagingCost" class="form-label fw-semibold">Baseline Packaging Cost</label>
+              <div class="input-group">
+                <span class="input-group-text">₱</span>
+                <input type="number" class="form-control" id="packagingCost" value="0" min="0" step="0.01">
+              </div>
+              <div class="form-text">Base pouch, box, or bubble wrap.</div>
+            </div>
+
+            <!-- Tax Registration -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">BIR Tax Registration Status</label>
+              <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="profTax" id="profNonVat" value="non-vat" checked>
+                <label class="btn btn-outline-primary" for="profNonVat">
+                  <i class="bi bi-percent me-1"></i>Non-VAT (3% Percentage Tax)
+                </label>
+
+                <input type="radio" class="btn-check" name="profTax" id="profVat" value="vat">
+                <label class="btn btn-outline-primary" for="profVat">
+                  <i class="bi bi-receipt-cutoff me-1"></i>VAT-Registered (12%)
+                </label>
+              </div>
+              <div class="form-text">Non-VAT for annual sales &lt; ₱3M; VAT for sales &gt; ₱3M.</div>
+            </div>
+
+            <!-- Tax Checkboxes -->
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+              <div class="form-check form-switch mb-2">
+                <input class="form-check-input" type="checkbox" id="profClaimVat" disabled>
+                <label class="form-check-label" for="profClaimVat">
+                  <strong>Claim Input VAT on Marketplace Fees</strong>
+                  <span class="text-body-secondary d-block small">Credits back 12% input VAT billed on platform commissions (VAT-registered sellers only).</span>
+                </label>
+              </div>
+
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="profIncludeWht" checked>
+                <label class="form-check-label" for="profIncludeWht">
+                  <strong>Subject to 0.5% Creditable Withholding Tax (RR 16-2023)</strong>
+                  <span class="text-body-secondary d-block small">Uncheck only if exempt (gross remittances &lt; ₱500,000 annually or BMBE registered).</span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Platform-Specific Expense & Ad Allotments -->
+      <h2 class="h5 fw-bold mb-3">
+        <i class="bi bi-pie-chart-fill me-2 text-primary"></i>2. Separate Platform Expense &amp; Ad Budget Allotments
+      </h2>
+
+      <div class="row g-4 mb-4">
+        
+        <!-- Shopee Allotment -->
+        <div class="col-lg-4">
+          <div class="card h-100 shadow-sm border-shopee">
+            <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-3">
+              <span class="badge badge-shopee fs-6 fw-bold">Shopee Philippines</span>
+              <i class="bi bi-tag-fill text-danger"></i>
+            </div>
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <label for="shAdCost" class="form-label fw-semibold small mb-1">
+                  Shopee Ads Spend Per Order
+                </label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="shAdCost" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Search, Discovery &amp; Live ads budget allotment</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="shRoas" class="form-label fw-semibold small mb-1">
+                  Target ROAS Multiplier
+                </label>
+                <div class="input-group input-group-sm">
+                  <input type="number" class="form-control" id="shRoas" value="3.5" min="0.1" step="0.1">
+                  <span class="input-group-text">×</span>
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Minimum acceptable return on ad spend</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="shOpex" class="form-label fw-semibold small mb-1">
+                  Specific Shopee Overhead / Order
+                </label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="shOpex" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Shopee pouches, waybills, packing labor</div>
+              </div>
+
+              <div class="form-check form-switch small mb-3">
+                <input class="form-check-input" type="checkbox" id="shOptIn">
+                <label class="form-check-label" for="shOptIn">
+                  Default: Opt-in to Mega Discount Voucher (4–5%)
+                </label>
+              </div>
+
+              <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border">
+                <strong>Shopee Notes:</strong> Standard category commission + 2.24% transaction fee + 5.6% shipping fee subsidy + 1.5% growth fee.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TikTok Shop Allotment -->
+        <div class="col-lg-4">
+          <div class="card h-100 shadow-sm border-tiktok">
+            <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-3">
+              <span class="badge badge-tiktok fs-6 fw-bold">TikTok Shop PH</span>
+              <i class="bi bi-play-circle-fill text-danger"></i>
+            </div>
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <label for="ttAdCost" class="form-label fw-semibold small mb-1">
+                  TikTok Ads / Affiliate Fee Per Order
+                </label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="ttAdCost" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">GMV Max, Spark ads, or creator affiliate commission</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="ttRoas" class="form-label fw-semibold small mb-1">
+                  Target ROAS Multiplier
+                </label>
+                <div class="input-group input-group-sm">
+                  <input type="number" class="form-control" id="ttRoas" value="2.8" min="0.1" step="0.1">
+                  <span class="input-group-text">×</span>
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Target multiplier for video/live conversions</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="ttOpex" class="form-label fw-semibold small mb-1">
+                  Live &amp; Sample Overhead / Order
+                </label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="ttOpex" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Live streaming host fees, creator product samples</div>
+              </div>
+
+              <div class="form-check form-switch small mb-3">
+                <input class="form-check-input" type="checkbox" id="ttOptIn">
+                <label class="form-check-label" for="ttOptIn">
+                  Default: Opt-in to Mega Discount Program (4–5%)
+                </label>
+              </div>
+
+              <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border">
+                <strong>TikTok Notes:</strong> Category commission + 2.24% transaction fee + 5.5% shipping platform fee + 1.0%–1.5% category growth fee.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lazada Allotment -->
+        <div class="col-lg-4">
+          <div class="card h-100 shadow-sm border-lazada">
+            <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-3">
+              <span class="badge badge-lazada fs-6 fw-bold">Lazada Philippines</span>
+              <i class="bi bi-lightning-fill text-primary"></i>
+            </div>
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <label for="lzAdCost" class="form-label fw-semibold small mb-1">
+                  Lazada Sponsored Solutions / Order
+                </label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="lzAdCost" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Sponsored Discovery, affiliate marketing budget</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="lzRoas" class="form-label fw-semibold small mb-1">
+                  Target ROAS Multiplier
+                </label>
+                <div class="input-group input-group-sm">
+                  <input type="number" class="form-control" id="lzRoas" value="3.5" min="0.1" step="0.1">
+                  <span class="input-group-text">×</span>
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Target advertising efficiency ceiling</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="lzOpex" class="form-label fw-semibold small mb-1">
+                  Specific Lazada Overhead / Order
+                </label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="lzOpex" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Lazada branded boxes, warehouse prep fees</div>
+              </div>
+
+              <div class="form-check form-switch small mb-3">
+                <input class="form-check-input" type="checkbox" id="lzPromoPass" checked disabled>
+                <label class="form-check-label" for="lzPromoPass">
+                  Promo Pass Program (5.8% up to ₱100, modeled mandatory)
+                </label>
+              </div>
+
+              <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border">
+                <strong>Lazada Notes:</strong> Category commission + 2.24% payment fee + 5.8% Promo Pass (max ₱100) + ₱5 order fee.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Card Footer -->
+      <div class="card shadow-sm border-0 mb-4 bg-body-tertiary">
+        <div class="card-body d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 py-3 px-4">
+          <div>
+            <button class="btn btn-outline-secondary btn-sm" id="resetProfileBtn" type="button">
+              <i class="bi bi-arrow-counterclockwise me-1"></i>Reset to Default Profile
+            </button>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-success" id="saveProfileBtnBottom" type="button">
+              <i class="bi bi-check-circle me-1"></i>Save &amp; Apply Profile
+            </button>
+            <a href="index.html" class="btn btn-primary">
+              <i class="bi bi-calculator me-1"></i>Simulate Now
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary py-4 border-top mt-auto">
+    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+      <div>
+        <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
+      </div>
+      <div class="d-flex gap-3">
+        <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
+        <a href="comparison.html" class="text-decoration-none text-body-secondary">Comparison</a>
+        <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
+        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax Guide</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Data & Engine -->
+  <script src="./js/data.js"></script>
+  <script src="./js/calculator.js"></script>
+
+  <!-- Page Script -->
+  <script>
+    const $ = s => document.querySelector(s);
+
+    function loadProfileToForm() {
+      const p = getStoredProfile();
+
+      $('#shopName').value = p.shopName || 'My Online Store';
+      $('#defaultMargin').value = p.defaultMargin !== undefined ? p.defaultMargin : 20;
+      $('#packagingCost').value = p.packagingCost || 0;
+
+      const isVat = p.taxStatus === 'vat';
+      $('#profVat').checked = isVat;
+      $('#profNonVat').checked = !isVat;
+
+      $('#profClaimVat').disabled = !isVat;
+      $('#profClaimVat').checked = isVat && p.claimInputVat === true;
+      $('#profIncludeWht').checked = p.includeWht !== false;
+
+      // Platform allotments
+      const sh = p.platforms.sh || {};
+      $('#shAdCost').value = sh.adCost || 0;
+      $('#shRoas').value = sh.targetRoas || 3.5;
+      $('#shOpex').value = sh.opex || 0;
+      $('#shOptIn').checked = sh.optIn === true;
+
+      const tt = p.platforms.tt || {};
+      $('#ttAdCost').value = tt.adCost || 0;
+      $('#ttRoas').value = tt.targetRoas || 2.8;
+      $('#ttOpex').value = tt.opex || 0;
+      $('#ttOptIn').checked = tt.optIn === true;
+
+      const lz = p.platforms.lz || {};
+      $('#lzAdCost').value = lz.adCost || 0;
+      $('#lzRoas').value = lz.targetRoas || 3.5;
+      $('#lzOpex').value = lz.opex || 0;
+    }
+
+    function saveFormToProfile() {
+      const isVat = $('#profVat').checked;
+
+      const profile = {
+        shopName: ($('#shopName').value || 'My Online Store').trim(),
+        taxStatus: isVat ? 'vat' : 'non-vat',
+        claimInputVat: isVat && $('#profClaimVat').checked,
+        includeWht: $('#profIncludeWht').checked,
+        defaultMargin: Math.max(0, Math.min(80, Number($('#defaultMargin').value || 20))),
+        packagingCost: Math.max(0, Number($('#packagingCost').value || 0)),
+        platforms: {
+          sh: {
+            adCost: Math.max(0, Number($('#shAdCost').value || 0)),
+            targetRoas: Math.max(0.1, Number($('#shRoas').value || 3.5)),
+            opex: Math.max(0, Number($('#shOpex').value || 0)),
+            optIn: $('#shOptIn').checked
+          },
+          tt: {
+            adCost: Math.max(0, Number($('#ttAdCost').value || 0)),
+            targetRoas: Math.max(0.1, Number($('#ttRoas').value || 2.8)),
+            opex: Math.max(0, Number($('#ttOpex').value || 0)),
+            optIn: $('#ttOptIn').checked
+          },
+          lz: {
+            adCost: Math.max(0, Number($('#lzAdCost').value || 0)),
+            targetRoas: Math.max(0.1, Number($('#lzRoas').value || 3.5)),
+            opex: Math.max(0, Number($('#lzOpex').value || 0)),
+            optIn: true
+          }
+        }
+      };
+
+      saveProfileToStorage(profile);
+
+      // Also sync to active calculator config so simulator reflects changes right away
+      const activeConfig = getStoredConfig();
+      activeConfig.vat = isVat;
+      activeConfig.nv = !isVat;
+      activeConfig.claim = profile.claimInputVat;
+      activeConfig.wht = profile.includeWht;
+      activeConfig.mg = profile.defaultMargin;
+      activeConfig.pack = profile.packagingCost;
+      activeConfig.osh = profile.platforms.sh.optIn;
+      activeConfig.ott = profile.platforms.tt.optIn;
+      saveConfigToStorage(activeConfig);
+
+      $('#saveBadge').innerHTML = '<i class="bi bi-check-circle-fill me-1"></i>Saved and applied successfully!';
+      $('#saveBadge').className = 'badge bg-success text-white px-3 py-2';
+      setTimeout(() => {
+        $('#saveBadge').innerHTML = '<i class="bi bi-shield-check me-1"></i>Profile active &amp; synced';
+        $('#saveBadge').className = 'badge bg-success-subtle text-success-emphasis border border-success-subtle px-3 py-2';
+      }, 2500);
+    }
+
+    function resetProfileDefaults() {
+      if (!confirm('Reset your Business Profile and platform allotments to default values?')) return;
+      localStorage.removeItem(PROFILE_STORAGE_KEY);
+      loadProfileToForm();
+      saveFormToProfile();
+    }
+
+    // Tax status change handler
+    document.querySelectorAll('input[name="profTax"]').forEach(r => {
+      r.addEventListener('change', () => {
+        const isVat = $('#profVat').checked;
+        $('#profClaimVat').disabled = !isVat;
+        if (!isVat) $('#profClaimVat').checked = false;
+      });
+    });
+
+    initTheme();
+    loadProfileToForm();
+
+    $('#saveProfileBtn').addEventListener('click', saveFormToProfile);
+    $('#saveProfileBtnBottom').addEventListener('click', saveFormToProfile);
+    $('#resetProfileBtn').addEventListener('click', resetProfileDefaults);
+  </script>
+</body>
+</html>
