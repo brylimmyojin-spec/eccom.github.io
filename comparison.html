@@ -247,6 +247,7 @@
       const cost = Math.max(0, Number(saved.cost || 100));
       const units = Math.max(1, Number(saved.units || 1));
       const pack = Math.max(0, Number(saved.pack !== undefined ? saved.pack : (profile.packagingCost || 0)));
+      const shippingCost = Math.max(0, Number(saved.shippingCost !== undefined ? saved.shippingCost : (profile.shippingCost || 0)));
       const opex = Math.max(0, Number(saved.opex || 0));
       const adcost = Math.max(0, Number(saved.adcost || 0));
       const targetRoas = Math.max(0.1, Number(saved.targetRoas || 3));
@@ -258,6 +259,7 @@
         cost: cost,
         units: units,
         pack: pack,
+        shippingCost: shippingCost,
         opex: opex,
         adcost: adcost,
         targetRoas: targetRoas,
@@ -280,7 +282,7 @@
       };
 
       // Summary Bar
-      const totalAllInCost = (cost * units) + pack + opex + adcost;
+      const totalAllInCost = (cost * units) + pack + shippingCost + opex + adcost;
       $('#summaryCost').textContent = `${P(cost)} (${units} unit${units > 1 ? 's' : ''})`;
       $('#summaryMargin').textContent = `${(margin * 100).toFixed(1)}%`;
       $('#summaryTax').textContent = vat ? 'VAT-Registered (12%)' : 'Non-VAT (3%)';

@@ -112,7 +112,7 @@
           <div class="row g-3">
             
             <!-- Store Name -->
-            <div class="col-md-4">
+            <div class="col-md-3">
               <label for="shopName" class="form-label fw-semibold small">Store / Brand Name</label>
               <div class="input-group input-group-sm">
                 <span class="input-group-text"><i class="bi bi-shop"></i></span>
@@ -122,8 +122,8 @@
             </div>
 
             <!-- Baseline Packaging Cost -->
-            <div class="col-md-4">
-              <label for="packagingCost" class="form-label fw-semibold small">Baseline Packaging Cost / Order</label>
+            <div class="col-md-3">
+              <label for="packagingCost" class="form-label fw-semibold small">Packaging Cost / Order</label>
               <div class="input-group input-group-sm">
                 <span class="input-group-text">₱</span>
                 <input type="number" class="form-control" id="packagingCost" value="0" min="0" step="0.01">
@@ -131,8 +131,18 @@
               <div class="form-text" style="font-size:0.75rem;">Pouch, tape, box, bubble wrap, thermal label</div>
             </div>
 
+            <!-- Seller-Paid Shipping Subsidy / Cost -->
+            <div class="col-md-3">
+              <label for="shippingCost" class="form-label fw-semibold small">Seller Shipping / Subsidy</label>
+              <div class="input-group input-group-sm">
+                <span class="input-group-text">₱</span>
+                <input type="number" class="form-control" id="shippingCost" value="0" min="0" step="0.01">
+              </div>
+              <div class="form-text" style="font-size:0.75rem;">Seller-funded shipping discount, drop-off, or RTS provision</div>
+            </div>
+
             <!-- Default Target Net Margin -->
-            <div class="col-md-4">
+            <div class="col-md-3">
               <label for="defaultMargin" class="form-label fw-semibold small">Default Net Margin Target</label>
               <div class="input-group input-group-sm">
                 <input type="number" class="form-control" id="defaultMargin" value="20" min="0" max="80" step="0.5">
@@ -228,6 +238,17 @@
                 <div class="form-text" style="font-size:0.75rem;">Shopee pouches, waybills, fulfillment labor</div>
               </div>
 
+              <div class="mb-3">
+                <label for="shShipping" class="form-label fw-semibold small mb-1">
+                  Shopee Seller Shipping / RTS Provision
+                </label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="shShipping" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Seller shipping subsidy, voucher share, or return allowance</div>
+              </div>
+
               <div class="form-check form-switch small mb-3">
                 <input class="form-check-input" type="checkbox" id="shOptIn">
                 <label class="form-check-label" for="shOptIn">
@@ -283,6 +304,17 @@
                 <div class="form-text" style="font-size:0.75rem;">Live streaming host fees, creator product samples</div>
               </div>
 
+              <div class="mb-3">
+                <label for="ttShipping" class="form-label fw-semibold small mb-1">
+                  TikTok Seller Shipping / RTS Provision
+                </label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="ttShipping" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Seller shipping subsidy, voucher share, or return allowance</div>
+              </div>
+
               <div class="form-check form-switch small mb-3">
                 <input class="form-check-input" type="checkbox" id="ttOptIn">
                 <label class="form-check-label" for="ttOptIn">
@@ -336,6 +368,17 @@
                   <input type="number" class="form-control" id="lzOpex" value="0" min="0" step="0.01">
                 </div>
                 <div class="form-text" style="font-size:0.75rem;">Lazada branded boxes, warehouse prep fees</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="lzShipping" class="form-label fw-semibold small mb-1">
+                  Lazada Seller Shipping / RTS Provision
+                </label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="lzShipping" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Seller shipping subsidy, voucher share, or return allowance</div>
               </div>
 
               <div class="form-check form-switch small mb-3">
@@ -625,6 +668,7 @@
       $('#shopName').value = p.shopName || 'My Online Store';
       $('#defaultMargin').value = p.defaultMargin !== undefined ? p.defaultMargin : 20;
       $('#packagingCost').value = p.packagingCost || 0;
+      $('#shippingCost').value = p.shippingCost || 0;
 
       const isVat = p.taxStatus === 'vat';
       $('#profVat').checked = isVat;
@@ -639,18 +683,21 @@
       $('#shAdCost').value = sh.adCost || 0;
       $('#shRoas').value = sh.targetRoas || 3.5;
       $('#shOpex').value = sh.opex || 0;
+      $('#shShipping').value = sh.shippingCost || 0;
       $('#shOptIn').checked = sh.optIn === true;
 
       const tt = p.platforms.tt || {};
       $('#ttAdCost').value = tt.adCost || 0;
       $('#ttRoas').value = tt.targetRoas || 2.8;
       $('#ttOpex').value = tt.opex || 0;
+      $('#ttShipping').value = tt.shippingCost || 0;
       $('#ttOptIn').checked = tt.optIn === true;
 
       const lz = p.platforms.lz || {};
       $('#lzAdCost').value = lz.adCost || 0;
       $('#lzRoas').value = lz.targetRoas || 3.5;
       $('#lzOpex').value = lz.opex || 0;
+      $('#lzShipping').value = lz.shippingCost || 0;
 
       updateExpenseSummary();
       updateRoasTester();
@@ -664,12 +711,14 @@
       const isVat = $('#profVat').checked;
       const nonrecoverableAdVat = $('#profNonrecoverableAdVat').checked;
       const pack = Math.max(0, Number($('#packagingCost').value || 0));
+      const baseShipping = Math.max(0, Number($('#shippingCost').value || 0));
 
       const testConfig = {
         vat: isVat,
         cost: cost,
         units: 1,
         pack: pack,
+        shippingCost: baseShipping,
         opex: 0,
         adcost: 0,
         m: margin,
@@ -684,9 +733,21 @@
         },
         cat: { sh: 0, tt: 0, lz: 0 },
         platformAllotments: {
-          sh: { adCost: Number($('#shAdCost').value || 0), opex: Number($('#shOpex').value || 0) },
-          tt: { adCost: Number($('#ttAdCost').value || 0), opex: Number($('#ttOpex').value || 0) },
-          lz: { adCost: Number($('#lzAdCost').value || 0), opex: Number($('#lzOpex').value || 0) }
+          sh: {
+            adCost: Number($('#shAdCost').value || 0),
+            opex: Number($('#shOpex').value || 0),
+            shippingCost: Number($('#shShipping').value || 0)
+          },
+          tt: {
+            adCost: Number($('#ttAdCost').value || 0),
+            opex: Number($('#ttOpex').value || 0),
+            shippingCost: Number($('#ttShipping').value || 0)
+          },
+          lz: {
+            adCost: Number($('#lzAdCost').value || 0),
+            opex: Number($('#lzOpex').value || 0),
+            shippingCost: Number($('#lzShipping').value || 0)
+          }
         }
       };
 
@@ -725,25 +786,32 @@
 
     function updateExpenseSummary() {
       const pack = Math.max(0, Number($('#packagingCost').value || 0));
+      const baseShip = Math.max(0, Number($('#shippingCost').value || 0));
+
       const shAd = Math.max(0, Number($('#shAdCost').value || 0));
       const shOp = Math.max(0, Number($('#shOpex').value || 0));
+      const shShip = Number($('#shShipping').value || 0) || baseShip;
+
       const ttAd = Math.max(0, Number($('#ttAdCost').value || 0));
       const ttOp = Math.max(0, Number($('#ttOpex').value || 0));
+      const ttShip = Number($('#ttShipping').value || 0) || baseShip;
+
       const lzAd = Math.max(0, Number($('#lzAdCost').value || 0));
       const lzOp = Math.max(0, Number($('#lzOpex').value || 0));
+      const lzShip = Number($('#lzShipping').value || 0) || baseShip;
 
-      const shTot = pack + shAd + shOp;
-      const ttTot = pack + ttAd + ttOp;
-      const lzTot = pack + lzAd + lzOp;
+      const shTot = pack + shShip + shAd + shOp;
+      const ttTot = pack + ttShip + ttAd + ttOp;
+      const lzTot = pack + lzShip + lzAd + lzOp;
 
       $('#summaryShTotal').textContent = P(shTot) + ' / order';
-      $('#summaryShDetail').textContent = `Pack: ${P(pack)} | Ads: ${P(shAd)} | Opex: ${P(shOp)}`;
+      $('#summaryShDetail').textContent = `Pack: ${P(pack)} | Ship: ${P(shShip)} | Ads: ${P(shAd)} | Opex: ${P(shOp)}`;
 
       $('#summaryTtTotal').textContent = P(ttTot) + ' / order';
-      $('#summaryTtDetail').textContent = `Pack: ${P(pack)} | Ads: ${P(ttAd)} | Opex: ${P(ttOp)}`;
+      $('#summaryTtDetail').textContent = `Pack: ${P(pack)} | Ship: ${P(ttShip)} | Ads: ${P(ttAd)} | Opex: ${P(ttOp)}`;
 
       $('#summaryLzTotal').textContent = P(lzTot) + ' / order';
-      $('#summaryLzDetail').textContent = `Pack: ${P(pack)} | Ads: ${P(lzAd)} | Opex: ${P(lzOp)}`;
+      $('#summaryLzDetail').textContent = `Pack: ${P(pack)} | Ship: ${P(lzShip)} | Ads: ${P(lzAd)} | Opex: ${P(lzOp)}`;
     }
 
     function saveExpensesToStorage() {
@@ -758,23 +826,27 @@
         nonrecoverableAdVat: nonrecoverableAdVat,
         defaultMargin: Math.max(0, Math.min(80, Number($('#defaultMargin').value || 20))),
         packagingCost: Math.max(0, Number($('#packagingCost').value || 0)),
+        shippingCost: Math.max(0, Number($('#shippingCost').value || 0)),
         platforms: {
           sh: {
             adCost: Math.max(0, Number($('#shAdCost').value || 0)),
             targetRoas: Math.max(0.1, Number($('#shRoas').value || 3.5)),
             opex: Math.max(0, Number($('#shOpex').value || 0)),
+            shippingCost: Math.max(0, Number($('#shShipping').value || 0)),
             optIn: $('#shOptIn').checked
           },
           tt: {
             adCost: Math.max(0, Number($('#ttAdCost').value || 0)),
             targetRoas: Math.max(0.1, Number($('#ttRoas').value || 2.8)),
             opex: Math.max(0, Number($('#ttOpex').value || 0)),
+            shippingCost: Math.max(0, Number($('#ttShipping').value || 0)),
             optIn: $('#ttOptIn').checked
           },
           lz: {
             adCost: Math.max(0, Number($('#lzAdCost').value || 0)),
             targetRoas: Math.max(0.1, Number($('#lzRoas').value || 3.5)),
             opex: Math.max(0, Number($('#lzOpex').value || 0)),
+            shippingCost: Math.max(0, Number($('#lzShipping').value || 0)),
             optIn: true
           }
         }
@@ -790,6 +862,7 @@
       activeConfig.wht = profile.includeWht;
       activeConfig.mg = profile.defaultMargin;
       activeConfig.pack = profile.packagingCost;
+      activeConfig.shippingCost = profile.shippingCost;
       activeConfig.osh = profile.platforms.sh.optIn;
       activeConfig.ott = profile.platforms.tt.optIn;
       saveConfigToStorage(activeConfig);
@@ -806,14 +879,18 @@
     }
 
     function resetExpensesToZero() {
-      if (!confirm('Reset packaging, operating overhead, and ad spend to ₱0.00?')) return;
+      if (!confirm('Reset packaging, seller shipping, operating overhead, and ad spend to ₱0.00?')) return;
       $('#packagingCost').value = '0';
+      $('#shippingCost').value = '0';
       $('#shAdCost').value = '0';
       $('#shOpex').value = '0';
+      $('#shShipping').value = '0';
       $('#ttAdCost').value = '0';
       $('#ttOpex').value = '0';
+      $('#ttShipping').value = '0';
       $('#lzAdCost').value = '0';
       $('#lzOpex').value = '0';
+      $('#lzShipping').value = '0';
       saveExpensesToStorage();
     }
 
