@@ -74,7 +74,8 @@
           <h1 class="h2 mb-0 fw-bold">Marketplace Pricing Simulator</h1>
           <span class="badge bg-body-tertiary text-body-secondary border px-2.5 py-1.5" id="profilePill" style="font-size:0.75rem;">
             <i class="bi bi-shop me-1 text-primary"></i><span id="profileNameDisplay">Store</span> (<span id="profileTaxDisplay">Non-VAT</span>)
-            <a href="profile.html" class="ms-1 text-primary text-decoration-none" title="Configure Profile"><i class="bi bi-pencil-square"></i></a>
+            <span class="badge bg-warning-subtle text-warning-emphasis border ms-1" id="profileAdVatDisplay" style="font-size:0.68rem;">+12% Ad VAT</span>
+            <a href="expenses.html" class="ms-1 text-primary text-decoration-none" title="Configure Profile &amp; Expenses"><i class="bi bi-pencil-square"></i></a>
           </span>
         </div>
         <p class="text-body-secondary mb-0">
@@ -432,43 +433,66 @@
               ${rowHtml('Product Cost (' + o.units + ' unit' + (o.units > 1 ? 's' : '') + ')', r.productCost)}
               ${r.pack > 0 ? rowHtml('Packaging Cost', r.pack) : ''}
               ${r.opex > 0 ? rowHtml('Overhead (' + pl.n + ')', r.opex) : ''}
-              ${r.adcost > 0 ? rowHtml('Ad Spend (' + pl.n + ')', r.adcost) : ''}
+              ${r.adcost > 0 ? (
+                r.nonrecoverableAdVat ?
+                  rowHtml('Pre-VAT Ad Spend (' + pl.n + ')', r.adcost) +
+                  rowHtml('Nonrecoverable Ad VAT (12%)', r.totalAdCost - r.adcost)
+                : rowHtml('Ad Spend (' + pl.n + ')', r.adcost)
+              ) : ''}
               ${rowHtml('All-in Cost', r.cost, true)}
               ${rowHtml('Net Profit', r.profit, true)}
             </div>
 
             <!-- Richmond Tan ROAS & Margin Analytics Footer -->
             <div class="pt-3 mt-3 border-top">
-              <div class="d-flex justify-content-between align-items-center mb-1">
+              <div class="d-flex justify-content-between align-items-center mb-1.5">
                 <small class="text-uppercase fw-bold text-body-secondary" style="font-size:0.7rem;">
-                  <i class="bi bi-calculator me-1 text-primary"></i>ROAS &amp; Margin Analytics
+                  <i class="bi bi-calculator me-1 text-primary"></i>ROAS &amp; Unit Economics
                 </small>
-                <small class="text-body-secondary" style="font-size:0.7rem;">BE &amp; Target Model</small>
+                <span class="badge ${r.nonrecoverableAdVat ? 'bg-warning-subtle text-warning-emphasis' : 'bg-success-subtle text-success-emphasis'} border" style="font-size:0.65rem;">
+                  ${r.nonrecoverableAdVat ? '12% Ad VAT Active' : 'Ad VAT Recoverable'}
+                </span>
+              </div>
+
+              <!-- Contribution Per Order & CM% -->
+              <div class="p-1.5 px-2 border rounded bg-body-tertiary d-flex justify-content-between align-items-center mb-2">
+                <small class="text-body-secondary" style="font-size:0.72rem;">Pre-Ad Contribution:</small>
+                <span class="fw-bold fs-7">${P(r.contributionPerOrder)} <small class="text-primary fw-semibold">(${(r.contributionMargin * 100).toFixed(1)}% CM)</small></span>
               </div>
 
               <div class="row g-2 text-center">
                 <!-- Break-Even ROAS -->
                 <div class="col-6">
-                  <div class="p-2 border rounded bg-body-tertiary">
-                    <small class="text-body-secondary d-block" style="font-size:0.7rem;" title="Richmond Tan Break-Even ROAS: Min ROAS to avoid loss">Break-Even ROAS</small>
+                  <div class="p-2 border rounded bg-body-tertiary h-100">
+                    <small class="text-body-secondary d-block" style="font-size:0.68rem;" title="Break-Even ROAS: Min ROAS to avoid loss">
+                      Break-Even ROAS
+                    </small>
                     <span class="fw-bold text-danger-emphasis fs-6">${r.breakEvenRoas ? r.breakEvenRoas.toFixed(2) + '×' : '—'}</span>
-                    <small class="d-block text-body-secondary" style="font-size:0.65rem;">Max ad: ${P(r.breakEvenAdSpend)}</small>
+                    <small class="d-block text-body-secondary" style="font-size:0.63rem;">
+                      ${r.nonrecoverableAdVat ? '1.12÷CM (Base: ' + (r.breakEvenRoasBase ? r.breakEvenRoasBase.toFixed(2) + '×' : '—') + ')' : '1÷CM'}
+                    </small>
+                    <small class="d-block text-body-secondary fw-semibold mt-0.5" style="font-size:0.63rem;">Max ad: ${P(r.breakEvenAdSpend)}</small>
                   </div>
                 </div>
 
                 <!-- Target ROAS -->
                 <div class="col-6">
-                  <div class="p-2 border rounded bg-body-tertiary">
-                    <small class="text-body-secondary d-block" style="font-size:0.7rem;" title="Target ROAS to achieve desired net margin">Target ROAS</small>
+                  <div class="p-2 border rounded bg-body-tertiary h-100">
+                    <small class="text-body-secondary d-block" style="font-size:0.68rem;" title="Target ROAS to achieve desired net margin">
+                      Target ROAS
+                    </small>
                     <span class="fw-bold text-success fs-6">${r.targetRoasCalculated ? r.targetRoasCalculated.toFixed(2) + '×' : '—'}</span>
-                    <small class="d-block text-body-secondary" style="font-size:0.65rem;">Max ad: ${P(r.maxAdSpendAtTarget)}</small>
+                    <small class="d-block text-body-secondary" style="font-size:0.63rem;">
+                      For ${(o.m * 100).toFixed(0)}% Net Margin
+                    </small>
+                    <small class="d-block text-body-secondary fw-semibold mt-0.5" style="font-size:0.63rem;">Max ad: ${P(r.maxAdSpendAtTarget)}</small>
                   </div>
                 </div>
 
                 <!-- Net Margin -->
                 <div class="col-6">
                   <div class="p-1.5 border rounded bg-body-tertiary">
-                    <small class="text-body-secondary d-block" style="font-size:0.7rem;">Net Margin</small>
+                    <small class="text-body-secondary d-block" style="font-size:0.68rem;">Net Margin</small>
                     <span class="fw-bold ${r.profit >= 0 ? 'text-success' : 'text-danger'}">${(r.mg * 100).toFixed(1)}%</span>
                   </div>
                 </div>
@@ -476,7 +500,7 @@
                 <!-- Markup -->
                 <div class="col-6">
                   <div class="p-1.5 border rounded bg-body-tertiary">
-                    <small class="text-body-secondary d-block" style="font-size:0.7rem;">Cost Markup</small>
+                    <small class="text-body-secondary d-block" style="font-size:0.68rem;">Cost Markup</small>
                     <span class="fw-bold">${(r.mk * 100).toFixed(1)}%</span>
                   </div>
                 </div>
@@ -485,7 +509,7 @@
               <!-- ROAS Campaign Health Status Badge -->
               <div class="mt-2 text-center">
                 <span class="badge ${r.roasBadgeClass} w-100 py-1.5" style="font-size:0.73rem;">
-                  <i class="bi bi-activity me-1"></i>${r.roasHealthLabel}${r.realizedRoas ? ' (Active ROAS: ' + r.realizedRoas.toFixed(2) + '×)' : ''}
+                  <i class="bi bi-activity me-1"></i>${r.roasHealthLabel}${r.realizedRoas ? ' (Actual ROAS: ' + r.realizedRoas.toFixed(2) + '×)' : ''}
                 </span>
               </div>
             </div>
@@ -499,6 +523,11 @@
       const profile = getStoredProfile();
       if ($('#profileNameDisplay')) $('#profileNameDisplay').textContent = profile.shopName || 'Store';
       if ($('#profileTaxDisplay')) $('#profileTaxDisplay').textContent = profile.taxStatus === 'vat' ? 'VAT' : 'Non-VAT';
+      if ($('#profileAdVatDisplay')) {
+        const hasAdVat = (profile.nonrecoverableAdVat !== undefined) ? profile.nonrecoverableAdVat : (!vatChecked || !$('#claim').checked);
+        $('#profileAdVatDisplay').textContent = hasAdVat ? '+12% Ad VAT' : 'Ad VAT Creditable';
+        $('#profileAdVatDisplay').className = `badge ${hasAdVat ? 'bg-warning-subtle text-warning-emphasis' : 'bg-success-subtle text-success-emphasis'} border ms-1`;
+      }
 
       // Update Active Expenses Display in Simulator
       if ($('#activeExpensesSummary')) {
@@ -528,6 +557,10 @@
       const vatChecked = $('#vat').checked;
       $('#claim').disabled = !vatChecked;
 
+      const nonrecoverableAdVat = (profile.nonrecoverableAdVat !== undefined) ? 
+        profile.nonrecoverableAdVat : 
+        (!vatChecked || !$('#claim').checked);
+
       const o = {
         vat: vatChecked,
         cost: Math.max(0, +$('#cost').value || 0),
@@ -536,6 +569,7 @@
         opex: 0,
         adcost: 0,
         targetRoas: 3,
+        nonrecoverableAdVat: nonrecoverableAdVat,
         m: Math.max(0, Math.min(0.8, (+$('#mg').value || 0) / 100)),
         srp: Math.max(0, +$('#srp').value || 0),
         wht: $('#wht').checked,

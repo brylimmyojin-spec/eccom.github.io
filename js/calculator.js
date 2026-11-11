@@ -19,6 +19,7 @@ function getDefaultProfile() {
     claimInputVat: false,
     includeWht: true,
     whtExempt: false,
+    nonrecoverableAdVat: true, // 12% VAT on digital advertising when nonrecoverable
     defaultMargin: 20,
     packagingCost: 0,
     platforms: {
@@ -143,8 +144,17 @@ function calc(p, o) {
       L.push([F.pn + ' (' + pe(F.promo) + ', max ₱' + F.pcap + ')', Math.min(pr * F.promo, F.pcap), F.mand ? 0 : 1]);
     }
 
+    // Advertising VAT treatment (from ROAS Computation Guide)
+    const nonrecoverableAdVat = (o.nonrecoverableAdVat !== undefined) ? 
+      (o.nonrecoverableAdVat === true) : 
+      (!o.vat || !o.claim);
+    const adVatRate = nonrecoverableAdVat ? 0.12 : 0;
+    const adVatMultiplier = 1 + adVatRate; // 1.12 if 12% nonrecoverable, 1.00 if creditable
+
     const nonAdCost = productCost + pack + opex;
-    const cost = nonAdCost + adcost;
+    const preVatAdSpend = adcost;
+    const totalAdCost = preVatAdSpend * adVatMultiplier;
+    const cost = nonAdCost + totalAdCost;
 
     const fe = L.reduce((a, x) => a + x[1], 0);
     const vat = pr * vs;
@@ -155,47 +165,56 @@ function calc(p, o) {
     const take = pr - vat - fe + iv - wh - tx;
     const profit = take - cost;
 
-    // --- Richmond Tan ROAS Computation Model ---
-    const preAdProfit = take - nonAdCost;
-    const preAdMargin = net > 0 ? (preAdProfit / net) : 0;
+    // --- Official ROAS Computation Guide Formulas ---
+    // 2. Contribution per order and Contribution Margin:
+    const contributionPerOrder = take - nonAdCost;
+    const contributionMargin = net > 0 ? (contributionPerOrder / net) : 0;
 
-    // Break-Even ROAS = Selling Price / Gross Profit before Ads
-    const breakEvenRoas = preAdProfit > 0 ? (pr / preAdProfit) : null;
-    const breakEvenAdSpend = Math.max(0, preAdProfit);
+    // 3. Break-Even ROAS before advertising VAT:
+    const breakEvenRoasBase = contributionMargin > 0 ? (1 / contributionMargin) : null;
 
-    // Target ROAS = Selling Price / (Pre-Ad Profit - Target Net Profit)
-    const targetProfitAmount = net * (o.m || 0);
-    const maxAdSpendAtTarget = Math.max(0, preAdProfit - targetProfitAmount);
-    const targetRoasCalculated = maxAdSpendAtTarget > 0 ? (pr / maxAdSpendAtTarget) : null;
+    // 4. Break-Even ROAS with nonrecoverable ad VAT (1.12 / CM):
+    const breakEvenRoasVatAdjusted = contributionMargin > 0 ? (1.12 / contributionMargin) : null;
+    const breakEvenRoas = nonrecoverableAdVat ? breakEvenRoasVatAdjusted : breakEvenRoasBase;
 
-    // Realized / Current ROAS from active ad spend input:
-    const realizedRoas = adcost > 0 ? (pr / adcost) : null;
+    // Break-even allowable pre-VAT ad spend per order:
+    const breakEvenAdSpend = contributionPerOrder > 0 ? (contributionPerOrder / adVatMultiplier) : 0;
+
+    // 7. Target ROAS: (1 + nonrecoverable ad VAT rate) / [(Contribution - Desired profit) / Net selling revenue]
+    const desiredProfitPerOrder = net * (o.m || 0);
+    const marginBuffer = contributionMargin - (o.m || 0);
+    const targetRoasCalculated = marginBuffer > 0 ? (adVatMultiplier / marginBuffer) : null;
+    const maxAdSpendAtTarget = Math.max(0, (contributionPerOrder - desiredProfitPerOrder) / adVatMultiplier);
+
+    // 1 & 6. Actual ROAS and Profit Contribution:
+    const actualRoas = preVatAdSpend > 0 ? (pr / preVatAdSpend) : null;
+    const profitContributionAfterAds = contributionPerOrder - totalAdCost;
 
     // ROAS Health Evaluation
     let roasHealth = 'none';
     let roasHealthLabel = 'No Ads Entered';
     let roasBadgeClass = 'bg-secondary-subtle text-secondary-emphasis';
 
-    if (preAdProfit <= 0) {
+    if (contributionPerOrder <= 0) {
       roasHealth = 'negative';
       roasHealthLabel = 'Negative Pre-Ad Margin';
       roasBadgeClass = 'bg-danger text-white';
-    } else if (adcost > 0) {
-      if (adcost > breakEvenAdSpend) {
+    } else if (preVatAdSpend > 0) {
+      if (preVatAdSpend > breakEvenAdSpend) {
         roasHealth = 'loss';
-        roasHealthLabel = 'Losing Money on Ads';
+        roasHealthLabel = 'Losing Money on Ads (ROAS < BE)';
         roasBadgeClass = 'bg-danger-subtle text-danger-emphasis border border-danger-subtle';
-      } else if (Math.abs(adcost - breakEvenAdSpend) < 0.1) {
+      } else if (Math.abs(preVatAdSpend - breakEvenAdSpend) < 0.1) {
         roasHealth = 'breakeven';
         roasHealthLabel = 'Break-Even (₱0 Net)';
         roasBadgeClass = 'bg-warning-subtle text-warning-emphasis border border-warning-subtle';
-      } else if (targetRoasCalculated && realizedRoas >= targetRoasCalculated) {
+      } else if (targetRoasCalculated && actualRoas >= targetRoasCalculated) {
         roasHealth = 'optimal';
-        roasHealthLabel = 'Target Margin Met';
+        roasHealthLabel = 'Target Margin Met (Scalable)';
         roasBadgeClass = 'bg-success-subtle text-success-emphasis border border-success-subtle';
       } else {
         roasHealth = 'profitable';
-        roasHealthLabel = 'Profitable (< Target)';
+        roasHealthLabel = 'Profitable (< Target Margin)';
         roasBadgeClass = 'bg-info-subtle text-info-emphasis border border-info-subtle';
       }
     }
@@ -216,15 +235,25 @@ function calc(p, o) {
       productCost,
       pack,
       opex,
-      adcost,
-      preAdProfit,
-      preAdMargin,
+      adcost: preVatAdSpend,
+      totalAdCost,
+      nonrecoverableAdVat,
+      adVatRate,
+      adVatMultiplier,
+      contributionPerOrder,
+      contributionMargin,
+      preAdProfit: contributionPerOrder,
+      preAdMargin: contributionMargin,
+      breakEvenRoasBase,
+      breakEvenRoasVatAdjusted,
       breakEvenRoas,
       breakEvenAdSpend,
       targetRoasCalculated,
       maxAdSpendAtTarget,
-      realizedRoas,
-      roas: realizedRoas,
+      actualRoas,
+      realizedRoas: actualRoas,
+      roas: actualRoas,
+      profitContributionAfterAds,
       maxAdSpend: maxAdSpendAtTarget > 0 ? maxAdSpendAtTarget : (targetRoas > 0 ? (pr / targetRoas) : 0),
       roasHealth,
       roasHealthLabel,

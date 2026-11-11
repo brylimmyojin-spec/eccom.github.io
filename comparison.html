@@ -150,12 +150,14 @@
               <th scope="col" class="text-end">Regular SRP</th>
               <th scope="col" class="text-end">SRP w/ Program</th>
               <th scope="col" class="text-end text-danger">Total Deductions</th>
-              <th scope="col" class="text-end text-success">Net Take-Home</th>
+              <th scope="col" class="text-end text-success">Net Revenue</th>
+              <th scope="col" class="text-end">Pre-Ad Contribution</th>
+              <th scope="col" class="text-end text-danger-emphasis" title="1 / CM">Base BE ROAS</th>
+              <th scope="col" class="text-end text-danger-emphasis" title="1.12 / CM">12% Ad VAT BE</th>
+              <th scope="col" class="text-end text-success" title="Target ROAS to hit net margin">Target ROAS</th>
               <th scope="col" class="text-end">All-In Cost</th>
               <th scope="col" class="text-end">Net Profit</th>
               <th scope="col" class="text-end">Net Margin</th>
-              <th scope="col" class="text-end text-danger-emphasis" title="Richmond Tan BE ROAS">BE ROAS</th>
-              <th scope="col" class="text-end text-success" title="Target ROAS to hit target margin">Target ROAS</th>
               <th scope="col" class="text-center">ROAS Health</th>
             </tr>
           </thead>
@@ -273,6 +275,7 @@
           tt: Number(saved.ct || 0),
           lz: Number(saved.cl || 0)
         },
+        nonrecoverableAdVat: (profile.nonrecoverableAdVat !== undefined) ? profile.nonrecoverableAdVat : (!vat || !profile.claimInputVat),
         platformAllotments: profile.platforms || {}
       };
 
@@ -302,7 +305,8 @@
         const isBest = r.profit === best;
         const pl = PL[p];
         const programText = p === 'lz' ? 'Auto: ' + P(r.price) : o.opt[p] ? P(r.price) : '<span class="text-body-secondary">Not opted in</span>';
-        const beRoasStr = r.breakEvenRoas ? r.breakEvenRoas.toFixed(2) + '×' : '—';
+        const baseBeStr = r.breakEvenRoasBase ? r.breakEvenRoasBase.toFixed(2) + '×' : '—';
+        const vatBeStr = r.breakEvenRoasVatAdjusted ? r.breakEvenRoasVatAdjusted.toFixed(2) + '×' : '—';
         const tgtRoasStr = r.targetRoasCalculated ? r.targetRoasCalculated.toFixed(2) + '×' : '—';
 
         return `
@@ -316,11 +320,16 @@
             <td class="text-end">${programText}</td>
             <td class="text-end text-danger">${P(r.ded)}</td>
             <td class="text-end text-success fw-bold">${P(r.take)}</td>
+            <td class="text-end">
+              <strong>${P(r.contributionPerOrder)}</strong>
+              <small class="text-primary d-block" style="font-size:0.72rem;">${(r.contributionMargin * 100).toFixed(1)}% CM</small>
+            </td>
+            <td class="text-end fw-bold text-danger-emphasis">${baseBeStr}</td>
+            <td class="text-end fw-bold text-danger-emphasis">${vatBeStr}</td>
+            <td class="text-end fw-bold text-success">${tgtRoasStr}</td>
             <td class="text-end">${P(r.cost)}</td>
             <td class="text-end fw-bold ${r.profit >= 0 ? 'text-success' : 'text-danger'}">${P(r.profit)}</td>
             <td class="text-end fw-semibold">${(r.mg * 100).toFixed(1)}%</td>
-            <td class="text-end fw-bold text-danger-emphasis">${beRoasStr}</td>
-            <td class="text-end fw-bold text-success">${tgtRoasStr}</td>
             <td class="text-center">
               <span class="badge ${r.roasBadgeClass}" style="font-size:0.75rem;">${r.roasHealthLabel}</span>
             </td>
@@ -366,7 +375,7 @@
     // Export CSV Helper
     function exportComparisonCsv() {
       const rows = [
-        ['Platform', 'Category', 'Regular SRP', 'Selected Program SRP', 'Total Deductions', 'Take-Home Pay', 'All-In Cost', 'Net Profit', 'Margin', 'Break-Even ROAS', 'Target ROAS', 'ROAS Health']
+        ['Platform', 'Regular SRP', 'Selected Program SRP', 'Total Deductions', 'Net Revenue', 'Pre-Ad Contribution', 'Base BE ROAS', '12% Ad VAT BE', 'Target ROAS', 'All-In Cost', 'Net Profit', 'Net Margin', 'ROAS Health']
       ];
       document.querySelectorAll('#cmp-rows tr').forEach(tr => {
         const cols = Array.from(tr.querySelectorAll('td')).map(td => td.innerText.replace(/\n/g, ' ').trim());
