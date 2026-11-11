@@ -75,8 +75,11 @@
           Compare take-home pay, total deductions, and net margins across all three marketplaces side-by-side.
         </p>
       </div>
-      <div class="d-flex gap-2">
-        <button class="btn btn-outline-secondary btn-sm" id="exportCsvBtn" type="button">
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-outline-primary btn-sm" id="snapshotBtn" type="button" title="Capture and save table as PNG image">
+          <i class="bi bi-camera-fill me-1"></i>Save Table PNG
+        </button>
+        <button class="btn btn-outline-secondary btn-sm" id="exportCsvBtn" type="button" title="Export comparison as CSV spreadsheet">
           <i class="bi bi-download me-1"></i>Export CSV
         </button>
         <button class="btn btn-outline-secondary btn-sm" onclick="window.print()" type="button">
@@ -137,10 +140,20 @@
     </div>
 
     <!-- Detailed Comparison Table Card -->
-    <div class="card shadow-sm border-0 mb-4">
-      <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-3">
-        <h2 class="h5 fw-bold mb-0">Platform Economics Table</h2>
-        <span class="badge bg-secondary-subtle text-secondary-emphasis">All rates verified</span>
+    <div class="card shadow-sm border-0 mb-4" id="comparisonTableCard">
+      <div class="card-header bg-body-tertiary d-flex flex-wrap justify-content-between align-items-center py-3 gap-2">
+        <div>
+          <h2 class="h5 fw-bold mb-0">
+            <i class="bi bi-table me-2 text-primary"></i>Platform Economics Table
+          </h2>
+          <small class="text-body-secondary">Shopee Philippines vs. TikTok Shop vs. Lazada Philippines</small>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge bg-secondary-subtle text-secondary-emphasis d-none d-sm-inline-block">All rates verified</span>
+          <button class="btn btn-sm btn-outline-primary" id="tableCardSnapshotBtn" type="button" title="Capture and download table snapshot as PNG image">
+            <i class="bi bi-camera-fill me-1"></i>PNG Snapshot
+          </button>
+        </div>
       </div>
       <div class="table-responsive">
         <table class="table table-hover align-middle mb-0 text-nowrap">
@@ -166,8 +179,13 @@
           </tbody>
         </table>
       </div>
-      <div class="card-footer bg-body-tertiary small text-body-secondary py-2">
-        <i class="bi bi-info-circle me-1"></i>Lazada includes Promo Pass (5.8% up to ₱100 cap) as modeled mandatory program rate. Shopee and TikTok reflect selected Mega Voucher opt-ins.
+      <div class="card-footer bg-body-tertiary small text-body-secondary py-2 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-1">
+        <div>
+          <i class="bi bi-info-circle me-1"></i>Lazada includes Promo Pass (5.8% up to ₱100 cap). Shopee &amp; TikTok reflect selected Mega Voucher opt-ins.
+        </div>
+        <div class="text-body-secondary opacity-75" style="font-size:0.75rem;">
+          ecomm.myojinits.com
+        </div>
       </div>
     </div>
 
@@ -232,6 +250,8 @@
 
   <!-- Bootstrap 5.3.3 Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- html2canvas for Table Snapshot PNG Export -->
+  <script src="./js/html2canvas.min.js"></script>
   <!-- Data & Engine -->
   <script src="./js/data.js"></script>
   <script src="./js/calculator.js"></script>
@@ -398,9 +418,97 @@
       document.body.removeChild(link);
     }
 
+    // Take Table Snapshot & Save as PNG
+    async function takeTableSnapshot() {
+      const btn = $('#snapshotBtn');
+      const cardBtn = $('#tableCardSnapshotBtn');
+      const card = document.getElementById('comparisonTableCard');
+      if (!card) return;
+
+      if (typeof html2canvas === 'undefined') {
+        alert('Snapshot engine is loading. Please check your internet connection and try again.');
+        return;
+      }
+
+      const origBtnHtml = btn ? btn.innerHTML : '';
+      const origCardBtnHtml = cardBtn ? cardBtn.innerHTML : '';
+
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>Capturing PNG...';
+      }
+      if (cardBtn) {
+        cardBtn.disabled = true;
+        cardBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>Capturing...';
+      }
+
+      // Temporarily expand table overflow so the full wide table is captured cleanly
+      const tableResponsive = card.querySelector('.table-responsive');
+      const prevOverflow = tableResponsive ? tableResponsive.style.overflow : '';
+      if (tableResponsive) {
+        tableResponsive.style.overflow = 'visible';
+      }
+
+      try {
+        const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        const canvas = await html2canvas(card, {
+          scale: 2, // 2x high resolution for sharp PNG
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: isDark ? '#1a1d20' : '#ffffff',
+          logging: false,
+          ignoreElements: el => el.id === 'tableCardSnapshotBtn'
+        });
+
+        const profile = getStoredProfile();
+        const shopSlug = (profile.shopName || 'Store').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_');
+        const now = new Date();
+        const dateStr = now.toISOString().slice(0, 10);
+
+        const link = document.createElement('a');
+        link.download = `ph_marketplace_table_${shopSlug}_${dateStr}.png`;
+        link.href = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        if (btn) {
+          btn.innerHTML = '<i class="bi bi-check2-circle text-success me-1"></i>PNG Saved!';
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = origBtnHtml;
+          }, 2500);
+        }
+        if (cardBtn) {
+          cardBtn.innerHTML = '<i class="bi bi-check2-circle text-success me-1"></i>Saved!';
+          setTimeout(() => {
+            cardBtn.disabled = false;
+            cardBtn.innerHTML = origCardBtnHtml;
+          }, 2500);
+        }
+      } catch (err) {
+        console.error('Table snapshot error:', err);
+        alert('Could not capture table snapshot: ' + (err.message || err));
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = origBtnHtml;
+        }
+        if (cardBtn) {
+          cardBtn.disabled = false;
+          cardBtn.innerHTML = origCardBtnHtml;
+        }
+      } finally {
+        if (tableResponsive) {
+          tableResponsive.style.overflow = prevOverflow;
+        }
+      }
+    }
+
     initTheme();
     loadAndRender();
     $('#exportCsvBtn').addEventListener('click', exportComparisonCsv);
+    if ($('#snapshotBtn')) $('#snapshotBtn').addEventListener('click', takeTableSnapshot);
+    if ($('#tableCardSnapshotBtn')) $('#tableCardSnapshotBtn').addEventListener('click', takeTableSnapshot);
   </script>
 </body>
 </html>
