@@ -131,14 +131,14 @@
               <div class="form-text" style="font-size:0.75rem;">Pouch, tape, box, bubble wrap, thermal label</div>
             </div>
 
-            <!-- Seller-Paid Shipping Subsidy / Cost -->
+            <!-- Inbound Sourcing Freight & Logistics -->
             <div class="col-md-3">
-              <label for="shippingCost" class="form-label fw-semibold small">Seller Shipping / Subsidy</label>
+              <label for="sourcingFreight" class="form-label fw-semibold small">Inbound Sourcing &amp; Freight</label>
               <div class="input-group input-group-sm">
                 <span class="input-group-text">₱</span>
-                <input type="number" class="form-control" id="shippingCost" value="0" min="0" step="0.01">
+                <input type="number" class="form-control" id="sourcingFreight" value="0" min="0" step="0.01">
               </div>
-              <div class="form-text" style="font-size:0.75rem;">Seller-funded shipping discount, drop-off, or RTS provision</div>
+              <div class="form-text" style="font-size:0.75rem;">Supplier to warehouse freight / forwarder fee per unit</div>
             </div>
 
             <!-- Default Target Net Margin -->
@@ -238,17 +238,6 @@
                 <div class="form-text" style="font-size:0.75rem;">Shopee pouches, waybills, fulfillment labor</div>
               </div>
 
-              <div class="mb-3">
-                <label for="shShipping" class="form-label fw-semibold small mb-1">
-                  Shopee Seller Shipping / RTS Provision
-                </label>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="shShipping" value="0" min="0" step="0.01">
-                </div>
-                <div class="form-text" style="font-size:0.75rem;">Seller shipping subsidy, voucher share, or return allowance</div>
-              </div>
-
               <div class="form-check form-switch small mb-3">
                 <input class="form-check-input" type="checkbox" id="shOptIn">
                 <label class="form-check-label" for="shOptIn">
@@ -304,17 +293,6 @@
                 <div class="form-text" style="font-size:0.75rem;">Live streaming host fees, creator product samples</div>
               </div>
 
-              <div class="mb-3">
-                <label for="ttShipping" class="form-label fw-semibold small mb-1">
-                  TikTok Seller Shipping / RTS Provision
-                </label>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="ttShipping" value="0" min="0" step="0.01">
-                </div>
-                <div class="form-text" style="font-size:0.75rem;">Seller shipping subsidy, voucher share, or return allowance</div>
-              </div>
-
               <div class="form-check form-switch small mb-3">
                 <input class="form-check-input" type="checkbox" id="ttOptIn">
                 <label class="form-check-label" for="ttOptIn">
@@ -368,17 +346,6 @@
                   <input type="number" class="form-control" id="lzOpex" value="0" min="0" step="0.01">
                 </div>
                 <div class="form-text" style="font-size:0.75rem;">Lazada branded boxes, warehouse prep fees</div>
-              </div>
-
-              <div class="mb-3">
-                <label for="lzShipping" class="form-label fw-semibold small mb-1">
-                  Lazada Seller Shipping / RTS Provision
-                </label>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="lzShipping" value="0" min="0" step="0.01">
-                </div>
-                <div class="form-text" style="font-size:0.75rem;">Seller shipping subsidy, voucher share, or return allowance</div>
               </div>
 
               <div class="form-check form-switch small mb-3">
@@ -563,21 +530,28 @@
           <div class="p-3.5 rounded border bg-body">
             <h4 class="h6 fw-bold mb-3"><i class="bi bi-calculator me-1 text-primary"></i>Live ROAS &amp; Unit Economics Simulator</h4>
             <div class="row g-3 align-items-end mb-3">
-              <div class="col-sm-4">
+              <div class="col-sm-3">
                 <label for="roasTestPrice" class="form-label small fw-semibold mb-1">Selling Price (₱)</label>
                 <div class="input-group input-group-sm">
                   <span class="input-group-text">₱</span>
                   <input type="number" class="form-control" id="roasTestPrice" value="500" min="1" step="1">
                 </div>
               </div>
-              <div class="col-sm-4">
-                <label for="roasTestCost" class="form-label small fw-semibold mb-1">Product Base Cost (₱)</label>
+              <div class="col-sm-3">
+                <label for="roasTestCost" class="form-label small fw-semibold mb-1">Supplier Base Cost (₱)</label>
                 <div class="input-group input-group-sm">
                   <span class="input-group-text">₱</span>
                   <input type="number" class="form-control" id="roasTestCost" value="150" min="0" step="1">
                 </div>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-3">
+                <label for="roasTestFreight" class="form-label small fw-semibold mb-1">Inbound Freight / Unit (₱)</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="roasTestFreight" value="25" min="0" step="1">
+                </div>
+              </div>
+              <div class="col-sm-3">
                 <label for="roasTestMargin" class="form-label small fw-semibold mb-1">Desired Net Margin (%)</label>
                 <div class="input-group input-group-sm">
                   <input type="number" class="form-control" id="roasTestMargin" value="20" min="0" max="80" step="1">
@@ -593,6 +567,7 @@
                   <tr>
                     <th scope="col" class="text-start">Marketplace</th>
                     <th scope="col">Selling Price</th>
+                    <th scope="col" title="Base Supplier Cost + Inbound Freight">Landed COGS</th>
                     <th scope="col">Pre-Ad Contribution</th>
                     <th scope="col">Contrib Margin</th>
                     <th scope="col" class="text-danger fw-bold" title="1 / CM">Base BE ROAS</th>
@@ -668,7 +643,7 @@
       $('#shopName').value = p.shopName || 'My Online Store';
       $('#defaultMargin').value = p.defaultMargin !== undefined ? p.defaultMargin : 20;
       $('#packagingCost').value = p.packagingCost || 0;
-      $('#shippingCost').value = p.shippingCost || 0;
+      $('#sourcingFreight').value = p.sourcingFreight !== undefined ? p.sourcingFreight : (p.shippingCost || 0);
 
       const isVat = p.taxStatus === 'vat';
       $('#profVat').checked = isVat;
@@ -683,21 +658,18 @@
       $('#shAdCost').value = sh.adCost || 0;
       $('#shRoas').value = sh.targetRoas || 3.5;
       $('#shOpex').value = sh.opex || 0;
-      $('#shShipping').value = sh.shippingCost || 0;
       $('#shOptIn').checked = sh.optIn === true;
 
       const tt = p.platforms.tt || {};
       $('#ttAdCost').value = tt.adCost || 0;
       $('#ttRoas').value = tt.targetRoas || 2.8;
       $('#ttOpex').value = tt.opex || 0;
-      $('#ttShipping').value = tt.shippingCost || 0;
       $('#ttOptIn').checked = tt.optIn === true;
 
       const lz = p.platforms.lz || {};
       $('#lzAdCost').value = lz.adCost || 0;
       $('#lzRoas').value = lz.targetRoas || 3.5;
       $('#lzOpex').value = lz.opex || 0;
-      $('#lzShipping').value = lz.shippingCost || 0;
 
       updateExpenseSummary();
       updateRoasTester();
@@ -706,19 +678,20 @@
     function updateRoasTester() {
       const price = Math.max(1, Number($('#roasTestPrice').value || 500));
       const cost = Math.max(0, Number($('#roasTestCost').value || 150));
+      const freight = Math.max(0, Number($('#roasTestFreight') ? $('#roasTestFreight').value : 0));
       const margin = Math.max(0, Math.min(0.8, Number($('#roasTestMargin').value || 20) / 100));
 
       const isVat = $('#profVat').checked;
       const nonrecoverableAdVat = $('#profNonrecoverableAdVat').checked;
       const pack = Math.max(0, Number($('#packagingCost').value || 0));
-      const baseShipping = Math.max(0, Number($('#shippingCost').value || 0));
 
       const testConfig = {
         vat: isVat,
         cost: cost,
+        freight: freight,
+        sourcingFreight: freight,
         units: 1,
         pack: pack,
-        shippingCost: baseShipping,
         opex: 0,
         adcost: 0,
         m: margin,
@@ -735,18 +708,15 @@
         platformAllotments: {
           sh: {
             adCost: Number($('#shAdCost').value || 0),
-            opex: Number($('#shOpex').value || 0),
-            shippingCost: Number($('#shShipping').value || 0)
+            opex: Number($('#shOpex').value || 0)
           },
           tt: {
             adCost: Number($('#ttAdCost').value || 0),
-            opex: Number($('#ttOpex').value || 0),
-            shippingCost: Number($('#ttShipping').value || 0)
+            opex: Number($('#ttOpex').value || 0)
           },
           lz: {
             adCost: Number($('#lzAdCost').value || 0),
-            opex: Number($('#lzOpex').value || 0),
-            shippingCost: Number($('#lzShipping').value || 0)
+            opex: Number($('#lzOpex').value || 0)
           }
         }
       };
@@ -768,6 +738,10 @@
               <span class="badge ${pl.badgeClass} me-1">${pl.n}</span>
             </td>
             <td><strong>${P(res.price)}</strong></td>
+            <td>
+              <strong>${P(res.landedCost)}</strong>
+              <small class="text-body-secondary d-block" style="font-size:0.68rem;">Base: ${P(res.baseProductCost)} + Freight: ${P(res.sourcingFreight)}</small>
+            </td>
             <td><strong>${P(res.contributionPerOrder)}</strong></td>
             <td><span class="badge bg-body-secondary text-body-emphasis border">${(res.contributionMargin * 100).toFixed(1)}%</span></td>
             <td class="text-danger fw-bold fs-6 ${!nonrecoverableAdVat ? 'table-active' : ''}">${baseBeStr}</td>
@@ -786,32 +760,29 @@
 
     function updateExpenseSummary() {
       const pack = Math.max(0, Number($('#packagingCost').value || 0));
-      const baseShip = Math.max(0, Number($('#shippingCost').value || 0));
+      const freight = Math.max(0, Number($('#sourcingFreight').value || 0));
 
       const shAd = Math.max(0, Number($('#shAdCost').value || 0));
       const shOp = Math.max(0, Number($('#shOpex').value || 0));
-      const shShip = Number($('#shShipping').value || 0) || baseShip;
 
       const ttAd = Math.max(0, Number($('#ttAdCost').value || 0));
       const ttOp = Math.max(0, Number($('#ttOpex').value || 0));
-      const ttShip = Number($('#ttShipping').value || 0) || baseShip;
 
       const lzAd = Math.max(0, Number($('#lzAdCost').value || 0));
       const lzOp = Math.max(0, Number($('#lzOpex').value || 0));
-      const lzShip = Number($('#lzShipping').value || 0) || baseShip;
 
-      const shTot = pack + shShip + shAd + shOp;
-      const ttTot = pack + ttShip + ttAd + ttOp;
-      const lzTot = pack + lzShip + lzAd + lzOp;
+      const shTot = pack + shAd + shOp;
+      const ttTot = pack + ttAd + ttOp;
+      const lzTot = pack + lzAd + lzOp;
 
       $('#summaryShTotal').textContent = P(shTot) + ' / order';
-      $('#summaryShDetail').textContent = `Pack: ${P(pack)} | Ship: ${P(shShip)} | Ads: ${P(shAd)} | Opex: ${P(shOp)}`;
+      $('#summaryShDetail').textContent = `Pack: ${P(pack)} | Freight: ${P(freight)}/unit | Ads: ${P(shAd)} | Opex: ${P(shOp)}`;
 
       $('#summaryTtTotal').textContent = P(ttTot) + ' / order';
-      $('#summaryTtDetail').textContent = `Pack: ${P(pack)} | Ship: ${P(ttShip)} | Ads: ${P(ttAd)} | Opex: ${P(ttOp)}`;
+      $('#summaryTtDetail').textContent = `Pack: ${P(pack)} | Freight: ${P(freight)}/unit | Ads: ${P(ttAd)} | Opex: ${P(ttOp)}`;
 
       $('#summaryLzTotal').textContent = P(lzTot) + ' / order';
-      $('#summaryLzDetail').textContent = `Pack: ${P(pack)} | Ship: ${P(lzShip)} | Ads: ${P(lzAd)} | Opex: ${P(lzOp)}`;
+      $('#summaryLzDetail').textContent = `Pack: ${P(pack)} | Freight: ${P(freight)}/unit | Ads: ${P(lzAd)} | Opex: ${P(lzOp)}`;
     }
 
     function saveExpensesToStorage() {
@@ -826,27 +797,24 @@
         nonrecoverableAdVat: nonrecoverableAdVat,
         defaultMargin: Math.max(0, Math.min(80, Number($('#defaultMargin').value || 20))),
         packagingCost: Math.max(0, Number($('#packagingCost').value || 0)),
-        shippingCost: Math.max(0, Number($('#shippingCost').value || 0)),
+        sourcingFreight: Math.max(0, Number($('#sourcingFreight').value || 0)),
         platforms: {
           sh: {
             adCost: Math.max(0, Number($('#shAdCost').value || 0)),
             targetRoas: Math.max(0.1, Number($('#shRoas').value || 3.5)),
             opex: Math.max(0, Number($('#shOpex').value || 0)),
-            shippingCost: Math.max(0, Number($('#shShipping').value || 0)),
             optIn: $('#shOptIn').checked
           },
           tt: {
             adCost: Math.max(0, Number($('#ttAdCost').value || 0)),
             targetRoas: Math.max(0.1, Number($('#ttRoas').value || 2.8)),
             opex: Math.max(0, Number($('#ttOpex').value || 0)),
-            shippingCost: Math.max(0, Number($('#ttShipping').value || 0)),
             optIn: $('#ttOptIn').checked
           },
           lz: {
             adCost: Math.max(0, Number($('#lzAdCost').value || 0)),
             targetRoas: Math.max(0.1, Number($('#lzRoas').value || 3.5)),
             opex: Math.max(0, Number($('#lzOpex').value || 0)),
-            shippingCost: Math.max(0, Number($('#lzShipping').value || 0)),
             optIn: true
           }
         }
@@ -862,7 +830,8 @@
       activeConfig.wht = profile.includeWht;
       activeConfig.mg = profile.defaultMargin;
       activeConfig.pack = profile.packagingCost;
-      activeConfig.shippingCost = profile.shippingCost;
+      activeConfig.freight = profile.sourcingFreight;
+      activeConfig.sourcingFreight = profile.sourcingFreight;
       activeConfig.osh = profile.platforms.sh.optIn;
       activeConfig.ott = profile.platforms.tt.optIn;
       saveConfigToStorage(activeConfig);
@@ -879,18 +848,15 @@
     }
 
     function resetExpensesToZero() {
-      if (!confirm('Reset packaging, seller shipping, operating overhead, and ad spend to ₱0.00?')) return;
+      if (!confirm('Reset packaging, sourcing freight, operating overhead, and ad spend to ₱0.00?')) return;
       $('#packagingCost').value = '0';
-      $('#shippingCost').value = '0';
+      $('#sourcingFreight').value = '0';
       $('#shAdCost').value = '0';
       $('#shOpex').value = '0';
-      $('#shShipping').value = '0';
       $('#ttAdCost').value = '0';
       $('#ttOpex').value = '0';
-      $('#ttShipping').value = '0';
       $('#lzAdCost').value = '0';
       $('#lzOpex').value = '0';
-      $('#lzShipping').value = '0';
       saveExpensesToStorage();
     }
 

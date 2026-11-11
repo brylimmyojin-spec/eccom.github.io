@@ -122,12 +122,22 @@
 
               <!-- Base Cost -->
               <div class="col-sm-6 col-lg-12">
-                <label for="cost" class="form-label fw-semibold small mb-1">Base Cost Per Unit</label>
+                <label for="cost" class="form-label fw-semibold small mb-1">Base Product Cost (Supplier Price)</label>
                 <div class="input-group input-group-sm">
                   <span class="input-group-text">₱</span>
                   <input type="number" class="form-control" id="cost" value="100" min="0" step="0.01">
                 </div>
-                <div class="form-text" style="font-size:0.75rem;">Wholesale or direct product cost</div>
+                <div class="form-text" style="font-size:0.75rem;">Supplier factory or wholesale item price</div>
+              </div>
+
+              <!-- Inbound Sourcing Freight & Logistics -->
+              <div class="col-sm-6 col-lg-12">
+                <label for="freight" class="form-label fw-semibold small mb-1">Inbound Logistics &amp; Freight Cost</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="freight" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.75rem;">Forwarder, sea/air cargo, customs, or supplier delivery / unit</div>
               </div>
 
               <!-- Units per Bundle -->
@@ -298,26 +308,30 @@
     });
 
     const SIMULATOR_CONFIG_IDS = [
-      'nv', 'vat', 'cost', 'units', 'mg', 'srp',
+      'nv', 'vat', 'cost', 'freight', 'units', 'mg', 'srp',
       'cs', 'ct', 'cl', 'osh', 'ott', 'camp',
       'wht', 'claim'
     ];
 
     function restoreConfig() {
       const saved = getStoredConfig();
+      const profile = getStoredProfile();
       SIMULATOR_CONFIG_IDS.forEach(id => {
-        if (!(id in saved)) return;
         const el = document.getElementById(id);
         if (!el) return;
-        const val = saved[id];
-        if (el.type === 'checkbox' || el.type === 'radio') {
-          el.checked = val === true;
-        } else if (el.tagName === 'SELECT') {
-          if (Array.from(el.options).some(opt => opt.value === String(val))) {
-            el.value = String(val);
+        if (id in saved) {
+          const val = saved[id];
+          if (el.type === 'checkbox' || el.type === 'radio') {
+            el.checked = val === true;
+          } else if (el.tagName === 'SELECT') {
+            if (Array.from(el.options).some(opt => opt.value === String(val))) {
+              el.value = String(val);
+            }
+          } else if (val !== undefined && val !== null) {
+            el.value = val;
           }
-        } else if (val !== undefined && val !== null) {
-          el.value = val;
+        } else if (id === 'freight' && profile.sourcingFreight) {
+          el.value = profile.sourcingFreight;
         }
       });
     }
@@ -428,11 +442,11 @@
               ${rowHtml('Total Deductions', r.ded, true)}
 
               <div class="fw-bold text-uppercase text-body-secondary small mb-1 mt-3" style="font-size:0.75rem;">
-                Costs &amp; Profit
+                Costs &amp; Landed Profit
               </div>
-              ${rowHtml('Product Cost (' + o.units + ' unit' + (o.units > 1 ? 's' : '') + ')', r.productCost)}
+              ${rowHtml('Supplier Cost (' + o.units + ' unit' + (o.units > 1 ? 's' : '') + ')', r.baseProductCost)}
+              ${r.sourcingFreight > 0 ? rowHtml('Inbound Sourcing Freight (' + o.units + ' unit' + (o.units > 1 ? 's' : '') + ')', r.sourcingFreight) : ''}
               ${r.pack > 0 ? rowHtml('Packaging Cost', r.pack) : ''}
-              ${r.shippingCost > 0 ? rowHtml('Seller Shipping Subsidy (' + pl.n + ')', r.shippingCost) : ''}
               ${r.opex > 0 ? rowHtml('Overhead (' + pl.n + ')', r.opex) : ''}
               ${r.adcost > 0 ? (
                 r.nonrecoverableAdVat ?
@@ -440,7 +454,7 @@
                   rowHtml('Nonrecoverable Ad VAT (12%)', r.totalAdCost - r.adcost)
                 : rowHtml('Ad Spend (' + pl.n + ')', r.adcost)
               ) : ''}
-              ${rowHtml('All-in Cost', r.cost, true)}
+              ${rowHtml('All-in Landed Cost', r.cost, true)}
               ${rowHtml('Net Profit', r.profit, true)}
             </div>
 
@@ -533,31 +547,31 @@
       // Update Active Expenses Display in Simulator
       if ($('#activeExpensesSummary')) {
         const pack = profile.packagingCost || 0;
-        const baseShip = profile.shippingCost || 0;
+        const defaultFreight = profile.sourcingFreight || 0;
         const shAd = (profile.platforms.sh && profile.platforms.sh.adCost) || 0;
         const shOp = (profile.platforms.sh && profile.platforms.sh.opex) || 0;
-        const shShip = (profile.platforms.sh && profile.platforms.sh.shippingCost) || baseShip;
 
         const ttAd = (profile.platforms.tt && profile.platforms.tt.adCost) || 0;
         const ttOp = (profile.platforms.tt && profile.platforms.tt.opex) || 0;
-        const ttShip = (profile.platforms.tt && profile.platforms.tt.shippingCost) || baseShip;
 
         const lzAd = (profile.platforms.lz && profile.platforms.lz.adCost) || 0;
         const lzOp = (profile.platforms.lz && profile.platforms.lz.opex) || 0;
-        const lzShip = (profile.platforms.lz && profile.platforms.lz.shippingCost) || baseShip;
 
         $('#activeExpensesSummary').innerHTML = `
           <div class="d-flex justify-content-between mb-1">
-            <span>Base Packaging &amp; Ship:</span> <span>Pack: <strong>${P(pack)}</strong> | Ship: <strong>${P(baseShip)}</strong></span>
+            <span>Base Packaging:</span> <strong>${P(pack)} / order</strong>
           </div>
           <div class="d-flex justify-content-between mb-1">
-            <span>Shopee Allotment:</span> <span>Ads: <strong>${P(shAd)}</strong> | Ship: <strong>${P(shShip)}</strong> | Opex: <strong>${P(shOp)}</strong></span>
+            <span>Default Sourcing Freight:</span> <strong>${P(defaultFreight)} / unit</strong>
           </div>
           <div class="d-flex justify-content-between mb-1">
-            <span>TikTok Allotment:</span> <span>Ads: <strong>${P(ttAd)}</strong> | Ship: <strong>${P(ttShip)}</strong> | Opex: <strong>${P(ttOp)}</strong></span>
+            <span>Shopee Allotment:</span> <span>Ads: <strong>${P(shAd)}</strong> | Opex: <strong>${P(shOp)}</strong></span>
+          </div>
+          <div class="d-flex justify-content-between mb-1">
+            <span>TikTok Allotment:</span> <span>Ads: <strong>${P(ttAd)}</strong> | Opex: <strong>${P(ttOp)}</strong></span>
           </div>
           <div class="d-flex justify-content-between">
-            <span>Lazada Allotment:</span> <span>Ads: <strong>${P(lzAd)}</strong> | Ship: <strong>${P(lzShip)}</strong> | Opex: <strong>${P(lzOp)}</strong></span>
+            <span>Lazada Allotment:</span> <span>Ads: <strong>${P(lzAd)}</strong> | Opex: <strong>${P(lzOp)}</strong></span>
           </div>
         `;
       }
@@ -569,12 +583,15 @@
         profile.nonrecoverableAdVat : 
         (!vatChecked || !$('#claim').checked);
 
+      const freightVal = $('#freight') ? Math.max(0, +$('#freight').value || 0) : (profile.sourcingFreight || 0);
+
       const o = {
         vat: vatChecked,
         cost: Math.max(0, +$('#cost').value || 0),
+        freight: freightVal,
+        sourcingFreight: freightVal,
         units: Math.max(1, +$('#units').value || 1),
         pack: Math.max(0, profile.packagingCost || 0),
-        shippingCost: Math.max(0, profile.shippingCost || 0),
         opex: 0,
         adcost: 0,
         targetRoas: 3,

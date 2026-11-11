@@ -22,12 +22,11 @@ function getDefaultProfile() {
     nonrecoverableAdVat: true, // 12% VAT on digital advertising when nonrecoverable
     defaultMargin: 20,
     packagingCost: 0,
-    shippingCost: 0, // Seller-side shipping cost / subsidy per order (distinct from platform fee)
+    sourcingFreight: 0, // Inbound sourcing & logistics freight cost per unit (supplier to warehouse)
     platforms: {
       sh: {
         adCost: 0,
         opex: 0,
-        shippingCost: 0,
         targetRoas: 3,
         optIn: false,
         notes: 'Shopee Ads (Discovery, Search)'
@@ -35,7 +34,6 @@ function getDefaultProfile() {
       tt: {
         adCost: 0,
         opex: 0,
-        shippingCost: 0,
         targetRoas: 3,
         optIn: false,
         notes: 'TikTok GMV Max & Live Production'
@@ -43,7 +41,6 @@ function getDefaultProfile() {
       lz: {
         adCost: 0,
         opex: 0,
-        shippingCost: 0,
         targetRoas: 3,
         optIn: false,
         notes: 'Lazada Sponsored Solutions'
@@ -106,11 +103,16 @@ function fees(p, o) {
 
 function calc(p, o) {
   const F = fees(p, o);
-  const productCost = Math.max(0, o.cost || 0) * Math.max(1, o.units || 1);
+  const units = Math.max(1, o.units || 1);
+  const baseItemCost = Math.max(0, o.cost || 0);
+  const unitFreight = Math.max(0, o.freight !== undefined ? o.freight : (o.sourcingFreight !== undefined ? o.sourcingFreight : (o.shippingCost || 0)));
+
+  const baseProductCost = baseItemCost * units;
+  const sourcingFreight = unitFreight * units;
+  const landedCost = baseProductCost + sourcingFreight;
 
   // Platform-specific expense resolution
   let pack = Math.max(0, o.pack || 0);
-  let shippingCost = Math.max(0, o.shippingCost || 0); // Seller-side shipping cost / subsidy
   let opex = Math.max(0, o.opex || 0);
   let adcost = Math.max(0, o.adcost || 0);
   let targetRoas = Math.max(0.1, o.targetRoas || 3);
@@ -118,14 +120,13 @@ function calc(p, o) {
   if (o.platformAllotments && o.platformAllotments[p]) {
     const allot = o.platformAllotments[p];
     if (allot.pack !== undefined && allot.pack !== null && allot.pack > 0) pack = Math.max(0, allot.pack);
-    if (allot.shippingCost !== undefined && allot.shippingCost !== null && allot.shippingCost > 0) shippingCost = Math.max(0, allot.shippingCost);
     if (allot.opex !== undefined && allot.opex !== null && allot.opex > 0) opex = Math.max(0, allot.opex);
     if (allot.adCost !== undefined && allot.adCost !== null) adcost = Math.max(0, allot.adCost);
     else if (allot.adcost !== undefined && allot.adcost !== null) adcost = Math.max(0, allot.adcost);
     if (allot.targetRoas !== undefined && allot.targetRoas !== null && allot.targetRoas > 0) targetRoas = Math.max(0.1, allot.targetRoas);
   }
 
-  const cost = productCost + pack + shippingCost + opex + adcost;
+  const cost = landedCost + pack + opex + adcost;
 
   const vs = o.vat ? (0.12 / 1.12) : 0;
   const k = 1 - (o.vat && o.claim ? vs : 0);
@@ -157,7 +158,7 @@ function calc(p, o) {
     const adVatRate = nonrecoverableAdVat ? 0.12 : 0;
     const adVatMultiplier = 1 + adVatRate; // 1.12 if 12% nonrecoverable, 1.00 if creditable
 
-    const nonAdCost = productCost + pack + shippingCost + opex;
+    const nonAdCost = landedCost + pack + opex;
     const preVatAdSpend = adcost;
     const totalAdCost = preVatAdSpend * adVatMultiplier;
     const cost = nonAdCost + totalAdCost;
@@ -238,10 +239,11 @@ function calc(p, o) {
       profit,
       cost,
       nonAdCost,
-      productCost,
+      baseProductCost,
+      sourcingFreight,
+      landedCost,
+      productCost: landedCost,
       pack,
-      shippingCost,
-      sellerShipping: shippingCost,
       opex,
       adcost: preVatAdSpend,
       totalAdCost,
