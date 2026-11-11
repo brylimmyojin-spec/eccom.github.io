@@ -165,8 +165,23 @@ body {
   box-shadow: 0 0.5rem 1.25rem rgba(25, 135, 84, 0.18) !important;
 }
 
-/* Large numbers */
+/* Large numbers & Price Displays */
+.suggested-price-display {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--bs-heading-color, inherit);
+}
+
 .take-home-display {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--profit-color);
+}
+
+.take-home-winner-display {
   font-size: 1.85rem;
   font-weight: 800;
   letter-spacing: -0.03em;

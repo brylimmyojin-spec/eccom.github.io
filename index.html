@@ -385,12 +385,25 @@
             <!-- Price & Take-home Banner -->
             <div class="bg-body-tertiary rounded-3 p-3 mb-3 border">
               <div class="d-flex justify-content-between align-items-baseline mb-1">
-                <span class="text-body-secondary small fw-medium">${o.srp > 0 ? 'Your Price' : 'Suggested Price'}:</span>
-                <span class="fw-bold fs-5">${P(r.price)}</span>
+                <span class="text-uppercase text-body-secondary fw-bold" style="font-size: 0.72rem; letter-spacing: 0.04em;">
+                  ${o.srp > 0 ? 'Your Selling Price' : 'Suggested Selling Price'}
+                </span>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle" style="font-size: 0.65rem;">
+                  Listing SRP
+                </span>
               </div>
-              <div class="d-flex justify-content-between align-items-baseline">
-                <span class="text-body-secondary small fw-medium">Net Take-Home:</span>
-                <span class="take-home-display">${P(r.take)}</span>
+              <div class="suggested-price-display mb-2 text-primary-emphasis">
+                ${P(r.price)}
+              </div>
+              <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                <div>
+                  <span class="text-body-secondary small fw-medium">Net Take-Home:</span>
+                  <span class="take-home-display ms-1">${P(r.take)}</span>
+                </div>
+                <div class="text-end">
+                  <span class="text-body-secondary small fw-medium">Net Profit:</span>
+                  <span class="fw-bold ms-1 ${r.profit >= 0 ? 'text-success' : 'text-danger'}" style="font-size: 1.05rem;">${P(r.profit)}</span>
+                </div>
               </div>
             </div>
 
