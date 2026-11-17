@@ -18,7 +18,7 @@
   <!-- Navigation Bar -->
   <header>
     <nav class="navbar navbar-expand-xl app-navbar sticky-top shadow-sm py-2">
-      <div class="container-xl">
+      <div class="container-fluid px-3 px-md-4 px-xl-5">
         <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none" href="index.html">
           <span class="brand-flag">🇵🇭</span>
           <div class="d-flex flex-column lh-1">
@@ -68,7 +68,7 @@
     </nav>
   </header>
 
-  <main class="container-xl py-4 flex-grow-1">
+  <main class="container-fluid px-3 px-md-4 px-xl-5 py-3 py-xl-4 flex-grow-1">
 
     <!-- Hero Title -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
@@ -99,8 +99,8 @@
     <div class="row g-4">
       
       <!-- Left Column: Input Form Controls -->
-      <div class="col-lg-5 col-xl-4">
-        <div class="card shadow-sm border-0 sticky-lg-top" style="top: 80px; z-index: 10;">
+      <div class="col-lg-4 col-xl-3 col-xxl-3">
+        <div class="card shadow-sm border-0 simulator-sidebar" style="top: 80px; z-index: 10;">
           
           <!-- Card Header -->
           <div class="card-header bg-body-tertiary py-3 d-flex justify-content-between align-items-center">
@@ -189,65 +189,167 @@
                 </div>
               </div>
 
-              <!-- Switches -->
+              <!-- Interactive Toggles -->
               <div class="col-12">
                 <hr class="my-2">
-                <div class="form-check form-switch small mb-2">
-                  <input class="form-check-input" type="checkbox" id="osh">
-                  <label class="form-check-label" for="osh">
-                    Shopee Mega Voucher (MDV 4% / 5%)
-                    <a href="opt-in-fees.html#mdv" class="text-decoration-none text-danger ms-1" title="Shopee Mega Discount Voucher (Campaign 779): 4% reg / 5% spike day, max ₱200/item, 28-day lock-in"><i class="bi bi-info-circle"></i></a>
-                  </label>
-                </div>
-                <div class="form-check form-switch small mb-2">
-                  <input class="form-check-input" type="checkbox" id="shRts">
-                  <label class="form-check-label" for="shRts">
-                    Shopee FRS / RTS Protection (₱2.00)
-                    <a href="opt-in-fees.html" class="text-decoration-none text-primary ms-1" title="Learn about Shopee FRS / RTS Protection (Campaign 470000001000041)"><i class="bi bi-info-circle"></i></a>
-                  </label>
-                </div>
-                <div class="form-check form-switch small mb-2">
-                  <input class="form-check-input" type="checkbox" id="ott">
-                  <label class="form-check-label" for="ott">TikTok Mega Discount (4–5%)</label>
-                </div>
-                <div class="form-check form-switch small mb-2">
-                  <input class="form-check-input" type="checkbox" id="camp">
-                  <label class="form-check-label" for="camp">
-                    Spike Day Campaign (Double-Double / Payday)
-                    <span class="badge bg-danger-subtle text-danger-emphasis border ms-1" style="font-size:0.65rem;" title="Starting Jan 1, 2026: +1% on MDV fees during Double Double & Payday campaigns">+1% MDV</span>
-                  </label>
-                </div>
-                <div class="form-check form-switch small mb-2">
-                  <input class="form-check-input" type="checkbox" id="wht" checked>
-                  <label class="form-check-label" for="wht">Withholding Tax (0.5% BIR)</label>
-                </div>
-                <div class="form-check form-switch small">
-                  <input class="form-check-input" type="checkbox" id="claim" disabled>
-                  <label class="form-check-label" for="claim">Claim Input VAT Credit (VAT only)</label>
+                
+                <!-- Group 1: Marketplace Campaigns & Protection -->
+                <div class="toggle-group-header">
+                  <span><i class="bi bi-tag-fill me-1 text-danger"></i>Opt-In Campaigns &amp; Protection</span>
+                  <a href="opt-in-fees.html" class="text-decoration-none text-primary fw-medium" style="font-size:0.68rem; text-transform:none;">Guide &rarr;</a>
                 </div>
 
-                <hr class="my-2">
-                <div class="mb-1 text-uppercase fw-bold text-body-secondary" style="font-size:0.68rem; letter-spacing:0.04em;">
-                  <i class="bi bi-gift-fill text-success me-1"></i>90-Day 0% Commission (New Seller)
+                <!-- Shopee MDV Toggle -->
+                <label class="toggle-card" for="osh">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger">
+                      <i class="bi bi-tag-fill"></i>Shopee Mega Voucher (MDV)
+                      <span class="badge bg-danger-subtle text-danger-emphasis border" style="font-size:0.65rem;">4% / 5%</span>
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Campaign 779 &bull; Max ₱200/item &bull; 28-day lock-in
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="osh">
+                  </div>
+                </label>
+
+                <!-- Shopee FRS / RTS Toggle -->
+                <label class="toggle-card" for="shRts">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger">
+                      <i class="bi bi-shield-check"></i>Shopee FRS / RTS Protection
+                      <span class="badge bg-danger-subtle text-danger-emphasis border" style="font-size:0.65rem;">₱2.00</span>
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Campaign 47000 &bull; 100% Free RSF/FSF (₱1K cap)
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="shRts">
+                  </div>
+                </label>
+
+                <!-- TikTok MDP Toggle -->
+                <label class="toggle-card" for="ott">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger-emphasis">
+                      <i class="bi bi-play-circle-fill"></i>TikTok Mega Discount (MDP)
+                      <span class="badge bg-danger-subtle text-danger-emphasis border" style="font-size:0.65rem;">4% / 5%</span>
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Mega campaigns &bull; Boosts LIVE &amp; affiliate exposure
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="ott">
+                  </div>
+                </label>
+
+                <!-- Spike Day Toggle -->
+                <label class="toggle-card" for="camp">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-warning-emphasis">
+                      <i class="bi bi-lightning-charge-fill text-warning"></i>Spike Day Campaign Mode
+                      <span class="badge bg-warning-subtle text-warning-emphasis border" style="font-size:0.65rem;">+1% MDV</span>
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Double-Double (9.9, etc.) &amp; Paydays (Jan 1, 2026 rule)
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="camp">
+                  </div>
+                </label>
+
+                <!-- Group 2: 90-Day Commission Free -->
+                <div class="toggle-group-header">
+                  <span><i class="bi bi-gift-fill me-1 text-success"></i>90-Day 0% Commission (New Seller)</span>
+                  <span class="badge bg-success-subtle text-success-emphasis border" style="font-size:0.65rem;">Waive Comm</span>
                 </div>
-                <div class="form-check form-switch small mb-1.5">
-                  <input class="form-check-input" type="checkbox" id="shFreeComm">
-                  <label class="form-check-label text-danger fw-semibold" for="shFreeComm">
-                    Shopee: Exclude Commission
-                  </label>
+
+                <!-- Shopee 90-Day Free Comm -->
+                <label class="toggle-card" for="shFreeComm">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger">
+                      <i class="bi bi-shop"></i>Shopee: Exclude Commission
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      0% category commission for first 90 days of store
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="shFreeComm">
+                  </div>
+                </label>
+
+                <!-- TikTok 90-Day Free Comm -->
+                <label class="toggle-card" for="ttFreeComm">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger-emphasis">
+                      <i class="bi bi-tiktok"></i>TikTok: Exclude Commission
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      0% marketplace commission for newly opened shops
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="ttFreeComm">
+                  </div>
+                </label>
+
+                <!-- Lazada 90-Day Free Comm -->
+                <label class="toggle-card" for="lzFreeComm">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-primary">
+                      <i class="bi bi-bag-check-fill"></i>Lazada: Exclude Commission
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      0% standard commission for first 90 days of store
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="lzFreeComm">
+                  </div>
+                </label>
+
+                <!-- Group 3: Taxes & Compliance -->
+                <div class="toggle-group-header">
+                  <span><i class="bi bi-bank me-1 text-primary"></i>Tax &amp; Compliance (BIR)</span>
+                  <a href="tax-guide.html" class="text-decoration-none text-primary fw-medium" style="font-size:0.68rem; text-transform:none;">Guide &rarr;</a>
                 </div>
-                <div class="form-check form-switch small mb-1.5">
-                  <input class="form-check-input" type="checkbox" id="ttFreeComm">
-                  <label class="form-check-label text-danger-emphasis fw-semibold" for="ttFreeComm">
-                    TikTok: Exclude Commission
-                  </label>
-                </div>
-                <div class="form-check form-switch small mb-1">
-                  <input class="form-check-input" type="checkbox" id="lzFreeComm">
-                  <label class="form-check-label text-primary fw-semibold" for="lzFreeComm">
-                    Lazada: Exclude Commission
-                  </label>
-                </div>
+
+                <!-- Withholding Tax -->
+                <label class="toggle-card" for="wht">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-primary">
+                      <i class="bi bi-file-earmark-check"></i>Withholding Tax (0.5% BIR)
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      BIR RR 16-2023 (1% on 50% gross remittances)
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="wht" checked>
+                  </div>
+                </label>
+
+                <!-- Claim Input VAT -->
+                <label class="toggle-card" for="claim">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-body-secondary">
+                      <i class="bi bi-receipt"></i>Claim Input VAT Credit
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Credits 12% VAT on platform fees (VAT sellers only)
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="claim" disabled>
+                  </div>
+                </label>
+
               </div>
 
               <!-- Separated Expenses Loaded from Local Storage Card -->
@@ -285,7 +387,7 @@
       </div>
 
       <!-- Right Column: Real-Time Platform Result Cards -->
-      <div class="col-lg-7 col-xl-8">
+      <div class="col-lg-8 col-xl-9 col-xxl-9">
         
         <!-- Summary Callout -->
         <div class="alert alert-primary d-flex align-items-center justify-content-between shadow-sm mb-4 py-3 px-4 border-0" id="bestPlatformAlert">
@@ -302,7 +404,7 @@
         </div>
 
         <!-- 3 Platform Cards Grid -->
-        <div class="row g-4" id="cards">
+        <div class="row g-3 g-xl-4" id="cards">
           <!-- Rendered dynamically -->
         </div>
 
@@ -314,7 +416,7 @@
 
   <!-- Footer -->
   <footer class="bg-body-tertiary py-4 border-top mt-auto">
-    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+    <div class="container-fluid px-3 px-md-4 px-xl-5 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
       <div>
         <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
       </div>

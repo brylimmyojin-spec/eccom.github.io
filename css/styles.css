@@ -234,3 +234,160 @@ body {
 .card {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+/* ==========================================================================
+   Modern Interactive Toggle Tiles & Switches
+   ========================================================================== */
+.toggle-group-header {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bs-secondary-color);
+  margin-top: 0.85rem;
+  margin-bottom: 0.45rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--bs-border-color);
+  background-color: var(--bs-body-bg);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.toggle-card:hover {
+  background-color: var(--bs-tertiary-bg);
+  border-color: var(--bs-border-color-translucent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.toggle-card:active {
+  transform: translateY(0);
+}
+
+.toggle-card .form-check-input {
+  cursor: pointer;
+  width: 2.65rem;
+  height: 1.45rem;
+  margin-top: 0;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.toggle-card-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  flex-grow: 1;
+}
+
+.toggle-card-title {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--bs-body-color);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.toggle-card-subtitle {
+  font-size: 0.7rem;
+  color: var(--bs-secondary-color);
+  margin-top: 0.2rem;
+}
+
+/* Platform-themed active states when switch is checked */
+.toggle-card:has(input#osh:checked),
+.toggle-card:has(input#shRts:checked),
+.toggle-card:has(input#shFreeComm:checked) {
+  border-color: rgba(238, 77, 45, 0.5);
+  background: linear-gradient(135deg, rgba(238, 77, 45, 0.07) 0%, rgba(238, 77, 45, 0.02) 100%);
+}
+.toggle-card:has(input#osh:checked) .form-check-input,
+.toggle-card:has(input#shRts:checked) .form-check-input,
+.toggle-card:has(input#shFreeComm:checked) .form-check-input {
+  background-color: #ee4d2d;
+  border-color: #ee4d2d;
+  box-shadow: 0 0 10px rgba(238, 77, 45, 0.35);
+}
+
+.toggle-card:has(input#ott:checked),
+.toggle-card:has(input#ttFreeComm:checked) {
+  border-color: rgba(254, 44, 85, 0.5);
+  background: linear-gradient(135deg, rgba(254, 44, 85, 0.07) 0%, rgba(254, 44, 85, 0.02) 100%);
+}
+.toggle-card:has(input#ott:checked) .form-check-input,
+.toggle-card:has(input#ttFreeComm:checked) .form-check-input {
+  background-color: #fe2c55;
+  border-color: #fe2c55;
+  box-shadow: 0 0 10px rgba(254, 44, 85, 0.35);
+}
+
+.toggle-card:has(input#lzFreeComm:checked) {
+  border-color: rgba(15, 20, 109, 0.5);
+  background: linear-gradient(135deg, rgba(76, 110, 245, 0.08) 0%, rgba(76, 110, 245, 0.02) 100%);
+}
+.toggle-card:has(input#lzFreeComm:checked) .form-check-input {
+  background-color: #0f146d;
+  border-color: #0f146d;
+  box-shadow: 0 0 10px rgba(15, 20, 109, 0.35);
+}
+[data-bs-theme="dark"] .toggle-card:has(input#lzFreeComm:checked) {
+  border-color: rgba(76, 110, 245, 0.5);
+}
+[data-bs-theme="dark"] .toggle-card:has(input#lzFreeComm:checked) .form-check-input {
+  background-color: #4c6ef5;
+  border-color: #4c6ef5;
+  box-shadow: 0 0 10px rgba(76, 110, 245, 0.4);
+}
+
+.toggle-card:has(input#camp:checked) {
+  border-color: rgba(255, 145, 0, 0.55);
+  background: linear-gradient(135deg, rgba(255, 145, 0, 0.08) 0%, rgba(220, 53, 69, 0.03) 100%);
+}
+.toggle-card:has(input#camp:checked) .form-check-input {
+  background-color: #ff9100;
+  border-color: #ff9100;
+  box-shadow: 0 0 10px rgba(255, 145, 0, 0.4);
+}
+
+.toggle-card:has(input#wht:checked),
+.toggle-card:has(input#claim:checked) {
+  border-color: rgba(13, 110, 253, 0.45);
+  background: linear-gradient(135deg, rgba(13, 110, 253, 0.06) 0%, rgba(13, 110, 253, 0.02) 100%);
+}
+.toggle-card:has(input#wht:checked) .form-check-input,
+.toggle-card:has(input#claim:checked) .form-check-input {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+}
+
+.toggle-card:has(input:disabled) {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background-color: var(--bs-tertiary-bg);
+}
+
+/* Maximize Fluid Canvas Spacing */
+@media (min-width: 1400px) {
+  .simulator-sidebar {
+    position: sticky;
+    top: 85px;
+    z-index: 10;
+  }
+}
