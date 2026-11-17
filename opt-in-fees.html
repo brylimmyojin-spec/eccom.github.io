@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marketplace Opt-In Programs &amp; RTS Protection | Philippine E-commerce Calculator</title>
+  <title>Marketplace Opt-In Programs &amp; RTS / MDV Protection | Philippine E-commerce Calculator</title>
   
   <!-- Bootstrap 5.3.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,11 +21,19 @@
       border-radius: 1rem;
       background: linear-gradient(135deg, rgba(238, 77, 45, 0.05) 0%, rgba(255, 115, 0, 0.03) 100%);
     }
+    .campaign-banner-mdv {
+      border: 2px solid #ee4d2d;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(238, 77, 45, 0.08) 0%, rgba(255, 61, 0, 0.03) 100%);
+    }
     .metric-bubble {
       border-radius: 0.75rem;
       padding: 1rem;
       background: var(--bs-tertiary-bg);
       border: 1px solid var(--bs-border-color);
+    }
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
@@ -87,23 +95,264 @@
     <!-- Header Section -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
       <div>
-        <h1 class="h2 mb-1 fw-bold">Marketplace Opt-In Programs &amp; RTS Protection</h1>
+        <h1 class="h2 mb-1 fw-bold">Marketplace Opt-In Programs &amp; Campaign Guide</h1>
         <p class="text-body-secondary mb-0">
-          Guide to seller campaign programs: Shopee Free Returns Service (FRS) / RTS Protection, Mega Discount Vouchers, and Lazada Promo Pass.
+          Complete fee formulas, break-even ROI calculators, and official Seller Center links for Shopee FRS, Shopee MDV, TikTok MDP, and Lazada Promo Pass.
         </p>
       </div>
-      <div class="d-flex gap-2">
-        <a href="index.html" class="btn btn-primary btn-sm">
-          <i class="bi bi-calculator me-1"></i>Open Simulator
+      <div class="d-flex flex-wrap gap-2">
+        <a href="#mdv" class="btn btn-outline-danger btn-sm">
+          <i class="bi bi-tag-fill me-1"></i>Shopee MDV (Campaign 779)
         </a>
-        <a href="comparison.html" class="btn btn-outline-secondary btn-sm">
-          <i class="bi bi-bar-chart-line me-1"></i>Compare Platforms
+        <a href="#frs" class="btn btn-outline-danger btn-sm">
+          <i class="bi bi-shield-check me-1"></i>Shopee FRS (₱2.00)
+        </a>
+        <a href="#matrix" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-table me-1"></i>Program Matrix
+        </a>
+        <a href="index.html" class="btn btn-primary btn-sm">
+          <i class="bi bi-calculator me-1"></i>Pricing Simulator
         </a>
       </div>
     </div>
 
-    <!-- Featured Campaign Card: Shopee FRS / RTS Protection -->
-    <div class="card campaign-banner-card shadow-sm mb-4">
+    <!-- SECTION 1: Shopee Mega Discount Voucher (MDV) Program (Campaign 779) -->
+    <div class="card campaign-banner-mdv shadow-sm mb-4" id="mdv">
+      <div class="card-body p-4">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-3">
+          <div>
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+              <span class="badge badge-shopee px-2.5 py-1.5 fs-6"><i class="bi bi-lightning-charge-fill me-1"></i>Shopee Official Campaign</span>
+              <span class="badge bg-danger-subtle text-danger-emphasis border border-danger-subtle fw-bold">Campaign ID: 779</span>
+              <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle fw-semibold">28-Day Lock-In</span>
+              <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Updated Jan 1, 2026 Spike Rule</span>
+            </div>
+            <h2 class="h3 fw-bold mb-1">Shopee Mega Discount Voucher (MDV) Program</h2>
+            <p class="text-body-secondary mb-0">
+              Customers enjoy multiple exclusive discount vouchers on items from participating shops. Sellers enjoy significant increase in marketing channel exposures on Shopee.
+            </p>
+          </div>
+          <div class="d-flex flex-column gap-2 text-lg-end">
+            <a href="https://seller.shopee.ph/portal/marketing/cmt/campaign/mdv/detail/779" target="_blank" rel="noopener" class="btn btn-danger btn-lg px-4 shadow-sm fw-bold">
+              <i class="bi bi-box-arrow-up-right me-2"></i>View MDV Campaign on Shopee (ID 779)
+            </a>
+            <div class="d-flex justify-content-lg-end gap-2">
+              <a href="https://seller.shopee.ph/edu/article/23201" target="_blank" rel="noopener" class="small text-decoration-none text-danger fw-semibold">
+                <i class="bi bi-journal-text me-1"></i>Shopee Edu Article 23201
+              </a>
+              <span class="text-body-secondary small">&bull;</span>
+              <span class="text-body-secondary small">Requires Seller Center PH login</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 pt-2">
+          <div class="col-md-3">
+            <div class="metric-bubble h-100">
+              <div class="text-body-secondary small fw-semibold text-uppercase">Regular Service Fee</div>
+              <div class="fs-4 fw-bold text-danger">4.0% <small class="fs-6 fw-normal text-body-secondary">/ successful item</small></div>
+              <div class="small text-body-secondary mt-1">Charged on all successful orders from participating shops on non-spike days.</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="metric-bubble h-100">
+              <div class="text-body-secondary small fw-semibold text-uppercase">Spike Days Fee (2026)</div>
+              <div class="fs-4 fw-bold text-danger-emphasis">5.0% <small class="fs-6 fw-normal text-body-secondary">(4% + 1% spike)</small></div>
+              <div class="small text-body-secondary mt-1">Starting Jan 1, 2026: +1% applied during Double-Double &amp; Payday campaigns.</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="metric-bubble h-100">
+              <div class="text-body-secondary small fw-semibold text-uppercase">Maximum Fee Ceiling</div>
+              <div class="fs-4 fw-bold text-primary">₱200 <small class="fs-6 fw-normal text-body-secondary">cap / item / order</small></div>
+              <div class="small text-body-secondary mt-1">Fee is capped at ₱200 per item. High-ticket items (&gt;₱5,000) benefit from capped fees.</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="metric-bubble h-100">
+              <div class="text-body-secondary small fw-semibold text-uppercase">Commitment Rule</div>
+              <div class="fs-4 fw-bold text-dark-emphasis">28 Days <small class="fs-6 fw-normal text-body-secondary">lock-in</small></div>
+              <div class="small text-body-secondary mt-1">Participating sellers are subject to a mandatory 28-day lock-in period upon enrollment.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Shopee MDV Fee & Break-Even Calculator -->
+    <div class="row g-4 mb-4">
+      <div class="col-lg-5">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-body py-3 d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-tag-fill text-danger fs-5"></i>
+              <h2 class="h5 mb-0 fw-bold">Shopee MDV Calculator (Campaign 779)</h2>
+            </div>
+            <span class="badge bg-danger-subtle text-danger-emphasis">Interactive</span>
+          </div>
+          <div class="card-body p-3 p-md-4">
+            <p class="small text-body-secondary mb-3">
+              Compute exact MDV deductions, test the <strong>₱200 cap per item</strong>, and evaluate the required Double-Double / Payday sales lift to justify the 4% / 5% fee.
+            </p>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold small" for="mdvPrice">
+                Selling Price per Item (SRP):
+                <span class="text-primary fw-bold ms-1" id="dispMdvPrice">₱500.00</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text">₱</span>
+                <input type="number" class="form-control" id="mdvPrice" value="500" min="1" step="10">
+              </div>
+              <div class="form-text">Listing price per piece on Shopee.</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold small" for="mdvUnits">
+                Units / Items per Order:
+                <span class="text-primary fw-bold ms-1" id="dispMdvUnits">1 pc</span>
+              </label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="mdvUnits" value="1" min="1" max="100" step="1">
+                <span class="input-group-text">pcs</span>
+              </div>
+              <div class="form-text">Cap of ₱200 applies per item per order.</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold small mb-1">Campaign Day Schedule:</label>
+              <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="mdvDayType" id="mdvRegularDay" autocomplete="off" checked>
+                <label class="btn btn-outline-danger btn-sm py-2" for="mdvRegularDay">
+                  <div class="fw-bold">Regular Days (4.0%)</div>
+                  <small style="font-size:0.7rem;">Standard daily rate</small>
+                </label>
+
+                <input type="radio" class="btn-check" name="mdvDayType" id="mdvSpikeDay" autocomplete="off">
+                <label class="btn btn-outline-danger btn-sm py-2" for="mdvSpikeDay">
+                  <div class="fw-bold">Spike Days (5.0%)</div>
+                  <small style="font-size:0.7rem;">Double-Double &amp; Paydays</small>
+                </label>
+              </div>
+              <div class="form-text">Starting Jan 1, 2026: +1% applied during Double-Double, Payday, pre-hype, and extension.</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold small" for="mdvOrders">
+                Estimated Monthly Orders:
+                <span class="text-primary fw-bold ms-1" id="dispMdvOrders">200</span>
+              </label>
+              <input type="number" class="form-control" id="mdvOrders" value="200" min="1" max="100000" step="10">
+            </div>
+
+            <div class="alert alert-info py-2 px-3 small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-info-circle-fill fs-5 text-info"></i>
+              <div>
+                <strong>Simulator Link:</strong> Toggle <strong>Shopee Mega Voucher (MDV)</strong> and <strong>Spike Day Campaign</strong> in our Pricing Simulator to automatically solve for the SRP that fully protects your net margin.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-body py-3">
+            <h2 class="h5 mb-0 fw-bold"><i class="bi bi-pie-chart-fill me-2 text-danger"></i>MDV Deduction &amp; Break-Even Lift Analysis</h2>
+          </div>
+          <div class="card-body p-3 p-md-4 d-flex flex-column justify-content-between">
+            <div>
+              <!-- MDV Cap Callout -->
+              <div id="mdvCapBanner" class="alert alert-primary p-3 mb-4 rounded-3 border border-primary-subtle">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="badge bg-primary text-white" id="mdvCapBadge">Standard Rate Active</span>
+                  <span class="fw-bold" id="mdvEffectiveRate">4.00% Effective</span>
+                </div>
+                <div class="h5 fw-bold mb-1" id="mdvFeePerItemText">MDV Fee: ₱20.00 / item</div>
+                <p class="mb-0 small text-body-secondary" id="mdvCapDesc">
+                  At ₱500.00 SRP, the 4.0% MDV fee is ₱20.00 per item (below the ₱200 cap).
+                </p>
+              </div>
+
+              <!-- Metrics Grid -->
+              <div class="row g-3 mb-4">
+                <div class="col-sm-6">
+                  <div class="p-3 border rounded-3 bg-body h-100">
+                    <span class="badge bg-secondary-subtle text-secondary-emphasis mb-2">Order-Level Impact</span>
+                    <div class="small text-body-secondary mb-1">Total Order Selling Value:</div>
+                    <div class="h5 fw-semibold mb-2" id="resMdvOrderTotal">₱500.00</div>
+                    <div class="small text-body-secondary mb-1">Total MDV Fee Deducted:</div>
+                    <div class="h4 fw-bold text-danger mb-0" id="resMdvTotalFee">₱20.00</div>
+                    <small class="text-body-secondary" id="resMdvPerItemNote">₱20.00 per item &times; 1 item</small>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="p-3 border rounded-3 bg-body h-100 border-danger-subtle">
+                    <span class="badge badge-shopee mb-2">Monthly Campaign Budget</span>
+                    <div class="small text-body-secondary mb-1">Monthly Order Volume:</div>
+                    <div class="h5 fw-semibold mb-2" id="resMdvMonthlyCount">200 orders</div>
+                    <div class="small text-body-secondary mb-1">Total Monthly MDV Fee:</div>
+                    <div class="h4 fw-bold text-danger mb-0" id="resMdvMonthlyFee">₱4,000.00</div>
+                    <small class="text-body-secondary">Deducted from seller payout escrow</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Economics & Required Sales Lift -->
+              <div class="row g-2 text-center small mb-3">
+                <div class="col-4">
+                  <div class="p-2 border rounded bg-body-tertiary">
+                    <span class="text-body-secondary d-block">Fee Cap Limit</span>
+                    <strong class="text-dark-emphasis fs-6" id="resMdvCapDisplay">₱200.00</strong>
+                    <small class="d-block text-body-secondary" style="font-size:0.65rem;">per item per order</small>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 border rounded bg-body-tertiary">
+                    <span class="text-body-secondary d-block">Suggested SRP Offset</span>
+                    <strong class="text-primary fs-6" id="resMdvSrpOffset">+₱23.50</strong>
+                    <small class="d-block text-body-secondary" style="font-size:0.65rem;">to preserve 20% margin</small>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="p-2 border rounded bg-body-tertiary">
+                    <span class="text-body-secondary d-block">Break-Even Sales Lift</span>
+                    <strong class="text-success fs-6" id="resMdvSalesLift">+25.0%</strong>
+                    <small class="d-block text-body-secondary" style="font-size:0.65rem;">orders to absorb fee</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-3 rounded bg-body-tertiary border small">
+                <div class="d-flex align-items-center gap-2 mb-1">
+                  <i class="bi bi-lightbulb-fill text-warning"></i>
+                  <strong>Strategic Takeaway:</strong>
+                </div>
+                <span id="mdvStrategyNote">
+                  If Shopee MDV participation boosts your campaign order volume by more than <strong>+25.0%</strong> during Double-Double / Payday spikes, your shop earns higher overall net take-home profit despite the 4%–5% service fee.
+                </span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top">
+              <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+                <span class="small text-body-secondary">
+                  <i class="bi bi-clock-history me-1"></i>28-day lock-in period applies once confirmed.
+                </span>
+                <a href="index.html" class="btn btn-danger btn-sm">
+                  <i class="bi bi-calculator me-1"></i>Simulate in Pricing Engine
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Shopee Free Returns Service (FRS) / RTS Protection (Campaign 470000001000041) -->
+    <div class="card campaign-banner-card shadow-sm mb-4" id="frs">
       <div class="card-body p-4">
         <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-3">
           <div>
@@ -119,7 +368,7 @@
           </div>
           <div class="d-flex flex-column gap-2 text-lg-end">
             <a href="https://seller.shopee.ph/portal/marketing/cmt/campaign/frs/detail/470000001000041" target="_blank" rel="noopener" class="btn btn-danger btn-lg px-4 shadow-sm fw-bold">
-              <i class="bi bi-box-arrow-up-right me-2"></i>View Campaign on Shopee Seller Center
+              <i class="bi bi-box-arrow-up-right me-2"></i>View FRS Campaign on Shopee (ID 470000001000041)
             </a>
             <small class="text-body-secondary">Requires Shopee Seller Center PH login</small>
           </div>
@@ -158,7 +407,7 @@
       </div>
     </div>
 
-    <!-- Interactive Break-Even & ROI Calculator -->
+    <!-- Interactive FRS Break-Even & ROI Calculator -->
     <div class="row g-4 mb-4">
       <div class="col-lg-5">
         <div class="card shadow-sm h-100">
@@ -219,7 +468,7 @@
       <div class="col-lg-7">
         <div class="card shadow-sm h-100">
           <div class="card-header bg-body py-3">
-            <h2 class="h5 mb-0 fw-bold"><i class="bi bi-graph-up-arrow me-2 text-success"></i>Financial Outcome &amp; Savings Analysis</h2>
+            <h2 class="h5 mb-0 fw-bold"><i class="bi bi-graph-up-arrow me-2 text-success"></i>FRS Financial Outcome &amp; Savings Analysis</h2>
           </div>
           <div class="card-body p-3 p-md-4 d-flex flex-column justify-content-between">
             <div>
@@ -298,8 +547,8 @@
       </div>
     </div>
 
-    <!-- Comparison of Marketplace Opt-In Programs Matrix -->
-    <div class="card shadow-sm mb-4">
+    <!-- SECTION 3: Comparison of Marketplace Opt-In Programs Matrix -->
+    <div class="card shadow-sm mb-4" id="matrix">
       <div class="card-header bg-body py-3">
         <h2 class="h5 mb-0 fw-bold"><i class="bi bi-table me-2 text-primary"></i>All Philippine Marketplace Opt-In Programs Matrix</h2>
       </div>
@@ -308,13 +557,44 @@
           <thead class="table-light">
             <tr>
               <th scope="col" style="min-width: 180px;">Platform &amp; Program</th>
-              <th scope="col" style="min-width: 120px;">Fee Structure</th>
+              <th scope="col" style="min-width: 130px;">Fee Structure</th>
               <th scope="col" style="min-width: 140px;">Cap / Maximum</th>
-              <th scope="col" style="min-width: 250px;">Key Seller Benefits &amp; Protection</th>
-              <th scope="col" style="min-width: 130px;" class="text-center">How to Opt-in</th>
+              <th scope="col" style="min-width: 250px;">Key Seller Benefits &amp; Terms</th>
+              <th scope="col" style="min-width: 140px;" class="text-center">How to Opt-in</th>
             </tr>
           </thead>
           <tbody>
+            <!-- Shopee Mega Discount Voucher -->
+            <tr class="table-danger-subtle">
+              <td>
+                <span class="badge badge-shopee me-1">Shopee</span>
+                <strong>Mega Discount Voucher (MDV)</strong>
+                <small class="d-block text-body-secondary">Campaign ID: 779 &bull; <a href="https://seller.shopee.ph/edu/article/23201" target="_blank" rel="noopener">Article 23201</a></small>
+              </td>
+              <td>
+                <div class="fw-bold text-danger">4.0% Regular</div>
+                <div class="small text-danger-emphasis fw-semibold">5.0% Spike Days</div>
+                <small class="text-body-secondary d-block" style="font-size:0.7rem;">+1% from Jan 1, 2026</small>
+              </td>
+              <td>
+                <strong>₱200 / item cap</strong>
+                <small class="d-block text-body-secondary">per order</small>
+              </td>
+              <td>
+                <ul class="list-unstyled mb-0 small">
+                  <li><i class="bi bi-lock-fill text-warning me-1"></i><strong>28-day lock-in period</strong> for participating shops.</li>
+                  <li><i class="bi bi-check-circle-fill text-success me-1"></i>Exclusive buyer vouchers (15%–30% platform co-funded).</li>
+                  <li><i class="bi bi-check-circle-fill text-success me-1"></i>Significant boost in marketing channel exposure.</li>
+                  <li><i class="bi bi-check-circle-fill text-success me-1"></i>Spike days: Double Double (1.1–12.12) &amp; Paydays (15th/30th).</li>
+                </ul>
+              </td>
+              <td class="text-center">
+                <a href="https://seller.shopee.ph/portal/marketing/cmt/campaign/mdv/detail/779" target="_blank" rel="noopener" class="btn btn-danger btn-sm">
+                  <i class="bi bi-box-arrow-up-right me-1"></i>Campaign 779
+                </a>
+              </td>
+            </tr>
+
             <!-- Shopee FRS / RTS -->
             <tr class="table-success-subtle">
               <td>
@@ -322,40 +602,18 @@
                 <strong>Free Returns Service (FRS)</strong>
                 <small class="d-block text-body-secondary">Campaign 470000001000041</small>
               </td>
-              <td class="fw-bold text-danger">₱2.00 flat</td>
+              <td class="fw-bold text-success">₱2.00 flat</td>
               <td>₱1,000 / parcel claim limit</td>
               <td>
                 <ul class="list-unstyled mb-0 small">
                   <li><i class="bi bi-check-circle-fill text-success me-1"></i>100% Reverse Shipping Fee (RSF) covered on Buyer Returns.</li>
                   <li><i class="bi bi-check-circle-fill text-success me-1"></i>100% Forward &amp; Return freight covered on RTS parcels.</li>
-                  <li><i class="bi bi-check-circle-fill text-success me-1"></i>Full Change-of-Mind (COM) coverage.</li>
+                  <li><i class="bi bi-check-circle-fill text-success me-1"></i>Full Change-of-Mind (COM) coverage under 15-day return policy.</li>
                 </ul>
               </td>
               <td class="text-center">
                 <a href="https://seller.shopee.ph/portal/marketing/cmt/campaign/frs/detail/470000001000041" target="_blank" rel="noopener" class="btn btn-outline-danger btn-sm">
-                  <i class="bi bi-box-arrow-up-right me-1"></i>Seller Portal
-                </a>
-              </td>
-            </tr>
-
-            <!-- Shopee Mega Discount Voucher -->
-            <tr>
-              <td>
-                <span class="badge badge-shopee me-1">Shopee</span>
-                <strong>Mega Discount Voucher (MDV)</strong>
-              </td>
-              <td class="fw-bold">4.0% – 5.0%</td>
-              <td>₱200 / item cap</td>
-              <td>
-                <ul class="list-unstyled mb-0 small">
-                  <li><i class="bi bi-check-circle-fill text-success me-1"></i>Unlocks 15%–30% platform-funded vouchers for buyers.</li>
-                  <li><i class="bi bi-check-circle-fill text-success me-1"></i>Priority homepage, campaign flash sales, &amp; search placement.</li>
-                  <li><i class="bi bi-check-circle-fill text-success me-1"></i>Higher conversion on double-digit pay-day campaigns.</li>
-                </ul>
-              </td>
-              <td class="text-center">
-                <a href="https://seller.shopee.ph/portal/marketing" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm">
-                  Marketing Centre
+                  <i class="bi bi-box-arrow-up-right me-1"></i>Portal ID 47000
                 </a>
               </td>
             </tr>
@@ -408,44 +666,36 @@
       </div>
     </div>
 
-    <!-- Step-by-Step Policy & FAQs -->
+    <!-- SECTION 4: Mechanics, Spike Calendar & FAQs -->
     <div class="row g-4">
       <div class="col-lg-6">
         <div class="card shadow-sm h-100">
           <div class="card-header bg-body py-3">
-            <h2 class="h5 mb-0 fw-bold"><i class="bi bi-signpost-split me-2 text-primary"></i>Shopee FRS Opt-in &amp; Opt-out Mechanics</h2>
+            <h2 class="h5 mb-0 fw-bold"><i class="bi bi-calendar-event me-2 text-danger"></i>Shopee MDV Spike Days &amp; Lock-in Terms</h2>
           </div>
           <div class="card-body p-3 p-md-4">
-            <ol class="list-group list-group-numbered mb-3">
-              <li class="list-group-item d-flex justify-content-between align-items-start border-0 px-0">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Login to Shopee Seller Centre PH</div>
-                  Navigate to <strong>Marketing Centre &gt; Campaign &gt; Free Returns Service</strong> or click the direct portal link above (Campaign ID: <code>470000001000041</code>).
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start border-0 px-0">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Review Eligible Categories &amp; Terms</div>
-                  Verify your store eligibility. Most non-perishable categories qualify automatically. Review the ₱2.00/order fee schedule.
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start border-0 px-0">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Click "Opt-in" &amp; Activate</div>
-                  Once confirmed, the program activates on your shop within 24–48 hours. The ₱2.00 fee only applies to orders placed after activation.
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start border-0 px-0">
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Flexible Opt-out Anytime</div>
-                  If your return rates drop or you wish to exit, you can submit an opt-out request through the same campaign link. Changes take effect on the next scheduled billing cycle.
-                </div>
-              </li>
-            </ol>
+            <div class="mb-3">
+              <h3 class="h6 fw-bold text-danger"><i class="bi bi-lightning-charge me-1"></i>What Qualifies as a Spike Day?</h3>
+              <p class="small text-body-secondary mb-2">
+                Starting <strong>January 1, 2026</strong>, an additional 1% service fee applies to MDV orders on Spike Days (raising the fee from 4% to 5%, capped at ₱200/item):
+              </p>
+              <ul class="small text-body-secondary mb-3">
+                <li><strong>Double-Double Mega Sales:</strong> 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 10.10, 11.11, 12.12.</li>
+                <li><strong>Pre-Hype &amp; Extension Days:</strong> Typically 1–3 days leading up to the mega date, plus post-campaign extensions.</li>
+                <li><strong>Payday Mega Sales:</strong> Mid-month Payday (15th) and Month-End Payday (30th/31st).</li>
+              </ul>
+            </div>
 
-            <div class="alert alert-warning py-2 px-3 small mb-0">
+            <div class="mb-3 pt-2 border-top">
+              <h3 class="h6 fw-bold text-dark-emphasis"><i class="bi bi-lock-fill me-1 text-warning"></i>28-Day Lock-In Rule</h3>
+              <p class="small text-body-secondary mb-0">
+                Shopee enforces a strict <strong>28-day commitment period</strong> once you opt in to Campaign ID 779. You cannot opt out during these initial 28 days. Any subsequent opt-out request submitted will only take effect starting the next regular weekly billing cut-off.
+              </p>
+            </div>
+
+            <div class="alert alert-warning py-2 px-3 small mb-0 mt-3">
               <i class="bi bi-exclamation-triangle-fill me-1"></i>
-              <strong>Important:</strong> The ₱2.00 fee applies to <em>all completed orders</em> while enrolled, not just orders that are actually returned. Use the calculator above to ensure your return volume justifies the enrollment.
+              <strong>Fee Applicability:</strong> MDV service fees are charged on <em>all completed orders</em> from participating shops while enrolled, regardless of whether the buyer used an MDV voucher or a regular voucher.
             </div>
           </div>
         </div>
@@ -458,6 +708,45 @@
           </div>
           <div class="accordion accordion-flush" id="faqAccordion">
             <div class="accordion-item">
+              <h3 class="accordion-header" id="faqMdvCap">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMdvCap">
+                  How does the ₱200 cap work on multi-item orders?
+                </button>
+              </h3>
+              <div id="collapseMdvCap" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-body-secondary small">
+                  The ₱200 cap is <strong>per item per order</strong>. For example, if a buyer purchases 2 items priced at ₱6,000 each during a 4% regular day: without a cap, 4% would be ₱240/item. With the cap, the fee is limited to ₱200 for Item 1 and ₱200 for Item 2, totaling ₱400 instead of ₱480.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="faqLockIn">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLockIn">
+                  Can I opt out of MDV before 28 days?
+                </button>
+              </h3>
+              <div id="collapseLockIn" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-body-secondary small">
+                  <strong>No.</strong> Shopee policies state that participating shops are locked in for a full 28 calendar days from registration approval. Be sure you factor the 4% (or 5% spike day) fee into your margins before joining.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="faqFrsCombo">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFrsCombo">
+                  Can I participate in both MDV (Campaign 779) and FRS (₱2.00)?
+                </button>
+              </h3>
+              <div id="collapseFrsCombo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-body-secondary small">
+                  <strong>Yes, absolutely.</strong> Many high-volume stores participate in both. When both are enabled in our Pricing Simulator, our engine stacks the 4%/5% MDV fee and the flat ₱2.00 FRS fee simultaneously, ensuring your suggested selling price covers both programs.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
               <h3 class="accordion-header" id="faq1">
                 <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
                   Does FRS protect against buyer Change of Mind (COM)?
@@ -465,46 +754,20 @@
               </h3>
               <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                 <div class="accordion-body text-body-secondary small">
-                  <strong>Yes.</strong> Under Shopee's updated returns policy, buyers can return items for Change of Mind within 15 days. Without FRS, sellers frequently shoulder reverse logistics fees. With FRS active, Shopee waives the reverse shipping fee up to ₱1,000 per parcel.
+                  <strong>Yes.</strong> Under Shopee's updated returns policy, buyers can return items for Change of Mind within 15 days. With FRS active, Shopee waives the reverse shipping fee up to ₱1,000 per parcel.
                 </div>
               </div>
             </div>
 
             <div class="accordion-item">
-              <h3 class="accordion-header" id="faq2">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
-                  What happens to failed delivery parcels (Return-to-Sender / RTS)?
+              <h3 class="accordion-header" id="faqWht">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWht">
+                  Are MDV fees deducted before or after BIR Withholding Tax?
                 </button>
               </h3>
-              <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div id="collapseWht" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                 <div class="accordion-body text-body-secondary small">
-                  When a buyer refuses delivery (COD unreceived or consignee unreachable), the parcel becomes RTS. FRS protects your seller payout from forward/reverse penalty charges on these failed attempts.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faq3">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
-                  How is the ₱2.00 RTS fee accounted for in our Pricing Simulator?
-                </button>
-              </h3>
-              <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-body-secondary small">
-                  When you check the <strong>Shopee FRS / RTS Protection (₱2.00)</strong> toggle on the Pricing Simulator or set it as default in Expenses &amp; Allotments, our mathematical solver increases your suggested SRP slightly to ensure your net profit margin (e.g. 20%) is 100% protected after paying the ₱2.00 fee.
-                </div>
-              </div>
-            </div>
-
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faq4">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
-                  Is FRS subject to BIR Withholding Tax (RR 16-2023)?
-                </button>
-              </h3>
-              <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-body-secondary small">
-                  No. The 1% BIR Withholding Tax (0.5% effective on 50% gross remittances) is computed on gross buyer product sales before platform service fee deductions. The ₱2.00 FRS is classified as an optional platform service fee.
+                  Under BIR Revenue Regulation 16-2023, the 1% Withholding Tax (effective 0.5% on 50% gross remittance) is computed on the <em>gross merchandise price</em> paid by the buyer. Platform fees (MDV, commission, transaction fees) are deducted from your seller escrow payout after tax computation.
                 </div>
               </div>
             </div>
@@ -539,6 +802,67 @@
   <script>
     const $ = id => document.getElementById(id);
 
+    // --- Shopee MDV Calculator (Campaign 779) ---
+    function calcMdv() {
+      const price = Math.max(1, +$('mdvPrice').value || 1);
+      const units = Math.max(1, +$('mdvUnits').value || 1);
+      const isSpike = $('mdvSpikeDay').checked;
+      const rate = isSpike ? 0.05 : 0.04;
+      const orders = Math.max(1, +$('mdvOrders').value || 1);
+
+      $('dispMdvPrice').textContent = P(price);
+      $('dispMdvUnits').textContent = `${units} pc${units > 1 ? 's' : ''}`;
+      $('dispMdvOrders').textContent = orders.toLocaleString();
+
+      const feeUncappedPerItem = price * rate;
+      const feePerItem = Math.min(feeUncappedPerItem, 200);
+      const isCapped = feeUncappedPerItem >= 200;
+      const totalOrderValue = price * units;
+      const totalFeePerOrder = feePerItem * units;
+      const effectiveRatePct = (totalFeePerOrder / totalOrderValue) * 100;
+      const monthlyFeeTotal = totalFeePerOrder * orders;
+
+      // SRP offset to maintain same net profit (20% margin assumed)
+      const baseProfit = price * 0.20;
+      const profitWithMdvAbsorbed = Math.max(0.01, baseProfit - feePerItem);
+      const salesLiftPct = ((baseProfit / profitWithMdvAbsorbed) - 1) * 100;
+      const srpOffset = feePerItem / (1 - 0.20 - 0.15); // approximate platform take + margin factor
+
+      $('mdvEffectiveRate').textContent = `${effectiveRatePct.toFixed(2)}% Effective`;
+      $('mdvFeePerItemText').textContent = `MDV Fee: ${P(feePerItem)} / item`;
+      $('resMdvOrderTotal').textContent = P(totalOrderValue);
+      $('resMdvTotalFee').textContent = P(totalFeePerOrder);
+      $('resMdvPerItemNote').textContent = `${P(feePerItem)} per item × ${units} item${units > 1 ? 's' : ''}`;
+      $('resMdvMonthlyCount').textContent = `${orders.toLocaleString()} orders`;
+      $('resMdvMonthlyFee').textContent = P(monthlyFeeTotal);
+      $('resMdvCapDisplay').textContent = P(200 * units);
+      $('resMdvSrpOffset').textContent = `+${P(srpOffset)}`;
+      $('resMdvSalesLift').textContent = `+${salesLiftPct.toFixed(1)}%`;
+
+      const capBanner = $('mdvCapBanner');
+      const capBadge = $('mdvCapBadge');
+      const capDesc = $('mdvCapDesc');
+
+      if (isCapped) {
+        const savedPerItem = feeUncappedPerItem - 200;
+        capBanner.className = 'alert alert-success p-3 mb-4 rounded-3 border border-success-subtle';
+        capBadge.className = 'badge bg-success text-white';
+        capBadge.textContent = '₱200 Cap Reached!';
+        capDesc.innerHTML = `At ${P(price)}, uncapped ${pe(rate)} fee would be ${P(feeUncappedPerItem)}. <strong>The ₱200 ceiling saves you ${P(savedPerItem)} per item!</strong>`;
+      } else {
+        capBanner.className = 'alert alert-primary p-3 mb-4 rounded-3 border border-primary-subtle';
+        capBadge.className = 'badge bg-primary text-white';
+        capBadge.textContent = isSpike ? 'Spike Day Rate (5.0%)' : 'Regular Rate (4.0%)';
+        const reachCapPrice = 200 / rate;
+        capDesc.innerHTML = `At ${P(price)}, the ${pe(rate)} fee is ${P(feePerItem)} / item. The ₱200 cap activates at items priced <strong>${P(reachCapPrice)}</strong> and above.`;
+      }
+
+      $('mdvStrategyNote').innerHTML = `
+        If Shopee MDV participation boosts your campaign order volume by more than <strong>+${salesLiftPct.toFixed(1)}%</strong> during Double-Double / Payday spikes, your shop earns higher overall net take-home profit despite the ${pe(rate)} service fee.
+      `;
+    }
+
+    // --- Shopee FRS / RTS Calculator ---
     function calcRoi() {
       const orders = Math.max(1, +$('calcOrders').value || 1);
       const ratePct = Math.max(0, +$('calcReturnRate').value || 0);
@@ -598,7 +922,14 @@
     }
 
     initTheme();
+    calcMdv();
     calcRoi();
+
+    ['mdvPrice', 'mdvUnits', 'mdvOrders'].forEach(id => {
+      $(id).addEventListener('input', calcMdv);
+    });
+    $('mdvRegularDay').addEventListener('change', calcMdv);
+    $('mdvSpikeDay').addEventListener('change', calcMdv);
 
     ['calcOrders', 'calcReturnRate', 'calcLossPerReturn'].forEach(id => {
       $(id).addEventListener('input', calcRoi);

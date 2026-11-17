@@ -75,6 +75,7 @@ function fees(p, o) {
   const catList = (PL[p] && PL[p].c) || [];
   const catIdx = Math.max(0, Math.min(catList.length - 1, (o.cat && o.cat[p]) || 0));
   const c = catList[catIdx] || ["General", 0.09];
+  const units = Math.max(1, o.units || 1);
 
   const F = {
     cat: c[0],
@@ -85,7 +86,8 @@ function fees(p, o) {
     cap: 100,
     opf: 5,
     promo: 0,
-    pcap: 200,
+    pcap: 200 * units, // ₱200 per item per order (Shopee MDV Campaign 779 & TikTok MDP)
+    pcapPerItem: 200,
     pn: '',
     mand: false,
     rts: 0
@@ -93,10 +95,13 @@ function fees(p, o) {
 
   if (p === 'lz') {
     F.promo = 0.058;
-    F.pcap = 100;
+    F.pcap = 100 * units;
+    F.pcapPerItem = 100;
     F.pn = 'Promo Pass';
     F.mand = true;
-  } else if (o.opt && o.opt[p]) {
+  } else if ((o.opt && o.opt[p]) || (o.platformAllotments && o.platformAllotments[p] && o.platformAllotments[p].optIn)) {
+    // Shopee MDV (Campaign 779): 4% on regular days, 5% on spike days (Double Double / Payday starting Jan 1, 2026). Cap ₱200/item.
+    // TikTok MDP: 4% on regular days, 5% on mega campaign days. Cap ₱200/item.
     F.promo = o.camp ? 0.05 : 0.04;
     F.pn = p === 'sh' ? 'Mega Discount Voucher' : 'Mega Discount Program';
   }
@@ -161,7 +166,19 @@ function calc(p, o) {
     }
     L.push(['Order processing fee', F.opf, 0]);
     if (F.promo) {
-      L.push([F.pn + ' (' + pe(F.promo) + ', max ₱' + F.pcap + ')', Math.min(pr * F.promo, F.pcap), F.mand ? 0 : 1]);
+      let promoLabel = F.pn;
+      if (p === 'sh') {
+        const rateLabel = o.camp ? '5.00% Spike Day' : '4.00% Regular';
+        const capLabel = units > 1 ? `max ₱${F.pcap} [₱200×${units}]` : 'max ₱200';
+        promoLabel = `Shopee MDV (${rateLabel}, ${capLabel})`;
+      } else if (p === 'tt') {
+        const rateLabel = o.camp ? '5.00% Mega Day' : '4.00% Regular';
+        const capLabel = units > 1 ? `max ₱${F.pcap} [₱200×${units}]` : 'max ₱200';
+        promoLabel = `TikTok MDP (${rateLabel}, ${capLabel})`;
+      } else {
+        promoLabel = `${F.pn} (${pe(F.promo)}, max ₱${F.pcap})`;
+      }
+      L.push([promoLabel, Math.min(pr * F.promo, F.pcap), F.mand ? 0 : 1]);
     }
     if (F.rts) {
       L.push(['Free Returns Service (FRS / RTS Protection)', F.rts, 1]);

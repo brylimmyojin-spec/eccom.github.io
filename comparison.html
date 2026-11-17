@@ -339,7 +339,10 @@
           programText = 'Auto: ' + P(r.price);
         } else {
           const progs = [];
-          if (o.opt[p]) progs.push('Mega');
+          if (o.opt[p]) {
+            if (p === 'sh') progs.push(o.camp ? 'MDV 5% (Spike)' : 'MDV 4%');
+            else progs.push(o.camp ? 'Mega 5%' : 'Mega 4%');
+          }
           if (p === 'sh' && o.opt.shRts) progs.push('FRS (₱2)');
           if (progs.length) {
             programText = `${P(r.price)} <small class="text-body-secondary d-block">(${progs.join(' + ')})</small>`;
