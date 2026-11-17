@@ -462,12 +462,21 @@ body {
   background-color: var(--bs-tertiary-bg);
 }
 
-/* Maximize Fluid Canvas Spacing */
-@media (min-width: 1400px) {
+/* Maximize Fluid Canvas Spacing & Sticky Sidebar */
+@media (min-width: 1200px) {
   .simulator-sidebar {
     position: sticky;
-    top: 85px;
+    top: 80px;
     z-index: 10;
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
+  }
+  .simulator-sidebar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .simulator-sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--bs-border-color);
+    border-radius: 4px;
   }
 }
 
