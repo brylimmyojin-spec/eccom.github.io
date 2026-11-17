@@ -18,7 +18,7 @@
   <!-- Navigation Bar -->
   <header>
     <nav class="navbar navbar-expand-xl app-navbar sticky-top shadow-sm py-2">
-      <div class="container-xl">
+      <div class="container-fluid px-3 px-md-4 px-xl-5">
         <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none" href="index.html">
           <span class="brand-flag">🇵🇭</span>
           <div class="d-flex flex-column lh-1">
@@ -68,75 +68,119 @@
     </nav>
   </header>
 
-  <main class="container-xl py-4 flex-grow-1">
+  <main class="container-fluid px-3 px-md-4 px-xl-5 py-4 flex-grow-1">
 
     <!-- Header Section -->
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-4 gap-3">
       <div>
-        <h1 class="h2 mb-1 fw-bold">Platform Comparison</h1>
+        <div class="d-flex align-items-center gap-2 mb-1.5">
+          <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle px-2.5 py-1">
+            <i class="bi bi-bar-chart-fill me-1"></i>Cross-Platform Analytics
+          </span>
+          <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle px-2.5 py-1">
+            <i class="bi bi-arrow-repeat me-1"></i>Live Synced
+          </span>
+        </div>
+        <h1 class="h2 mb-1 fw-bold">Platform Economics Comparison</h1>
         <p class="text-body-secondary mb-0">
-          Compare take-home pay, total deductions, and net margins across all three marketplaces side-by-side.
+          Side-by-side fee, margin, and take-home comparison between Shopee, TikTok Shop, and Lazada Philippines.
         </p>
       </div>
-      <div class="d-flex flex-wrap gap-2">
-        <button class="btn btn-outline-primary btn-sm" id="snapshotBtn" type="button" title="Capture and save table as PNG image">
-          <i class="bi bi-camera-fill me-1"></i>Save Table PNG
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        <button class="btn btn-primary btn-sm d-flex align-items-center gap-1.5 px-3 py-2 shadow-sm" id="snapshotBtn" type="button" title="Capture and save table as PNG image">
+          <i class="bi bi-camera-fill"></i>
+          <span>Save Table PNG</span>
         </button>
-        <button class="btn btn-outline-secondary btn-sm" id="exportCsvBtn" type="button" title="Export comparison as CSV spreadsheet">
-          <i class="bi bi-download me-1"></i>Export CSV
+        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-3 py-2" id="exportCsvBtn" type="button" title="Export comparison as CSV spreadsheet">
+          <i class="bi bi-download"></i>
+          <span>Export CSV</span>
         </button>
-        <button class="btn btn-outline-secondary btn-sm" onclick="window.print()" type="button">
-          <i class="bi bi-printer me-1"></i>Print
+        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-2.5 py-2" onclick="window.print()" type="button" title="Print this comparison">
+          <i class="bi bi-printer"></i>
+          <span class="d-none d-sm-inline">Print</span>
         </button>
-        <a href="index.html" class="btn btn-primary btn-sm">
-          <i class="bi bi-sliders me-1"></i>Edit in Simulator
+        <a href="index.html" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1.5 px-3 py-2">
+          <i class="bi bi-sliders"></i>
+          <span>Pricing Simulator</span>
+        </a>
+        <a href="expenses.html" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-2.5 py-2">
+          <i class="bi bi-cash-coin"></i>
+          <span class="d-none d-sm-inline">Expenses</span>
         </a>
       </div>
     </div>
 
-    <!-- Active Scenario Bar (Synchronized with localStorage) -->
-    <div class="card shadow-sm border-0 mb-4 bg-body-tertiary">
-      <div class="card-body py-3 px-4">
-        <div class="row g-3 align-items-center small">
-          <div class="col-md-3">
-            <span class="text-body-secondary d-block">Base Cost / Listing:</span>
-            <span class="fw-bold fs-6" id="summaryCost">₱100.00 (1 unit)</span>
+    <!-- Active Scenario Overview Bar (Synchronized with localStorage) -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="cmp-kpi-card h-100">
+          <div class="d-flex align-items-center justify-content-between mb-1">
+            <span class="text-body-secondary small fw-medium">Base Cost &amp; Freight</span>
+            <i class="bi bi-box-seam text-primary fs-5"></i>
           </div>
-          <div class="col-md-3">
-            <span class="text-body-secondary d-block">Target Margin:</span>
-            <span class="fw-bold fs-6 text-success" id="summaryMargin">20.0%</span>
+          <div class="fw-bold fs-5 text-body-emphasis" id="summaryCost">₱100.00 (1 unit)</div>
+          <small class="text-body-secondary" style="font-size:0.75rem;">Product sourcing &amp; logistics</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cmp-kpi-card h-100">
+          <div class="d-flex align-items-center justify-content-between mb-1">
+            <span class="text-body-secondary small fw-medium">Target Net Margin</span>
+            <i class="bi bi-graph-up text-success fs-5"></i>
           </div>
-          <div class="col-md-3">
-            <span class="text-body-secondary d-block">Tax Status:</span>
-            <span class="fw-bold fs-6" id="summaryTax">Non-VAT (3%)</span>
+          <div class="fw-bold fs-5 text-success" id="summaryMargin">20.0%</div>
+          <small class="text-body-secondary" style="font-size:0.75rem;">Desired profit percentage</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cmp-kpi-card h-100">
+          <div class="d-flex align-items-center justify-content-between mb-1">
+            <span class="text-body-secondary small fw-medium">BIR Tax Status</span>
+            <i class="bi bi-bank text-info fs-5"></i>
           </div>
-          <div class="col-md-3">
-            <span class="text-body-secondary d-block">All-In Cost:</span>
-            <span class="fw-bold fs-6" id="summaryAllInCost">₱100.00</span>
+          <div class="fw-bold fs-5 text-body-emphasis" id="summaryTax">Non-VAT (3%)</div>
+          <small class="text-body-secondary" style="font-size:0.75rem;">BIR 1% WHT &amp; VAT recovery</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cmp-kpi-card h-100">
+          <div class="d-flex align-items-center justify-content-between mb-1">
+            <span class="text-body-secondary small fw-medium">Total Landed / All-In Cost</span>
+            <i class="bi bi-wallet2 text-danger-emphasis fs-5"></i>
           </div>
+          <div class="fw-bold fs-5 text-body-emphasis" id="summaryAllInCost">₱100.00</div>
+          <small class="text-body-secondary" style="font-size:0.75rem;">COGS + Pack + OPEX + Ad Budget</small>
         </div>
       </div>
     </div>
 
     <!-- Top Platform Highlight -->
-    <div class="card border-success shadow-sm mb-4" id="winnerCard">
+    <div class="card shadow-sm mb-4 winner-hero-card" id="winnerCard">
       <div class="card-body p-4">
-        <div class="row align-items-center">
-          <div class="col-md-8">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle px-2.5 py-1.5 fw-bold">
-                <i class="bi bi-trophy-fill me-1"></i>Highest Profit Winner
+        <div class="row align-items-center g-3">
+          <div class="col-lg-8">
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+              <span class="badge bg-success text-white px-3 py-1.5 fw-bold shadow-sm">
+                <i class="bi bi-trophy-fill me-1"></i>Highest Net Profit Winner
               </span>
-              <span class="badge fs-6" id="winnerBadge">Platform</span>
+              <span class="badge fs-6 px-3 py-1.5 shadow-sm" id="winnerBadge">Platform</span>
+              <span class="badge bg-body text-body-secondary border px-2.5 py-1.5 small">
+                <i class="bi bi-lightning-charge-fill me-1 text-warning"></i>Optimal Channel Recommendation
+              </span>
             </div>
-            <h3 class="h4 fw-bold mb-1" id="winnerHeadline">Shopee produces the highest net profit</h3>
+            <h3 class="h4 fw-bold mb-1 text-body-emphasis" id="winnerHeadline">Shopee produces the highest net profit</h3>
             <p class="text-body-secondary mb-0 small" id="winnerDetails">
               Net profit of ₱46.03 (20.0% net margin) with total take-home pay of ₱176.03.
             </p>
           </div>
-          <div class="col-md-4 text-md-end mt-3 mt-md-0">
-            <div class="text-body-secondary small fw-medium">Winning Net Take-Home</div>
-            <div class="take-home-winner-display text-success" id="winnerTakeHome">₱0.00</div>
+          <div class="col-lg-4 text-lg-end">
+            <div class="p-3 bg-body rounded-3 border d-inline-block text-start text-lg-end shadow-sm" style="min-width: 240px;">
+              <div class="text-body-secondary small fw-medium mb-1">
+                <i class="bi bi-cash-stack text-success me-1"></i>Winning Net Take-Home Pay
+              </div>
+              <div class="take-home-winner-display text-success lh-1 mb-1" id="winnerTakeHome">₱0.00</div>
+              <div class="text-body-secondary small" style="font-size:0.75rem;">Estimated cash payout after all fees &amp; taxes</div>
+            </div>
           </div>
         </div>
       </div>
@@ -144,15 +188,15 @@
 
     <!-- Detailed Comparison Table Card -->
     <div class="card shadow-sm border-0 mb-4" id="comparisonTableCard">
-      <div class="card-header bg-body-tertiary d-flex flex-wrap justify-content-between align-items-center py-3 gap-2">
+      <div class="card-header bg-body-tertiary d-flex flex-wrap justify-content-between align-items-center py-3 px-4 gap-2">
         <div>
           <h2 class="h5 fw-bold mb-0">
             <i class="bi bi-table me-2 text-primary"></i>Platform Economics Table
           </h2>
-          <small class="text-body-secondary">Shopee Philippines vs. TikTok Shop vs. Lazada Philippines</small>
+          <small class="text-body-secondary">Shopee Philippines vs. TikTok Shop vs. Lazada Philippines (Side-by-Side)</small>
         </div>
         <div class="d-flex align-items-center gap-2">
-          <span class="badge bg-secondary-subtle text-secondary-emphasis d-none d-sm-inline-block">All rates verified</span>
+          <span class="badge bg-secondary-subtle text-secondary-emphasis d-none d-sm-inline-block">2026 Verified Rate Cards</span>
           <button class="btn btn-sm btn-outline-primary" id="tableCardSnapshotBtn" type="button" title="Capture and download table snapshot as PNG image">
             <i class="bi bi-camera-fill me-1"></i>PNG Snapshot
           </button>
@@ -160,21 +204,28 @@
       </div>
       <div class="table-responsive">
         <table class="table table-hover align-middle mb-0 text-nowrap">
-          <thead class="table-light">
-            <tr>
-              <th scope="col" style="min-width: 140px;">Marketplace</th>
-              <th scope="col" class="text-end">Regular SRP</th>
-              <th scope="col" class="text-end">SRP w/ Program</th>
-              <th scope="col" class="text-end text-danger">Total Deductions</th>
-              <th scope="col" class="text-end text-success">Net Revenue</th>
-              <th scope="col" class="text-end">Pre-Ad Contribution</th>
-              <th scope="col" class="text-end text-danger-emphasis" title="1 / CM">Base BE ROAS</th>
-              <th scope="col" class="text-end text-danger-emphasis" title="1.12 / CM">12% Ad VAT BE</th>
-              <th scope="col" class="text-end text-success" title="Target ROAS to hit net margin">Target ROAS</th>
+          <thead>
+            <tr class="table-light border-bottom text-uppercase" style="font-size: 0.72rem; letter-spacing: 0.05em;">
+              <th scope="col" class="py-2.5 ps-3">Marketplace &amp; Category</th>
+              <th scope="col" colspan="2" class="text-center py-2.5 bg-body-secondary bg-opacity-25 border-start border-end">Suggested Selling Prices</th>
+              <th scope="col" colspan="2" class="text-center py-2.5 bg-danger-subtle bg-opacity-20 border-end">Payout &amp; Deductions</th>
+              <th scope="col" colspan="4" class="text-center py-2.5 bg-info-subtle bg-opacity-20 border-end">ROAS &amp; Advertising Economics</th>
+              <th scope="col" colspan="4" class="text-center py-2.5 bg-success-subtle bg-opacity-20 pe-3">Profitability &amp; Return</th>
+            </tr>
+            <tr class="table-light small">
+              <th scope="col" class="ps-3" style="min-width: 170px;">Platform</th>
+              <th scope="col" class="text-end border-start">Regular SRP</th>
+              <th scope="col" class="text-end border-end">SRP w/ Program</th>
+              <th scope="col" class="text-end text-danger bg-danger-subtle bg-opacity-10">Total Deductions</th>
+              <th scope="col" class="text-end text-success fw-bold bg-success-subtle bg-opacity-10 border-end">Net Take-Home</th>
+              <th scope="col" class="text-end" title="Selling Price minus Platform Deductions and Product Landed Cost">Pre-Ad CM</th>
+              <th scope="col" class="text-end text-danger-emphasis" title="Base Break-Even ROAS = 1 / CM">Base BE ROAS</th>
+              <th scope="col" class="text-end text-danger-emphasis" title="12% Ad VAT Adjusted Break-Even ROAS = 1.12 / CM">12% Ad VAT BE</th>
+              <th scope="col" class="text-end text-success fw-bold border-end" title="Target ROAS needed to hit desired profit margin">Target ROAS</th>
               <th scope="col" class="text-end">All-In Cost</th>
-              <th scope="col" class="text-end">Net Profit</th>
-              <th scope="col" class="text-end">Net Margin</th>
-              <th scope="col" class="text-center">ROAS Health</th>
+              <th scope="col" class="text-end fw-bold">Net Profit</th>
+              <th scope="col" class="text-end">Margin</th>
+              <th scope="col" class="text-center pe-3">ROAS Health</th>
             </tr>
           </thead>
           <tbody id="cmp-rows">
@@ -182,7 +233,7 @@
           </tbody>
         </table>
       </div>
-      <div class="card-footer bg-body-tertiary small text-body-secondary py-2 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-1">
+      <div class="card-footer bg-body-tertiary small text-body-secondary py-2.5 px-4 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-1">
         <div>
           <i class="bi bi-info-circle me-1"></i>Lazada includes Promo Pass (5.8% up to ₱100 cap). Shopee &amp; TikTok reflect selected Mega Voucher opt-ins.
         </div>
@@ -196,38 +247,77 @@
     <div class="row g-4 mb-4">
       
       <!-- Fee Take-Away Bar Breakdown -->
-      <div class="col-md-6">
+      <div class="col-lg-6">
         <div class="card h-100 shadow-sm border-0">
-          <div class="card-header bg-body-tertiary fw-semibold">
-            <i class="bi bi-pie-chart me-2 text-primary"></i>Fee &amp; Cost Share Comparison
+          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-3 px-4">
+            <div class="fw-semibold">
+              <i class="bi bi-pie-chart-fill me-2 text-primary"></i>Fee &amp; Cost Share Comparison
+            </div>
+            <div class="d-flex align-items-center gap-2 small text-body-secondary">
+              <span><i class="legend-indicator" style="background-color: var(--cost-color);"></i>Cost</span>
+              <span><i class="legend-indicator" style="background-color: var(--ded-color);"></i>Fees</span>
+              <span class="text-success fw-bold"><i class="legend-indicator" style="background-color: var(--profit-color);"></i>Profit</span>
+            </div>
           </div>
           <div class="card-body p-4" id="shareBreakdown">
             <!-- Rendered dynamically -->
           </div>
+          <div class="card-footer bg-body-tertiary small text-body-secondary py-2 px-4">
+            <i class="bi bi-info-circle me-1"></i>Shows how customer payment is split between inventory landed cost, marketplace commissions/taxes, and your net take-home pocket.
+          </div>
         </div>
       </div>
 
-      <!-- Quick Tips Card -->
-      <div class="col-md-6">
+      <!-- Strategy Cards -->
+      <div class="col-lg-6">
         <div class="card h-100 shadow-sm border-0">
-          <div class="card-header bg-body-tertiary fw-semibold">
-            <i class="bi bi-lightning-charge me-2 text-warning"></i>Key Strategic Takeaways
+          <div class="card-header bg-body-tertiary fw-semibold py-3 px-4">
+            <i class="bi bi-lightning-charge-fill me-2 text-warning"></i>Marketplace Fee &amp; Strategy Decision Matrix
           </div>
           <div class="card-body p-4">
-            <ul class="list-group list-group-flush small">
-              <li class="list-group-item px-0">
-                <strong>TikTok Shop:</strong> Offers lower base commissions in select fashion/lifestyle categories, but watch for the Category Growth Service fee (1.0%–1.5%).
-              </li>
-              <li class="list-group-item px-0">
-                <strong>Shopee:</strong> Strong organic traffic and campaign lift, but shipping subsidies (5.6% up to ₱100) and service fee (1.5%) increase total deductions.
-              </li>
-              <li class="list-group-item px-0">
-                <strong>Lazada:</strong> Payment fee is 2.24% with no separate shipping platform percentage, but Promo Pass adds 5.8% (capped at ₱100).
-              </li>
-              <li class="list-group-item px-0">
-                <strong>Input VAT Benefit:</strong> VAT-registered sellers should always claim input VAT on marketplace fees to recover 12% of the deduction.
-              </li>
-            </ul>
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="strategic-card p-3 bg-body-tertiary">
+                  <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="badge badge-shopee px-2.5 py-1 fw-bold">Shopee</span>
+                    <span class="fw-bold small">High Volume &amp; Heavy Campaigns</span>
+                  </div>
+                  <p class="small text-body-secondary mb-0">
+                    Highest organic GMV volume in PH. Strongest voucher participation via MDV (4% regular, 5% spike days capped at ₱200) and FRS RTS Protection (₱2 flat fee) to eliminate return logistics risk.
+                  </p>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="strategic-card p-3 bg-body-tertiary">
+                  <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="badge badge-tiktok px-2.5 py-1 fw-bold">TikTok Shop</span>
+                    <span class="fw-bold small">Affiliate Power &amp; Live Selling</span>
+                  </div>
+                  <p class="small text-body-secondary mb-0">
+                    Excellent impulse conversion. Base commissions are competitive, but factor in the Category Growth Service Fee (1.0%–1.5%) and creator sample/affiliate costs when scaling.
+                  </p>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="strategic-card p-3 bg-body-tertiary">
+                  <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="badge badge-lazada px-2.5 py-1 fw-bold">Lazada</span>
+                    <span class="fw-bold small">Direct Payout &amp; Search Discovery</span>
+                  </div>
+                  <p class="small text-body-secondary mb-0">
+                    Payment transaction fee is standard 2.24% with no separate shipping platform percentage. Lazada Promo Pass automatically absorbs 5.8% (capped at ₱100/item) for free shipping vouchers.
+                  </p>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="p-2.5 rounded-3 bg-info-subtle text-info-emphasis border border-info-subtle small d-flex align-items-start gap-2">
+                  <i class="bi bi-shield-check fs-6 mt-0.5"></i>
+                  <div>
+                    <strong>Tax Strategy:</strong> VAT-registered sellers should claim 12% Input VAT against official marketplace tax invoices, and Non-VAT sellers can use BIR Form 2307 to offset the 1% withholding tax against their quarterly income tax.
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -238,7 +328,19 @@
 
   <!-- Footer -->
   <footer class="bg-body-tertiary py-4 border-top mt-auto">
-    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+    <div class="container-fluid px-3 px-md-4 px-xl-5 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+      <div>
+        <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
+      </div>
+      <div class="d-flex flex-wrap gap-3">
+        <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
+        <a href="expenses.html" class="text-decoration-none text-body-secondary">Expenses &amp; Allotments</a>
+        <a href="opt-in-fees.html" class="text-decoration-none text-body-secondary">Opt-In Fees &amp; RTS</a>
+        <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
+        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax &amp; BIR Guide</a>
+      </div>
+    </div>
+  </footer>
       <div>
         <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
       </div>
@@ -339,18 +441,19 @@
       $('#cmp-rows').innerHTML = R.map(([p, r, b]) => {
         const isBest = r.profit === best;
         const pl = PL[p];
-        let programText = '<span class="text-body-secondary">Not opted in</span>';
+        const pClass = p === 'sh' ? 'row-platform-shopee' : p === 'tt' ? 'row-platform-tiktok' : 'row-platform-lazada';
+        let programText = '<span class="badge bg-secondary-subtle text-secondary-emphasis">Not opted in</span>';
         if (p === 'lz') {
-          programText = 'Auto: ' + P(r.price);
+          programText = `<span class="fw-bold">${P(r.price)}</span> <small class="text-body-secondary d-block" style="font-size:0.7rem;">(Promo Pass Auto)</small>`;
         } else {
           const progs = [];
           if (o.opt[p]) {
-            if (p === 'sh') progs.push(o.camp ? 'MDV 5% (Spike)' : 'MDV 4%');
+            if (p === 'sh') progs.push(o.camp ? 'MDV 5% Spike' : 'MDV 4%');
             else progs.push(o.camp ? 'Mega 5%' : 'Mega 4%');
           }
           if (p === 'sh' && o.opt.shRts) progs.push('FRS (₱2)');
           if (progs.length) {
-            programText = `${P(r.price)} <small class="text-body-secondary d-block">(${progs.join(' + ')})</small>`;
+            programText = `<span class="fw-bold">${P(r.price)}</span> <small class="text-primary d-block fw-medium" style="font-size:0.7rem;">(${progs.join(' + ')})</small>`;
           }
         }
         const baseBeStr = r.breakEvenRoasBase ? r.breakEvenRoasBase.toFixed(2) + '×' : '—';
@@ -358,63 +461,72 @@
         const tgtRoasStr = r.targetRoasCalculated ? r.targetRoasCalculated.toFixed(2) + '×' : '—';
 
         return `
-          <tr class="${isBest ? 'table-best-row' : ''}">
-            <td>
-              <span class="badge ${pl.badgeClass} me-1.5">${pl.n}</span>
-              ${r.isCommissionFree ? '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle ms-1" style="font-size:0.65rem;" title="90-Day New Seller Incentive: 0% Category Commission"><i class="bi bi-gift-fill me-1"></i>0% Comm</span>' : ''}
-              ${isBest ? '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle ms-1"><i class="bi bi-trophy-fill me-1"></i>Best</span>' : ''}
-              <small class="d-block text-body-secondary text-truncate" style="max-width: 170px;">${r.F.cat}</small>
+          <tr class="${isBest ? 'table-best-row' : ''} ${pClass}">
+            <td class="ps-3">
+              <div class="d-flex align-items-center gap-1.5 flex-wrap">
+                <span class="badge ${pl.badgeClass} px-2.5 py-1">${pl.n}</span>
+                ${r.isCommissionFree ? '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle" style="font-size:0.68rem;" title="90-Day New Seller Incentive: 0% Category Commission"><i class="bi bi-gift-fill me-1"></i>0% Comm</span>' : ''}
+                ${isBest ? '<span class="badge bg-success text-white shadow-sm" style="font-size:0.68rem;"><i class="bi bi-trophy-fill me-1"></i>Best Profit</span>' : ''}
+              </div>
+              <small class="d-block text-body-secondary text-truncate mt-1" style="max-width: 190px;" title="${r.F.cat}">${r.F.cat}</small>
             </td>
-            <td class="text-end fw-medium">${P(b.price)}</td>
-            <td class="text-end">${programText}</td>
-            <td class="text-end text-danger">${P(r.ded)}</td>
-            <td class="text-end text-success fw-bold">${P(r.take)}</td>
+            <td class="text-end fw-semibold border-start">${P(b.price)}</td>
+            <td class="text-end border-end">${programText}</td>
+            <td class="text-end text-danger fw-semibold bg-danger-subtle bg-opacity-10">${P(r.ded)}</td>
+            <td class="text-end text-success fw-bold bg-success-subtle bg-opacity-10 border-end">${P(r.take)}</td>
             <td class="text-end">
               <strong>${P(r.contributionPerOrder)}</strong>
-              <small class="text-primary d-block" style="font-size:0.72rem;">${(r.contributionMargin * 100).toFixed(1)}% CM</small>
+              <small class="text-primary d-block fw-semibold" style="font-size:0.72rem;">${(r.contributionMargin * 100).toFixed(1)}% CM</small>
             </td>
             <td class="text-end fw-bold text-danger-emphasis">${baseBeStr}</td>
             <td class="text-end fw-bold text-danger-emphasis">${vatBeStr}</td>
-            <td class="text-end fw-bold text-success">${tgtRoasStr}</td>
-            <td class="text-end">${P(r.cost)}</td>
-            <td class="text-end fw-bold ${r.profit >= 0 ? 'text-success' : 'text-danger'}">${P(r.profit)}</td>
-            <td class="text-end fw-semibold">${(r.mg * 100).toFixed(1)}%</td>
-            <td class="text-center">
-              <span class="badge ${r.roasBadgeClass}" style="font-size:0.75rem;">${r.roasHealthLabel}</span>
+            <td class="text-end fw-bold text-success border-end">${tgtRoasStr}</td>
+            <td class="text-end text-body-secondary">${P(r.cost)}</td>
+            <td class="text-end fw-bold ${r.profit >= 0 ? 'text-success' : 'text-danger'} fs-6">${P(r.profit)}</td>
+            <td class="text-end fw-bold">${(r.mg * 100).toFixed(1)}%</td>
+            <td class="text-center pe-3">
+              <span class="badge ${r.roasBadgeClass} px-2.5 py-1.5" style="font-size:0.75rem;">${r.roasHealthLabel}</span>
             </td>
           </tr>
         `;
       }).join('');
 
       // Render Visual Share Bars
-      $('#shareBreakdown').innerHTML = R.map(([p, r]) => {
+      $('#shareBreakdown').innerHTML = R.map(([p, r], idx) => {
         const pl = PL[p];
         const t = r.price > 0 ? r.price : 1;
         const cp = Math.min(100, Math.max(0, (r.cost / t) * 100));
         const dp = Math.max(0, Math.min(100 - cp, (r.ded / t) * 100));
         const pp = Math.max(0, 100 - cp - dp);
+        const isLast = idx === R.length - 1;
 
         return `
-          <div class="mb-3">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <span class="fw-semibold small">${pl.n}</span>
-              <span class="small text-body-secondary">${P(r.price)}</span>
+          <div class="${isLast ? '' : 'mb-3.5 pb-3.5 border-bottom'}">
+            <div class="d-flex justify-content-between align-items-center mb-1.5">
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge ${pl.badgeClass} px-2.5 py-1">${pl.n}</span>
+                <span class="text-body-secondary small text-truncate" style="max-width: 170px;" title="${r.F.cat}">${r.F.cat}</span>
+              </div>
+              <div class="text-end">
+                <span class="fw-bold">${P(r.price)}</span>
+                <small class="text-body-secondary d-block" style="font-size: 0.7rem;">Suggested SRP</small>
+              </div>
             </div>
-            <div class="progress-stacked" style="height: 12px; border-radius: 6px;">
-              <div class="progress" style="width: ${cp}%">
+            <div class="progress-stacked" style="height: 14px; border-radius: 7px; overflow: hidden; background-color: var(--bs-tertiary-bg);">
+              <div class="progress" style="width: ${cp}%" title="All-In Cost: ${P(r.cost)} (${cp.toFixed(1)}%)">
                 <div class="progress-bar" style="background-color: var(--cost-color);"></div>
               </div>
-              <div class="progress" style="width: ${dp}%">
+              <div class="progress" style="width: ${dp}%" title="Platform Deductions: ${P(r.ded)} (${dp.toFixed(1)}%)">
                 <div class="progress-bar" style="background-color: var(--ded-color);"></div>
               </div>
-              <div class="progress" style="width: ${pp}%">
+              <div class="progress" style="width: ${pp}%" title="Net Profit: ${P(r.profit)} (${pp.toFixed(1)}%)">
                 <div class="progress-bar" style="background-color: var(--profit-color);"></div>
               </div>
             </div>
-            <div class="d-flex justify-content-between text-body-secondary mt-1" style="font-size: 0.72rem;">
-              <span>Cost: ${(cp).toFixed(0)}%</span>
-              <span>Deductions: ${(dp).toFixed(0)}%</span>
-              <span class="fw-bold text-success">Profit: ${(pp).toFixed(0)}%</span>
+            <div class="d-flex justify-content-between text-body-secondary mt-1.5 small" style="font-size: 0.75rem;">
+              <span><i class="legend-indicator" style="background-color: var(--cost-color);"></i>Cost: <strong>${P(r.cost)}</strong> (${cp.toFixed(0)}%)</span>
+              <span><i class="legend-indicator" style="background-color: var(--ded-color);"></i>Fees: <strong>${P(r.ded)}</strong> (${dp.toFixed(0)}%)</span>
+              <span class="fw-bold text-success"><i class="legend-indicator" style="background-color: var(--profit-color);"></i>Profit: <strong>${P(r.profit)}</strong> (${pp.toFixed(0)}%)</span>
             </div>
           </div>
         `;

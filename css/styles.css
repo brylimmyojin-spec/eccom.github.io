@@ -226,8 +226,64 @@ body {
 
 /* Table Best Row */
 .table-best-row {
-  background-color: rgba(25, 135, 84, 0.08) !important;
+  background-color: rgba(25, 135, 84, 0.09) !important;
   font-weight: 600;
+}
+[data-bs-theme="dark"] .table-best-row {
+  background-color: rgba(25, 135, 84, 0.22) !important;
+}
+
+/* Comparison UI Enhancements */
+.winner-hero-card {
+  background: linear-gradient(135deg, rgba(25, 135, 84, 0.08) 0%, rgba(25, 135, 84, 0.02) 100%);
+  border: 2px solid rgba(25, 135, 84, 0.45) !important;
+  border-radius: 1rem;
+}
+[data-bs-theme="dark"] .winner-hero-card {
+  background: linear-gradient(135deg, rgba(25, 135, 84, 0.2) 0%, rgba(25, 135, 84, 0.06) 100%);
+  border-color: rgba(40, 167, 69, 0.55) !important;
+}
+
+.cmp-kpi-card {
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.85rem;
+  padding: 0.85rem 1.15rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cmp-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  border-color: var(--bs-border-color-translucent);
+}
+
+.row-platform-shopee {
+  border-left: 5px solid var(--shopee-color) !important;
+}
+.row-platform-tiktok {
+  border-left: 5px solid var(--tiktok-color) !important;
+}
+.row-platform-lazada {
+  border-left: 5px solid var(--lazada-color) !important;
+}
+
+.table-header-group {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.75rem !important;
+  border-bottom: 2px solid var(--bs-border-color);
+}
+
+.strategic-card {
+  border-radius: 0.85rem;
+  border: 1px solid var(--bs-border-color);
+  transition: all 0.2s ease;
+}
+.strategic-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
 /* Smooth transitions */
