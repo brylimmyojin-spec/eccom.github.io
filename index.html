@@ -225,6 +225,29 @@
                   <input class="form-check-input" type="checkbox" id="claim" disabled>
                   <label class="form-check-label" for="claim">Claim Input VAT Credit (VAT only)</label>
                 </div>
+
+                <hr class="my-2">
+                <div class="mb-1 text-uppercase fw-bold text-body-secondary" style="font-size:0.68rem; letter-spacing:0.04em;">
+                  <i class="bi bi-gift-fill text-success me-1"></i>90-Day 0% Commission (New Seller)
+                </div>
+                <div class="form-check form-switch small mb-1.5">
+                  <input class="form-check-input" type="checkbox" id="shFreeComm">
+                  <label class="form-check-label text-danger fw-semibold" for="shFreeComm">
+                    Shopee: Exclude Commission
+                  </label>
+                </div>
+                <div class="form-check form-switch small mb-1.5">
+                  <input class="form-check-input" type="checkbox" id="ttFreeComm">
+                  <label class="form-check-label text-danger-emphasis fw-semibold" for="ttFreeComm">
+                    TikTok: Exclude Commission
+                  </label>
+                </div>
+                <div class="form-check form-switch small mb-1">
+                  <input class="form-check-input" type="checkbox" id="lzFreeComm">
+                  <label class="form-check-label text-primary fw-semibold" for="lzFreeComm">
+                    Lazada: Exclude Commission
+                  </label>
+                </div>
               </div>
 
               <!-- Separated Expenses Loaded from Local Storage Card -->
@@ -328,7 +351,7 @@
     const SIMULATOR_CONFIG_IDS = [
       'nv', 'vat', 'cost', 'freight', 'units', 'mg', 'srp',
       'cs', 'ct', 'cl', 'osh', 'shRts', 'ott', 'camp',
-      'wht', 'claim'
+      'wht', 'claim', 'shFreeComm', 'ttFreeComm', 'lzFreeComm'
     ];
 
     function restoreConfig() {
@@ -351,6 +374,12 @@
         } else if (id === 'freight' && profile.sourcingFreight) {
           el.value = profile.sourcingFreight;
         } else if (id === 'shRts' && profile.platforms && profile.platforms.sh && profile.platforms.sh.optInRts) {
+          el.checked = true;
+        } else if (id === 'shFreeComm' && profile.platforms && profile.platforms.sh && profile.platforms.sh.freeCommission) {
+          el.checked = true;
+        } else if (id === 'ttFreeComm' && profile.platforms && profile.platforms.tt && profile.platforms.tt.freeCommission) {
+          el.checked = true;
+        } else if (id === 'lzFreeComm' && profile.platforms && profile.platforms.lz && profile.platforms.lz.freeCommission) {
           el.checked = true;
         }
       });
@@ -392,9 +421,12 @@
             
             <!-- Platform Header -->
             <div class="d-flex justify-content-between align-items-center mb-1">
-              <span class="badge ${pl.badgeClass} fs-6 px-2.5 py-1.5 fw-bold">
-                ${pl.n}
-              </span>
+              <div class="d-flex align-items-center gap-1.5 flex-wrap">
+                <span class="badge ${pl.badgeClass} fs-6 px-2.5 py-1.5 fw-bold">
+                  ${pl.n}
+                </span>
+                ${r.isCommissionFree ? '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle fw-semibold" style="font-size: 0.65rem;" title="90-Day New Seller Incentive: Category commission fee is 100% waived"><i class="bi bi-gift-fill me-1"></i>0% Comm (90D Free)</span>' : ''}
+              </div>
               ${isBest ? '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle fw-bold"><i class="bi bi-trophy-fill me-1"></i>Highest Profit</span>' : ''}
             </div>
 
@@ -639,6 +671,11 @@
           shRts: $('#shRts') ? $('#shRts').checked : false,
           tt: $('#ott').checked
         },
+        freeCommission: {
+          sh: $('#shFreeComm') ? $('#shFreeComm').checked : false,
+          tt: $('#ttFreeComm') ? $('#ttFreeComm').checked : false,
+          lz: $('#lzFreeComm') ? $('#lzFreeComm').checked : false
+        },
         cat: {
           sh: +$('#cs').value || 0,
           tt: +$('#ct').value || 0,
@@ -678,6 +715,9 @@
       $('#camp').checked = false;
       $('#wht').checked = true;
       $('#claim').checked = false;
+      if ($('#shFreeComm')) $('#shFreeComm').checked = false;
+      if ($('#ttFreeComm')) $('#ttFreeComm').checked = false;
+      if ($('#lzFreeComm')) $('#lzFreeComm').checked = false;
 
       DEFAULT_CATEGORIES.forEach(([p, def]) => {
         const s = $('#c' + (p === 'sh' ? 's' : p === 'tt' ? 't' : 'l'));

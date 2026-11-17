@@ -30,6 +30,7 @@ function getDefaultProfile() {
         targetRoas: 3,
         optIn: false,
         optInRts: false, // Shopee Free Returns Service (FRS) / RTS Protection Program (₱2.00 / order)
+        freeCommission: false, // 90-Day 0% Commission Fee Free (New Seller Incentive)
         notes: 'Shopee Ads (Discovery, Search)'
       },
       tt: {
@@ -37,6 +38,7 @@ function getDefaultProfile() {
         opex: 0,
         targetRoas: 3,
         optIn: false,
+        freeCommission: false, // 90-Day 0% Commission Fee Free (New Seller Incentive)
         notes: 'TikTok GMV Max & Live Production'
       },
       lz: {
@@ -44,6 +46,7 @@ function getDefaultProfile() {
         opex: 0,
         targetRoas: 3,
         optIn: false,
+        freeCommission: false, // 90-Day 0% Commission Fee Free (New Seller Incentive)
         notes: 'Lazada Sponsored Solutions'
       }
     }
@@ -116,6 +119,21 @@ function fees(p, o) {
     F.rts = 2.00;
   }
 
+  // 90-Day 0% Commission Fee Free Incentive (New Seller Program)
+  const isCommissionFree = Boolean(
+    (o.freeCommission && o.freeCommission[p]) ||
+    (o.freeComm && o.freeComm[p]) ||
+    o['freeComm_' + p] ||
+    o['freeComm' + p] ||
+    (o.opt && (o.opt['freeComm_' + p] || o.opt['freeComm' + p])) ||
+    (o.platformAllotments && o.platformAllotments[p] && o.platformAllotments[p].freeCommission)
+  );
+  if (isCommissionFree) {
+    F.commOriginal = F.comm;
+    F.comm = 0;
+    F.isCommissionFree = true;
+  }
+
   return F;
 }
 
@@ -153,8 +171,11 @@ function calc(p, o) {
 
   const evaluate = price => {
     const pr = Math.max(0, price);
+    const commLabel = F.isCommissionFree ?
+      'Commission (0.00% [90-Day Free])' :
+      'Commission (' + pe(F.comm) + ')';
     const L = [
-      ['Commission (' + pe(F.comm) + ')', pr * F.comm, 0],
+      [commLabel, pr * F.comm, 0],
       [(p === 'lz' ? 'Payment fee' : 'Transaction fee') + ' (' + pe(F.trans) + ')', pr * F.trans, 0]
     ];
 
@@ -301,6 +322,9 @@ function calc(p, o) {
       roasHealth,
       roasHealthLabel,
       roasBadgeClass,
+      isCommissionFree: F.isCommissionFree || false,
+      commOriginal: F.commOriginal !== undefined ? F.commOriginal : F.comm,
+      commSavings: F.isCommissionFree ? (F.commOriginal * pr) : 0,
       net,
       ded: pr - take,
       mg: net > 0 ? (profit / net) : 0,

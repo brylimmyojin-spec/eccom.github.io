@@ -298,6 +298,11 @@
           shRts: saved.shRts !== undefined ? saved.shRts : (profile.platforms.sh.optInRts || false),
           tt: saved.ott !== undefined ? saved.ott : profile.platforms.tt.optIn
         },
+        freeCommission: {
+          sh: saved.shFreeComm !== undefined ? saved.shFreeComm : (profile.platforms.sh.freeCommission || false),
+          tt: saved.ttFreeComm !== undefined ? saved.ttFreeComm : (profile.platforms.tt.freeCommission || false),
+          lz: saved.lzFreeComm !== undefined ? saved.lzFreeComm : (profile.platforms.lz.freeCommission || false)
+        },
         cat: {
           sh: Number(saved.cs || 0),
           tt: Number(saved.ct || 0),
@@ -356,6 +361,7 @@
           <tr class="${isBest ? 'table-best-row' : ''}">
             <td>
               <span class="badge ${pl.badgeClass} me-1.5">${pl.n}</span>
+              ${r.isCommissionFree ? '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle ms-1" style="font-size:0.65rem;" title="90-Day New Seller Incentive: 0% Category Commission"><i class="bi bi-gift-fill me-1"></i>0% Comm</span>' : ''}
               ${isBest ? '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle ms-1"><i class="bi bi-trophy-fill me-1"></i>Best</span>' : ''}
               <small class="d-block text-body-secondary text-truncate" style="max-width: 170px;">${r.F.cat}</small>
             </td>

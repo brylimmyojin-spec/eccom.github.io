@@ -249,11 +249,20 @@
                 </label>
               </div>
 
-              <div class="form-check form-switch small mb-3">
+              <div class="form-check form-switch small mb-2">
                 <input class="form-check-input" type="checkbox" id="shOptInRts">
                 <label class="form-check-label" for="shOptInRts">
                   Default Opt-in: Free Returns Service (FRS / RTS Protection - ₱2.00)
                   <a href="opt-in-fees.html" class="text-primary text-decoration-none ms-1" title="Learn about Shopee FRS (Campaign 470000001000041)"><i class="bi bi-info-circle"></i></a>
+                </label>
+              </div>
+
+              <div class="form-check form-switch small mb-3">
+                <input class="form-check-input" type="checkbox" id="shFreeComm">
+                <label class="form-check-label" for="shFreeComm">
+                  <strong>90-Day Commission Free (0% New Seller)</strong>
+                  <span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">Exclude Fee</span>
+                  <small class="d-block text-body-secondary" style="font-size:0.7rem;">Excludes category commission for the first 90 days of store opening</small>
                 </label>
               </div>
 
@@ -305,10 +314,19 @@
                 <div class="form-text" style="font-size:0.75rem;">Live streaming host fees, creator product samples</div>
               </div>
 
-              <div class="form-check form-switch small mb-3">
+              <div class="form-check form-switch small mb-2">
                 <input class="form-check-input" type="checkbox" id="ttOptIn">
                 <label class="form-check-label" for="ttOptIn">
                   Default Opt-in: Mega Discount Program (4–5%)
+                </label>
+              </div>
+
+              <div class="form-check form-switch small mb-3">
+                <input class="form-check-input" type="checkbox" id="ttFreeComm">
+                <label class="form-check-label" for="ttFreeComm">
+                  <strong>90-Day Commission Free (0% New Seller)</strong>
+                  <span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">Exclude Fee</span>
+                  <small class="d-block text-body-secondary" style="font-size:0.7rem;">Excludes category commission for the first 90 days of store opening</small>
                 </label>
               </div>
 
@@ -360,10 +378,19 @@
                 <div class="form-text" style="font-size:0.75rem;">Lazada branded boxes, warehouse prep fees</div>
               </div>
 
-              <div class="form-check form-switch small mb-3">
+              <div class="form-check form-switch small mb-2">
                 <input class="form-check-input" type="checkbox" id="lzPromoPass" checked disabled>
                 <label class="form-check-label" for="lzPromoPass">
                   Promo Pass Program (5.8% up to ₱100, modeled mandatory)
+                </label>
+              </div>
+
+              <div class="form-check form-switch small mb-3">
+                <input class="form-check-input" type="checkbox" id="lzFreeComm">
+                <label class="form-check-label" for="lzFreeComm">
+                  <strong>90-Day Commission Free (0% New Seller)</strong>
+                  <span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">Exclude Fee</span>
+                  <small class="d-block text-body-secondary" style="font-size:0.7rem;">Excludes category commission for the first 90 days of store opening</small>
                 </label>
               </div>
 
@@ -674,17 +701,20 @@
       $('#shOpex').value = sh.opex || 0;
       $('#shOptIn').checked = sh.optIn === true;
       $('#shOptInRts').checked = sh.optInRts === true;
+      if ($('#shFreeComm')) $('#shFreeComm').checked = sh.freeCommission === true;
 
       const tt = p.platforms.tt || {};
       $('#ttAdCost').value = tt.adCost || 0;
       $('#ttRoas').value = tt.targetRoas || 2.8;
       $('#ttOpex').value = tt.opex || 0;
       $('#ttOptIn').checked = tt.optIn === true;
+      if ($('#ttFreeComm')) $('#ttFreeComm').checked = tt.freeCommission === true;
 
       const lz = p.platforms.lz || {};
       $('#lzAdCost').value = lz.adCost || 0;
       $('#lzRoas').value = lz.targetRoas || 3.5;
       $('#lzOpex').value = lz.opex || 0;
+      if ($('#lzFreeComm')) $('#lzFreeComm').checked = lz.freeCommission === true;
 
       updateExpenseSummary();
       updateRoasTester();
@@ -719,6 +749,11 @@
           sh: $('#shOptIn').checked,
           shRts: $('#shOptInRts') ? $('#shOptInRts').checked : false,
           tt: $('#ttOptIn').checked
+        },
+        freeCommission: {
+          sh: $('#shFreeComm') ? $('#shFreeComm').checked : false,
+          tt: $('#ttFreeComm') ? $('#ttFreeComm').checked : false,
+          lz: $('#lzFreeComm') ? $('#lzFreeComm').checked : false
         },
         cat: { sh: 0, tt: 0, lz: 0 },
         platformAllotments: {
@@ -820,19 +855,22 @@
             targetRoas: Math.max(0.1, Number($('#shRoas').value || 3.5)),
             opex: Math.max(0, Number($('#shOpex').value || 0)),
             optIn: $('#shOptIn').checked,
-            optInRts: $('#shOptInRts') ? $('#shOptInRts').checked : false
+            optInRts: $('#shOptInRts') ? $('#shOptInRts').checked : false,
+            freeCommission: $('#shFreeComm') ? $('#shFreeComm').checked : false
           },
           tt: {
             adCost: Math.max(0, Number($('#ttAdCost').value || 0)),
             targetRoas: Math.max(0.1, Number($('#ttRoas').value || 2.8)),
             opex: Math.max(0, Number($('#ttOpex').value || 0)),
-            optIn: $('#ttOptIn').checked
+            optIn: $('#ttOptIn').checked,
+            freeCommission: $('#ttFreeComm') ? $('#ttFreeComm').checked : false
           },
           lz: {
             adCost: Math.max(0, Number($('#lzAdCost').value || 0)),
             targetRoas: Math.max(0.1, Number($('#lzRoas').value || 3.5)),
             opex: Math.max(0, Number($('#lzOpex').value || 0)),
-            optIn: true
+            optIn: true,
+            freeCommission: $('#lzFreeComm') ? $('#lzFreeComm').checked : false
           }
         }
       };
@@ -852,6 +890,9 @@
       activeConfig.osh = profile.platforms.sh.optIn;
       activeConfig.shRts = profile.platforms.sh.optInRts;
       activeConfig.ott = profile.platforms.tt.optIn;
+      activeConfig.shFreeComm = profile.platforms.sh.freeCommission;
+      activeConfig.ttFreeComm = profile.platforms.tt.freeCommission;
+      activeConfig.lzFreeComm = profile.platforms.lz.freeCommission;
       saveConfigToStorage(activeConfig);
 
       updateExpenseSummary();
