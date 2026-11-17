@@ -42,6 +42,9 @@
               <a class="nav-link active" href="expenses.html"><i class="bi bi-cash-coin me-1"></i>Expenses &amp; Allotments</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="opt-in-fees.html"><i class="bi bi-shield-check me-1"></i>Opt-In Fees &amp; RTS</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="fee-reference.html"><i class="bi bi-journal-bookmark me-1"></i>Fee Reference</a>
             </li>
             <li class="nav-item">
@@ -238,15 +241,23 @@
                 <div class="form-text" style="font-size:0.75rem;">Shopee pouches, waybills, fulfillment labor</div>
               </div>
 
-              <div class="form-check form-switch small mb-3">
+              <div class="form-check form-switch small mb-2">
                 <input class="form-check-input" type="checkbox" id="shOptIn">
                 <label class="form-check-label" for="shOptIn">
                   Default Opt-in: Mega Discount Voucher (4–5%)
                 </label>
               </div>
 
+              <div class="form-check form-switch small mb-3">
+                <input class="form-check-input" type="checkbox" id="shOptInRts">
+                <label class="form-check-label" for="shOptInRts">
+                  Default Opt-in: Free Returns Service (FRS / RTS Protection - ₱2.00)
+                  <a href="opt-in-fees.html" class="text-primary text-decoration-none ms-1" title="Learn about Shopee FRS (Campaign 470000001000041)"><i class="bi bi-info-circle"></i></a>
+                </label>
+              </div>
+
               <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border">
-                <strong>Shopee Deductions:</strong> Category commission + 2.24% transaction fee + 5.6% shipping platform fee (₱100 cap) + 1.5% growth fee.
+                <strong>Shopee Deductions:</strong> Category commission + 2.24% transaction fee + 5.6% shipping platform fee (₱100 cap) + 1.5% growth fee + ₱5.00 order fee + optional ₱2.00 FRS/RTS protection.
               </div>
             </div>
           </div>
@@ -618,11 +629,13 @@
       <div>
         <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
       </div>
-      <div class="d-flex gap-3">
+      <div class="d-flex flex-wrap gap-3">
         <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
         <a href="comparison.html" class="text-decoration-none text-body-secondary">Comparison</a>
+        <a href="expenses.html" class="text-decoration-none text-body-secondary">Expenses &amp; Allotments</a>
+        <a href="opt-in-fees.html" class="text-decoration-none text-body-secondary">Opt-In Fees &amp; RTS</a>
         <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
-        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax Guide</a>
+        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax &amp; BIR Guide</a>
       </div>
     </div>
   </footer>
@@ -659,6 +672,7 @@
       $('#shRoas').value = sh.targetRoas || 3.5;
       $('#shOpex').value = sh.opex || 0;
       $('#shOptIn').checked = sh.optIn === true;
+      $('#shOptInRts').checked = sh.optInRts === true;
 
       const tt = p.platforms.tt || {};
       $('#ttAdCost').value = tt.adCost || 0;
@@ -702,6 +716,7 @@
         camp: false,
         opt: {
           sh: $('#shOptIn').checked,
+          shRts: $('#shOptInRts') ? $('#shOptInRts').checked : false,
           tt: $('#ttOptIn').checked
         },
         cat: { sh: 0, tt: 0, lz: 0 },
@@ -803,7 +818,8 @@
             adCost: Math.max(0, Number($('#shAdCost').value || 0)),
             targetRoas: Math.max(0.1, Number($('#shRoas').value || 3.5)),
             opex: Math.max(0, Number($('#shOpex').value || 0)),
-            optIn: $('#shOptIn').checked
+            optIn: $('#shOptIn').checked,
+            optInRts: $('#shOptInRts') ? $('#shOptInRts').checked : false
           },
           tt: {
             adCost: Math.max(0, Number($('#ttAdCost').value || 0)),
@@ -833,6 +849,7 @@
       activeConfig.freight = profile.sourcingFreight;
       activeConfig.sourcingFreight = profile.sourcingFreight;
       activeConfig.osh = profile.platforms.sh.optIn;
+      activeConfig.shRts = profile.platforms.sh.optInRts;
       activeConfig.ott = profile.platforms.tt.optIn;
       saveConfigToStorage(activeConfig);
 

@@ -42,6 +42,9 @@
               <a class="nav-link" href="expenses.html"><i class="bi bi-cash-coin me-1"></i>Expenses &amp; Allotments</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="opt-in-fees.html"><i class="bi bi-shield-check me-1"></i>Opt-In Fees &amp; RTS</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="fee-reference.html"><i class="bi bi-journal-bookmark me-1"></i>Fee Reference</a>
             </li>
             <li class="nav-item">
@@ -239,11 +242,12 @@
       <div>
         <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
       </div>
-      <div class="d-flex gap-3">
+      <div class="d-flex flex-wrap gap-3">
         <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
         <a href="expenses.html" class="text-decoration-none text-body-secondary">Expenses &amp; Allotments</a>
+        <a href="opt-in-fees.html" class="text-decoration-none text-body-secondary">Opt-In Fees &amp; RTS</a>
         <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
-        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax Guide</a>
+        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax &amp; BIR Guide</a>
       </div>
     </div>
   </footer>
@@ -291,6 +295,7 @@
         camp: saved.camp === true,
         opt: {
           sh: saved.osh !== undefined ? saved.osh : profile.platforms.sh.optIn,
+          shRts: saved.shRts !== undefined ? saved.shRts : (profile.platforms.sh.optInRts || false),
           tt: saved.ott !== undefined ? saved.ott : profile.platforms.tt.optIn
         },
         cat: {
@@ -307,12 +312,11 @@
       $('#summaryCost').textContent = freight > 0 ? 
         `${P(cost)} + ${P(freight)} freight (${units} unit${units > 1 ? 's' : ''})` : 
         `${P(cost)} (${units} unit${units > 1 ? 's' : ''})`;
-      $('#summaryCost').textContent = `${P(cost)} (${units} unit${units > 1 ? 's' : ''})`;
       $('#summaryMargin').textContent = `${(margin * 100).toFixed(1)}%`;
       $('#summaryTax').textContent = vat ? 'VAT-Registered (12%)' : 'Non-VAT (3%)';
       $('#summaryAllInCost').textContent = P(totalAllInCost);
 
-      const base = { ...o, opt: { sh: false, tt: false }, camp: false };
+      const base = { ...o, opt: { sh: false, shRts: false, tt: false }, camp: false };
       const R = ['sh', 'tt', 'lz'].map(p => [p, calc(p, o), calc(p, base)]);
       const best = Math.max(...R.map(r => r[1].profit));
       const bestItem = R.find(r => r[1].profit === best);
@@ -330,7 +334,17 @@
       $('#cmp-rows').innerHTML = R.map(([p, r, b]) => {
         const isBest = r.profit === best;
         const pl = PL[p];
-        const programText = p === 'lz' ? 'Auto: ' + P(r.price) : o.opt[p] ? P(r.price) : '<span class="text-body-secondary">Not opted in</span>';
+        let programText = '<span class="text-body-secondary">Not opted in</span>';
+        if (p === 'lz') {
+          programText = 'Auto: ' + P(r.price);
+        } else {
+          const progs = [];
+          if (o.opt[p]) progs.push('Mega');
+          if (p === 'sh' && o.opt.shRts) progs.push('FRS (₱2)');
+          if (progs.length) {
+            programText = `${P(r.price)} <small class="text-body-secondary d-block">(${progs.join(' + ')})</small>`;
+          }
+        }
         const baseBeStr = r.breakEvenRoasBase ? r.breakEvenRoasBase.toFixed(2) + '×' : '—';
         const vatBeStr = r.breakEvenRoasVatAdjusted ? r.breakEvenRoasVatAdjusted.toFixed(2) + '×' : '—';
         const tgtRoasStr = r.targetRoasCalculated ? r.targetRoasCalculated.toFixed(2) + '×' : '—';

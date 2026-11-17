@@ -29,6 +29,7 @@ function getDefaultProfile() {
         opex: 0,
         targetRoas: 3,
         optIn: false,
+        optInRts: false, // Shopee Free Returns Service (FRS) / RTS Protection Program (₱2.00 / order)
         notes: 'Shopee Ads (Discovery, Search)'
       },
       tt: {
@@ -86,7 +87,8 @@ function fees(p, o) {
     promo: 0,
     pcap: 200,
     pn: '',
-    mand: false
+    mand: false,
+    rts: 0
   };
 
   if (p === 'lz') {
@@ -98,6 +100,17 @@ function fees(p, o) {
     F.promo = o.camp ? 0.05 : 0.04;
     F.pn = p === 'sh' ? 'Mega Discount Voucher' : 'Mega Discount Program';
   }
+
+  // Shopee Free Returns Service (FRS) / RTS Protection Program (₱2.00 flat fee per order)
+  const isRtsOpted = p === 'sh' && Boolean(
+    (o.opt && o.opt.shRts) ||
+    o.shRts ||
+    (o.platformAllotments && o.platformAllotments.sh && o.platformAllotments.sh.optInRts)
+  );
+  if (isRtsOpted) {
+    F.rts = 2.00;
+  }
+
   return F;
 }
 
@@ -149,6 +162,9 @@ function calc(p, o) {
     L.push(['Order processing fee', F.opf, 0]);
     if (F.promo) {
       L.push([F.pn + ' (' + pe(F.promo) + ', max ₱' + F.pcap + ')', Math.min(pr * F.promo, F.pcap), F.mand ? 0 : 1]);
+    }
+    if (F.rts) {
+      L.push(['Free Returns Service (FRS / RTS Protection)', F.rts, 1]);
     }
 
     // Advertising VAT treatment (from ROAS Computation Guide)
