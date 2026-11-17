@@ -113,6 +113,53 @@
       </div>
     </div>
 
+    <!-- Strategic Directive: Pricing vs. ROAS Principle Banner -->
+    <div class="card shadow-sm border-0 mb-4 bg-body-tertiary">
+      <div class="card-body p-4">
+        <div class="d-flex flex-column flex-md-row align-items-md-start gap-3">
+          <div class="rounded-circle bg-primary-subtle text-primary p-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 48px; height: 48px;">
+            <i class="bi bi-compass fs-4"></i>
+          </div>
+          <div class="flex-grow-1">
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+              <span class="badge bg-primary text-white fw-bold">Executive Strategic Rule</span>
+              <span class="badge bg-body text-body-secondary border fw-medium">Pricing vs. ROAS Separation</span>
+            </div>
+            <h2 class="h5 fw-bold mb-2">ROAS Should Not Be Baked Directly Into Base Product Pricing</h2>
+            <p class="text-body-secondary small mb-3">
+              Base product pricing must reflect <strong>Product Value, Target Market Positioning, COGS, Inbound Freight, Packaging, Baseline OPEX, and Desired Net Margin</strong> plus marketplace fees. ROAS is an <em>acquisition efficiency stress-test</em> that measures whether your margins can afford paid traffic, not a permanent price inflator. Here is why:
+            </p>
+            <div class="row g-2 small">
+              <div class="col-md-6 col-lg-3">
+                <div class="p-2.5 bg-body rounded border h-100">
+                  <div class="fw-bold text-body-emphasis mb-1"><i class="bi bi-graph-down-arrow text-danger me-1"></i>1. Ad Costs Fluctuate</div>
+                  <div class="text-body-secondary" style="font-size:0.75rem;">Auction CPC bidding shifts constantly with seasonality and competition. Inflating base price makes your catalog uncompetitive.</div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3">
+                <div class="p-2.5 bg-body rounded border h-100">
+                  <div class="fw-bold text-body-emphasis mb-1"><i class="bi bi-people-fill text-info me-1"></i>2. Protect Organic Sales</div>
+                  <div class="text-body-secondary" style="font-size:0.75rem;">Organic search, repeat buyers, and live stream orders incur ₱0 ad spend. Baking ads into base SRP overcharges non-ad customers.</div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3">
+                <div class="p-2.5 bg-body rounded border h-100">
+                  <div class="fw-bold text-body-emphasis mb-1"><i class="bi bi-percent text-warning me-1"></i>3. Shopee Fee Compounding</div>
+                  <div class="text-body-secondary" style="font-size:0.75rem;">Shopee's % commissions (4%–5%+), transaction fees (2.24%), and MDV voucher fees (4%/5%) penalize inflated prices on every sale.</div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3">
+                <div class="p-2.5 bg-body rounded border h-100">
+                  <div class="fw-bold text-body-emphasis mb-1"><i class="bi bi-signpost-split-fill text-success me-1"></i>4. Channel Fit &amp; Margin</div>
+                  <div class="text-body-secondary" style="font-size:0.75rem;">If required BE ROAS is too high (&gt;4.5×), the problem is unit economics or channel fit. Don't hike price—bundle units or lower sourcing cost.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Executive KPI Ribbon -->
     <div class="row g-3 mb-4" id="roasKpis">
       <div class="col-6 col-xl-2">
@@ -447,6 +494,7 @@
     </div>
 
     <!-- Section 3: Interactive ROAS Sensitivity Curve & Matrix -->
+    <!-- Section 3 & 4: Sensitivity Curve & Reverse Budget -->
     <div class="row g-4 mb-4">
       
       <!-- Sensitivity Table -->
@@ -493,7 +541,7 @@
         </div>
       </div>
 
-      <!-- Section 4: Reverse Budget & CPA Target Calculator -->
+      <!-- Reverse Budget & CPA Target Calculator -->
       <div class="col-xl-4">
         <div class="card h-100 shadow-sm border-0">
           <div class="card-header bg-body-tertiary fw-bold py-3 px-4">
@@ -539,15 +587,143 @@
 
     </div>
 
-    <!-- Section 5: Official Richmond Tan ROAS Computation Guide -->
+    <!-- Section 4: Channel Fit Benchmark Reality Check & Blended MER Simulator -->
+    <div class="row g-4 mb-4">
+      
+      <!-- Channel Fit Benchmark Reality Check -->
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-header bg-body-tertiary fw-semibold py-3 px-4 d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-speedometer2 me-2 text-primary"></i>Channel Fit &amp; Benchmark Reality Check
+            </div>
+            <span class="badge bg-secondary-subtle text-secondary-emphasis">Market Comparison</span>
+          </div>
+          <div class="card-body p-4">
+            <p class="small text-body-secondary mb-3">
+              Compares your calculated Break-Even ROAS against realistic Philippine marketplace benchmarks. If your required ROAS is significantly higher than category averages, <strong>do not artificially inflate your price</strong>—your product economics or acquisition funnel must be optimized instead.
+            </p>
+
+            <div class="mb-3">
+              <label for="benchmarkCategory" class="form-label small fw-semibold mb-1">Target Product Category Benchmark:</label>
+              <select class="form-select form-select-sm" id="benchmarkCategory">
+                <option value="fashion" data-low="2.8" data-high="4.2">Fashion &amp; Apparel (Avg ROAS: 2.8× – 4.2×)</option>
+                <option value="beauty" data-low="2.5" data-high="3.8">Health, Beauty &amp; Personal Care (Avg ROAS: 2.5× – 3.8×)</option>
+                <option value="electronics" data-low="3.5" data-high="6.0">Consumer Electronics &amp; Accessories (Avg ROAS: 3.5× – 6.0×)</option>
+                <option value="home" data-low="2.8" data-high="4.5">Home &amp; Living, Furniture (Avg ROAS: 2.8× – 4.5×)</option>
+                <option value="fmcg" data-low="2.5" data-high="3.5">Groceries &amp; FMCG (Avg ROAS: 2.5× – 3.5×)</option>
+                <option value="general" data-low="3.0" data-high="4.5" selected>General Marketplace Benchmark (Avg ROAS: 3.0× – 4.5×)</option>
+              </select>
+            </div>
+
+            <div class="p-3 bg-body-tertiary rounded-3 border mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1.5">
+                <span class="text-body-secondary small">Your 12% Ad VAT Break-Even ROAS:</span>
+                <span class="fw-bold fs-6 text-danger" id="benchmarkUserBeRoas">2.49×</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-1.5">
+                <span class="text-body-secondary small">Realistic Category Benchmark Range:</span>
+                <span class="fw-bold fs-6 text-body-emphasis" id="benchmarkCategoryRange">3.00× – 4.50×</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-body-secondary small">Channel Fit Status:</span>
+                <span id="benchmarkStatusBadge"><span class="badge bg-success">Strong Channel Fit</span></span>
+              </div>
+            </div>
+
+            <div class="alert mb-0 small" id="benchmarkExplanation">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blended Sales Mix & MER Simulator -->
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-header bg-body-tertiary fw-semibold py-3 px-4 d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-pie-chart-fill me-2 text-success"></i>Blended Sales Mix &amp; MER Simulator
+            </div>
+            <span class="badge bg-success-subtle text-success-emphasis">Avoid Overcharging Organic</span>
+          </div>
+          <div class="card-body p-4">
+            <p class="small text-body-secondary mb-3">
+              Not all sales come from paid ads! See how mixing organic search, live streams, and repeat customer sales keeps your base price competitive while delivering healthy blended store net profits.
+            </p>
+
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <label for="blendedPaidRatio" class="form-label small fw-semibold mb-0">Percentage of Orders from Paid Ads:</label>
+                <span class="fw-bold text-primary" id="blendedPaidRatioDisplay">35% Paid / 65% Organic</span>
+              </div>
+              <input type="range" class="form-range" id="blendedPaidRatio" min="0" max="100" step="5" value="35">
+              <div class="d-flex justify-content-between text-body-secondary" style="font-size:0.7rem;">
+                <span>0% (100% Organic)</span>
+                <span>50% Split</span>
+                <span>100% (Pure Ad Scale)</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-body-tertiary rounded-3 border mb-3">
+              <div class="row g-2 text-center small">
+                <div class="col-4 border-end">
+                  <span class="text-body-secondary d-block" style="font-size:0.72rem;">Organic Margin</span>
+                  <span class="fw-bold fs-6 text-success" id="blendedOrganicMargin">20.0%</span>
+                  <small class="d-block text-body-secondary" style="font-size:0.68rem;">₱0 Ad Cost</small>
+                </div>
+                <div class="col-4 border-end">
+                  <span class="text-body-secondary d-block" style="font-size:0.72rem;">Paid Order Margin</span>
+                  <span class="fw-bold fs-6 text-primary" id="blendedPaidMargin">10.2%</span>
+                  <small class="d-block text-body-secondary" style="font-size:0.68rem;">After Ad + VAT</small>
+                </div>
+                <div class="col-4">
+                  <span class="text-body-secondary d-block" style="font-size:0.72rem;">Blended Store Margin</span>
+                  <span class="fw-bold fs-6 text-success" id="blendedStoreMargin">16.6%</span>
+                  <small class="d-block text-body-secondary" style="font-size:0.68rem;">Total Store GMV</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-2.5 rounded bg-body border small d-flex align-items-center justify-content-between">
+              <div>
+                <span class="fw-semibold text-body-secondary d-block" style="font-size:0.72rem;">Blended MER (Marketing Efficiency Ratio):</span>
+                <span class="fw-bold text-success fs-6" id="blendedMerDisplay">8.57× MER</span>
+              </div>
+              <div class="text-end">
+                <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle">Healthy Store Blended Returns</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Section 5: Official Richmond Tan ROAS Computation Guide & Shopee Caution -->
     <div class="card shadow-sm border-0 mb-4">
-      <div class="card-header bg-body-tertiary fw-semibold py-3 px-4">
-        <i class="bi bi-book-half me-2 text-primary"></i>Richmond Tan ROAS Computation Framework &amp; Formula Guide
+      <div class="card-header bg-body-tertiary fw-semibold py-3 px-4 d-flex justify-content-between align-items-center">
+        <div>
+          <i class="bi bi-book-half me-2 text-primary"></i>Richmond Tan Framework &amp; Marketplace Pricing Guardrails
+        </div>
+        <span class="badge bg-primary-subtle text-primary-emphasis">Strategic Reference</span>
       </div>
       <div class="card-body p-4">
-        <div class="alert alert-warning border-warning-subtle small mb-4">
-          <strong><i class="bi bi-exclamation-triangle-fill me-1"></i>The Vanity ROAS Trap:</strong>
-          Philippine sellers often celebrate an 8.0× or 10.0× ROAS in Meta Ads or Shopee Ads Manager, unaware they are actually losing money. Why? Because marketplace commissions, transaction fees, shipping subsidies, packaging, and especially the <strong>12% nonrecoverable digital ad VAT</strong> eat into the gross margin. Your ROAS must exceed the <em>12% Ad VAT Adjusted Break-Even ROAS</em> floor to avoid draining your working capital.
+        
+        <div class="row g-3 mb-4">
+          <div class="col-lg-6">
+            <div class="alert alert-warning border-warning-subtle small h-100 mb-0">
+              <strong class="d-block mb-1"><i class="bi bi-exclamation-triangle-fill me-1"></i>1. The Vanity ROAS Trap (Richmond Tan):</strong>
+              Philippine sellers often celebrate an 8.0× or 10.0× ROAS in Meta Ads or Shopee Ads Manager, unaware they are actually losing money. Why? Because marketplace commissions, transaction fees, shipping subsidies, packaging, and especially the <strong>12% nonrecoverable digital ad VAT</strong> eat into the gross margin. Your ROAS must exceed the <em>12% Ad VAT Adjusted Break-Even ROAS</em> floor to avoid draining your working capital.
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="alert alert-danger border-danger-subtle small h-100 mb-0">
+              <strong class="d-block mb-1"><i class="bi bi-shield-slash-fill me-1"></i>2. The Shopee Compounding Fee Trap:</strong>
+              Never artificially inflate base SRP to cover high ad budgets on Shopee. Shopee's commissions (4%–5%+), transaction fees (2.24%), service fees (1.5%), and Mega Discount Vouchers (4%/5% up to ₱200 cap) are charged as a percentage of the <em>total customer price</em>. If you mark up SRP by ₱100 to pay for ads, Shopee takes ~₱15.50 in extra platform deductions on that markup alone, while cratering your conversion rate!
+            </div>
+          </div>
         </div>
 
         <div class="row g-4">
@@ -808,6 +984,10 @@
 
       // Render Reverse CPA
       renderReverseCpa();
+
+      // Render Channel Fit Reality Check & Blended MER
+      renderChannelFit(results);
+      renderBlendedMix(results);
     }
 
     function renderRoasTable(results) {
@@ -962,6 +1142,75 @@
       }
     }
 
+    function renderChannelFit(results) {
+      const shRes = results[0].res;
+      const nonrecAdVat = $('#adVatNonrecoverable').checked;
+      const userBeRoas = nonrecAdVat ? shRes.breakEvenRoasVatAdjusted : shRes.breakEvenRoasBase;
+      const beStr = userBeRoas ? userBeRoas.toFixed(2) + '×' : '—';
+      $('#benchmarkUserBeRoas').textContent = beStr;
+
+      const sel = $('#benchmarkCategory');
+      const opt = sel ? sel.options[sel.selectedIndex] : null;
+      const low = opt ? Number(opt.getAttribute('data-low') || 3.0) : 3.0;
+      const high = opt ? Number(opt.getAttribute('data-high') || 4.5) : 4.5;
+      $('#benchmarkCategoryRange').textContent = `${low.toFixed(2)}× – ${high.toFixed(2)}×`;
+
+      const badge = $('#benchmarkStatusBadge');
+      const expl = $('#benchmarkExplanation');
+
+      if (!userBeRoas || shRes.contributionMargin <= 0) {
+        badge.innerHTML = '<span class="badge bg-danger">Negative Pre-Ad Margin</span>';
+        expl.className = 'alert alert-danger mb-0 small';
+        expl.innerHTML = '<strong><i class="bi bi-x-octagon-fill me-1"></i>Cannot Run Paid Ads:</strong> Product price is below landed cost and platform fees. Fix product sourcing, packaging, or base price before launching ads.';
+      } else if (userBeRoas <= low) {
+        badge.innerHTML = '<span class="badge bg-success">Strong Channel Fit (Scalable)</span>';
+        expl.className = 'alert alert-success mb-0 small';
+        expl.innerHTML = `<strong><i class="bi bi-check-circle-fill me-1"></i>Excellent Channel Fit:</strong> Your Break-Even ROAS (${beStr}) is lower than the category average (${low.toFixed(1)}×–${high.toFixed(1)}×). You have generous pre-ad margin buffer and can scale paid ads aggressively.`;
+      } else if (userBeRoas <= high) {
+        badge.innerHTML = '<span class="badge bg-info text-dark">Moderate Fit (Requires Discipline)</span>';
+        expl.className = 'alert alert-info mb-0 small';
+        expl.innerHTML = `<strong><i class="bi bi-info-circle-fill me-1"></i>Viable with Tight Management:</strong> Your Break-Even ROAS (${beStr}) falls within normal category bidding range. Maintain strict negative keywords and monitor daily ROAS to avoid slipping into losses.`;
+      } else {
+        badge.innerHTML = '<span class="badge bg-danger">Thin Margin / High Risk Alert</span>';
+        expl.className = 'alert alert-danger mb-0 small';
+        expl.innerHTML = `<strong><i class="bi bi-exclamation-triangle-fill me-1"></i>Strategic Rule: Do NOT Just Inflate Price!</strong> Your Break-Even ROAS (${beStr}) exceeds realistic category averages (${low.toFixed(1)}×–${high.toFixed(1)}×). Raising your sticker price to cover ads will ruin customer conversion. <em>Instead:</em> negotiate lower supplier COGS, bundle 2–3 units to lift order value, or rely on organic search and affiliate live streams.`;
+      }
+    }
+
+    function renderBlendedMix(results) {
+      const shRes = results[0].res;
+      const targetMargin = Math.max(0, Math.min(0.8, Number($('#inputMargin').value || 20) / 100));
+      const paidRatio = Math.max(0, Math.min(100, Number($('#blendedPaidRatio').value || 35))) / 100;
+
+      $('#blendedPaidRatioDisplay').textContent = `${(paidRatio * 100).toFixed(0)}% Paid / ${(100 - paidRatio * 100).toFixed(0)}% Organic`;
+
+      // Organic orders earn full pre-ad contribution margin minus OPEX
+      const organicMarginPct = shRes.net > 0 ? (shRes.profit / shRes.net) * 100 : (targetMargin * 100);
+      
+      const nonrecAdVat = $('#adVatNonrecoverable').checked;
+      const adVatMultiplier = nonrecAdVat ? 1.12 : 1.0;
+      const shAd = Math.max(0, Number($('#shAdCost').value || 0));
+      let paidMarginPct = 0;
+      if (shAd > 0) {
+        const netProfit = shRes.contributionPerOrder - (shAd * adVatMultiplier);
+        paidMarginPct = shRes.price > 0 ? (netProfit / shRes.price) * 100 : 0;
+      } else {
+        paidMarginPct = Math.max(0, targetMargin * 0.5 * 100);
+      }
+
+      const blendedMarginPct = ((1 - paidRatio) * organicMarginPct) + (paidRatio * paidMarginPct);
+
+      $('#blendedOrganicMargin').textContent = `${organicMarginPct.toFixed(1)}%`;
+      $('#blendedPaidMargin').textContent = `${paidMarginPct.toFixed(1)}%`;
+      $('#blendedStoreMargin').textContent = `${blendedMarginPct.toFixed(1)}%`;
+
+      const adSpendPerOrder = (shAd > 0 ? shAd : (shRes.price / 3.5)) * adVatMultiplier;
+      const blendedAdSpendPerOrder = paidRatio * adSpendPerOrder;
+      const mer = blendedAdSpendPerOrder > 0 ? (shRes.price / blendedAdSpendPerOrder) : 99;
+
+      $('#blendedMerDisplay').textContent = mer >= 50 ? 'Pure Organic (₱0 Ad Spend)' : `${mer.toFixed(2)}× MER`;
+    }
+
     function attachListeners() {
       const inputs = [
         '#inputPrice', '#inputCost', '#inputFreight', '#inputPack', '#inputOpex', '#inputMargin',
@@ -969,7 +1218,8 @@
         '#shAdCost', '#shTargetRoas', '#shMdvToggle', '#shRtsToggle',
         '#ttAdCost', '#ttTargetRoas', '#ttMdpToggle',
         '#lzAdCost', '#lzTargetRoas',
-        '#revBudget', '#revOrders'
+        '#revBudget', '#revOrders',
+        '#benchmarkCategory', '#blendedPaidRatio'
       ];
 
       inputs.forEach(sel => {
