@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Expenses &amp; Platform Allotments | PH Marketplace Fee Calculator</title>
-  <meta name="description" content="Manage and save seller packaging expenses, overhead, and platform-specific ad spend allotments for Shopee, TikTok Shop, and Lazada.">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operating Expenses &amp; Platform Allotments | Philippine E-commerce Calculator</title>
+  
   <!-- Bootstrap 5.3.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
@@ -13,12 +12,12 @@
   <!-- Custom Styles -->
   <link href="./css/styles.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100 bg-body-tertiary">
 
   <!-- Navigation Bar -->
   <header>
     <nav class="navbar navbar-expand-xl app-navbar sticky-top shadow-sm py-2">
-      <div class="container-xl">
+      <div class="container-fluid px-3 px-md-4 px-xl-5">
         <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none" href="index.html">
           <span class="brand-flag">🇵🇭</span>
           <div class="d-flex flex-column lh-1">
@@ -68,64 +67,77 @@
     </nav>
   </header>
 
-  <main class="container-xl py-4 flex-grow-1">
+  <main class="container-fluid px-3 px-md-4 px-xl-5 py-4 flex-grow-1">
 
     <!-- Header Section -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
       <div>
         <h1 class="h2 mb-1 fw-bold">Operating Expenses &amp; Platform Allotments</h1>
         <p class="text-body-secondary mb-0">
-          Separate your operational overhead, packaging costs, and advertising budgets per platform. All settings are saved locally to your device.
+          Configure baseline store packaging, sourcing freight, platform operational overhead, and ad budgets. All settings persist on your device.
         </p>
       </div>
-      <div class="d-flex align-items-center gap-2">
+      <div class="d-flex flex-wrap align-items-center gap-2">
         <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle px-3 py-2" id="saveBadge">
           <i class="bi bi-check2-circle text-success me-1"></i>Saved locally in browser
         </span>
+        <button class="btn btn-success btn-sm" id="quickSaveBtn" type="button">
+          <i class="bi bi-floppy me-1"></i>Save Locally
+        </button>
         <a href="index.html" class="btn btn-primary btn-sm">
           <i class="bi bi-calculator me-1"></i>Open Simulator
         </a>
       </div>
     </div>
 
-    <!-- Alert / Explanation -->
+    <!-- Alert / Persistence Notice -->
     <div class="alert alert-primary d-flex align-items-center justify-content-between shadow-sm mb-4 py-3 px-4 border-0">
       <div class="d-flex align-items-center gap-3">
         <div class="fs-2 text-primary"><i class="bi bi-hdd-network"></i></div>
         <div>
           <div class="fw-bold fs-6">Local Storage Persistence Enabled</div>
           <div class="small opacity-75">
-            Any expense or ad budget you enter here is automatically stored on your browser (<code>localStorage</code>) and injected into your <strong>Pricing Simulator</strong> and <strong>Comparison Table</strong>.
+            Any expense, freight, or ad budget entered here is automatically saved in your browser (<code>localStorage</code>) and injected into your <strong>Pricing Simulator</strong> and <strong>Platform Comparison</strong>.
           </div>
         </div>
       </div>
-      <button class="btn btn-sm btn-outline-primary d-none d-md-inline-block" id="quickSaveBtn">
-        <i class="bi bi-floppy me-1"></i>Save Now
-      </button>
+      <div>
+        <button class="btn btn-sm btn-outline-primary" id="resetExpensesBtn" type="button">
+          <i class="bi bi-arrow-counterclockwise me-1"></i>Reset Expenses to 0
+        </button>
+      </div>
     </div>
 
     <form id="expensesForm">
 
-      <!-- Section 1: Baseline Packaging & Tax Settings -->
+      <!-- ================================================================= -->
+      <!-- SECTION 1: ALL INPUTS FIRST                                       -->
+      <!-- ================================================================= -->
+
+      <!-- Part 1A: General Store Packaging & Tax Configuration -->
       <div class="card shadow-sm border-0 mb-4">
-        <div class="card-header bg-body-tertiary fw-bold py-3">
-          <i class="bi bi-box-seam me-2 text-primary"></i>1. General Store Packaging &amp; Tax Configuration
+        <div class="card-header bg-body py-3 d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-primary rounded-pill px-2.5">Step 1</span>
+            <h2 class="h5 mb-0 fw-bold"><i class="bi bi-box-seam me-1 text-primary"></i>General Store, Packaging &amp; Sourcing Inputs</h2>
+          </div>
+          <span class="badge bg-secondary-subtle text-secondary-emphasis">Base Store Profile</span>
         </div>
-        <div class="card-body p-4">
+        <div class="card-body p-3 p-md-4">
           <div class="row g-3">
             
             <!-- Store Name -->
-            <div class="col-md-3">
+            <div class="col-sm-6 col-xl-3">
               <label for="shopName" class="form-label fw-semibold small">Store / Brand Name</label>
               <div class="input-group input-group-sm">
                 <span class="input-group-text"><i class="bi bi-shop"></i></span>
                 <input type="text" class="form-control" id="shopName" value="My Online Store" placeholder="e.g. Manila E-Store">
               </div>
-              <div class="form-text" style="font-size:0.75rem;">Labels your reports and exports</div>
+              <div class="form-text" style="font-size:0.75rem;">Labels exports and reports</div>
             </div>
 
             <!-- Baseline Packaging Cost -->
-            <div class="col-md-3">
+            <div class="col-sm-6 col-xl-3">
               <label for="packagingCost" class="form-label fw-semibold small">Packaging Cost / Order</label>
               <div class="input-group input-group-sm">
                 <span class="input-group-text">₱</span>
@@ -135,28 +147,28 @@
             </div>
 
             <!-- Inbound Sourcing Freight & Logistics -->
-            <div class="col-md-3">
-              <label for="sourcingFreight" class="form-label fw-semibold small">Inbound Sourcing &amp; Freight</label>
+            <div class="col-sm-6 col-xl-3">
+              <label for="sourcingFreight" class="form-label fw-semibold small">Inbound Sourcing Freight / Unit</label>
               <div class="input-group input-group-sm">
                 <span class="input-group-text">₱</span>
                 <input type="number" class="form-control" id="sourcingFreight" value="0" min="0" step="0.01">
               </div>
-              <div class="form-text" style="font-size:0.75rem;">Supplier to warehouse freight / forwarder fee per unit</div>
+              <div class="form-text" style="font-size:0.75rem;">Supplier to warehouse sea/air forwarder fee per unit</div>
             </div>
 
             <!-- Default Target Net Margin -->
-            <div class="col-md-3">
+            <div class="col-sm-6 col-xl-3">
               <label for="defaultMargin" class="form-label fw-semibold small">Default Net Margin Target</label>
               <div class="input-group input-group-sm">
                 <input type="number" class="form-control" id="defaultMargin" value="20" min="0" max="80" step="0.5">
                 <span class="input-group-text">%</span>
               </div>
-              <div class="form-text" style="font-size:0.75rem;">Default profit margin for solver</div>
+              <div class="form-text" style="font-size:0.75rem;">Target profit margin for solver</div>
             </div>
 
-            <!-- Tax Registration -->
-            <div class="col-md-6">
-              <label class="form-label fw-semibold small">BIR Tax Registration</label>
+            <!-- Tax Registration Option -->
+            <div class="col-lg-5">
+              <label class="form-label fw-semibold small">BIR Tax Registration Status</label>
               <div class="btn-group w-100 btn-group-sm" role="group">
                 <input type="radio" class="btn-check" name="profTax" id="profNonVat" value="non-vat" checked>
                 <label class="btn btn-outline-primary" for="profNonVat">Non-VAT (3% Percentage Tax)</label>
@@ -164,28 +176,63 @@
                 <input type="radio" class="btn-check" name="profTax" id="profVat" value="vat">
                 <label class="btn btn-outline-primary" for="profVat">VAT-Registered (12%)</label>
               </div>
-              <div class="form-text" style="font-size:0.75rem;">Non-VAT for annual sales &lt; ₱3M</div>
+              <div class="form-text" style="font-size:0.75rem;">Non-VAT for annual gross sales &lt; ₱3M under Section 116</div>
             </div>
 
-            <!-- Tax Switches -->
-            <div class="col-md-6 d-flex flex-column justify-content-center">
-              <div class="form-check form-switch small mb-2">
-                <input class="form-check-input" type="checkbox" id="profClaimVat" disabled>
-                <label class="form-check-label" for="profClaimVat">
-                  Claim Input VAT Credit on Platform Fees (12/112 credit)
-                </label>
-              </div>
-              <div class="form-check form-switch small mb-2">
-                <input class="form-check-input" type="checkbox" id="profIncludeWht" checked>
-                <label class="form-check-label" for="profIncludeWht">
-                  Subject to BIR 0.5% Creditable Withholding Tax (RR 16-2023)
-                </label>
-              </div>
-              <div class="form-check form-switch small">
-                <input class="form-check-input" type="checkbox" id="profNonrecoverableAdVat" checked>
-                <label class="form-check-label" for="profNonrecoverableAdVat">
-                  <strong>12% Nonrecoverable Digital Ad VAT</strong> (Digital ad invoices carry +12% non-creditable VAT: Ad Spend &times; 1.12)
-                </label>
+            <!-- Tax Switches (Interactive Toggle Cards) -->
+            <div class="col-lg-7">
+              <div class="row g-2">
+                <!-- Withholding Tax Switch -->
+                <div class="col-md-6">
+                  <label class="toggle-card h-100 mb-0" for="profIncludeWht">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-primary">
+                        <i class="bi bi-file-earmark-check"></i>0.5% Withholding Tax
+                      </span>
+                      <span class="toggle-card-subtitle">
+                        BIR RR 16-2023 (1% on 50% gross remittances)
+                      </span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="profIncludeWht" checked>
+                    </div>
+                  </label>
+                </div>
+
+                <!-- Claim Input VAT Switch -->
+                <div class="col-md-6">
+                  <label class="toggle-card h-100 mb-0" for="profClaimVat">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-body-secondary">
+                        <i class="bi bi-receipt"></i>Claim Input VAT Credit
+                      </span>
+                      <span class="toggle-card-subtitle">
+                        12/112 credit on platform fees (VAT sellers only)
+                      </span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="profClaimVat" disabled>
+                    </div>
+                  </label>
+                </div>
+
+                <!-- 12% Nonrecoverable Ad VAT Switch -->
+                <div class="col-12">
+                  <label class="toggle-card mb-0" for="profNonrecoverableAdVat">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-warning-emphasis">
+                        <i class="bi bi-receipt-cutoff text-warning"></i>12% Nonrecoverable Digital Advertising VAT
+                        <span class="badge bg-warning-subtle text-warning-emphasis border" style="font-size:0.65rem;">Ad Spend &times; 1.12</span>
+                      </span>
+                      <span class="toggle-card-subtitle">
+                        Digital ad invoices carry +12% non-creditable VAT for non-VAT businesses and non-claiming filers
+                      </span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="profNonrecoverableAdVat" checked>
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -193,21 +240,25 @@
         </div>
       </div>
 
-      <!-- Section 2: Dedicated Platform Expense & Ad Allotments -->
-      <h2 class="h5 fw-bold mb-3">
-        <i class="bi bi-pie-chart-fill me-2 text-primary"></i>2. Platform-Specific Expense &amp; Ad Budget Allotments
-      </h2>
+      <!-- Part 1B: Platform-Specific Expense & Ad Allotments -->
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge bg-primary rounded-pill px-2.5">Step 2</span>
+          <h2 class="h5 fw-bold mb-0">Platform-Specific Expense &amp; Campaign Allotments</h2>
+        </div>
+        <span class="small text-body-secondary">Shopee &bull; TikTok Shop &bull; Lazada</span>
+      </div>
 
       <div class="row g-4 mb-4">
         
-        <!-- Shopee Allotment -->
+        <!-- Shopee Allotment Card -->
         <div class="col-lg-4">
           <div class="card h-100 shadow-sm border-shopee">
             <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-3">
               <span class="badge badge-shopee fs-6 fw-bold">Shopee Philippines</span>
               <i class="bi bi-tag-fill text-danger"></i>
             </div>
-            <div class="card-body p-4">
+            <div class="card-body p-3 p-md-4">
               <div class="mb-3">
                 <label for="shAdCost" class="form-label fw-semibold small mb-1">
                   Shopee Ads Spend Per Order
@@ -216,7 +267,7 @@
                   <span class="input-group-text">₱</span>
                   <input type="number" class="form-control" id="shAdCost" value="0" min="0" step="0.01">
                 </div>
-                <div class="form-text" style="font-size:0.75rem;">Search Ads, Discovery Ads, Shop Ads</div>
+                <div class="form-text" style="font-size:0.75rem;">Discovery Ads, Search Ads, Shop Ads</div>
               </div>
 
               <div class="mb-3">
@@ -227,7 +278,7 @@
                   <input type="number" class="form-control" id="shRoas" value="3.5" min="0.1" step="0.1">
                   <span class="input-group-text">×</span>
                 </div>
-                <div class="form-text" style="font-size:0.75rem;">Max allowable ad budget ceiling</div>
+                <div class="form-text" style="font-size:0.75rem;">Allowable ad budget ceiling</div>
               </div>
 
               <div class="mb-3">
@@ -241,46 +292,75 @@
                 <div class="form-text" style="font-size:0.75rem;">Shopee pouches, waybills, fulfillment labor</div>
               </div>
 
-              <div class="form-check form-switch small mb-2">
-                <input class="form-check-input" type="checkbox" id="shOptIn">
-                <label class="form-check-label" for="shOptIn">
-                  Default Opt-in: Mega Discount Voucher (MDV Campaign 779: 4% reg / 5% spike)
-                  <a href="opt-in-fees.html#mdv" class="text-danger text-decoration-none ms-1" title="Shopee MDV (Campaign 779): 4% reg, 5% spike day, ₱200 cap/item, 28-day lock-in"><i class="bi bi-info-circle"></i></a>
+              <!-- Shopee Program Toggles -->
+              <div class="pt-2 border-top">
+                <div class="toggle-group-header">
+                  <span>Shopee Programs &amp; Incentives</span>
+                </div>
+
+                <!-- Shopee MDV Toggle -->
+                <label class="toggle-card" for="shOptIn">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger">
+                      <i class="bi bi-tag-fill"></i>Mega Discount Voucher (MDV)
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Campaign 779 &bull; 4% reg / 5% spike &bull; max ₱200/item
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="shOptIn">
+                  </div>
+                </label>
+
+                <!-- Shopee FRS / RTS Toggle -->
+                <label class="toggle-card" for="shOptInRts">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger">
+                      <i class="bi bi-shield-check"></i>Free Returns Service (FRS)
+                      <span class="badge bg-danger-subtle text-danger-emphasis border ms-1" style="font-size:0.65rem;">₱2.00</span>
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Campaign 47000 &bull; 100% Free RSF/FSF (₱1K cap)
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="shOptInRts">
+                  </div>
+                </label>
+
+                <!-- Shopee 90-Day Free Comm Toggle -->
+                <label class="toggle-card" for="shFreeComm">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger">
+                      <i class="bi bi-gift-fill text-success"></i>90-Day 0% Commission
+                      <span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">Exclude Fee</span>
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Waives category commission for first 90 days
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="shFreeComm">
+                  </div>
                 </label>
               </div>
 
-              <div class="form-check form-switch small mb-2">
-                <input class="form-check-input" type="checkbox" id="shOptInRts">
-                <label class="form-check-label" for="shOptInRts">
-                  Default Opt-in: Free Returns Service (FRS / RTS Protection - ₱2.00)
-                  <a href="opt-in-fees.html" class="text-primary text-decoration-none ms-1" title="Learn about Shopee FRS (Campaign 470000001000041)"><i class="bi bi-info-circle"></i></a>
-                </label>
-              </div>
-
-              <div class="form-check form-switch small mb-3">
-                <input class="form-check-input" type="checkbox" id="shFreeComm">
-                <label class="form-check-label" for="shFreeComm">
-                  <strong>90-Day Commission Free (0% New Seller)</strong>
-                  <span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">Exclude Fee</span>
-                  <small class="d-block text-body-secondary" style="font-size:0.7rem;">Excludes category commission for the first 90 days of store opening</small>
-                </label>
-              </div>
-
-              <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border">
-                <strong>Shopee Deductions:</strong> Category commission + 2.24% transaction fee + 5.6% shipping platform fee (₱100 cap) + 1.5% growth fee + ₱5.00 order fee + optional ₱2.00 FRS/RTS protection.
+              <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border mt-3">
+                <strong>Standard Deductions:</strong> Category commission + 2.24% transaction fee + 5.6% shipping fee (₱100 cap) + 1.5% growth fee + ₱5.00 order fee.
               </div>
             </div>
           </div>
         </div>
 
-        <!-- TikTok Shop Allotment -->
+        <!-- TikTok Shop Allotment Card -->
         <div class="col-lg-4">
           <div class="card h-100 shadow-sm border-tiktok">
             <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-3">
               <span class="badge badge-tiktok fs-6 fw-bold">TikTok Shop PH</span>
               <i class="bi bi-play-circle-fill text-danger"></i>
             </div>
-            <div class="card-body p-4">
+            <div class="card-body p-3 p-md-4">
               <div class="mb-3">
                 <label for="ttAdCost" class="form-label fw-semibold small mb-1">
                   TikTok Ads &amp; Affiliate Spend / Order
@@ -314,37 +394,59 @@
                 <div class="form-text" style="font-size:0.75rem;">Live streaming host fees, creator product samples</div>
               </div>
 
-              <div class="form-check form-switch small mb-2">
-                <input class="form-check-input" type="checkbox" id="ttOptIn">
-                <label class="form-check-label" for="ttOptIn">
-                  Default Opt-in: Mega Discount Program (4–5%)
+              <!-- TikTok Program Toggles -->
+              <div class="pt-2 border-top">
+                <div class="toggle-group-header">
+                  <span>TikTok Programs &amp; Incentives</span>
+                </div>
+
+                <!-- TikTok MDP Toggle -->
+                <label class="toggle-card" for="ttOptIn">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger-emphasis">
+                      <i class="bi bi-play-circle-fill"></i>Mega Discount Program (MDP)
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Mega campaign voucher co-funding &bull; 4% to 5%
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="ttOptIn">
+                  </div>
+                </label>
+
+                <!-- TikTok 90-Day Free Comm Toggle -->
+                <label class="toggle-card" for="ttFreeComm">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-danger-emphasis">
+                      <i class="bi bi-gift-fill text-success"></i>90-Day 0% Commission
+                      <span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">Exclude Fee</span>
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      0% commission for newly registered shops
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="ttFreeComm">
+                  </div>
                 </label>
               </div>
 
-              <div class="form-check form-switch small mb-3">
-                <input class="form-check-input" type="checkbox" id="ttFreeComm">
-                <label class="form-check-label" for="ttFreeComm">
-                  <strong>90-Day Commission Free (0% New Seller)</strong>
-                  <span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">Exclude Fee</span>
-                  <small class="d-block text-body-secondary" style="font-size:0.7rem;">Excludes category commission for the first 90 days of store opening</small>
-                </label>
-              </div>
-
-              <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border">
-                <strong>TikTok Deductions:</strong> Category commission + 2.24% transaction fee + 5.5% shipping fee (₱100 cap) + 1.0%–1.5% category growth fee.
+              <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border mt-3">
+                <strong>Standard Deductions:</strong> Category commission + 2.24% transaction fee + 5.5% shipping fee (₱100 cap) + 1.0%–1.5% growth fee.
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Lazada Allotment -->
+        <!-- Lazada Allotment Card -->
         <div class="col-lg-4">
           <div class="card h-100 shadow-sm border-lazada">
             <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-3">
               <span class="badge badge-lazada fs-6 fw-bold">Lazada Philippines</span>
               <i class="bi bi-lightning-fill text-primary"></i>
             </div>
-            <div class="card-body p-4">
+            <div class="card-body p-3 p-md-4">
               <div class="mb-3">
                 <label for="lzAdCost" class="form-label fw-semibold small mb-1">
                   Lazada Sponsored Solutions / Order
@@ -378,24 +480,47 @@
                 <div class="form-text" style="font-size:0.75rem;">Lazada branded boxes, warehouse prep fees</div>
               </div>
 
-              <div class="form-check form-switch small mb-2">
-                <input class="form-check-input" type="checkbox" id="lzPromoPass" checked disabled>
-                <label class="form-check-label" for="lzPromoPass">
-                  Promo Pass Program (5.8% up to ₱100, modeled mandatory)
+              <!-- Lazada Program Toggles -->
+              <div class="pt-2 border-top">
+                <div class="toggle-group-header">
+                  <span>Lazada Programs &amp; Incentives</span>
+                </div>
+
+                <!-- Lazada Promo Pass Toggle -->
+                <label class="toggle-card" for="lzPromoPass">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-primary">
+                      <i class="bi bi-check-circle-fill text-primary"></i>Promo Pass Program
+                      <span class="badge bg-primary-subtle text-primary border ms-1" style="font-size:0.65rem;">5.8% (₱100 cap)</span>
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      All-inclusive bundle for vouchers &amp; LazCoins
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="lzPromoPass" checked disabled>
+                  </div>
+                </label>
+
+                <!-- Lazada 90-Day Free Comm Toggle -->
+                <label class="toggle-card" for="lzFreeComm">
+                  <div class="toggle-card-label">
+                    <span class="toggle-card-title text-primary">
+                      <i class="bi bi-gift-fill text-success"></i>90-Day 0% Commission
+                      <span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">Exclude Fee</span>
+                    </span>
+                    <span class="toggle-card-subtitle">
+                      Excludes standard commission for first 90 days
+                    </span>
+                  </div>
+                  <div class="form-check form-switch m-0 p-0">
+                    <input class="form-check-input" type="checkbox" id="lzFreeComm">
+                  </div>
                 </label>
               </div>
 
-              <div class="form-check form-switch small mb-3">
-                <input class="form-check-input" type="checkbox" id="lzFreeComm">
-                <label class="form-check-label" for="lzFreeComm">
-                  <strong>90-Day Commission Free (0% New Seller)</strong>
-                  <span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">Exclude Fee</span>
-                  <small class="d-block text-body-secondary" style="font-size:0.7rem;">Excludes category commission for the first 90 days of store opening</small>
-                </label>
-              </div>
-
-              <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border">
-                <strong>Lazada Deductions:</strong> Category commission + 2.24% payment fee + 5.8% Promo Pass (max ₱100) + ₱5.00 order fee.
+              <div class="p-2.5 rounded bg-body-tertiary small text-body-secondary border mt-3">
+                <strong>Standard Deductions:</strong> Category commission + 2.24% payment fee + 5.8% Promo Pass (max ₱100) + ₱5.00 order fee.
               </div>
             </div>
           </div>
@@ -403,264 +528,289 @@
 
       </div>
 
-      <!-- Live Summary Bar -->
-      <div class="card shadow-sm border-0 mb-4 bg-body-tertiary">
+      <!-- Part 1C: Live Summary & Direct Save Bar -->
+      <div class="card shadow-sm border-0 mb-5 bg-body-tertiary">
         <div class="card-body p-4">
-          <h3 class="h6 fw-bold mb-3"><i class="bi bi-graph-up me-2 text-success"></i>Live All-In Expense Summary Per Platform (Excluding Product Base Cost)</h3>
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
+            <div>
+              <h3 class="h6 fw-bold mb-1"><i class="bi bi-graph-up me-2 text-success"></i>Live All-In Expense Summary (Excluding Product Base Cost)</h3>
+              <p class="small text-body-secondary mb-0">Packaging + Inbound Sourcing Freight + Platform Specific Overhead + Ad Spend</p>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-success fw-semibold" id="saveExpensesBtn" type="button">
+                <i class="bi bi-check-circle me-1"></i>Save Locally to Device
+              </button>
+              <a href="index.html" class="btn btn-primary">
+                <i class="bi bi-calculator me-1"></i>Open Pricing Simulator
+              </a>
+            </div>
+          </div>
+
           <div class="row g-3 text-center">
             <div class="col-md-4">
-              <div class="p-3 border rounded bg-body">
-                <div class="small text-body-secondary mb-1">Shopee Operating &amp; Ads Total</div>
-                <div class="fw-bold fs-5 text-danger" id="summaryShTotal">₱0.00 / order</div>
-                <small class="text-body-secondary d-block" id="summaryShDetail">Packaging: ₱0.00 | Ads: ₱0.00 | Opex: ₱0.00</small>
+              <div class="p-3 border rounded bg-body h-100">
+                <div class="small text-body-secondary mb-1 fw-semibold text-danger">Shopee Total Expense</div>
+                <div class="fw-bold fs-4 text-danger" id="summaryShTotal">₱0.00 / order</div>
+                <small class="text-body-secondary d-block mt-1" id="summaryShDetail">Packaging: ₱0.00 | Freight: ₱0.00 | Ads: ₱0.00 | Opex: ₱0.00</small>
               </div>
             </div>
             <div class="col-md-4">
-              <div class="p-3 border rounded bg-body">
-                <div class="small text-body-secondary mb-1">TikTok Shop Operating &amp; Ads Total</div>
-                <div class="fw-bold fs-5 text-danger" id="summaryTtTotal">₱0.00 / order</div>
-                <small class="text-body-secondary d-block" id="summaryTtDetail">Packaging: ₱0.00 | Ads: ₱0.00 | Opex: ₱0.00</small>
+              <div class="p-3 border rounded bg-body h-100">
+                <div class="small text-body-secondary mb-1 fw-semibold text-danger-emphasis">TikTok Shop Total Expense</div>
+                <div class="fw-bold fs-4 text-danger-emphasis" id="summaryTtTotal">₱0.00 / order</div>
+                <small class="text-body-secondary d-block mt-1" id="summaryTtDetail">Packaging: ₱0.00 | Freight: ₱0.00 | Ads: ₱0.00 | Opex: ₱0.00</small>
               </div>
             </div>
             <div class="col-md-4">
-              <div class="p-3 border rounded bg-body">
-                <div class="small text-body-secondary mb-1">Lazada Operating &amp; Ads Total</div>
-                <div class="fw-bold fs-5 text-danger" id="summaryLzTotal">₱0.00 / order</div>
-                <small class="text-body-secondary d-block" id="summaryLzDetail">Packaging: ₱0.00 | Ads: ₱0.00 | Opex: ₱0.00</small>
+              <div class="p-3 border rounded bg-body h-100">
+                <div class="small text-body-secondary mb-1 fw-semibold text-primary">Lazada Total Expense</div>
+                <div class="fw-bold fs-4 text-primary" id="summaryLzTotal">₱0.00 / order</div>
+                <small class="text-body-secondary d-block mt-1" id="summaryLzDetail">Packaging: ₱0.00 | Freight: ₱0.00 | Ads: ₱0.00 | Opex: ₱0.00</small>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Richmond Tan ROAS Computation & Formula Breakdown Section -->
-      <div class="card shadow-sm border-0 mb-4">
-        <div class="card-header bg-body-tertiary fw-bold py-3 d-flex justify-content-between align-items-center">
-          <div>
-            <i class="bi bi-graph-up-arrow me-2 text-primary"></i>Official ROAS Computation Guide (Richmond Tan Framework)
-          </div>
-          <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Core E-Com Unit Economics</span>
-        </div>
-        <div class="card-body p-4">
-          <div class="alert alert-warning border-warning-subtle small mb-4">
-            <div class="d-flex align-items-start gap-2">
-              <i class="bi bi-exclamation-triangle-fill fs-5 text-warning flex-shrink-0 mt-0.5"></i>
-              <div>
-                <strong>"High ROAS on your ads dashboard is a vanity metric if it is below your Break-Even threshold."</strong><br>
-                Scaling ad budgets without calculating your exact Break-Even ROAS causes store capital bleeding. Platform commissions, payment fees, shipping subsidies, packaging, and nonrecoverable digital advertising VAT (12%) must be deducted from revenue first before determining allowable ad spend.
-              </div>
-            </div>
-          </div>
-
-          <!-- Formula Cards Grid -->
-          <div class="row g-3 mb-4">
-            <!-- 1. Actual ROAS -->
-            <div class="col-md-6 col-xl-3">
-              <div class="card h-100 bg-body-tertiary border">
-                <div class="card-body p-3">
-                  <div class="fw-bold text-primary mb-1"><i class="bi bi-bar-chart-line me-1"></i>1. Actual ROAS</div>
-                  <div class="font-monospace small bg-body p-2 rounded border mb-2 text-center">
-                    ROAS = Attributed Rev &divide; Ad Spend
-                  </div>
-                  <p class="small text-body-secondary mb-0" style="font-size:0.75rem;">
-                    The campaign efficiency reported by Meta, TikTok, or Shopee Ads Manager.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- 2. Contribution Margin -->
-            <div class="col-md-6 col-xl-3">
-              <div class="card h-100 bg-body-tertiary border">
-                <div class="card-body p-3">
-                  <div class="fw-bold text-info-emphasis mb-1"><i class="bi bi-wallet2 me-1"></i>2. Contribution Margin</div>
-                  <div class="font-monospace small bg-body p-2 rounded border mb-2 text-center">
-                    CM = Contribution &divide; Net Revenue
-                  </div>
-                  <p class="small text-body-secondary mb-0" style="font-size:0.75rem;">
-                    Contribution = Net Selling Revenue &minus; Variable Costs per order (before ads).
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- 3. Break-Even ROAS -->
-            <div class="col-md-6 col-xl-3">
-              <div class="card h-100 bg-body-tertiary border">
-                <div class="card-body p-3">
-                  <div class="fw-bold text-danger mb-1"><i class="bi bi-shield-x me-1"></i>3. Break-Even ROAS</div>
-                  <div class="font-monospace small bg-body p-2 rounded border mb-2 text-center">
-                    Base: 1 &divide; CM<br>
-                    12% Ad VAT: 1.12 &divide; CM
-                  </div>
-                  <p class="small text-body-secondary mb-0" style="font-size:0.75rem;">
-                    The minimum ROAS floor to avoid operating losses. If ROAS is lower, every order loses money.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- 4. Target ROAS -->
-            <div class="col-md-6 col-xl-3">
-              <div class="card h-100 bg-body-tertiary border">
-                <div class="card-body p-3">
-                  <div class="fw-bold text-success mb-1"><i class="bi bi-bullseye me-1"></i>4. Target ROAS</div>
-                  <div class="font-monospace small bg-body p-2 rounded border mb-2 text-center">
-                    Target ROAS = 1.12 &divide; (CM &minus; Desired Margin)
-                  </div>
-                  <p class="small text-body-secondary mb-0" style="font-size:0.75rem;">
-                    The required ads manager ROAS to bank your target net profit margin after all costs and taxes.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section 5 & 6 Worked Example Card -->
-          <div class="card border border-primary-subtle bg-primary-subtle bg-opacity-10 mb-4">
-            <div class="card-body p-3.5">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h4 class="h6 fw-bold text-primary mb-0">
-                  <i class="bi bi-journal-bookmark-fill me-1"></i>Official Worked Example from Guide (₱400 Sale)
-                </h4>
-                <span class="badge bg-primary text-white">Reference Model</span>
-              </div>
-              <p class="small text-body-secondary mb-3">
-                Assuming a product selling at <strong>₱400.00</strong>, with <strong>₱200.00</strong> product cost, and <strong>₱150.00</strong> total marketplace fees, packaging, and variable costs before ads:
-              </p>
-              <div class="row g-2 text-center small mb-3">
-                <div class="col-sm-6 col-md-3">
-                  <div class="p-2 border rounded bg-body">
-                    <span class="text-body-secondary d-block" style="font-size:0.7rem;">Pre-Ad Contribution</span>
-                    <strong class="fs-6">₱50.00</strong>
-                    <div class="text-primary fw-semibold" style="font-size:0.72rem;">12.5% Contrib Margin</div>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                  <div class="p-2 border rounded bg-body">
-                    <span class="text-body-secondary d-block" style="font-size:0.7rem;">Base Break-Even ROAS</span>
-                    <strong class="fs-6 text-danger">8.00×</strong>
-                    <div class="text-body-secondary" style="font-size:0.72rem;">1 &divide; 0.125</div>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                  <div class="p-2 border rounded bg-body">
-                    <span class="text-body-secondary d-block" style="font-size:0.7rem;">12% Ad VAT BE ROAS</span>
-                    <strong class="fs-6 text-danger">8.96×</strong>
-                    <div class="text-body-secondary" style="font-size:0.72rem;">1.12 &divide; 0.125</div>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                  <div class="p-2 border rounded bg-body">
-                    <span class="text-body-secondary d-block" style="font-size:0.7rem;">At 10.00× ROAS Profit</span>
-                    <strong class="fs-6 text-success">₱5.20 / order</strong>
-                    <div class="text-body-secondary" style="font-size:0.72rem;">Ad: ₱40 + ₱4.80 VAT = ₱44.80</div>
-                  </div>
-                </div>
-              </div>
-              <div class="p-2 rounded bg-body small border" style="font-size:0.78rem;">
-                <i class="bi bi-lightbulb-fill text-warning me-1"></i>
-                <strong>Key Insight:</strong> At 10.00× ROAS, pre-VAT ad spend is ₱400 &divide; 10 = ₱40.00. Because 12% digital ad VAT is nonrecoverable, total ad cost is ₱40 &times; 1.12 = ₱44.80. The merchant nets <strong>₱5.20 profit</strong> (₱50 &minus; ₱44.80). At 8.00× ROAS without adjusting for VAT, the seller would lose ₱4.80 on VAT!
-              </div>
-            </div>
-          </div>
-
-          <!-- Interactive Richmond Tan ROAS Tester -->
-          <div class="p-3.5 rounded border bg-body">
-            <h4 class="h6 fw-bold mb-3"><i class="bi bi-calculator me-1 text-primary"></i>Live ROAS &amp; Unit Economics Simulator</h4>
-            <div class="row g-3 align-items-end mb-3">
-              <div class="col-sm-3">
-                <label for="roasTestPrice" class="form-label small fw-semibold mb-1">Selling Price (₱)</label>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="roasTestPrice" value="500" min="1" step="1">
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <label for="roasTestCost" class="form-label small fw-semibold mb-1">Supplier Base Cost (₱)</label>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="roasTestCost" value="150" min="0" step="1">
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <label for="roasTestFreight" class="form-label small fw-semibold mb-1">Inbound Freight / Unit (₱)</label>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="roasTestFreight" value="25" min="0" step="1">
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <label for="roasTestMargin" class="form-label small fw-semibold mb-1">Desired Net Margin (%)</label>
-                <div class="input-group input-group-sm">
-                  <input type="number" class="form-control" id="roasTestMargin" value="20" min="0" max="80" step="1">
-                  <span class="input-group-text">%</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Real-time ROAS Results Table -->
-            <div class="table-responsive">
-              <table class="table table-sm table-bordered align-middle small text-center mb-0">
-                <thead class="table-light">
-                  <tr>
-                    <th scope="col" class="text-start">Marketplace</th>
-                    <th scope="col">Selling Price</th>
-                    <th scope="col" title="Base Supplier Cost + Inbound Freight">Landed COGS</th>
-                    <th scope="col">Pre-Ad Contribution</th>
-                    <th scope="col">Contrib Margin</th>
-                    <th scope="col" class="text-danger fw-bold" title="1 / CM">Base BE ROAS</th>
-                    <th scope="col" class="text-danger fw-bold" title="1.12 / CM">12% Ad VAT BE</th>
-                    <th scope="col" class="text-success fw-bold">Target ROAS</th>
-                    <th scope="col">Max Pre-VAT Ad</th>
-                    <th scope="col">Active Ad (w/ VAT)</th>
-                    <th scope="col">Profit After Ads</th>
-                    <th scope="col">ROAS Health</th>
-                  </tr>
-                </thead>
-                <tbody id="roasTestTbody">
-                  <!-- Rendered dynamically -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Action Card Footer -->
-      <div class="card shadow-sm border-0 mb-4 bg-body-tertiary">
-        <div class="card-body d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 py-3 px-4">
-          <div>
-            <button class="btn btn-outline-secondary btn-sm" id="resetExpensesBtn" type="button">
-              <i class="bi bi-arrow-counterclockwise me-1"></i>Reset Expenses to 0
-            </button>
-          </div>
-          <div class="d-flex gap-2">
-            <button class="btn btn-success" id="saveExpensesBtn" type="button">
-              <i class="bi bi-check-circle me-1"></i>Save Locally to Device
-            </button>
-            <a href="index.html" class="btn btn-primary">
-              <i class="bi bi-calculator me-1"></i>Go to Pricing Simulator
-            </a>
           </div>
         </div>
       </div>
 
     </form>
 
+    <!-- ================================================================= -->
+    <!-- SECTION 2: BELOW - THE SIMULATORS & UNIT ECONOMICS ANALYTICS      -->
+    <!-- ================================================================= -->
+
+    <div class="mb-4">
+      <div class="d-flex align-items-center gap-2 mb-1">
+        <span class="badge bg-success rounded-pill px-2.5">Simulators</span>
+        <h2 class="h4 fw-bold mb-0"><i class="bi bi-calculator me-1 text-success"></i>Live Unit Economics &amp; ROAS Simulator</h2>
+      </div>
+      <p class="text-body-secondary small mb-3">
+        See how your above packaging, freight, tax, and ad allotments instantly translate into Break-Even ROAS, Target ROAS, and allowable ad budgets across all 3 marketplaces.
+      </p>
+    </div>
+
+    <!-- Live ROAS Simulator Controls & Results Table Card -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-body py-3 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+        <div class="fw-bold">
+          <i class="bi bi-sliders2-vertical me-2 text-primary"></i>Simulate Order Economics:
+        </div>
+        <div class="small text-body-secondary">
+          Adjust testing figures below to verify margins in real-time
+        </div>
+      </div>
+      <div class="card-body p-3 p-md-4">
+
+        <!-- Simulator Input Bar -->
+        <div class="row g-3 align-items-end mb-4 p-3 bg-body-tertiary rounded-3 border">
+          <div class="col-sm-6 col-lg-3">
+            <label for="roasTestPrice" class="form-label small fw-semibold mb-1">Selling Price (₱)</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text">₱</span>
+              <input type="number" class="form-control" id="roasTestPrice" value="500" min="1" step="1">
+            </div>
+            <div class="form-text" style="font-size:0.7rem;">Expected listing selling price</div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <label for="roasTestCost" class="form-label small fw-semibold mb-1">Supplier Base Cost (₱)</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text">₱</span>
+              <input type="number" class="form-control" id="roasTestCost" value="150" min="0" step="1">
+            </div>
+            <div class="form-text" style="font-size:0.7rem;">Item wholesale or factory cost</div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <label for="roasTestFreight" class="form-label small fw-semibold mb-1">Inbound Freight / Unit (₱)</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text">₱</span>
+              <input type="number" class="form-control" id="roasTestFreight" value="25" min="0" step="1">
+            </div>
+            <div class="form-text" style="font-size:0.7rem;">Forwarder delivery fee per unit</div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <label for="roasTestMargin" class="form-label small fw-semibold mb-1">Desired Net Margin (%)</label>
+            <div class="input-group input-group-sm">
+              <input type="number" class="form-control" id="roasTestMargin" value="20" min="0" max="80" step="1">
+              <span class="input-group-text">%</span>
+            </div>
+            <div class="form-text" style="font-size:0.7rem;">Target margin for Target ROAS</div>
+          </div>
+        </div>
+
+        <!-- Real-time Multi-Platform ROAS Results Table -->
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered align-middle small text-center mb-0">
+            <thead class="table-light">
+              <tr>
+                <th scope="col" class="text-start">Marketplace</th>
+                <th scope="col">Selling Price</th>
+                <th scope="col" title="Base Supplier Cost + Inbound Freight">Landed COGS</th>
+                <th scope="col">Pre-Ad Contribution</th>
+                <th scope="col">Contrib Margin</th>
+                <th scope="col" class="text-danger fw-bold" title="1 / CM">Base BE ROAS</th>
+                <th scope="col" class="text-danger fw-bold" title="1.12 / CM">12% Ad VAT BE</th>
+                <th scope="col" class="text-success fw-bold">Target ROAS</th>
+                <th scope="col">Max Pre-VAT Ad</th>
+                <th scope="col">Active Ad (w/ VAT)</th>
+                <th scope="col">Profit After Ads</th>
+                <th scope="col">ROAS Health</th>
+              </tr>
+            </thead>
+            <tbody id="roasTestTbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Richmond Tan ROAS Computation Guide & Formula Breakdown -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-body py-3 d-flex justify-content-between align-items-center">
+        <div>
+          <i class="bi bi-graph-up-arrow me-2 text-primary"></i>Official ROAS Computation Guide (Richmond Tan Framework)
+        </div>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Core E-Com Unit Economics</span>
+      </div>
+      <div class="card-body p-4">
+        <div class="alert alert-warning border-warning-subtle small mb-4">
+          <div class="d-flex align-items-start gap-2">
+            <i class="bi bi-exclamation-triangle-fill fs-5 text-warning flex-shrink-0 mt-0.5"></i>
+            <div>
+              <strong>"High ROAS on your ads dashboard is a vanity metric if it is below your Break-Even threshold."</strong><br>
+              Scaling ad budgets without calculating your exact Break-Even ROAS causes store capital bleeding. Platform commissions, payment fees, shipping subsidies, packaging, and nonrecoverable digital advertising VAT (12%) must be deducted from revenue first before determining allowable ad spend.
+            </div>
+          </div>
+        </div>
+
+        <!-- Formula Cards Grid -->
+        <div class="row g-3 mb-4">
+          <!-- 1. Actual ROAS -->
+          <div class="col-md-6 col-xl-3">
+            <div class="card h-100 bg-body-tertiary border">
+              <div class="card-body p-3">
+                <div class="fw-bold text-primary mb-1"><i class="bi bi-bar-chart-line me-1"></i>1. Actual ROAS</div>
+                <div class="font-monospace small bg-body p-2 rounded border mb-2 text-center">
+                  ROAS = Attributed Rev &divide; Ad Spend
+                </div>
+                <p class="small text-body-secondary mb-0" style="font-size:0.75rem;">
+                  The campaign efficiency reported by Meta, TikTok, or Shopee Ads Manager.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Contribution Margin -->
+          <div class="col-md-6 col-xl-3">
+            <div class="card h-100 bg-body-tertiary border">
+              <div class="card-body p-3">
+                <div class="fw-bold text-info-emphasis mb-1"><i class="bi bi-wallet2 me-1"></i>2. Contribution Margin</div>
+                <div class="font-monospace small bg-body p-2 rounded border mb-2 text-center">
+                  CM = Contribution &divide; Net Revenue
+                </div>
+                <p class="small text-body-secondary mb-0" style="font-size:0.75rem;">
+                  Contribution = Net Selling Revenue &minus; Variable Costs per order (before ads).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Break-Even ROAS -->
+          <div class="col-md-6 col-xl-3">
+            <div class="card h-100 bg-body-tertiary border">
+              <div class="card-body p-3">
+                <div class="fw-bold text-danger mb-1"><i class="bi bi-shield-x me-1"></i>3. Break-Even ROAS</div>
+                <div class="font-monospace small bg-body p-2 rounded border mb-2 text-center">
+                  Base: 1 &divide; CM<br>
+                  12% Ad VAT: 1.12 &divide; CM
+                </div>
+                <p class="small text-body-secondary mb-0" style="font-size:0.75rem;">
+                  The minimum ROAS floor to avoid operating losses. If ROAS is lower, every order loses money.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Target ROAS -->
+          <div class="col-md-6 col-xl-3">
+            <div class="card h-100 bg-body-tertiary border">
+              <div class="card-body p-3">
+                <div class="fw-bold text-success mb-1"><i class="bi bi-bullseye me-1"></i>4. Target ROAS</div>
+                <div class="font-monospace small bg-body p-2 rounded border mb-2 text-center">
+                  Target ROAS = 1.12 &divide; (CM &minus; Desired Margin)
+                </div>
+                <p class="small text-body-secondary mb-0" style="font-size:0.75rem;">
+                  The required ads manager ROAS to bank your target net profit margin after all costs and taxes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5 & 6 Worked Example Card -->
+        <div class="card border border-primary-subtle bg-primary-subtle bg-opacity-10">
+          <div class="card-body p-3.5">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h4 class="h6 fw-bold text-primary mb-0">
+                <i class="bi bi-journal-bookmark-fill me-1"></i>Official Worked Example from Guide (₱400 Sale)
+              </h4>
+              <span class="badge bg-primary text-white">Reference Model</span>
+            </div>
+            <p class="small text-body-secondary mb-3">
+              Assuming a product selling at <strong>₱400.00</strong>, with <strong>₱200.00</strong> product cost, and <strong>₱150.00</strong> total marketplace fees, packaging, and variable costs before ads:
+            </p>
+            <div class="row g-2 text-center small mb-3">
+              <div class="col-sm-6 col-md-3">
+                <div class="p-2 border rounded bg-body">
+                  <span class="text-body-secondary d-block" style="font-size:0.7rem;">Pre-Ad Contribution</span>
+                  <strong class="fs-6">₱50.00</strong>
+                  <div class="text-primary fw-semibold" style="font-size:0.72rem;">12.5% Contrib Margin</div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="p-2 border rounded bg-body">
+                  <span class="text-body-secondary d-block" style="font-size:0.7rem;">Base Break-Even ROAS</span>
+                  <strong class="fs-6 text-danger">8.00×</strong>
+                  <div class="text-body-secondary" style="font-size:0.72rem;">1 &divide; 0.125</div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="p-2 border rounded bg-body">
+                  <span class="text-body-secondary d-block" style="font-size:0.7rem;">12% Ad VAT BE ROAS</span>
+                  <strong class="fs-6 text-danger">8.96×</strong>
+                  <div class="text-body-secondary" style="font-size:0.72rem;">1.12 &divide; 0.125</div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="p-2 border rounded bg-body">
+                  <span class="text-body-secondary d-block" style="font-size:0.7rem;">At 10.00× ROAS Profit</span>
+                  <strong class="fs-6 text-success">₱5.20 / order</strong>
+                  <div class="text-body-secondary" style="font-size:0.72rem;">Ad: ₱40 + ₱4.80 VAT = ₱44.80</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-2 rounded bg-body small border" style="font-size:0.78rem;">
+              <i class="bi bi-lightbulb-fill text-warning me-1"></i>
+              <strong>Key Insight:</strong> At 10.00× ROAS, pre-VAT ad spend is ₱400 &divide; 10 = ₱40.00. Because 12% digital ad VAT is nonrecoverable, total ad cost is ₱40 &times; 1.12 = ₱44.80. The merchant nets <strong>₱5.20 profit</strong> (₱50 &minus; ₱44.80). At 8.00× ROAS without adjusting for VAT, the seller would lose ₱4.80 on VAT!
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </main>
 
   <!-- Footer -->
   <footer class="bg-body-tertiary py-4 border-top mt-auto">
-    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+    <div class="container-fluid px-3 px-md-4 px-xl-5 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
       <div>
         <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
       </div>
       <div class="d-flex flex-wrap gap-3">
         <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
         <a href="comparison.html" class="text-decoration-none text-body-secondary">Comparison</a>
-        <a href="expenses.html" class="text-decoration-none text-body-secondary">Expenses &amp; Allotments</a>
+        <a href="expenses.html" class="text-decoration-none text-body-secondary fw-semibold">Expenses &amp; Allotments</a>
         <a href="opt-in-fees.html" class="text-decoration-none text-body-secondary">Opt-In Fees &amp; RTS</a>
         <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
         <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax &amp; BIR Guide</a>
@@ -787,6 +937,7 @@
           <tr>
             <td class="text-start">
               <span class="badge ${pl.badgeClass} me-1">${pl.n}</span>
+              ${res.isCommissionFree ? '<span class="badge bg-success-subtle text-success-emphasis border ms-1" style="font-size:0.65rem;">0% Comm</span>' : ''}
             </td>
             <td><strong>${P(res.price)}</strong></td>
             <td>
@@ -822,18 +973,18 @@
       const lzAd = Math.max(0, Number($('#lzAdCost').value || 0));
       const lzOp = Math.max(0, Number($('#lzOpex').value || 0));
 
-      const shTot = pack + shAd + shOp;
-      const ttTot = pack + ttAd + ttOp;
-      const lzTot = pack + lzAd + lzOp;
+      const shTot = pack + freight + shAd + shOp;
+      const ttTot = pack + freight + ttAd + ttOp;
+      const lzTot = pack + freight + lzAd + lzOp;
 
       $('#summaryShTotal').textContent = P(shTot) + ' / order';
-      $('#summaryShDetail').textContent = `Pack: ${P(pack)} | Freight: ${P(freight)}/unit | Ads: ${P(shAd)} | Opex: ${P(shOp)}`;
+      $('#summaryShDetail').textContent = `Pack: ${P(pack)} | Freight: ${P(freight)} | Ads: ${P(shAd)} | Opex: ${P(shOp)}`;
 
       $('#summaryTtTotal').textContent = P(ttTot) + ' / order';
-      $('#summaryTtDetail').textContent = `Pack: ${P(pack)} | Freight: ${P(freight)}/unit | Ads: ${P(ttAd)} | Opex: ${P(ttOp)}`;
+      $('#summaryTtDetail').textContent = `Pack: ${P(pack)} | Freight: ${P(freight)} | Ads: ${P(ttAd)} | Opex: ${P(ttOp)}`;
 
       $('#summaryLzTotal').textContent = P(lzTot) + ' / order';
-      $('#summaryLzDetail').textContent = `Pack: ${P(pack)} | Freight: ${P(freight)}/unit | Ads: ${P(lzAd)} | Opex: ${P(lzOp)}`;
+      $('#summaryLzDetail').textContent = `Pack: ${P(pack)} | Freight: ${P(freight)} | Ads: ${P(lzAd)} | Opex: ${P(lzOp)}`;
     }
 
     function saveExpensesToStorage() {
@@ -923,7 +1074,7 @@
     document.querySelectorAll('input').forEach(e => {
       e.addEventListener('input', () => {
         updateExpenseSummary();
-      updateRoasTester();
+        updateRoasTester();
         saveExpensesToStorage();
       });
       e.addEventListener('change', () => {
@@ -931,7 +1082,7 @@
         $('#profClaimVat').disabled = !isVat;
         if (!isVat) $('#profClaimVat').checked = false;
         updateExpenseSummary();
-      updateRoasTester();
+        updateRoasTester();
         saveExpensesToStorage();
       });
     });
