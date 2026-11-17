@@ -286,6 +286,29 @@ body {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
+/* ROAS Sensitivity Table Rows */
+.roas-row-loss {
+  background-color: rgba(220, 53, 69, 0.08) !important;
+}
+[data-bs-theme="dark"] .roas-row-loss {
+  background-color: rgba(220, 53, 69, 0.18) !important;
+}
+
+.roas-row-be {
+  background-color: rgba(255, 193, 7, 0.12) !important;
+}
+[data-bs-theme="dark"] .roas-row-be {
+  background-color: rgba(255, 193, 7, 0.22) !important;
+}
+
+.roas-row-target {
+  background-color: rgba(25, 135, 84, 0.12) !important;
+  font-weight: 600;
+}
+[data-bs-theme="dark"] .roas-row-target {
+  background-color: rgba(25, 135, 84, 0.25) !important;
+}
+
 /* Smooth transitions */
 .card {
   transition: transform 0.15s ease, box-shadow 0.15s ease;

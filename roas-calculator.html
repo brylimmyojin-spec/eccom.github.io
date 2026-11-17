@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ROAS &amp; Ads Allotment Calculator | PH Marketplace Fee &amp; Margin Calculator</title>
+  <meta name="description" content="Calculate Break-Even ROAS, 12% Digital Advertising VAT adjustments, allowable ad spend, and target multipliers across Shopee, TikTok Shop, and Lazada Philippines.">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="./css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-xl app-navbar sticky-top shadow-sm py-2">
+      <div class="container-fluid px-3 px-md-4 px-xl-5">
+        <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none" href="index.html">
+          <span class="brand-flag">🇵🇭</span>
+          <div class="d-flex flex-column lh-1">
+            <span class="brand-title fw-bold">PH Marketplace</span>
+            <span class="brand-subtitle text-body-secondary">Fee &amp; Margin Calculator</span>
+          </div>
+        </a>
+        <button class="navbar-toggler border-0 shadow-none px-2 py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-xl-0 ms-xl-2">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html"><i class="bi bi-calculator me-1"></i>Pricing Simulator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line me-1"></i>Comparison</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="roas-calculator.html"><i class="bi bi-graph-up-arrow me-1"></i>ROAS &amp; Ads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="expenses.html"><i class="bi bi-cash-coin me-1"></i>Expenses &amp; Allotments</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="opt-in-fees.html"><i class="bi bi-shield-check me-1"></i>Opt-In Fees &amp; RTS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="fee-reference.html"><i class="bi bi-journal-bookmark me-1"></i>Fee Reference</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tax-guide.html"><i class="bi bi-bank me-1"></i>Tax &amp; BIR Guide</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2 pt-2 pt-xl-0 border-top border-xl-0">
+            <!-- Theme Toggle -->
+            <button class="btn btn-outline-secondary btn-sm rounded-pill d-flex align-items-center gap-1.5 px-3 py-1.5" id="themeToggle" type="button" title="Toggle dark/light mode">
+              <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+              <span id="themeText">Theme</span>
+            </button>
+            <!-- GitHub Link -->
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub" style="width: 34px; height: 34px;">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-fluid px-3 px-md-4 px-xl-5 py-4 flex-grow-1">
+
+    <!-- Header Section -->
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-4 gap-3">
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-1.5">
+          <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle px-2.5 py-1">
+            <i class="bi bi-graph-up-arrow me-1"></i>Advertising Economics
+          </span>
+          <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle px-2.5 py-1">
+            <i class="bi bi-shield-check me-1"></i>Richmond Tan Framework
+          </span>
+        </div>
+        <h1 class="h2 mb-1 fw-bold">ROAS &amp; Advertising Allotment Calculator</h1>
+        <p class="text-body-secondary mb-0">
+          Model Break-Even ROAS, 12% digital advertising VAT adjustments, allowable ad spend, and target multipliers across Shopee, TikTok Shop, and Lazada.
+        </p>
+      </div>
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        <button class="btn btn-primary btn-sm d-flex align-items-center gap-1.5 px-3 py-2 shadow-sm" id="snapshotBtn" type="button" title="Capture and save table as PNG image">
+          <i class="bi bi-camera-fill"></i>
+          <span>Save ROAS PNG</span>
+        </button>
+        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-3 py-2" id="exportCsvBtn" type="button" title="Export ROAS data as CSV spreadsheet">
+          <i class="bi bi-download"></i>
+          <span>Export CSV</span>
+        </button>
+        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-2.5 py-2" onclick="window.print()" type="button" title="Print this analysis">
+          <i class="bi bi-printer"></i>
+          <span class="d-none d-sm-inline">Print</span>
+        </button>
+        <a href="comparison.html" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1.5 px-3 py-2">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Comparison</span>
+        </a>
+        <a href="expenses.html" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-2.5 py-2">
+          <i class="bi bi-cash-coin"></i>
+          <span class="d-none d-sm-inline">Expenses</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Executive KPI Ribbon -->
+    <div class="row g-3 mb-4" id="roasKpis">
+      <div class="col-6 col-xl-2">
+        <div class="cmp-kpi-card h-100">
+          <div class="d-flex align-items-center justify-content-between mb-1">
+            <span class="text-body-secondary small fw-medium">Selling Price (SRP)</span>
+            <i class="bi bi-tag text-primary fs-5"></i>
+          </div>
+          <div class="fw-bold fs-5 text-body-emphasis" id="kpiPrice">₱500.00</div>
+          <small class="text-body-secondary" style="font-size:0.72rem;">Customer listing price</small>
+        </div>
+      </div>
+      <div class="col-6 col-xl-2">
+        <div class="cmp-kpi-card h-100">
+          <div class="d-flex align-items-center justify-content-between mb-1">
+            <span class="text-body-secondary small fw-medium">Non-Ad Landed Cost</span>
+            <i class="bi bi-box-seam text-secondary fs-5"></i>
+          </div>
+          <div class="fw-bold fs-5 text-body-emphasis" id="kpiLanded">₱175.00</div>
+          <small class="text-body-secondary" style="font-size:0.72rem;">COGS + Freight + Pack + OPEX</small>
+        </div>
+      </div>
+      <div class="col-6 col-xl-2">
+        <div class="cmp-kpi-card h-100">
+          <div class="d-flex align-items-center justify-content-between mb-1">
+            <span class="text-body-secondary small fw-medium">Pre-Ad Contribution</span>
+            <i class="bi bi-pie-chart text-info fs-5"></i>
+          </div>
+          <div class="fw-bold fs-5 text-info" id="kpiCm">₱225.00 (45%)</div>
+          <small class="text-body-secondary" style="font-size:0.72rem;">Take-Home before ad spend</small>
+        </div>
+      </div>
+      <div class="col-6 col-xl-3">
+        <div class="cmp-kpi-card h-100">
+          <div class="d-flex align-items-center justify-content-between mb-1">
+            <span class="text-body-secondary small fw-medium">Break-Even ROAS Floor</span>
+            <i class="bi bi-shield-x text-danger-emphasis fs-5"></i>
+          </div>
+          <div class="fw-bold fs-5 text-danger-emphasis" id="kpiBeRoas">2.49× <span class="fs-6 fw-normal text-body-secondary">(w/ 12% VAT)</span></div>
+          <small class="text-body-secondary" style="font-size:0.72rem;">Minimum ROAS to avoid loss</small>
+        </div>
+      </div>
+      <div class="col-6 col-xl-3">
+        <div class="cmp-kpi-card h-100">
+          <div class="d-flex align-items-center justify-content-between mb-1">
+            <span class="text-body-secondary small fw-medium">Target ROAS Multiplier</span>
+            <i class="bi bi-bullseye text-success fs-5"></i>
+          </div>
+          <div class="fw-bold fs-5 text-success" id="kpiTargetRoas">4.48×</div>
+          <small class="text-body-secondary" style="font-size:0.72rem;" id="kpiTargetSub">To bank 20.0% net margin</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1: Inputs & Allotments Card -->
+    <div class="card shadow-sm border-0 mb-4" id="roasConfigCard">
+      <div class="card-header bg-body-tertiary d-flex flex-wrap justify-content-between align-items-center py-3 px-4 gap-2">
+        <div class="fw-bold">
+          <i class="bi bi-sliders me-2 text-primary"></i>Live ROAS &amp; Advertising Allotment Parameters
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-outline-secondary btn-sm" id="resetBtn" type="button" title="Reset parameters to profile defaults">
+            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset to Profile
+          </button>
+          <button class="btn btn-primary btn-sm" id="saveAllotmentsBtn" type="button" title="Save ad allotments to store profile">
+            <i class="bi bi-check2-circle me-1"></i>Save Allotments to Profile
+          </button>
+        </div>
+      </div>
+      <div class="card-body p-4">
+        
+        <!-- Row 1: Unit Economics Inputs -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-2">
+            <label for="inputPrice" class="form-label small fw-semibold mb-1">Selling Price (₱)</label>
+            <input type="number" class="form-control" id="inputPrice" value="500" min="1" step="1">
+            <div class="form-text" style="font-size:0.7rem;">Customer selling price</div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <label for="inputCost" class="form-label small fw-semibold mb-1">Supplier Base Cost (₱)</label>
+            <input type="number" class="form-control" id="inputCost" value="150" min="0" step="1">
+            <div class="form-text" style="font-size:0.7rem;">Raw product purchase price</div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <label for="inputFreight" class="form-label small fw-semibold mb-1">Inbound Freight / Unit (₱)</label>
+            <input type="number" class="form-control" id="inputFreight" value="25" min="0" step="1">
+            <div class="form-text" style="font-size:0.7rem;">Supplier to warehouse logistics</div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <label for="inputPack" class="form-label small fw-semibold mb-1">Packaging Cost (₱)</label>
+            <input type="number" class="form-control" id="inputPack" value="10" min="0" step="1">
+            <div class="form-text" style="font-size:0.7rem;">Box, pouch, bubble wrap</div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <label for="inputOpex" class="form-label small fw-semibold mb-1">OPEX Allotment (₱)</label>
+            <input type="number" class="form-control" id="inputOpex" value="15" min="0" step="1">
+            <div class="form-text" style="font-size:0.7rem;">Labor, rent, software share</div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <label for="inputMargin" class="form-label small fw-semibold mb-1">Target Net Margin (%)</label>
+            <input type="number" class="form-control" id="inputMargin" value="20" min="0" max="80" step="1">
+            <div class="form-text" style="font-size:0.7rem;">Desired net profit buffer</div>
+          </div>
+        </div>
+
+        <!-- Row 2: Advertising VAT & Tax Mode -->
+        <div class="row g-3 mb-4 pt-3 border-top">
+          <div class="col-md-6 col-lg-4">
+            <div class="p-3 bg-body-tertiary rounded-3 border h-100">
+              <label class="form-label small fw-bold mb-2 d-flex align-items-center justify-content-between">
+                <span><i class="bi bi-bank me-1.5 text-primary"></i>BIR Tax Status</span>
+                <span class="badge bg-secondary-subtle text-secondary-emphasis" id="badgeTax">Non-VAT</span>
+              </label>
+              <div class="d-flex gap-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="taxMode" id="taxNonVat" value="nonvat" checked>
+                  <label class="form-check-label small" for="taxNonVat">Non-VAT (3% Tax)</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="taxMode" id="taxVat" value="vat">
+                  <label class="form-check-label small" for="taxVat">VAT-Registered (12%)</label>
+                </div>
+              </div>
+              <div class="form-text mt-2" style="font-size:0.72rem;">
+                Determines 1% WHT &amp; input VAT claim eligibility on marketplace fees.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="p-3 bg-body-tertiary rounded-3 border h-100">
+              <label class="form-label small fw-bold mb-2 d-flex align-items-center justify-content-between">
+                <span><i class="bi bi-receipt-cutoff me-1.5 text-warning"></i>12% Digital Ad VAT Treatment</span>
+                <span class="badge bg-warning-subtle text-warning-emphasis" id="badgeAdVat">Nonrecoverable (+12%)</span>
+              </label>
+              <div class="form-check form-switch mb-1">
+                <input class="form-check-input" type="checkbox" id="adVatNonrecoverable" checked>
+                <label class="form-check-label small fw-medium" for="adVatNonrecoverable">Treat 12% Digital Ad VAT as Nonrecoverable Expense</label>
+              </div>
+              <div class="form-text" style="font-size:0.72rem;">
+                Applies 1.12× multiplier on ad spend (Shopee, TikTok, Meta, Google). Uncheck only if claiming 100% input VAT with BIR.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 col-lg-4">
+            <div class="p-3 bg-body-tertiary rounded-3 border h-100">
+              <label class="form-label small fw-bold mb-2">
+                <i class="bi bi-tag-fill me-1.5 text-success"></i>Campaign Spike &amp; Mega Days
+              </label>
+              <div class="form-check form-switch mb-1">
+                <input class="form-check-input" type="checkbox" id="campToggle">
+                <label class="form-check-label small fw-medium" for="campToggle">Double-Double / Payday Mega Campaign Spike Days</label>
+              </div>
+              <div class="form-text" style="font-size:0.72rem;">
+                Applies 5% Spike MDV fee (Shopee Campaign 779) and Mega Day rates on TikTok Shop.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: Platform-Specific Ad Allotment Cards -->
+        <div class="toggle-group-header mb-2">
+          <span><i class="bi bi-megaphone-fill me-1.5 text-primary"></i>Platform-Specific Ad Spend Allotments &amp; Target ROAS</span>
+          <span class="text-body-secondary text-lowercase fw-normal">per-order allowable marketing cost</span>
+        </div>
+
+        <div class="row g-3">
+          
+          <!-- Shopee Ads Card -->
+          <div class="col-md-4">
+            <div class="strategic-card p-3 bg-body h-100 border-shopee">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge badge-shopee px-2.5 py-1 fw-bold">Shopee Ads</span>
+                <span class="text-body-secondary small" style="font-size:0.72rem;">Search + Discovery Ads</span>
+              </div>
+              <div class="mb-2.5">
+                <label for="shAdCost" class="form-label small fw-semibold mb-1">Ad Budget Allotment / Order (₱)</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="shAdCost" value="0" min="0" step="0.5">
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="shTargetRoas" class="form-label small fw-semibold mb-1">Target ROAS Multiplier (×)</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text"><i class="bi bi-bullseye"></i></span>
+                  <input type="number" class="form-control" id="shTargetRoas" value="3.5" min="0.5" step="0.1">
+                  <span class="input-group-text">×</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center small text-body-secondary pt-2 border-top" style="font-size:0.72rem;">
+                <span>Opt-ins:</span>
+                <div class="d-flex gap-2">
+                  <div class="form-check form-check-inline m-0">
+                    <input class="form-check-input" type="checkbox" id="shMdvToggle" checked>
+                    <label class="form-check-label" for="shMdvToggle" style="font-size:0.7rem;">MDV (4%/5%)</label>
+                  </div>
+                  <div class="form-check form-check-inline m-0">
+                    <input class="form-check-input" type="checkbox" id="shRtsToggle">
+                    <label class="form-check-label" for="shRtsToggle" style="font-size:0.7rem;">FRS (₱2)</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TikTok Shop Ads Card -->
+          <div class="col-md-4">
+            <div class="strategic-card p-3 bg-body h-100 border-tiktok">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge badge-tiktok px-2.5 py-1 fw-bold">TikTok Shop Ads</span>
+                <span class="text-body-secondary small" style="font-size:0.72rem;">Product Shopping Ads (PSA)</span>
+              </div>
+              <div class="mb-2.5">
+                <label for="ttAdCost" class="form-label small fw-semibold mb-1">Ad Budget Allotment / Order (₱)</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="ttAdCost" value="0" min="0" step="0.5">
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="ttTargetRoas" class="form-label small fw-semibold mb-1">Target ROAS Multiplier (×)</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text"><i class="bi bi-bullseye"></i></span>
+                  <input type="number" class="form-control" id="ttTargetRoas" value="2.8" min="0.5" step="0.1">
+                  <span class="input-group-text">×</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center small text-body-secondary pt-2 border-top" style="font-size:0.72rem;">
+                <span>Opt-ins:</span>
+                <div class="form-check form-check-inline m-0">
+                  <input class="form-check-input" type="checkbox" id="ttMdpToggle" checked>
+                  <label class="form-check-label" for="ttMdpToggle" style="font-size:0.7rem;">MDP (4%/5%)</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lazada Sponsored Solutions Card -->
+          <div class="col-md-4">
+            <div class="strategic-card p-3 bg-body h-100 border-lazada">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge badge-lazada px-2.5 py-1 fw-bold">Lazada Solutions</span>
+                <span class="text-body-secondary small" style="font-size:0.72rem;">Sponsored Search &amp; Display</span>
+              </div>
+              <div class="mb-2.5">
+                <label for="lzAdCost" class="form-label small fw-semibold mb-1">Ad Budget Allotment / Order (₱)</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="lzAdCost" value="0" min="0" step="0.5">
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="lzTargetRoas" class="form-label small fw-semibold mb-1">Target ROAS Multiplier (×)</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text"><i class="bi bi-bullseye"></i></span>
+                  <input type="number" class="form-control" id="lzTargetRoas" value="3.5" min="0.5" step="0.1">
+                  <span class="input-group-text">×</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center small text-body-secondary pt-2 border-top" style="font-size:0.72rem;">
+                <span>Program:</span>
+                <span class="text-body-secondary" style="font-size:0.7rem;">Promo Pass 5.8% (Auto ₱100 cap)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section 2: Multi-Platform ROAS Economics Comparison Table -->
+    <div class="card shadow-sm border-0 mb-4" id="roasTableCard">
+      <div class="card-header bg-body-tertiary d-flex flex-wrap justify-content-between align-items-center py-3 px-4 gap-2">
+        <div>
+          <h2 class="h5 fw-bold mb-0">
+            <i class="bi bi-table me-2 text-primary"></i>Multi-Platform ROAS Economics &amp; Allowable Ad Spend Table
+          </h2>
+          <small class="text-body-secondary">Side-by-side break-even thresholds, ad VAT impact, and allowable ad budgets</small>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge bg-secondary-subtle text-secondary-emphasis d-none d-sm-inline-block">2026 Verified Formulas</span>
+          <button class="btn btn-sm btn-outline-primary" id="tableSnapshotBtn" type="button" title="Capture and download table snapshot as PNG image">
+            <i class="bi bi-camera-fill me-1"></i>PNG Snapshot
+          </button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 text-nowrap">
+          <thead>
+            <tr class="table-light border-bottom text-uppercase" style="font-size: 0.72rem; letter-spacing: 0.05em;">
+              <th scope="col" class="py-2.5 ps-3">Marketplace</th>
+              <th scope="col" class="text-end py-2.5">Selling Price</th>
+              <th scope="col" class="text-end py-2.5 text-danger bg-danger-subtle bg-opacity-10">Platform Deductions</th>
+              <th scope="col" class="text-end py-2.5">Non-Ad Landed</th>
+              <th scope="col" class="text-end py-2.5 text-primary bg-primary-subtle bg-opacity-10 border-start border-end">Pre-Ad CM (₱ &amp; %)</th>
+              <th scope="col" colspan="3" class="text-center py-2.5 bg-danger-subtle bg-opacity-20 border-end">Break-Even Thresholds</th>
+              <th scope="col" colspan="2" class="text-center py-2.5 bg-success-subtle bg-opacity-20 border-end">Target Profit Targets</th>
+              <th scope="col" colspan="3" class="text-center py-2.5 bg-info-subtle bg-opacity-20 pe-3">Current Ad Status</th>
+            </tr>
+            <tr class="table-light small">
+              <th scope="col" class="ps-3" style="min-width: 170px;">Platform &amp; Category</th>
+              <th scope="col" class="text-end">Regular SRP</th>
+              <th scope="col" class="text-end text-danger bg-danger-subtle bg-opacity-10">Fees &amp; Taxes</th>
+              <th scope="col" class="text-end">Cost per Unit</th>
+              <th scope="col" class="text-end text-primary fw-bold bg-primary-subtle bg-opacity-10 border-start border-end">Pre-Ad Margin</th>
+              <th scope="col" class="text-end text-danger-emphasis" title="1 / CM (Ad Manager ROAS without VAT)">Base BE ROAS</th>
+              <th scope="col" class="text-end text-danger fw-bold" title="1.12 / CM (Actual Cash Break-Even ROAS with 12% nonrecoverable VAT)">12% Ad VAT BE</th>
+              <th scope="col" class="text-end border-end" title="Maximum allowable ad spend to break even (₱0 net profit)">Max BE Ad Spend</th>
+              <th scope="col" class="text-end text-success fw-bold" title="Required ROAS to achieve target net profit margin">Target ROAS</th>
+              <th scope="col" class="text-end text-success border-end" title="Allowable ad spend while retaining target net profit margin">Target Ad Spend</th>
+              <th scope="col" class="text-end">Current Ad Cost</th>
+              <th scope="col" class="text-end fw-bold">Net Profit</th>
+              <th scope="col" class="text-center pe-3">ROAS Health</th>
+            </tr>
+          </thead>
+          <tbody id="roasTableTbody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer bg-body-tertiary small text-body-secondary py-2.5 px-4 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-1">
+        <div>
+          <i class="bi bi-info-circle me-1"></i>Pre-Ad CM = Selling Price &minus; Platform Fees &minus; Non-Ad Landed Cost. 12% Ad VAT BE applies when digital advertising VAT cannot be claimed back from BIR.
+        </div>
+        <div class="text-body-secondary opacity-75" style="font-size:0.75rem;">
+          ecomm.myojinits.com
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Interactive ROAS Sensitivity Curve & Matrix -->
+    <div class="row g-4 mb-4">
+      
+      <!-- Sensitivity Table -->
+      <div class="col-xl-8">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-header bg-body-tertiary d-flex flex-wrap justify-content-between align-items-center py-3 px-4 gap-2">
+            <div>
+              <div class="fw-bold">
+                <i class="bi bi-activity me-2 text-primary"></i>ROAS Multiplier Sensitivity Curve
+              </div>
+              <small class="text-body-secondary">What-if simulation at different ad performance tiers</small>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="small fw-semibold text-body-secondary">Channel:</span>
+              <div class="btn-group btn-group-sm" role="group" id="sensitivityPlatformGroup">
+                <button type="button" class="btn btn-outline-primary active" data-platform="sh">Shopee</button>
+                <button type="button" class="btn btn-outline-primary" data-platform="tt">TikTok Shop</button>
+                <button type="button" class="btn btn-outline-primary" data-platform="lz">Lazada</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 text-nowrap small">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" class="ps-3">ROAS Multiplier</th>
+                  <th scope="col" class="text-end">Pre-VAT Ad Spend</th>
+                  <th scope="col" class="text-end">12% Ad VAT</th>
+                  <th scope="col" class="text-end">Total Ad Cost</th>
+                  <th scope="col" class="text-end">Net Take-Home</th>
+                  <th scope="col" class="text-end fw-bold">Net Profit</th>
+                  <th scope="col" class="text-end">Net Margin</th>
+                  <th scope="col" class="text-center pe-3">Outcome Status</th>
+                </tr>
+              </thead>
+              <tbody id="sensitivityTbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer bg-body-tertiary small text-body-secondary py-2 px-4">
+            <i class="bi bi-lightbulb me-1 text-warning"></i>Row highlights indicate whether ads result in capital loss (red), break-even (yellow), or target profit attainment (green).
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Reverse Budget & CPA Target Calculator -->
+      <div class="col-xl-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-header bg-body-tertiary fw-bold py-3 px-4">
+            <i class="bi bi-calculator me-2 text-success"></i>Reverse Ad Budget &amp; CPA Planner
+          </div>
+          <div class="card-body p-4">
+            <p class="small text-body-secondary mb-3">
+              Calculate maximum allowable Cost Per Acquisition (CPA) and required ROAS based on your campaign budget.
+            </p>
+            <div class="mb-3">
+              <label for="revBudget" class="form-label small fw-semibold mb-1">Monthly Advertising Budget (₱)</label>
+              <div class="input-group">
+                <span class="input-group-text">₱</span>
+                <input type="number" class="form-control" id="revBudget" value="30000" min="500" step="500">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="revOrders" class="form-label small fw-semibold mb-1">Target Monthly Orders (Units)</label>
+              <input type="number" class="form-control" id="revOrders" value="300" min="1" step="1">
+            </div>
+
+            <div class="p-3 bg-body-tertiary rounded-3 border mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="text-body-secondary small">Projected CPA / Order:</span>
+                <span class="fw-bold fs-6 text-primary" id="revCpa">₱100.00</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="text-body-secondary small">Total Ad Cost w/ 12% VAT:</span>
+                <span class="fw-bold fs-6" id="revTotalCpa">₱112.00</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="text-body-secondary small">Implied Realized ROAS:</span>
+                <span class="fw-bold fs-6 text-success" id="revImpliedRoas">5.00×</span>
+              </div>
+            </div>
+
+            <div class="alert mb-0 small" id="revVerdictBox">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Section 5: Official Richmond Tan ROAS Computation Guide -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-body-tertiary fw-semibold py-3 px-4">
+        <i class="bi bi-book-half me-2 text-primary"></i>Richmond Tan ROAS Computation Framework &amp; Formula Guide
+      </div>
+      <div class="card-body p-4">
+        <div class="alert alert-warning border-warning-subtle small mb-4">
+          <strong><i class="bi bi-exclamation-triangle-fill me-1"></i>The Vanity ROAS Trap:</strong>
+          Philippine sellers often celebrate an 8.0× or 10.0× ROAS in Meta Ads or Shopee Ads Manager, unaware they are actually losing money. Why? Because marketplace commissions, transaction fees, shipping subsidies, packaging, and especially the <strong>12% nonrecoverable digital ad VAT</strong> eat into the gross margin. Your ROAS must exceed the <em>12% Ad VAT Adjusted Break-Even ROAS</em> floor to avoid draining your working capital.
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="strategic-card p-3 bg-body-tertiary h-100">
+              <div class="fw-bold text-primary mb-1">
+                <i class="bi bi-bar-chart-line me-1"></i>1. Actual ROAS
+              </div>
+              <code class="d-block bg-body p-2 rounded mb-2 border text-body-emphasis small">
+                ROAS = Attributed Rev &divide; Ad Spend
+              </code>
+              <p class="small text-body-secondary mb-0">
+                The standard ratio reported in Ads Manager. It only compares top-line customer revenue to ad spend, completely ignoring product costs, seller fees, and taxes.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="strategic-card p-3 bg-body-tertiary h-100">
+              <div class="fw-bold text-info mb-1">
+                <i class="bi bi-pie-chart me-1"></i>2. Contribution Margin (CM)
+              </div>
+              <code class="d-block bg-body p-2 rounded mb-2 border text-body-emphasis small">
+                CM = (Take-Home &minus; Landed Cost) &divide; Net Rev
+              </code>
+              <p class="small text-body-secondary mb-0">
+                What remains from every order after paying marketplace fees, taxes, product sourcing, freight, and packaging, but before ad spend.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="strategic-card p-3 bg-body-tertiary h-100">
+              <div class="fw-bold text-danger mb-1">
+                <i class="bi bi-shield-x me-1"></i>3. 12% Ad VAT BE ROAS
+              </div>
+              <code class="d-block bg-body p-2 rounded mb-2 border text-body-emphasis small">
+                BE ROAS = 1.12 &divide; CM
+              </code>
+              <p class="small text-body-secondary mb-0">
+                The minimum ROAS floor required to not lose money. Incorporates the mandatory 12% nonrecoverable digital advertising VAT paid on ad invoices.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="strategic-card p-3 bg-body-tertiary h-100">
+              <div class="fw-bold text-success mb-1">
+                <i class="bi bi-bullseye me-1"></i>4. Target ROAS
+              </div>
+              <code class="d-block bg-body p-2 rounded mb-2 border text-body-emphasis small">
+                Target = 1.12 &divide; (CM &minus; Desired Margin)
+              </code>
+              <p class="small text-body-secondary mb-0">
+                The required Ads Manager multiplier to bank your target net profit margin (e.g. 20%) in cold cash after all deductions, VAT, and ad costs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary py-4 border-top mt-auto">
+    <div class="container-fluid px-3 px-md-4 px-xl-5 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+      <div>
+        <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
+      </div>
+      <div class="d-flex flex-wrap gap-3">
+        <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
+        <a href="comparison.html" class="text-decoration-none text-body-secondary">Comparison</a>
+        <a href="roas-calculator.html" class="text-decoration-none text-body-secondary fw-semibold">ROAS &amp; Ads</a>
+        <a href="expenses.html" class="text-decoration-none text-body-secondary">Expenses &amp; Allotments</a>
+        <a href="opt-in-fees.html" class="text-decoration-none text-body-secondary">Opt-In Fees &amp; RTS</a>
+        <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
+        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax &amp; BIR Guide</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- html2canvas for Table Snapshot PNG Export -->
+  <script src="./js/html2canvas.min.js"></script>
+  <!-- Data & Engine -->
+  <script src="./js/data.js"></script>
+  <script src="./js/calculator.js"></script>
+
+  <!-- Page Script -->
+  <script>
+    const $ = s => document.querySelector(s);
+    let currentSensitivityPlatform = 'sh';
+
+    function initPage() {
+      const profile = getStoredProfile();
+      const saved = getStoredConfig();
+
+      // Populate Inputs from profile / saved config
+      $('#inputPrice').value = saved.srp > 0 ? saved.srp : 500;
+      $('#inputCost').value = saved.cost > 0 ? saved.cost : 150;
+      $('#inputFreight').value = saved.freight !== undefined ? saved.freight : (profile.sourcingFreight || 25);
+      $('#inputPack').value = saved.pack !== undefined ? saved.pack : (profile.packagingCost || 10);
+      $('#inputOpex').value = saved.opex !== undefined ? saved.opex : (profile.opexCost || 15);
+      $('#inputMargin').value = saved.mg !== undefined ? saved.mg : (profile.defaultMargin || 20);
+
+      // Tax Mode
+      const isVat = saved.vat === true || profile.taxStatus === 'vat';
+      if (isVat) {
+        $('#taxVat').checked = true;
+      } else {
+        $('#taxNonVat').checked = true;
+      }
+
+      // 12% Ad VAT Nonrecoverable
+      if (profile.nonrecoverableAdVat !== undefined) {
+        $('#adVatNonrecoverable').checked = profile.nonrecoverableAdVat === true;
+      } else {
+        $('#adVatNonrecoverable').checked = !isVat;
+      }
+
+      // Campaign Toggle
+      $('#campToggle').checked = saved.camp === true;
+
+      // Platform Ad Allotments & Opt-ins
+      const sh = profile.platforms && profile.platforms.sh ? profile.platforms.sh : {};
+      const tt = profile.platforms && profile.platforms.tt ? profile.platforms.tt : {};
+      const lz = profile.platforms && profile.platforms.lz ? profile.platforms.lz : {};
+
+      $('#shAdCost').value = sh.adCost || 0;
+      $('#shTargetRoas').value = sh.targetRoas || 3.5;
+      $('#shMdvToggle').checked = saved.osh !== undefined ? saved.osh : (sh.optIn !== false);
+      $('#shRtsToggle').checked = saved.shRts !== undefined ? saved.shRts : (sh.optInRts === true);
+
+      $('#ttAdCost').value = tt.adCost || 0;
+      $('#ttTargetRoas').value = tt.targetRoas || 2.8;
+      $('#ttMdpToggle').checked = saved.ott !== undefined ? saved.ott : (tt.optIn !== false);
+
+      $('#lzAdCost').value = lz.adCost || 0;
+      $('#lzTargetRoas').value = lz.targetRoas || 3.5;
+
+      attachListeners();
+      recalculateAll();
+    }
+
+    function getOptionsForPlatform(p) {
+      const price = Math.max(1, Number($('#inputPrice').value || 500));
+      const cost = Math.max(0, Number($('#inputCost').value || 0));
+      const freight = Math.max(0, Number($('#inputFreight').value || 0));
+      const pack = Math.max(0, Number($('#inputPack').value || 0));
+      const opex = Math.max(0, Number($('#inputOpex').value || 0));
+      const margin = Math.max(0, Math.min(0.8, Number($('#inputMargin').value || 20) / 100));
+
+      const isVat = $('#taxVat').checked;
+      const nonrecoverableAdVat = $('#adVatNonrecoverable').checked;
+      const isCamp = $('#campToggle').checked;
+
+      const profile = getStoredProfile();
+      const saved = getStoredConfig();
+
+      let adCost = 0;
+      let targetRoas = 3.5;
+      if (p === 'sh') {
+        adCost = Math.max(0, Number($('#shAdCost').value || 0));
+        targetRoas = Math.max(0.1, Number($('#shTargetRoas').value || 3.5));
+      } else if (p === 'tt') {
+        adCost = Math.max(0, Number($('#ttAdCost').value || 0));
+        targetRoas = Math.max(0.1, Number($('#ttTargetRoas').value || 2.8));
+      } else if (p === 'lz') {
+        adCost = Math.max(0, Number($('#lzAdCost').value || 0));
+        targetRoas = Math.max(0.1, Number($('#lzTargetRoas').value || 3.5));
+      }
+
+      return {
+        vat: isVat,
+        cost: cost,
+        freight: freight,
+        sourcingFreight: freight,
+        units: 1,
+        pack: pack,
+        opex: opex,
+        adcost: adCost,
+        targetRoas: targetRoas,
+        m: margin,
+        srp: price,
+        wht: true,
+        claim: isVat,
+        camp: isCamp,
+        nonrecoverableAdVat: nonrecoverableAdVat,
+        opt: {
+          sh: $('#shMdvToggle').checked,
+          shRts: $('#shRtsToggle').checked,
+          tt: $('#ttMdpToggle').checked
+        },
+        freeCommission: {
+          sh: saved.shFreeComm || false,
+          tt: saved.ttFreeComm || false,
+          lz: saved.lzFreeComm || false
+        },
+        cat: {
+          sh: Number(saved.cs || 0),
+          tt: Number(saved.ct || 0),
+          lz: Number(saved.cl || 0)
+        },
+        platformAllotments: {
+          [p]: {
+            adCost: adCost,
+            targetRoas: targetRoas
+          }
+        }
+      };
+    }
+
+    function recalculateAll() {
+      const price = Math.max(1, Number($('#inputPrice').value || 500));
+      const cost = Math.max(0, Number($('#inputCost').value || 0));
+      const freight = Math.max(0, Number($('#inputFreight').value || 0));
+      const pack = Math.max(0, Number($('#inputPack').value || 0));
+      const opex = Math.max(0, Number($('#inputOpex').value || 0));
+      const margin = Math.max(0, Math.min(0.8, Number($('#inputMargin').value || 20) / 100));
+
+      const isVat = $('#taxVat').checked;
+      const nonrecAdVat = $('#adVatNonrecoverable').checked;
+
+      $('#badgeTax').textContent = isVat ? 'VAT (12%)' : 'Non-VAT (3%)';
+      $('#badgeAdVat').textContent = nonrecAdVat ? 'Nonrecoverable (+12%)' : 'Creditable Input VAT';
+
+      const landed = cost + freight + pack + opex;
+
+      // Calculate for each platform
+      const platforms = ['sh', 'tt', 'lz'];
+      const results = platforms.map(p => {
+        const o = getOptionsForPlatform(p);
+        const res = calc(p, o);
+        return { p, o, res };
+      });
+
+      // Update Top KPIs with average or primary
+      const shRes = results[0].res;
+      $('#kpiPrice').textContent = P(price);
+      $('#kpiLanded').textContent = P(landed);
+      $('#kpiCm').textContent = `${P(shRes.contributionPerOrder)} (${(shRes.contributionMargin * 100).toFixed(1)}%)`;
+      
+      const beRoasDisplay = nonrecAdVat ? 
+        (shRes.breakEvenRoasVatAdjusted ? `${shRes.breakEvenRoasVatAdjusted.toFixed(2)}× (w/ 12% VAT)` : '—') :
+        (shRes.breakEvenRoasBase ? `${shRes.breakEvenRoasBase.toFixed(2)}×` : '—');
+      $('#kpiBeRoas').innerHTML = `${beRoasDisplay}`;
+
+      $('#kpiTargetRoas').textContent = shRes.targetRoasCalculated ? `${shRes.targetRoasCalculated.toFixed(2)}×` : '—';
+      $('#kpiTargetSub').textContent = `To bank ${(margin * 100).toFixed(1)}% net margin`;
+
+      // Render Multi-Platform ROAS Table
+      renderRoasTable(results);
+
+      // Render Sensitivity Matrix
+      renderSensitivityMatrix();
+
+      // Render Reverse CPA
+      renderReverseCpa();
+    }
+
+    function renderRoasTable(results) {
+      const nonrecAdVat = $('#adVatNonrecoverable').checked;
+      const adVatMultiplier = nonrecAdVat ? 1.12 : 1.0;
+
+      const rows = results.map(({ p, o, res }) => {
+        const pl = PL[p];
+        const pClass = p === 'sh' ? 'row-platform-shopee' : p === 'tt' ? 'row-platform-tiktok' : 'row-platform-lazada';
+
+        const baseBeStr = res.breakEvenRoasBase ? res.breakEvenRoasBase.toFixed(2) + '×' : '—';
+        const vatBeStr = res.breakEvenRoasVatAdjusted ? res.breakEvenRoasVatAdjusted.toFixed(2) + '×' : '—';
+        const targetRoasStr = res.targetRoasCalculated ? res.targetRoasCalculated.toFixed(2) + '×' : '—';
+
+        // Maximum allowable ad spend per order
+        const maxBeAdSpend = res.contributionPerOrder > 0 ? (res.contributionPerOrder / adVatMultiplier) : 0;
+        const maxTargetAdSpend = res.maxAdSpendAtTarget !== undefined ? res.maxAdSpendAtTarget : 
+          Math.max(0, (res.contributionPerOrder - (res.net * (o.m || 0))) / adVatMultiplier);
+
+        const currentAdCostDisplay = res.adcost > 0 ? 
+          `₱${res.adcost.toFixed(2)}${nonrecAdVat ? '<br><small class="text-body-secondary">w/ VAT: ₱' + res.totalAdCost.toFixed(2) + '</small>' : ''}` : 
+          '<span class="text-body-secondary">₱0.00</span>';
+
+        return `
+          <tr class="${pClass}">
+            <td class="ps-3">
+              <div class="d-flex align-items-center gap-1.5 flex-wrap">
+                <span class="badge ${pl.badgeClass} px-2.5 py-1">${pl.n}</span>
+                ${res.isCommissionFree ? '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle" style="font-size:0.68rem;"><i class="bi bi-gift-fill me-1"></i>0% Comm</span>' : ''}
+              </div>
+              <small class="d-block text-body-secondary text-truncate mt-1" style="max-width: 180px;" title="${res.F.cat}">${res.F.cat}</small>
+            </td>
+            <td class="text-end fw-semibold">${P(res.price)}</td>
+            <td class="text-end text-danger fw-semibold bg-danger-subtle bg-opacity-10">${P(res.ded)}</td>
+            <td class="text-end text-body-secondary">${P(res.landedCost || (o.cost + o.freight + o.pack + o.opex))}</td>
+            <td class="text-end text-primary fw-bold bg-primary-subtle bg-opacity-10 border-start border-end">
+              ${P(res.contributionPerOrder)}
+              <small class="d-block text-primary" style="font-size:0.72rem;">${(res.contributionMargin * 100).toFixed(1)}% CM</small>
+            </td>
+            <td class="text-end fw-bold text-danger-emphasis">${baseBeStr}</td>
+            <td class="text-end fw-bold text-danger">${vatBeStr}</td>
+            <td class="text-end border-end fw-semibold">${P(maxBeAdSpend)}</td>
+            <td class="text-end fw-bold text-success">${targetRoasStr}</td>
+            <td class="text-end border-end fw-semibold text-success">${P(maxTargetAdSpend)}</td>
+            <td class="text-end">${currentAdCostDisplay}</td>
+            <td class="text-end fw-bold ${res.profit >= 0 ? 'text-success' : 'text-danger'} fs-6">${P(res.profit)}</td>
+            <td class="text-center pe-3">
+              <span class="badge ${res.roasBadgeClass} px-2.5 py-1.5" style="font-size:0.75rem;">${res.roasHealthLabel}</span>
+            </td>
+          </tr>
+        `;
+      });
+
+      $('#roasTableTbody').innerHTML = rows.join('');
+    }
+
+    function renderSensitivityMatrix() {
+      const p = currentSensitivityPlatform;
+      const o = getOptionsForPlatform(p);
+      const res = calc(p, o);
+
+      const nonrecAdVat = $('#adVatNonrecoverable').checked;
+      const adVatMultiplier = nonrecAdVat ? 1.12 : 1.0;
+
+      const roasTiers = [1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 8.0, 10.0, 15.0];
+      const beRoas = nonrecAdVat ? res.breakEvenRoasVatAdjusted : res.breakEvenRoasBase;
+      const targetRoas = res.targetRoasCalculated;
+
+      const rows = roasTiers.map(tier => {
+        // At this ROAS, ad spend = Price / ROAS
+        const preVatAd = res.price / tier;
+        const adVat = nonrecAdVat ? (preVatAd * 0.12) : 0;
+        const totalAd = preVatAd * adVatMultiplier;
+
+        // Profit = Contribution - Total Ad Cost
+        const profit = res.contributionPerOrder - totalAd;
+        const marginPct = (profit / res.price) * 100;
+
+        let rowClass = '';
+        let badgeHtml = '';
+
+        if (profit < -0.1) {
+          rowClass = 'roas-row-loss';
+          badgeHtml = '<span class="badge bg-danger-subtle text-danger-emphasis border border-danger-subtle">Losing Money</span>';
+        } else if (Math.abs(profit) <= 0.1 || (beRoas && Math.abs(tier - beRoas) <= 0.15)) {
+          rowClass = 'roas-row-be';
+          badgeHtml = '<span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">Break-Even Floor</span>';
+        } else if (targetRoas && tier >= targetRoas) {
+          rowClass = 'roas-row-target';
+          badgeHtml = '<span class="badge bg-success text-white shadow-sm"><i class="bi bi-check-lg me-1"></i>Target Profit Met</span>';
+        } else {
+          badgeHtml = '<span class="badge bg-info-subtle text-info-emphasis border border-info-subtle">Profitable</span>';
+        }
+
+        return `
+          <tr class="${rowClass}">
+            <td class="ps-3 fw-bold">${tier.toFixed(2)}×</td>
+            <td class="text-end">₱${preVatAd.toFixed(2)}</td>
+            <td class="text-end text-body-secondary">₱${adVat.toFixed(2)}</td>
+            <td class="text-end fw-semibold">₱${totalAd.toFixed(2)}</td>
+            <td class="text-end text-success fw-semibold">₱${(res.take - totalAd).toFixed(2)}</td>
+            <td class="text-end fw-bold ${profit >= 0 ? 'text-success' : 'text-danger'}">₱${profit.toFixed(2)}</td>
+            <td class="text-end fw-semibold ${profit >= 0 ? 'text-success' : 'text-danger'}">${marginPct.toFixed(1)}%</td>
+            <td class="text-center pe-3">${badgeHtml}</td>
+          </tr>
+        `;
+      });
+
+      $('#sensitivityTbody').innerHTML = rows.join('');
+    }
+
+    function renderReverseCpa() {
+      const budget = Math.max(1, Number($('#revBudget').value || 30000));
+      const orders = Math.max(1, Number($('#revOrders').value || 300));
+      const price = Math.max(1, Number($('#inputPrice').value || 500));
+      const nonrecAdVat = $('#adVatNonrecoverable').checked;
+      const adVatMultiplier = nonrecAdVat ? 1.12 : 1.0;
+
+      const preVatCpa = budget / orders;
+      const totalCpa = preVatCpa * adVatMultiplier;
+      const impliedRoas = preVatCpa > 0 ? (price / preVatCpa) : 0;
+
+      $('#revCpa').textContent = `₱${preVatCpa.toFixed(2)}`;
+      $('#revTotalCpa').textContent = `₱${totalCpa.toFixed(2)}`;
+      $('#revImpliedRoas').textContent = `${impliedRoas.toFixed(2)}×`;
+
+      // Check against Shopee baseline
+      const o = getOptionsForPlatform('sh');
+      const res = calc('sh', o);
+      const beRoas = nonrecAdVat ? res.breakEvenRoasVatAdjusted : res.breakEvenRoasBase;
+      const targetRoas = res.targetRoasCalculated;
+
+      const box = $('#revVerdictBox');
+      if (beRoas && impliedRoas < beRoas) {
+        box.className = 'alert alert-danger mb-0 small';
+        box.innerHTML = `
+          <strong><i class="bi bi-x-circle-fill me-1"></i>High Risk: Unprofitable Campaign</strong><br>
+          An implied ROAS of ${impliedRoas.toFixed(2)}× is below your Break-Even threshold of ${beRoas.toFixed(2)}×. At this CPA of ₱${totalCpa.toFixed(2)}, you will lose approximately ₱${Math.abs(res.contributionPerOrder - totalCpa).toFixed(2)} per order.
+        `;
+      } else if (targetRoas && impliedRoas >= targetRoas) {
+        box.className = 'alert alert-success mb-0 small';
+        box.innerHTML = `
+          <strong><i class="bi bi-check-circle-fill me-1"></i>Viable &amp; Scalable Budget!</strong><br>
+          An implied ROAS of ${impliedRoas.toFixed(2)}× exceeds your Target ROAS of ${targetRoas.toFixed(2)}×. You will achieve your full ${(o.m * 100).toFixed(0)}% net profit margin on this plan.
+        `;
+      } else {
+        box.className = 'alert alert-info mb-0 small';
+        box.innerHTML = `
+          <strong><i class="bi bi-info-circle-fill me-1"></i>Profitable, Below Target Margin</strong><br>
+          An implied ROAS of ${impliedRoas.toFixed(2)}× is above Break-Even (${beRoas ? beRoas.toFixed(2) : 2.5}×) but below Target ROAS (${targetRoas ? targetRoas.toFixed(2) : 4.0}×). Ads generate net cash, but at lower margin.
+        `;
+      }
+    }
+
+    function attachListeners() {
+      const inputs = [
+        '#inputPrice', '#inputCost', '#inputFreight', '#inputPack', '#inputOpex', '#inputMargin',
+        '#taxNonVat', '#taxVat', '#adVatNonrecoverable', '#campToggle',
+        '#shAdCost', '#shTargetRoas', '#shMdvToggle', '#shRtsToggle',
+        '#ttAdCost', '#ttTargetRoas', '#ttMdpToggle',
+        '#lzAdCost', '#lzTargetRoas',
+        '#revBudget', '#revOrders'
+      ];
+
+      inputs.forEach(sel => {
+        const el = $(sel);
+        if (el) {
+          el.addEventListener('input', recalculateAll);
+          el.addEventListener('change', recalculateAll);
+        }
+      });
+
+      // Sensitivity Platform Selector
+      document.querySelectorAll('#sensitivityPlatformGroup button').forEach(btn => {
+        btn.addEventListener('click', e => {
+          document.querySelectorAll('#sensitivityPlatformGroup button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentSensitivityPlatform = btn.getAttribute('data-platform');
+          renderSensitivityMatrix();
+        });
+      });
+
+      // Save Allotments to Store Profile
+      $('#saveAllotmentsBtn').addEventListener('click', () => {
+        const profile = getStoredProfile();
+        if (!profile.platforms) profile.platforms = {};
+        if (!profile.platforms.sh) profile.platforms.sh = {};
+        if (!profile.platforms.tt) profile.platforms.tt = {};
+        if (!profile.platforms.lz) profile.platforms.lz = {};
+
+        profile.platforms.sh.adCost = Math.max(0, Number($('#shAdCost').value || 0));
+        profile.platforms.sh.targetRoas = Math.max(0.1, Number($('#shTargetRoas').value || 3.5));
+        profile.platforms.sh.optIn = $('#shMdvToggle').checked;
+        profile.platforms.sh.optInRts = $('#shRtsToggle').checked;
+
+        profile.platforms.tt.adCost = Math.max(0, Number($('#ttAdCost').value || 0));
+        profile.platforms.tt.targetRoas = Math.max(0.1, Number($('#ttTargetRoas').value || 2.8));
+        profile.platforms.tt.optIn = $('#ttMdpToggle').checked;
+
+        profile.platforms.lz.adCost = Math.max(0, Number($('#lzAdCost').value || 0));
+        profile.platforms.lz.targetRoas = Math.max(0.1, Number($('#lzTargetRoas').value || 3.5));
+
+        profile.nonrecoverableAdVat = $('#adVatNonrecoverable').checked;
+
+        saveStoredProfile(profile);
+
+        // Visual feedback
+        const btn = $('#saveAllotmentsBtn');
+        const origHtml = btn.innerHTML;
+        btn.className = 'btn btn-success btn-sm';
+        btn.innerHTML = '<i class="bi bi-check2-circle me-1"></i>Saved to Profile!';
+        setTimeout(() => {
+          btn.className = 'btn btn-primary btn-sm';
+          btn.innerHTML = origHtml;
+        }, 2000);
+      });
+
+      // Reset Button
+      $('#resetBtn').addEventListener('click', () => {
+        initPage();
+      });
+
+      // Export CSV
+      $('#exportCsvBtn').addEventListener('click', exportRoasCsv);
+
+      // Snapshot PNG
+      if ($('#snapshotBtn')) $('#snapshotBtn').addEventListener('click', takeTableSnapshot);
+      if ($('#tableSnapshotBtn')) $('#tableSnapshotBtn').addEventListener('click', takeTableSnapshot);
+    }
+
+    function exportRoasCsv() {
+      const rows = [
+        ['Platform', 'Regular SRP', 'Platform Fees & Taxes', 'Non-Ad Landed Cost', 'Pre-Ad CM (₱)', 'Base BE ROAS', '12% Ad VAT BE', 'Max BE Ad Spend', 'Target ROAS', 'Target Ad Spend', 'Current Ad Cost', 'Net Profit', 'ROAS Health']
+      ];
+      document.querySelectorAll('#roasTableTbody tr').forEach(tr => {
+        const cols = Array.from(tr.querySelectorAll('td')).map(td => td.innerText.replace(/\n/g, ' ').trim());
+        if (cols.length) rows.push(cols);
+      });
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(e => e.map(i => `"${i.replace(/"/g, '""')}"`).join(',')).join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'ph_marketplace_roas_economics.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    async function takeTableSnapshot() {
+      const btn = $('#snapshotBtn');
+      const cardBtn = $('#tableSnapshotBtn');
+      const card = document.getElementById('roasTableCard');
+      if (!card) return;
+
+      if (typeof html2canvas === 'undefined') {
+        alert('Snapshot engine is loading. Please check your internet connection and try again.');
+        return;
+      }
+
+      const origBtnHtml = btn ? btn.innerHTML : '';
+      const origCardBtnHtml = cardBtn ? cardBtn.innerHTML : '';
+
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>Capturing PNG...';
+      }
+      if (cardBtn) {
+        cardBtn.disabled = true;
+        cardBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>Capturing...';
+      }
+
+      const tableResponsive = card.querySelector('.table-responsive');
+      const prevOverflow = tableResponsive ? tableResponsive.style.overflow : '';
+      if (tableResponsive) {
+        tableResponsive.style.overflow = 'visible';
+      }
+
+      try {
+        const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        const canvas = await html2canvas(card, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: isDark ? '#1a1d20' : '#ffffff',
+          logging: false,
+          ignoreElements: el => el.id === 'tableSnapshotBtn'
+        });
+
+        const profile = getStoredProfile();
+        const shopSlug = (profile.shopName || 'Store').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_');
+        const now = new Date();
+        const dateStr = now.toISOString().slice(0, 10);
+
+        const link = document.createElement('a');
+        link.download = `ph_marketplace_roas_${shopSlug}_${dateStr}.png`;
+        link.href = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        if (btn) {
+          btn.innerHTML = '<i class="bi bi-check2-circle text-success me-1"></i>PNG Saved!';
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = origBtnHtml;
+          }, 2500);
+        }
+        if (cardBtn) {
+          cardBtn.innerHTML = '<i class="bi bi-check2-circle text-success me-1"></i>Saved!';
+          setTimeout(() => {
+            cardBtn.disabled = false;
+            cardBtn.innerHTML = origCardBtnHtml;
+          }, 2500);
+        }
+      } catch (err) {
+        console.error('ROAS snapshot error:', err);
+        alert('Could not capture ROAS snapshot: ' + (err.message || err));
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = origBtnHtml;
+        }
+        if (cardBtn) {
+          cardBtn.disabled = false;
+          cardBtn.innerHTML = origCardBtnHtml;
+        }
+      } finally {
+        if (tableResponsive) {
+          tableResponsive.style.overflow = prevOverflow;
+        }
+      }
+    }
+
+    initTheme();
+    initPage();
+  </script>
+</body>
+</html>
