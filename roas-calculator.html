@@ -334,37 +334,78 @@
       </div>
       <div class="card-body p-4">
         
-        <!-- Row 1: Unit Economics Inputs -->
+        <!-- Row 1: Unit Economics Inputs (Emphasizing Base Sourcing Cost & Target Margin First) -->
         <div class="row g-3 mb-4">
-          <div class="col-sm-6 col-lg-2">
-            <label for="inputPrice" class="form-label small fw-semibold mb-1">Selling Price (₱)</label>
-            <input type="number" class="form-control" id="inputPrice" value="500" min="1" step="1">
-            <div class="form-text" style="font-size:0.7rem;">Customer selling price</div>
+          <!-- 1. Core Drivers -->
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-2.5 rounded bg-primary-subtle bg-opacity-25 border border-primary-subtle h-100">
+              <label for="inputCost" class="form-label small fw-bold text-primary mb-1 d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-box-seam-fill me-1"></i>Base Product Cost (Supplier)</span>
+                <span class="badge bg-primary text-white" style="font-size:0.62rem;">Primary COGS</span>
+              </label>
+              <div class="input-group input-group-sm">
+                <span class="input-group-text bg-primary-subtle text-primary fw-bold">₱</span>
+                <input type="number" class="form-control fw-bold" id="inputCost" value="150" min="0" step="1">
+              </div>
+              <div class="form-text" style="font-size:0.7rem;">Raw wholesale purchase price</div>
+            </div>
           </div>
-          <div class="col-sm-6 col-lg-2">
-            <label for="inputCost" class="form-label small fw-semibold mb-1">Supplier Base Cost (₱)</label>
-            <input type="number" class="form-control" id="inputCost" value="150" min="0" step="1">
-            <div class="form-text" style="font-size:0.7rem;">Raw product purchase price</div>
+
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-2.5 rounded bg-success-subtle bg-opacity-25 border border-success-subtle h-100">
+              <label for="inputMargin" class="form-label small fw-bold text-success mb-1 d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-graph-up-arrow me-1"></i>Target Net Margin (%)</span>
+                <span class="badge bg-success text-white" style="font-size:0.62rem;">Profit Target</span>
+              </label>
+              <div class="input-group input-group-sm">
+                <input type="number" class="form-control fw-bold text-success" id="inputMargin" value="20" min="0" max="80" step="1">
+                <span class="input-group-text bg-success-subtle text-success fw-bold">%</span>
+              </div>
+              <div class="form-text" style="font-size:0.7rem;">Desired net profit buffer on price</div>
+            </div>
           </div>
+
+          <!-- 2. Landed Costs & Fulfillment -->
           <div class="col-sm-6 col-lg-2">
-            <label for="inputFreight" class="form-label small fw-semibold mb-1">Inbound Freight / Unit (₱)</label>
-            <input type="number" class="form-control" id="inputFreight" value="25" min="0" step="1">
+            <label for="inputFreight" class="form-label small fw-semibold mb-1">Inbound Freight / Unit</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text">₱</span>
+              <input type="number" class="form-control" id="inputFreight" value="25" min="0" step="1">
+            </div>
             <div class="form-text" style="font-size:0.7rem;">Supplier to warehouse logistics</div>
           </div>
           <div class="col-sm-6 col-lg-2">
-            <label for="inputPack" class="form-label small fw-semibold mb-1">Packaging Cost (₱)</label>
-            <input type="number" class="form-control" id="inputPack" value="10" min="0" step="1">
+            <label for="inputPack" class="form-label small fw-semibold mb-1">Packaging Cost</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text">₱</span>
+              <input type="number" class="form-control" id="inputPack" value="10" min="0" step="1">
+            </div>
             <div class="form-text" style="font-size:0.7rem;">Box, pouch, bubble wrap</div>
           </div>
           <div class="col-sm-6 col-lg-2">
-            <label for="inputOpex" class="form-label small fw-semibold mb-1">OPEX Allotment (₱)</label>
-            <input type="number" class="form-control" id="inputOpex" value="15" min="0" step="1">
+            <label for="inputOpex" class="form-label small fw-semibold mb-1">OPEX Allotment</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text">₱</span>
+              <input type="number" class="form-control" id="inputOpex" value="15" min="0" step="1">
+            </div>
             <div class="form-text" style="font-size:0.7rem;">Labor, rent, software share</div>
           </div>
-          <div class="col-sm-6 col-lg-2">
-            <label for="inputMargin" class="form-label small fw-semibold mb-1">Target Net Margin (%)</label>
-            <input type="number" class="form-control" id="inputMargin" value="20" min="0" max="80" step="1">
-            <div class="form-text" style="font-size:0.7rem;">Desired net profit buffer</div>
+
+          <!-- Selling Price -->
+          <div class="col-12 mt-2">
+            <div class="p-2 rounded bg-body-tertiary border d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-secondary text-white" style="font-size:0.68rem;">Listing SRP</span>
+                <label for="inputPrice" class="form-label small fw-bold mb-0">Customer Selling Price (₱):</label>
+                <div class="input-group input-group-sm" style="max-width: 170px;">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control fw-bold" id="inputPrice" value="500" min="1" step="1">
+                </div>
+              </div>
+              <small class="text-body-secondary" style="font-size:0.75rem;">
+                <i class="bi bi-info-circle me-1 text-primary"></i>Base price reflects product value &amp; COGS. Profit margin sets your allowable ad spend limit.
+              </small>
+            </div>
           </div>
         </div>
 

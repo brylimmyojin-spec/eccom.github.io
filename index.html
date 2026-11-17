@@ -117,6 +117,118 @@
           <div class="card-body p-3 p-md-4">
             <div class="row g-3">
               
+              <!-- 1. PRIMARY PRICING DRIVERS (HERO SECTION) -->
+              <div class="col-12">
+                <div class="pricing-hero-container">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="d-flex align-items-center gap-1.5">
+                      <span class="badge bg-primary text-white px-2 py-1 fw-bold" style="font-size:0.68rem;">Step 1</span>
+                      <span class="fw-bold fs-6 text-body-emphasis">Core Pricing Drivers</span>
+                    </div>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle" style="font-size:0.65rem;">
+                      Primary Value &amp; Margin
+                    </span>
+                  </div>
+                  <p class="text-body-secondary small mb-3" style="font-size:0.75rem; line-height: 1.35;">
+                    Set your foundation: <strong>Supplier Price</strong> sets the cost floor, and <strong>Target Net Margin</strong> defines required profit before fulfillment and platform deductions.
+                  </p>
+
+                  <div class="row g-2.5">
+                    <!-- Base Product Cost (Supplier Price) -->
+                    <div class="col-12">
+                      <div class="pricing-driver-card">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                          <label for="cost" class="form-label fw-bold text-primary mb-0 d-flex align-items-center gap-1" style="font-size:0.85rem;">
+                            <i class="bi bi-box-seam-fill"></i> Base Product Cost (Supplier Price)
+                          </label>
+                          <span class="badge bg-primary-subtle text-primary" style="font-size:0.63rem;">Primary COGS</span>
+                        </div>
+                        <div class="input-group">
+                          <span class="input-group-text bg-primary-subtle text-primary fw-bold fs-6">₱</span>
+                          <input type="number" class="form-control form-control-lg fw-bold text-body-emphasis" id="cost" value="100" min="0" step="0.01" style="font-size:1.25rem;">
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-1 text-body-secondary" style="font-size:0.72rem;">
+                          <span>Supplier factory or wholesale item cost</span>
+                          <span class="fw-semibold text-primary" id="costPerBatchPreview">₱100.00 / unit</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Target Net Margin (%) -->
+                    <div class="col-12 mt-2">
+                      <div class="pricing-driver-card driver-margin">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                          <label for="mg" class="form-label fw-bold text-success mb-0 d-flex align-items-center gap-1" style="font-size:0.85rem;">
+                            <i class="bi bi-graph-up-arrow"></i> Target Net Margin (%)
+                          </label>
+                          <span class="badge bg-success-subtle text-success-emphasis" style="font-size:0.63rem;">Profit Goal</span>
+                        </div>
+                        <div class="input-group">
+                          <input type="number" class="form-control form-control-lg fw-bold text-success" id="mg" value="20" min="0" max="80" step="0.5" style="font-size:1.25rem;">
+                          <span class="input-group-text bg-success-subtle text-success fw-bold fs-6">%</span>
+                        </div>
+                        <!-- Quick Presets -->
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-1 mt-2">
+                          <span class="text-body-secondary small" style="font-size:0.7rem;">Quick presets:</span>
+                          <div class="d-flex gap-1" id="marginPresetContainer">
+                            <button type="button" class="preset-chip" data-preset="15">15%</button>
+                            <button type="button" class="preset-chip active" data-preset="20">20%</button>
+                            <button type="button" class="preset-chip" data-preset="25">25%</button>
+                            <button type="button" class="preset-chip" data-preset="30">30%</button>
+                            <button type="button" class="preset-chip" data-preset="40">40%</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. LANDED SOURCING & FULFILLMENT COSTS -->
+              <div class="col-12">
+                <div class="section-divider-title">
+                  <i class="bi bi-truck text-secondary"></i> 2. Landed Logistics &amp; Fulfillment Costs
+                </div>
+              </div>
+
+              <!-- Inbound Sourcing Freight & Logistics -->
+              <div class="col-sm-6 col-lg-12">
+                <label for="freight" class="form-label fw-semibold small mb-1">Inbound Logistics &amp; Freight Cost</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="freight" value="0" min="0" step="0.01">
+                </div>
+                <div class="form-text" style="font-size:0.73rem;">Forwarder, sea/air cargo, customs, or supplier delivery / unit</div>
+              </div>
+
+              <!-- Units per Bundle -->
+              <div class="col-sm-6 col-lg-12">
+                <label for="units" class="form-label fw-semibold small mb-1">Units Per Bundle / SKU</label>
+                <div class="input-group input-group-sm">
+                  <input type="number" class="form-control" id="units" value="1" min="1" step="1">
+                  <span class="input-group-text">pcs</span>
+                </div>
+                <div class="form-text" style="font-size:0.73rem;">Multiplies supplier base cost and unit freight</div>
+              </div>
+
+              <!-- Packaging & Active Expenses Link Indicator -->
+              <div class="col-12">
+                <div class="p-2 rounded bg-body-tertiary border d-flex justify-content-between align-items-center" style="font-size:0.75rem;">
+                  <div>
+                    <span class="fw-semibold text-body-secondary"><i class="bi bi-box me-1"></i>Packaging &amp; OPEX:</span>
+                    <span class="ms-1" id="activePackOpexSummary">₱0.00 pack / unit</span>
+                  </div>
+                  <a href="expenses.html" class="text-primary text-decoration-none fw-semibold">Edit &rarr;</a>
+                </div>
+              </div>
+
+              <!-- 3. TAX STATUS & PRICING MODE -->
+              <div class="col-12">
+                <div class="section-divider-title">
+                  <i class="bi bi-receipt text-info"></i> 3. Tax Status &amp; Pricing Mode
+                </div>
+              </div>
+
               <!-- Tax Registration -->
               <div class="col-12">
                 <label class="form-label fw-semibold small mb-1">BIR Tax Registration</label>
@@ -129,58 +241,25 @@
                 </div>
               </div>
 
-              <!-- Base Cost -->
-              <div class="col-sm-6 col-lg-12">
-                <label for="cost" class="form-label fw-semibold small mb-1">Base Product Cost (Supplier Price)</label>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="cost" value="100" min="0" step="0.01">
-                </div>
-                <div class="form-text" style="font-size:0.75rem;">Supplier factory or wholesale item price</div>
-              </div>
-
-              <!-- Inbound Sourcing Freight & Logistics -->
-              <div class="col-sm-6 col-lg-12">
-                <label for="freight" class="form-label fw-semibold small mb-1">Inbound Logistics &amp; Freight Cost</label>
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="freight" value="0" min="0" step="0.01">
-                </div>
-                <div class="form-text" style="font-size:0.75rem;">Forwarder, sea/air cargo, customs, or supplier delivery / unit</div>
-              </div>
-
-              <!-- Units per Bundle -->
-              <div class="col-sm-6 col-lg-12">
-                <label for="units" class="form-label fw-semibold small mb-1">Units Per Bundle</label>
-                <div class="input-group input-group-sm">
-                  <input type="number" class="form-control" id="units" value="1" min="1" step="1">
-                  <span class="input-group-text">pcs</span>
-                </div>
-              </div>
-
-              <!-- Target Margin -->
-              <div class="col-sm-6 col-lg-12">
-                <label for="mg" class="form-label fw-semibold small mb-1">Target Net Margin</label>
-                <div class="input-group input-group-sm">
-                  <input type="number" class="form-control" id="mg" value="20" min="0" max="80" step="0.5">
-                  <span class="input-group-text">%</span>
-                </div>
-                <div class="form-text" style="font-size:0.75rem;">Profit target (% of net sales)</div>
-              </div>
-
               <!-- Fixed Selling Price (Optional) -->
-              <div class="col-sm-6 col-lg-12">
-                <label for="srp" class="form-label fw-semibold small mb-1">Fixed Price Override (Optional)</label>
+              <div class="col-12">
+                <label for="srp" class="form-label fw-semibold small mb-1 d-flex justify-content-between align-items-center">
+                  <span>Fixed Price Override (Optional)</span>
+                  <span class="badge bg-secondary-subtle text-secondary" style="font-size:0.62rem;">Manual Mode</span>
+                </label>
                 <div class="input-group input-group-sm">
                   <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="srp" placeholder="Leave empty to solve" min="0" step="1">
+                  <input type="number" class="form-control" id="srp" placeholder="Leave empty to auto-solve for target margin" min="0" step="1">
                 </div>
-                <div class="form-text" style="font-size:0.75rem;">Overrides auto margin pricing</div>
+                <div class="form-text" style="font-size:0.73rem;">Overrides auto-target pricing to stress-test margins</div>
               </div>
 
-              <!-- Categories -->
+              <!-- 4. MARKETPLACE CATEGORIES & OPT-IN CAMPAIGNS -->
               <div class="col-12">
-                <hr class="my-2">
+                <div class="section-divider-title">
+                  <i class="bi bi-grid-3x3-gap text-danger"></i> 4. Marketplace Categories &amp; Opt-In Campaigns
+                </div>
+              </div>
                 <div class="mb-2">
                   <label for="cs" class="form-label fw-semibold small mb-1 text-danger">Shopee Category</label>
                   <select class="form-select form-select-sm" id="cs"></select>
@@ -558,6 +637,29 @@
               <div class="suggested-price-display mb-2 text-primary-emphasis">
                 ${P(r.price)}
               </div>
+
+              <!-- Primary Value & Profit Anchors -->
+              <div class="row g-1.5 mb-2 py-1">
+                <div class="col-6">
+                  <div class="p-1.5 px-2 rounded bg-body border d-flex flex-column text-start">
+                    <span class="text-body-secondary" style="font-size:0.65rem; text-transform:uppercase; font-weight:700; letter-spacing:0.02em;">
+                      <i class="bi bi-box-seam text-primary me-0.5"></i>Supplier Base Cost
+                    </span>
+                    <span class="fw-bold text-primary fs-6">${P(r.baseProductCost)}</span>
+                    <span class="text-body-secondary" style="font-size:0.62rem;">${o.units > 1 ? o.units + ' units bundle' : '1 unit item price'}</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-1.5 px-2 rounded bg-body border d-flex flex-column text-start">
+                    <span class="text-body-secondary" style="font-size:0.65rem; text-transform:uppercase; font-weight:700; letter-spacing:0.02em;">
+                      <i class="bi bi-graph-up-arrow text-success me-0.5"></i>Target Net Profit
+                    </span>
+                    <span class="fw-bold ${r.profit >= 0 ? 'text-success' : 'text-danger'} fs-6">${P(r.profit)}</span>
+                    <span class="text-body-secondary" style="font-size:0.62rem;">${(r.mg * 100).toFixed(1)}% margin on price</span>
+                  </div>
+                </div>
+              </div>
+
               <div class="d-flex justify-content-between align-items-center pt-2 border-top">
                 <div>
                   <span class="text-body-secondary small fw-medium">Net Take-Home:</span>
@@ -591,21 +693,53 @@
               </div>
             </div>
 
-            <!-- Detailed Breakdown -->
+            <!-- Detailed Breakdown Structured by Economic Priority -->
             <div class="flex-grow-1">
-              <div class="fw-bold text-uppercase text-body-secondary small mb-1 mt-2" style="font-size:0.75rem;">
-                Mandatory Platform Fees
+              <!-- 1. Core Economic Anchors -->
+              <div class="d-flex justify-content-between align-items-center fw-bold text-uppercase text-body-secondary small mb-1 mt-2" style="font-size:0.75rem;">
+                <span><i class="bi bi-bullseye text-primary me-1"></i>1. Core Value &amp; Profit</span>
+                <span class="badge bg-primary-subtle text-primary" style="font-size:0.62rem;">Foundation</span>
+              </div>
+              <div class="breakdown-row highlight-core-row">
+                <span class="fw-semibold text-primary">Base Product Cost (Supplier)</span>
+                <span class="fw-bold text-primary">${P(r.baseProductCost)}</span>
+              </div>
+              <div class="breakdown-row highlight-profit-row">
+                <span class="fw-semibold text-success">Target Net Profit (${(r.mg * 100).toFixed(1)}%)</span>
+                <span class="fw-bold text-success">${P(r.profit)}</span>
+              </div>
+
+              <!-- 2. Landed Logistics & Fulfillment Costs -->
+              <div class="d-flex justify-content-between align-items-center fw-bold text-uppercase text-body-secondary small mb-1 mt-3" style="font-size:0.75rem;">
+                <span><i class="bi bi-truck text-secondary me-1"></i>2. Landed Sourcing &amp; OPEX</span>
+                <span class="badge bg-secondary-subtle text-secondary" style="font-size:0.62rem;">Fulfillment</span>
+              </div>
+              ${r.sourcingFreight > 0 ? rowHtml('Inbound Sourcing Freight (' + o.units + ' unit' + (o.units > 1 ? 's' : '') + ')', r.sourcingFreight) : ''}
+              ${r.pack > 0 ? rowHtml('Packaging Cost', r.pack) : ''}
+              ${r.opex > 0 ? rowHtml('Overhead OPEX (' + pl.n + ')', r.opex) : ''}
+              ${r.adcost > 0 ? (
+                r.nonrecoverableAdVat ?
+                  rowHtml('Pre-VAT Ad Spend (' + pl.n + ')', r.adcost) +
+                  rowHtml('Nonrecoverable Ad VAT (12%)', r.totalAdCost - r.adcost)
+                : rowHtml('Ad Spend (' + pl.n + ')', r.adcost)
+              ) : ''}
+              ${rowHtml('All-in Landed Cost', r.cost, true)}
+
+              <!-- 3. Marketplace Deductions & Taxes -->
+              <div class="d-flex justify-content-between align-items-center fw-bold text-uppercase text-body-secondary small mb-1 mt-3" style="font-size:0.75rem;">
+                <span><i class="bi bi-shop text-danger me-1"></i>3. Marketplace Fees &amp; Taxes</span>
+                <span class="badge bg-danger-subtle text-danger" style="font-size:0.62rem;">Deductions</span>
               </div>
               ${mandatoryFees.map(x => rowHtml(x[0], x[1])).join('')}
 
               ${optFees.length ? `
-                <div class="fw-bold text-uppercase text-body-secondary small mb-1 mt-3" style="font-size:0.75rem;">
+                <div class="fw-semibold text-body-secondary small mb-1 mt-2" style="font-size:0.72rem;">
                   Opt-In Programs
                 </div>
                 ${optFees.map(x => rowHtml(x[0], x[1])).join('')}
               ` : ''}
 
-              <div class="fw-bold text-uppercase text-body-secondary small mb-1 mt-3" style="font-size:0.75rem;">
+              <div class="fw-semibold text-body-secondary small mb-1 mt-2" style="font-size:0.72rem;">
                 Philippine Taxes
               </div>
               ${o.vat ? 
@@ -615,23 +749,7 @@
               }
               ${rowHtml('Withholding Tax (0.5%)', r.wh)}
 
-              ${rowHtml('Total Deductions', r.ded, true)}
-
-              <div class="fw-bold text-uppercase text-body-secondary small mb-1 mt-3" style="font-size:0.75rem;">
-                Costs &amp; Landed Profit
-              </div>
-              ${rowHtml('Supplier Cost (' + o.units + ' unit' + (o.units > 1 ? 's' : '') + ')', r.baseProductCost)}
-              ${r.sourcingFreight > 0 ? rowHtml('Inbound Sourcing Freight (' + o.units + ' unit' + (o.units > 1 ? 's' : '') + ')', r.sourcingFreight) : ''}
-              ${r.pack > 0 ? rowHtml('Packaging Cost', r.pack) : ''}
-              ${r.opex > 0 ? rowHtml('Overhead (' + pl.n + ')', r.opex) : ''}
-              ${r.adcost > 0 ? (
-                r.nonrecoverableAdVat ?
-                  rowHtml('Pre-VAT Ad Spend (' + pl.n + ')', r.adcost) +
-                  rowHtml('Nonrecoverable Ad VAT (12%)', r.totalAdCost - r.adcost)
-                : rowHtml('Ad Spend (' + pl.n + ')', r.adcost)
-              ) : ''}
-              ${rowHtml('All-in Landed Cost', r.cost, true)}
-              ${rowHtml('Net Profit', r.profit, true)}
+              ${rowHtml('Total Marketplace Deductions', r.ded, true)}
             </div>
 
             <!-- Richmond Tan ROAS & Margin Analytics Footer -->
@@ -765,13 +883,35 @@
         (!vatChecked || !$('#claim').checked);
 
       const freightVal = $('#freight') ? Math.max(0, +$('#freight').value || 0) : (profile.sourcingFreight || 0);
+      const baseCost = Math.max(0, +$('#cost').value || 0);
+      const units = Math.max(1, +$('#units').value || 1);
+
+      if ($('#costPerBatchPreview')) {
+        $('#costPerBatchPreview').textContent = units > 1 ? 
+          `${P(baseCost * units)} (${units} pcs × ${P(baseCost)})` : 
+          `${P(baseCost)} / unit`;
+      }
+
+      if ($('#activePackOpexSummary')) {
+        const pack = profile.packagingCost || 0;
+        $('#activePackOpexSummary').textContent = `${P(pack)} pack + ${P(freightVal)} freight / unit`;
+      }
+
+      const curMg = Math.round(+$('#mg').value || 0);
+      document.querySelectorAll('#marginPresetContainer .preset-chip').forEach(btn => {
+        if (+btn.dataset.preset === curMg) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
 
       const o = {
         vat: vatChecked,
-        cost: Math.max(0, +$('#cost').value || 0),
+        cost: baseCost,
         freight: freightVal,
         sourcingFreight: freightVal,
-        units: Math.max(1, +$('#units').value || 1),
+        units: units,
         pack: Math.max(0, profile.packagingCost || 0),
         opex: 0,
         adcost: 0,
@@ -823,6 +963,7 @@
       $('#nv').checked = true;
       $('#vat').checked = false;
       $('#cost').value = '100';
+      if ($('#freight')) $('#freight').value = '0';
       $('#units').value = '1';
       $('#mg').value = '20';
       $('#srp').value = '';
@@ -852,6 +993,13 @@
     document.querySelectorAll('input, select').forEach(e => {
       e.addEventListener('input', render);
       e.addEventListener('change', render);
+    });
+
+    document.querySelectorAll('#marginPresetContainer .preset-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        $('#mg').value = btn.dataset.preset;
+        render();
+      });
     });
 
     $('#resetDefaultsBtn').addEventListener('click', resetDefaults);
