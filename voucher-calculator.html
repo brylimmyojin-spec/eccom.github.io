@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Seller Voucher Profitability Calculator | PH Marketplace Fee &amp; Margin Calculator</title>
+  <meta name="description" content="Calculate if your Shopee seller-initiated Shop Voucher, Product Voucher, Follow Prize, or Coins Cashback voucher is still profitable after Shopee fees and BIR taxes.">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="./css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg app-navbar sticky-top shadow-sm py-2">
+      <div class="container-fluid px-3 px-md-4 px-xl-5">
+        <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none flex-shrink-0" href="index.html">
+          <span class="brand-flag">🇵🇭</span>
+          <div class="d-flex flex-column lh-1">
+            <span class="brand-title fw-bold">PH Marketplace</span>
+            <span class="brand-subtitle text-body-secondary">Fee &amp; Margin Calculator</span>
+          </div>
+        </a>
+        <button class="navbar-toggler border-0 shadow-none px-2 py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3 align-items-lg-center">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html"><i class="bi bi-calculator"></i>Pricing Simulator</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-tags"></i>Shopee Promos
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="discount-calculator.html"><i class="bi bi-tags-fill"></i>Discount, Bundle &amp; Add-on</a></li>
+                <li><a class="dropdown-item active" href="voucher-calculator.html"><i class="bi bi-ticket-perforated-fill"></i>Seller Vouchers &amp; Coins</a></li>
+                <li><a class="dropdown-item" href="campaign-calculator.html"><i class="bi bi-megaphone-fill"></i>Campaigns &amp; Flash Deals</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line"></i>Comparison</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="roas-calculator.html"><i class="bi bi-graph-up-arrow"></i>ROAS &amp; Ads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="expenses.html"><i class="bi bi-cash-coin"></i>Expenses</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-journal-bookmark"></i>Guides &amp; Portals
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="opt-in-fees.html"><i class="bi bi-shield-check"></i>Opt-In Fees &amp; RTS</a></li>
+                <li><a class="dropdown-item" href="fee-reference.html"><i class="bi bi-journal-bookmark-fill"></i>Fee Reference</a></li>
+                <li><a class="dropdown-item" href="tax-guide.html"><i class="bi bi-bank"></i>Tax &amp; BIR Guide</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="seller-centers.html"><i class="bi bi-box-arrow-up-right"></i>Seller Portals</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2 pt-2 pt-lg-0 border-top border-lg-0 flex-shrink-0">
+            <button class="btn btn-outline-secondary btn-sm rounded-pill d-flex align-items-center gap-1.5 px-3 py-1.5" id="themeToggle" type="button" title="Toggle dark/light mode">
+              <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+              <span id="themeText">Theme</span>
+            </button>
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub" style="width: 34px; height: 34px;">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-fluid px-3 px-md-4 px-xl-5 py-3 py-xl-4 flex-grow-1">
+
+    <!-- Hero Title -->
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-4 gap-3">
+      <div>
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+          <span class="badge badge-shopee px-2.5 py-1 fw-semibold">
+            <i class="bi bi-ticket-perforated-fill me-1"></i>Shopee Seller-Initiated Vouchers
+          </span>
+          <span class="badge bg-body-tertiary text-body-secondary border px-2.5 py-1" style="font-size:0.75rem;">
+            Fix Amount &bull; % Off (Capped) &bull; Coins Cashback
+          </span>
+        </div>
+        <h1 class="h2 mb-1 fw-bold">Seller Voucher Profitability Calculator</h1>
+        <p class="text-body-secondary mb-0">
+          Simulate Shop Vouchers, Product Vouchers, Follow Prizes, and Live/Video Vouchers — including Minimum Spend floors, Coins Cashback fee impact, and total campaign budget exposure.
+        </p>
+      </div>
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        <button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1.5 px-3 py-2" id="syncFromSimulatorBtn" type="button" title="Load Base Cost, Selling Price, and Shopee settings from Pricing Simulator">
+          <i class="bi bi-arrow-repeat"></i>
+          <span>Sync from Simulator</span>
+        </button>
+        <button class="btn btn-primary btn-sm d-flex align-items-center gap-1.5 px-3 py-2 shadow-sm" id="snapshotBtn" type="button" title="Save voucher profitability breakdown as PNG">
+          <i class="bi bi-camera-fill"></i>
+          <span>Save PNG</span>
+        </button>
+        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-2.5 py-2" onclick="window.print()" type="button" title="Print analysis">
+          <i class="bi bi-printer"></i>
+          <span class="d-none d-sm-inline">Print</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Layout: Inputs Left, Real-Time Voucher Analysis Right -->
+    <div class="row g-4">
+
+      <!-- LEFT SIDEBAR: Inputs -->
+      <div class="col-lg-5 col-xl-4">
+        <div class="card shadow-sm border-0 border-shopee simulator-sidebar">
+          <div class="card-header bg-body-tertiary py-3 d-flex justify-content-between align-items-center">
+            <span class="fw-bold fs-6"><i class="bi bi-ticket-detailed me-2" style="color: var(--shopee-color);"></i>Voucher &amp; Product Inputs</span>
+            <button type="button" class="btn btn-link btn-sm text-decoration-none p-0 text-secondary" id="resetBtn" title="Reset inputs to defaults">
+              <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+            </button>
+          </div>
+
+          <div class="card-body p-3 p-md-4">
+
+            <!-- STEP 1: Product & Basket Info -->
+            <div class="pricing-hero-container mb-3">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-1.5">
+                  <span class="badge text-white px-2 py-1 fw-bold" style="font-size:0.68rem; background-color: var(--shopee-color);">Step 1</span>
+                  <span class="fw-bold fs-6 text-body-emphasis">Product &amp; Order Basket</span>
+                </div>
+                <span class="badge badge-shopee" style="font-size:0.65rem;">Inclusive of Fees</span>
+              </div>
+
+              <div class="row g-2">
+                <!-- Base Cost -->
+                <div class="col-6">
+                  <div class="pricing-driver-card p-2.5">
+                    <label for="baseCost" class="form-label fw-bold text-primary mb-1" style="font-size:0.78rem;">
+                      <i class="bi bi-box-seam-fill me-1"></i>Base Cost / pc
+                    </label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text bg-primary-subtle text-primary fw-bold">₱</span>
+                      <input type="number" class="form-control fw-bold" id="baseCost" value="100" min="0" step="0.01">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Selling Price -->
+                <div class="col-6">
+                  <div class="pricing-driver-card driver-shopee p-2.5">
+                    <label for="sellingPrice" class="form-label fw-bold mb-1" style="font-size:0.78rem; color: var(--shopee-color);">
+                      <i class="bi bi-tag-fill me-1"></i>Selling Price / pc
+                    </label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold" style="background-color: rgba(238,77,45,0.12); color: var(--shopee-color);">₱</span>
+                      <input type="number" class="form-control fw-bold" id="sellingPrice" value="220" min="0" step="0.01">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Order Qty & Existing Listing Discount -->
+                <div class="col-6">
+                  <label for="orderQty" class="form-label small fw-semibold mb-1">Order Quantity</label>
+                  <div class="input-group input-group-sm">
+                    <input type="number" class="form-control fw-bold" id="orderQty" value="2" min="1" step="1">
+                    <span class="input-group-text">pcs</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="listingDiscPct" class="form-label small fw-semibold mb-1">Existing Promo (%)</label>
+                  <div class="input-group input-group-sm">
+                    <input type="number" class="form-control" id="listingDiscPct" value="0" min="0" max="90" step="1">
+                    <span class="input-group-text">% off</span>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="d-flex justify-content-between align-items-center small pt-1 text-body-secondary" style="font-size:0.74rem;">
+                    <span>Order Subtotal before Voucher:</span>
+                    <strong class="text-body-emphasis" id="subtotalPreview">₱440.00</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2: Seller Voucher Setup (Shopee Seller Centre Fields) -->
+            <div class="section-divider-title mt-3">
+              <i class="bi bi-ticket-perforated-fill" style="color: var(--shopee-color);"></i> Step 2. Seller Voucher Setup
+            </div>
+
+            <!-- Voucher Channel / Preset -->
+            <div class="mb-2.5">
+              <label for="voucherChannel" class="form-label small fw-semibold mb-1">Voucher Type (Shopee Marketing Centre)</label>
+              <select class="form-select form-select-sm" id="voucherChannel">
+                <option value="Shop Voucher">Shop Voucher (Applies to all products)</option>
+                <option value="Product Voucher">Product Voucher (Selected SKUs)</option>
+                <option value="Follow Prize">Follow Prize Voucher (New Followers)</option>
+                <option value="Shopee Live Voucher">Shopee Live Voucher</option>
+                <option value="Shopee Video Voucher">Shopee Video Voucher</option>
+                <option value="Repeat Buyer Voucher">Repeat Buyer / Exclusive Voucher</option>
+              </select>
+            </div>
+
+            <!-- Reward Type Tabs -->
+            <div class="shopee-promo-tabs mb-3" role="tablist" aria-label="Voucher Reward Type">
+              <button type="button" class="shopee-promo-tab active" data-reward="fixed" role="tab" aria-selected="true">
+                <i class="bi bi-cash-stack"></i>
+                <span class="promo-tab-title">Fix Amount</span>
+                <span class="promo-tab-sub">₱ Off Order</span>
+              </button>
+              <button type="button" class="shopee-promo-tab" data-reward="pct" role="tab" aria-selected="false">
+                <i class="bi bi-percent"></i>
+                <span class="promo-tab-title">% Discount</span>
+                <span class="promo-tab-sub">% Off + Cap</span>
+              </button>
+              <button type="button" class="shopee-promo-tab" data-reward="coins" role="tab" aria-selected="false">
+                <i class="bi bi-coin"></i>
+                <span class="promo-tab-title">Coins Cashback</span>
+                <span class="promo-tab-sub">% Coins + Cap</span>
+              </button>
+            </div>
+
+            <!-- Reward Parameters Box -->
+            <div class="p-3 rounded-3 border bg-body-tertiary mb-3">
+              <!-- Fixed Amount Input -->
+              <div id="reward-fixed">
+                <label for="voucherFixedAmt" class="form-label small fw-semibold mb-1">Discount Amount (₱)</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text fw-bold">₱</span>
+                  <input type="number" class="form-control fw-bold" id="voucherFixedAmt" value="30" min="0" step="1">
+                  <span class="input-group-text">OFF</span>
+                </div>
+                <div class="d-flex flex-wrap gap-1 mt-2" id="fixedPresets">
+                  <button type="button" class="preset-chip" data-val="10">₱10</button>
+                  <button type="button" class="preset-chip" data-val="20">₱20</button>
+                  <button type="button" class="preset-chip active" data-val="30">₱30</button>
+                  <button type="button" class="preset-chip" data-val="50">₱50</button>
+                  <button type="button" class="preset-chip" data-val="100">₱100</button>
+                </div>
+              </div>
+
+              <!-- Percentage Discount Input -->
+              <div id="reward-pct" class="d-none">
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label for="voucherPct" class="form-label small fw-semibold mb-1">Discount (%)</label>
+                    <div class="input-group input-group-sm">
+                      <input type="number" class="form-control fw-bold" id="voucherPct" value="10" min="0" max="99" step="1">
+                      <span class="input-group-text">% OFF</span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <label for="voucherPctCap" class="form-label small fw-semibold mb-1">Max Discount Cap</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control fw-bold" id="voucherPctCap" value="50" min="0" step="1">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-text mt-1" style="font-size:0.71rem;">Set cap to 0 for no cap (not recommended on Shopee)</div>
+              </div>
+
+              <!-- Coins Cashback Input -->
+              <div id="reward-coins" class="d-none">
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label for="voucherCoinsPct" class="form-label small fw-semibold mb-1">Coins Cashback (%)</label>
+                    <div class="input-group input-group-sm">
+                      <input type="number" class="form-control fw-bold" id="voucherCoinsPct" value="10" min="0" max="99" step="1">
+                      <span class="input-group-text">%</span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <label for="voucherCoinsCap" class="form-label small fw-semibold mb-1">Max Coins Cap</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control fw-bold" id="voucherCoinsCap" value="50" min="0" step="1">
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-2 p-2 rounded bg-body border small text-body-secondary" style="font-size:0.72rem;">
+                  <i class="bi bi-exclamation-circle-fill text-warning me-1"></i>
+                  <strong>Shopee Coins Rule:</strong> Buyer still pays full checkout price, so Shopee fees &amp; BIR taxes are charged on the <em>full subtotal</em>, while Coins cost is deducted from your payout.
+                </div>
+              </div>
+
+              <!-- Min Basket Price & Usage Limit -->
+              <div class="row g-2 mt-2 pt-2 border-top">
+                <div class="col-6">
+                  <label for="minSpend" class="form-label small fw-semibold mb-1">Min. Basket Price</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">₱</span>
+                    <input type="number" class="form-control fw-bold" id="minSpend" value="399" min="0" step="1">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="usageQty" class="form-label small fw-semibold mb-1">Usage Quantity</label>
+                  <div class="input-group input-group-sm">
+                    <input type="number" class="form-control" id="usageQty" value="100" min="1" step="10">
+                    <span class="input-group-text">claims</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: Shopee Fees & Tax Settings -->
+            <div class="section-divider-title mt-3">
+              <i class="bi bi-gear-fill text-secondary"></i> Step 3. Shopee Fees &amp; Tax Settings
+            </div>
+
+            <div class="mb-2.5">
+              <label for="shopeeCategory" class="form-label small fw-semibold mb-1">Shopee Category (Commission)</label>
+              <select class="form-select form-select-sm" id="shopeeCategory"></select>
+            </div>
+
+            <div class="mb-2.5">
+              <label class="form-label small fw-semibold mb-1">BIR Tax Registration</label>
+              <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="taxStatus" id="taxNonVat" value="non-vat" checked>
+                <label class="btn btn-outline-primary btn-sm" for="taxNonVat">Non-VAT (3%)</label>
+
+                <input type="radio" class="btn-check" name="taxStatus" id="taxVat" value="vat">
+                <label class="btn btn-outline-primary btn-sm" for="taxVat">VAT (12%)</label>
+              </div>
+            </div>
+
+            <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('osh'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+              <div class="toggle-card-label">
+                <span class="toggle-card-title">Shopee MDV Program <span class="badge badge-shopee" style="font-size:0.62rem;">4% / 5%</span></span>
+                <span class="toggle-card-subtitle">Mega Discount Voucher (max ₱200/item)</span>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" id="osh">
+              </div>
+            </div>
+
+            <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('camp'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+              <div class="toggle-card-label">
+                <span class="toggle-card-title">Spike / Double-Double Day <span class="badge bg-warning-subtle text-warning-emphasis" style="font-size:0.62rem;">5% MDV</span></span>
+                <span class="toggle-card-subtitle">Payday, 11.11, 12.12 campaign rate</span>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" id="camp">
+              </div>
+            </div>
+
+            <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('shRts'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+              <div class="toggle-card-label">
+                <span class="toggle-card-title">Free Returns / RTS Protection</span>
+                <span class="toggle-card-subtitle">₱2.00 flat fee per order</span>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" id="shRts">
+              </div>
+            </div>
+
+            <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('shFreeComm'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+              <div class="toggle-card-label">
+                <span class="toggle-card-title">90-Day 0% Commission <span class="badge bg-success-subtle text-success-emphasis" style="font-size:0.62rem;">New Seller</span></span>
+                <span class="toggle-card-subtitle">Waives Shopee category commission</span>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" id="shFreeComm">
+              </div>
+            </div>
+
+            <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('wht'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+              <div class="toggle-card-label">
+                <span class="toggle-card-title">0.5% BIR Withholding Tax</span>
+                <span class="toggle-card-subtitle">Creditable WHT deducted by Shopee</span>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" id="wht" checked>
+              </div>
+            </div>
+
+            <div class="toggle-card d-none" id="claimVatCard" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('claim'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+              <div class="toggle-card-label">
+                <span class="toggle-card-title">Claim Input VAT on Fees</span>
+                <span class="toggle-card-subtitle">Offsets 12% VAT inside Shopee fees</span>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" id="claim">
+              </div>
+            </div>
+
+            <div class="mt-2.5">
+              <label for="extraCost" class="form-label small fw-semibold mb-1">Packaging / OPEX / Ads per Order (Optional)</label>
+              <div class="input-group input-group-sm">
+                <span class="input-group-text">₱</span>
+                <input type="number" class="form-control" id="extraCost" value="0" min="0" step="0.5">
+                <span class="input-group-text">/ order</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL: Voucher Profitability Analysis -->
+      <div class="col-lg-7 col-xl-8" id="captureArea">
+
+        <!-- Min Spend Warning Alert (shown if current basket < Min Spend) -->
+        <div class="alert alert-warning d-none align-items-center justify-content-between gap-2 mb-3 shadow-sm" id="minSpendAlert" role="alert">
+          <div class="small">
+            <i class="bi bi-exclamation-triangle-fill me-1.5"></i>
+            <strong>Basket below Min. Spend:</strong> Current order subtotal (<span id="alertSubtotal">₱0</span>) is less than your Min. Spend (<span id="alertMinSpend">₱0</span>). The voucher cannot be claimed on this order yet.
+          </div>
+          <button type="button" class="btn btn-sm btn-warning fw-semibold text-nowrap" id="autoQtyBtn">Match Min. Spend</button>
+        </div>
+
+        <!-- 1. PROFITABILITY VERDICT HERO CARD -->
+        <div class="card shadow-sm border-0 mb-4 verdict-card verdict-profit" id="verdictCard">
+          <div class="card-body p-3 p-md-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3 pb-3 border-bottom">
+              <div class="d-flex align-items-center gap-3">
+                <div class="verdict-icon-box" id="verdictIconBox">
+                  <i class="bi bi-check-circle-fill" id="verdictIcon"></i>
+                </div>
+                <div>
+                  <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+                    <span class="badge fw-bold px-2.5 py-1" id="verdictBadge">STILL PROFITABLE</span>
+                    <span class="badge bg-body text-body-secondary border" id="activeVoucherBadge">Shop Voucher</span>
+                  </div>
+                  <h2 class="h4 fw-bold mb-0" id="verdictTitle">Yes — This seller voucher is profitable!</h2>
+                  <p class="text-body-secondary small mb-0 mt-0.5" id="verdictSubtitle">Your order stays profitable after voucher cost, Shopee fees, and BIR taxes.</p>
+                </div>
+              </div>
+              <div class="text-md-end">
+                <div class="text-body-secondary small fw-semibold text-uppercase" style="font-size:0.7rem; letter-spacing:0.05em;">Net Profit / Order</div>
+                <div class="verdict-profit-number" id="heroNetProfit">₱0.00</div>
+                <div class="small fw-semibold" id="heroMarginBadge">0.00% Net Margin</div>
+              </div>
+            </div>
+
+            <!-- 4 KPI Tiles -->
+            <div class="row g-2.5">
+              <div class="col-6 col-md-3">
+                <div class="cmp-kpi-card h-100">
+                  <div class="text-body-secondary small" style="font-size:0.73rem;">Seller Voucher Cost</div>
+                  <div class="fw-bold fs-5" style="color: var(--shopee-color);" id="kpiVoucherCost">₱0.00</div>
+                  <div class="small text-body-secondary" style="font-size:0.72rem;" id="kpiEffDisc">0.0% of order</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="cmp-kpi-card h-100">
+                  <div class="text-body-secondary small" style="font-size:0.73rem;">Shopee Payout (Take-Home)</div>
+                  <div class="fw-bold fs-5 text-primary" id="kpiTakeHome">₱0.00</div>
+                  <div class="small text-body-secondary" style="font-size:0.72rem;" id="kpiBuyerPays">Buyer pays: ₱0.00</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="cmp-kpi-card h-100">
+                  <div class="text-body-secondary small" style="font-size:0.73rem;">Max Safe Voucher</div>
+                  <div class="fw-bold fs-5 text-warning-emphasis" id="kpiMaxVoucher">₱0.00</div>
+                  <div class="small text-body-secondary" style="font-size:0.72rem;" id="kpiMaxVoucherSub">Before ₱0 profit</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="cmp-kpi-card h-100">
+                  <div class="text-body-secondary small" style="font-size:0.73rem;">Profit Impact vs No Voucher</div>
+                  <div class="fw-bold fs-5" id="kpiProfitDelta">₱0.00</div>
+                  <div class="small text-body-secondary" style="font-size:0.72rem;" id="kpiVolumeLift">1.00× orders to match</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. SHOPEE VOUCHER TICKET PREVIEW + CAMPAIGN BUDGET EXPOSURE -->
+        <div class="row g-4 mb-4">
+          <!-- Shopee Voucher Ticket Visual -->
+          <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-header bg-body-tertiary py-2.5 d-flex justify-content-between align-items-center">
+                <span class="fw-bold small"><i class="bi bi-ticket-perforated me-1.5" style="color: var(--shopee-color);"></i>Shopee Voucher Preview</span>
+                <span class="badge badge-shopee" id="ticketChannelBadge">Shop Voucher</span>
+              </div>
+              <div class="card-body p-3 d-flex flex-column justify-content-between">
+                <div class="shopee-voucher-ticket mb-3">
+                  <div class="voucher-stub">
+                    <i class="bi bi-shop fs-4 mb-1"></i>
+                    <span class="fw-bold" style="font-size:0.65rem; letter-spacing:0.04em;" id="stubTag">SHOP VOUCHER</span>
+                  </div>
+                  <div class="voucher-body">
+                    <div class="fw-bold fs-5 lh-sm" style="color: var(--shopee-color);" id="ticketHeadline">₱30 OFF</div>
+                    <div class="small text-body-secondary mt-0.5" id="ticketMinSpend">Min. Spend ₱399.00</div>
+                    <div class="d-flex align-items-center justify-content-between mt-2">
+                      <span class="badge bg-body-tertiary text-body-secondary border" style="font-size:0.66rem;" id="ticketCapNote">Fix Amount</span>
+                      <span class="small fw-semibold text-body-secondary" style="font-size:0.7rem;" id="ticketClaimsNote">100 claims</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Revenue Split Bar -->
+                <div>
+                  <div class="mb-1.5 d-flex justify-content-between align-items-center small">
+                    <span class="fw-semibold text-body-secondary">Order Subtotal Allocation</span>
+                    <span class="text-body-secondary" id="barSubLabel">₱440.00 Gross</span>
+                  </div>
+                  <div class="progress mb-2" style="height: 13px; border-radius: 7px;">
+                    <div class="progress-bar bg-secondary" id="barCogs" style="width: 45%;" title="COGS &amp; OPEX"></div>
+                    <div class="progress-bar" id="barVoucher" style="width: 10%; background-color: var(--shopee-color);" title="Seller Voucher"></div>
+                    <div class="progress-bar bg-warning" id="barFees" style="width: 20%;" title="Shopee Fees &amp; Tax"></div>
+                    <div class="progress-bar bg-success" id="barProfit" style="width: 25%;" title="Net Profit"></div>
+                  </div>
+                  <div class="d-flex flex-wrap justify-content-between gap-1 small" style="font-size:0.72rem;">
+                    <span><span class="legend-indicator bg-secondary"></span>COGS: <strong id="legCogs">0%</strong></span>
+                    <span><span class="legend-indicator" style="background: var(--shopee-color);"></span>Voucher: <strong id="legVoucher">0%</strong></span>
+                    <span><span class="legend-indicator bg-warning"></span>Fees: <strong id="legFees">0%</strong></span>
+                    <span><span class="legend-indicator" id="legProfitDot" style="background: var(--profit-color);"></span>Profit: <strong id="legProfit">0%</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Campaign Budget & Min Spend Guardrails -->
+          <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-header bg-body-tertiary py-2.5 d-flex justify-content-between align-items-center">
+                <span class="fw-bold small"><i class="bi bi-wallet2 me-1.5 text-primary"></i>Campaign Budget &amp; Min. Spend Guard</span>
+                <span class="badge bg-body text-body-secondary border" style="font-size:0.68rem;" id="budgetClaimsBadge">100 Claims</span>
+              </div>
+              <div class="card-body p-3 d-flex flex-column justify-content-between">
+                <div>
+                  <div class="breakdown-row">
+                    <span class="text-body-secondary">Max Campaign Voucher Cost</span>
+                    <strong style="color: var(--shopee-color);" id="campTotalVoucherCost">₱0.00</strong>
+                  </div>
+                  <div class="breakdown-row">
+                    <span class="text-body-secondary">Projected Gross Sales (All Claims)</span>
+                    <strong id="campTotalSales">₱0.00</strong>
+                  </div>
+                  <div class="breakdown-row">
+                    <span class="text-body-secondary">Projected Net Profit (All Claims)</span>
+                    <strong class="text-success" id="campTotalProfit">₱0.00</strong>
+                  </div>
+                  <div class="breakdown-row">
+                    <span class="text-body-secondary">Voucher ROAS (Sales ÷ Voucher Cost)</span>
+                    <strong id="campVoucherRoas">0.00×</strong>
+                  </div>
+                  <div class="breakdown-row">
+                    <span class="text-body-secondary">Safe Min. Spend Floor (Break-Even)</span>
+                    <strong class="text-danger" id="guardMinSpendFloor">₱0.00</strong>
+                  </div>
+                </div>
+                <div class="mt-2 p-2.5 rounded-3 bg-body-tertiary border small" style="font-size:0.77rem;">
+                  <i class="bi bi-lightbulb-fill text-warning me-1"></i>
+                  <span id="guardAdviceText">Configure your voucher and basket to see Min. Spend safety recommendations.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. BEFORE VS AFTER VOUCHER BREAKDOWN TABLE -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-header bg-body-tertiary py-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+            <span class="fw-bold"><i class="bi bi-receipt-cutoff me-2 text-primary"></i>Order Payout Breakdown (No Voucher vs. With Seller Voucher)</span>
+            <span class="badge bg-body text-body-secondary border" id="breakdownMeta">Shopee PH &bull; Non-VAT</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 small">
+              <thead class="table-light">
+                <tr>
+                  <th class="ps-3">Line Item</th>
+                  <th class="text-end">Without Voucher</th>
+                  <th class="text-end" style="color: var(--shopee-color);">With Seller Voucher</th>
+                  <th class="text-end pe-3">Difference (Δ)</th>
+                </tr>
+              </thead>
+              <tbody id="breakdownTableBody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 4. BASKET SIZE / MIN. SPEND SENSITIVITY LADDER -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-header bg-body-tertiary py-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+            <div>
+              <span class="fw-bold"><i class="bi bi-layers me-2" style="color: var(--shopee-color);"></i>Basket Size &amp; Min. Spend Profitability Ladder</span>
+              <div class="text-body-secondary small" style="font-size:0.76rem;">
+                Check if buyers redeeming your voucher right at Min. Spend (worst-case %) or buying multiple units stay profitable
+              </div>
+            </div>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle" id="ladderMinSpendBadge">Min. Spend: ₱399</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm table-hover align-middle mb-0 small">
+              <thead class="table-light">
+                <tr>
+                  <th class="ps-3">Order Scenario</th>
+                  <th class="text-end">Order Subtotal</th>
+                  <th class="text-end">Voucher Cost</th>
+                  <th class="text-end">Fees &amp; Tax</th>
+                  <th class="text-end">Take-Home</th>
+                  <th class="text-end">Net Profit</th>
+                  <th class="text-end">Margin</th>
+                  <th class="text-center pe-3">Status</th>
+                </tr>
+              </thead>
+              <tbody id="sensitivityTableBody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="mt-auto py-3 border-top bg-body-tertiary text-body-secondary small">
+    <div class="container-fluid px-3 px-md-4 px-xl-5 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+      <div>PH Marketplace Fee &amp; Margin Calculator &bull; Seller Voucher Profitability Calculator</div>
+      <div>Models Shopee PH 2026 seller fee deductions for Fix Amount, % Discount, and Coins Cashback vouchers.</div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- html2canvas for PNG export -->
+  <script src="./js/html2canvas.min.js"></script>
+  <!-- App Data & Core Engine -->
+  <script src="./js/data.js"></script>
+  <script src="./js/calculator.js"></script>
+
+  <script>
+    (function () {
+      const $ = id => document.getElementById(id);
+      const VOUCHER_STORAGE_KEY = 'ph-marketplace-voucher-calc-v1';
+
+      let activeReward = 'fixed'; // 'fixed' | 'pct' | 'coins'
+
+      function populateCategories() {
+        const sel = $('shopeeCategory');
+        sel.innerHTML = '';
+        D.sh.forEach((item, idx) => {
+          const opt = document.createElement('option');
+          opt.value = idx;
+          opt.textContent = `${item[0]} (${(item[1] * 100).toFixed(1)}%)`;
+          sel.appendChild(opt);
+        });
+        const defIdx = D.sh.findIndex(c => c[0] === 'Food & Beverages');
+        sel.value = defIdx >= 0 ? defIdx : 0;
+      }
+
+      // Compute seller-funded voucher amount for a given order subtotal
+      function computeVoucherAmount(subtotal, voucherCfg) {
+        if (subtotal <= 0 || subtotal < voucherCfg.minSpend) {
+          return { eligible: false, voucherAmt: 0, coinsCost: 0, discountAmt: 0 };
+        }
+        let amt = 0;
+        if (voucherCfg.rewardType === 'fixed') {
+          amt = Math.min(subtotal, voucherCfg.fixedAmt);
+          return { eligible: true, voucherAmt: amt, coinsCost: 0, discountAmt: amt };
+        } else if (voucherCfg.rewardType === 'pct') {
+          const raw = subtotal * (voucherCfg.pct / 100);
+          amt = Math.min(subtotal, voucherCfg.pctCap > 0 ? Math.min(raw, voucherCfg.pctCap) : raw);
+          return { eligible: true, voucherAmt: amt, coinsCost: 0, discountAmt: amt };
+        } else {
+          // Coins Cashback: buyer pays full subtotal; seller pays coins cost out of payout
+          const raw = subtotal * (voucherCfg.coinsPct / 100);
+          amt = Math.min(subtotal, voucherCfg.coinsCap > 0 ? Math.min(raw, voucherCfg.coinsCap) : raw);
+          return { eligible: true, voucherAmt: amt, coinsCost: amt, discountAmt: 0 };
+        }
+      }
+
+      // Evaluate Shopee order with optional seller discount & coins cashback
+      function evaluateVoucherOrder(orderSubtotal, discountAmt, coinsCost, totalCogs, itemCount, settings) {
+        const subtotal = Math.max(0, Number(orderSubtotal) || 0);
+        const disc = Math.max(0, Math.min(subtotal, Number(discountAmt) || 0));
+        const coins = Math.max(0, Number(coinsCost) || 0);
+        const buyerPays = Math.max(0, subtotal - disc); // Fee basis on Shopee
+        const cogs = Math.max(0, Number(totalCogs) || 0);
+        const itemsForMdv = Math.max(1, Number(itemCount) || 1);
+
+        const catIdx = Math.max(0, Math.min(D.sh.length - 1, Number(settings.catIdx) || 0));
+        const catEntry = D.sh[catIdx] || ['General', 0.095];
+        const commRate = settings.freeComm ? 0 : catEntry[1];
+        const transRate = 0.0224;
+        const growthRate = 0.015;
+        const shipRate = 0.056;
+        const shipCap = 100;
+        const opf = buyerPays > 0 ? 5.00 : 0;
+        const rts = (settings.rts && buyerPays > 0) ? 2.00 : 0;
+
+        const mdvRate = settings.mdv ? (settings.camp ? 0.05 : 0.04) : 0;
+        const mdvCap = 200 * itemsForMdv;
+
+        const commFee = buyerPays * commRate;
+        const transFee = buyerPays * transRate;
+        const growthFee = buyerPays * growthRate;
+        const shipFee = Math.min(buyerPays * shipRate, shipCap);
+        const mdvFee = settings.mdv ? Math.min(buyerPays * mdvRate, mdvCap) : 0;
+
+        const platformFees = commFee + transFee + growthFee + shipFee + opf + mdvFee + rts;
+
+        const isVat = Boolean(settings.vat);
+        const vs = isVat ? (0.12 / 1.12) : 0;
+        const outputVat = buyerPays * vs;
+        const inputVatCredit = (isVat && settings.claimVat) ? (platformFees * vs) : 0;
+        const wht = settings.wht ? (buyerPays * 0.005) : 0;
+        const pctTax = isVat ? 0 : (buyerPays * 0.03);
+
+        const netRevenue = buyerPays - outputVat;
+        // Seller payout deducts platform fees, taxes, AND coins cashback if applicable
+        const takeHome = buyerPays - outputVat - platformFees + inputVatCredit - wht - pctTax - coins;
+        const totalFeesAndTax = (buyerPays - (takeHome + coins));
+        const netProfit = takeHome - cogs;
+        const netMargin = netRevenue > 0 ? (netProfit / netRevenue) : (buyerPays > 0 ? (netProfit / buyerPays) : 0);
+
+        return {
+          subtotal,
+          discountAmt: disc,
+          coinsCost: coins,
+          voucherCost: disc + coins,
+          buyerPays,
+          cogs,
+          catName: catEntry[0],
+          commRate,
+          commFee,
+          transFee,
+          growthFee,
+          shipFee,
+          opf,
+          mdvRate,
+          mdvCap,
+          mdvFee,
+          rts,
+          platformFees,
+          outputVat,
+          inputVatCredit,
+          wht,
+          pctTax,
+          totalTaxAndWht: outputVat - inputVatCredit + wht + pctTax,
+          totalFeesAndTax,
+          netRevenue,
+          takeHome,
+          netProfit,
+          netMargin
+        };
+      }
+
+      // Find maximum safe voucher amount (₱) for the current order before netProfit hits ₱0
+      function findMaxSafeVoucher(orderSubtotal, totalCogs, itemCount, rewardType, settings) {
+        if (orderSubtotal <= 0) return 0;
+        const baseEval = evaluateVoucherOrder(orderSubtotal, 0, 0, totalCogs, itemCount, settings);
+        if (baseEval.netProfit <= 0) return 0;
+
+        let low = 0;
+        let high = orderSubtotal;
+        for (let i = 0; i < 60; i++) {
+          const mid = (low + high) / 2;
+          const ev = rewardType === 'coins'
+            ? evaluateVoucherOrder(orderSubtotal, 0, mid, totalCogs, itemCount, settings)
+            : evaluateVoucherOrder(orderSubtotal, mid, 0, totalCogs, itemCount, settings);
+          if (ev.netProfit >= 0) low = mid;
+          else high = mid;
+        }
+        return Math.floor(low * 100) / 100;
+      }
+
+      // Find minimum safe basket subtotal (Min. Spend) where applying this voucher still breaks even
+      // Uses the product's cost-to-price ratio (COGS ratio) to model proportional COGS at any basket size
+      function findSafeMinSpendFloor(unitPriceAfterDisc, unitCost, voucherCfg, settings) {
+        if (unitPriceAfterDisc <= 0) return 0;
+        const cogsRatio = unitCost / unitPriceAfterDisc;
+        // Test if a huge basket is even profitable (e.g., if COGS ratio + fee rate >= 1)
+        const testHigh = (sub) => {
+          const estUnits = Math.max(1, sub / unitPriceAfterDisc);
+          const estCogs = (sub * cogsRatio) + settings.extraCost;
+          const v = computeVoucherAmount(sub, { ...voucherCfg, minSpend: 0 });
+          return evaluateVoucherOrder(sub, v.discountAmt, v.coinsCost, estCogs, estUnits, settings).netProfit;
+        };
+        if (testHigh(1e6) < 0) return null;
+
+        let low = 1;
+        let high = Math.max(100, unitPriceAfterDisc * 2);
+        while (testHigh(high) < 0 && high < 1e7) high *= 2;
+        for (let i = 0; i < 60; i++) {
+          const mid = (low + high) / 2;
+          if (testHigh(mid) >= 0) high = mid;
+          else low = mid;
+        }
+        return Math.ceil(high);
+      }
+
+      function readInputs() {
+        const baseCost = Math.max(0, Number($('baseCost').value) || 0);
+        const sellingPrice = Math.max(0, Number($('sellingPrice').value) || 0);
+        const orderQty = Math.max(1, Math.floor(Number($('orderQty').value) || 1));
+        const listingDiscPct = Math.max(0, Math.min(95, Number($('listingDiscPct').value) || 0));
+        const unitPriceAfterDisc = sellingPrice * (1 - listingDiscPct / 100);
+        const orderSubtotal = unitPriceAfterDisc * orderQty;
+
+        const voucherCfg = {
+          channel: $('voucherChannel').value,
+          rewardType: activeReward,
+          fixedAmt: Math.max(0, Number($('voucherFixedAmt').value) || 0),
+          pct: Math.max(0, Math.min(99, Number($('voucherPct').value) || 0)),
+          pctCap: Math.max(0, Number($('voucherPctCap').value) || 0),
+          coinsPct: Math.max(0, Math.min(99, Number($('voucherCoinsPct').value) || 0)),
+          coinsCap: Math.max(0, Number($('voucherCoinsCap').value) || 0),
+          minSpend: Math.max(0, Number($('minSpend').value) || 0),
+          usageQty: Math.max(1, Math.floor(Number($('usageQty').value) || 1))
+        };
+
+        const settings = {
+          catIdx: Number($('shopeeCategory').value) || 0,
+          vat: $('taxVat').checked,
+          claimVat: $('claim').checked,
+          wht: $('wht').checked,
+          mdv: $('osh').checked,
+          camp: $('camp').checked,
+          rts: $('shRts').checked,
+          freeComm: $('shFreeComm').checked,
+          extraCost: Math.max(0, Number($('extraCost').value) || 0)
+        };
+
+        const totalCogs = (baseCost * orderQty) + settings.extraCost;
+
+        return {
+          baseCost,
+          sellingPrice,
+          orderQty,
+          listingDiscPct,
+          unitPriceAfterDisc,
+          orderSubtotal,
+          totalCogs,
+          voucherCfg,
+          settings
+        };
+      }
+
+      function renderBreakdownRow(label, regVal, vVal, opts = {}) {
+        const { isNeg = false, isBold = false, isHighlight = false, isPct = false, invertDeltaColor = false } = opts;
+        const delta = vVal - regVal;
+        const fmt = v => isPct ? pe(v) : (isNeg && v > 0 ? `-${P(v)}` : P(v));
+        const fmtDelta = d => {
+          if (Math.abs(d) < 0.0001) return '<span class="text-body-secondary">—</span>';
+          const sign = d > 0 ? '+' : '-';
+          const txt = isPct ? `${sign}${(Math.abs(d) * 100).toFixed(2)}%` : `${sign}${P(Math.abs(d))}`;
+          let cls = invertDeltaColor ? (d < 0 ? 'text-success' : 'text-danger') : (d > 0 ? 'text-success' : 'text-danger');
+          return `<span class="fw-semibold ${cls}">${txt}</span>`;
+        };
+        const rowCls = isHighlight ? 'table-active fw-bold' : (isBold ? 'fw-semibold' : '');
+        return `
+          <tr class="${rowCls}">
+            <td class="ps-3">${label}</td>
+            <td class="text-end">${fmt(regVal)}</td>
+            <td class="text-end">${fmt(vVal)}</td>
+            <td class="text-end pe-3">${fmtDelta(delta)}</td>
+          </tr>
+        `;
+      }
+
+      function render() {
+        const inp = readInputs();
+        const { voucherCfg, settings, orderSubtotal, totalCogs, orderQty, unitPriceAfterDisc, baseCost } = inp;
+
+        $('subtotalPreview').textContent = P(orderSubtotal);
+
+        const vCalc = computeVoucherAmount(orderSubtotal, voucherCfg);
+        const noVoucherEval = evaluateVoucherOrder(orderSubtotal, 0, 0, totalCogs, orderQty, settings);
+        const withVoucherEval = evaluateVoucherOrder(orderSubtotal, vCalc.discountAmt, vCalc.coinsCost, totalCogs, orderQty, settings);
+
+        const maxSafeVoucher = findMaxSafeVoucher(orderSubtotal, totalCogs, orderQty, voucherCfg.rewardType, settings);
+        const safeMinSpendFloor = findSafeMinSpendFloor(unitPriceAfterDisc, baseCost, voucherCfg, settings);
+
+        // Min Spend Alert
+        const belowMinSpend = !vCalc.eligible && voucherCfg.minSpend > 0;
+        $('minSpendAlert').classList.toggle('d-none', !belowMinSpend);
+        $('minSpendAlert').classList.toggle('d-flex', belowMinSpend);
+        if (belowMinSpend) {
+          $('alertSubtotal').textContent = P(orderSubtotal);
+          $('alertMinSpend').textContent = P(voucherCfg.minSpend);
+        }
+
+        // Verdict Banner
+        const card = $('verdictCard');
+        const badge = $('verdictBadge');
+        const icon = $('verdictIcon');
+        const title = $('verdictTitle');
+        const subtitle = $('verdictSubtitle');
+        const heroProfit = $('heroNetProfit');
+        const heroMargin = $('heroMarginBadge');
+
+        card.classList.remove('verdict-profit', 'verdict-thin', 'verdict-loss');
+
+        if (withVoucherEval.netProfit < -0.005) {
+          card.classList.add('verdict-loss');
+          badge.className = 'badge bg-danger text-white fw-bold px-2.5 py-1';
+          badge.textContent = 'UNPROFITABLE (LOSS)';
+          icon.className = 'bi bi-x-octagon-fill';
+          title.textContent = `No — You lose ${P(Math.abs(withVoucherEval.netProfit))} per redeemed order!`;
+          subtitle.textContent = `Voucher cost (${P(withVoucherEval.voucherCost)}) exceeds your profit buffer. Cap voucher at ${P(maxSafeVoucher)} or raise Min. Spend.`;
+          heroProfit.className = 'verdict-profit-number text-danger';
+          heroProfit.textContent = `-${P(Math.abs(withVoucherEval.netProfit))}`;
+          heroMargin.className = 'small fw-semibold text-danger';
+          heroMargin.textContent = `${pe(withVoucherEval.netMargin)} Net Margin`;
+        } else if (withVoucherEval.netProfit <= 0.005 || withVoucherEval.netMargin < 0.08) {
+          card.classList.add('verdict-thin');
+          badge.className = 'badge bg-warning text-dark fw-bold px-2.5 py-1';
+          badge.textContent = withVoucherEval.netProfit <= 0.005 ? 'BREAK-EVEN' : 'THIN MARGIN (CAUTION)';
+          icon.className = 'bi bi-exclamation-triangle-fill';
+          title.textContent = withVoucherEval.netProfit <= 0.005
+            ? 'Break-Even — ₱0.00 net profit'
+            : `Thin Margin — Only ${P(withVoucherEval.netProfit)} net profit`;
+          subtitle.textContent = 'Low buffer for ads or RTS. Consider increasing Min. Basket Price to lift average order value.';
+          heroProfit.className = 'verdict-profit-number text-warning-emphasis';
+          heroProfit.textContent = P(withVoucherEval.netProfit);
+          heroMargin.className = 'small fw-semibold text-warning-emphasis';
+          heroMargin.textContent = `${pe(withVoucherEval.netMargin)} Net Margin`;
+        } else {
+          card.classList.add('verdict-profit');
+          badge.className = 'badge bg-success text-white fw-bold px-2.5 py-1';
+          badge.textContent = belowMinSpend ? 'PROFITABLE (VOUCHER NOT TRIGGERED)' : (withVoucherEval.netMargin >= 0.20 ? 'HIGHLY PROFITABLE' : 'STILL PROFITABLE');
+          icon.className = 'bi bi-check-circle-fill';
+          title.textContent = belowMinSpend
+            ? `Order is profitable (${P(withVoucherEval.netProfit)}), but below Min. Spend`
+            : `Yes — Voucher stays profitable at ${P(withVoucherEval.netProfit)}/order!`;
+          subtitle.textContent = belowMinSpend
+            ? `Raise order quantity to reach ${P(voucherCfg.minSpend)} to simulate actual voucher redemption.`
+            : `You keep ${pe(withVoucherEval.netMargin)} net margin after ${P(withVoucherEval.voucherCost)} voucher cost and ${P(withVoucherEval.totalFeesAndTax)} fees/taxes.`;
+          heroProfit.className = 'verdict-profit-number text-success';
+          heroProfit.textContent = P(withVoucherEval.netProfit);
+          heroMargin.className = 'small fw-semibold text-success';
+          heroMargin.textContent = `${pe(withVoucherEval.netMargin)} Net Margin`;
+        }
+
+        $('activeVoucherBadge').textContent = voucherCfg.channel;
+
+        // 4 KPI Tiles
+        $('kpiVoucherCost').textContent = P(withVoucherEval.voucherCost);
+        const effVoucherPct = orderSubtotal > 0 ? (withVoucherEval.voucherCost / orderSubtotal) * 100 : 0;
+        $('kpiEffDisc').textContent = vCalc.eligible
+          ? `${effVoucherPct.toFixed(1)}% of order`
+          : 'Not eligible (< Min. Spend)';
+
+        $('kpiTakeHome').textContent = P(withVoucherEval.takeHome);
+        $('kpiBuyerPays').textContent = `Buyer pays: ${P(withVoucherEval.buyerPays)}`;
+
+        $('kpiMaxVoucher').textContent = P(maxSafeVoucher);
+        const maxPct = orderSubtotal > 0 ? (maxSafeVoucher / orderSubtotal) * 100 : 0;
+        $('kpiMaxVoucherSub').textContent = `Up to ${maxPct.toFixed(1)}% off this basket`;
+
+        const pDelta = withVoucherEval.netProfit - noVoucherEval.netProfit;
+        const deltaEl = $('kpiProfitDelta');
+        if (Math.abs(pDelta) < 0.01) {
+          deltaEl.className = 'fw-bold fs-5 text-body-secondary';
+          deltaEl.textContent = '₱0.00';
+        } else if (pDelta > 0) {
+          deltaEl.className = 'fw-bold fs-5 text-success';
+          deltaEl.textContent = `+${P(pDelta)}`;
+        } else {
+          deltaEl.className = 'fw-bold fs-5 text-danger';
+          deltaEl.textContent = `-${P(Math.abs(pDelta))}`;
+        }
+
+        if (withVoucherEval.netProfit <= 0) {
+          $('kpiVolumeLift').textContent = 'Cannot recover via volume';
+        } else if (noVoucherEval.netProfit > 0) {
+          $('kpiVolumeLift').textContent = `${(noVoucherEval.netProfit / withVoucherEval.netProfit).toFixed(2)}× orders to match`;
+        } else {
+          $('kpiVolumeLift').textContent = 'Profitable order';
+        }
+
+        // Ticket Preview
+        $('ticketChannelBadge').textContent = voucherCfg.channel;
+        $('stubTag').textContent = voucherCfg.channel.toUpperCase().replace(' VOUCHER', '');
+        if (voucherCfg.rewardType === 'fixed') {
+          $('ticketHeadline').textContent = `${P(voucherCfg.fixedAmt)} OFF`;
+          $('ticketCapNote').textContent = 'Fix Amount Voucher';
+        } else if (voucherCfg.rewardType === 'pct') {
+          $('ticketHeadline').textContent = `${voucherCfg.pct}% OFF` + (voucherCfg.pctCap > 0 ? ` (Max ${P(voucherCfg.pctCap)})` : '');
+          $('ticketCapNote').textContent = 'Percentage Discount';
+        } else {
+          $('ticketHeadline').textContent = `${voucherCfg.coinsPct}% COINS CASHBACK` + (voucherCfg.coinsCap > 0 ? ` (Max ${P(voucherCfg.coinsCap)})` : '');
+          $('ticketCapNote').textContent = 'Shopee Coins Cashback';
+        }
+        $('ticketMinSpend').textContent = voucherCfg.minSpend > 0 ? `Min. Spend ${P(voucherCfg.minSpend)}` : 'No Min. Spend';
+        $('ticketClaimsNote').textContent = `${voucherCfg.usageQty.toLocaleString()} claims`;
+
+        // Stacked Bar
+        $('barSubLabel').textContent = `${P(orderSubtotal)} Gross`;
+        if (orderSubtotal > 0) {
+          const cPct = Math.min(100, Math.max(0, (withVoucherEval.cogs / orderSubtotal) * 100));
+          const vPct = Math.min(100 - cPct, Math.max(0, (withVoucherEval.voucherCost / orderSubtotal) * 100));
+          const fPct = Math.min(100 - cPct - vPct, Math.max(0, (withVoucherEval.totalFeesAndTax / orderSubtotal) * 100));
+          const pPct = Math.max(0, 100 - cPct - vPct - fPct);
+
+          $('barCogs').style.width = cPct.toFixed(1) + '%';
+          $('barVoucher').style.width = vPct.toFixed(1) + '%';
+          $('barFees').style.width = fPct.toFixed(1) + '%';
+          $('barProfit').style.width = (withVoucherEval.netProfit > 0 ? pPct : 0).toFixed(1) + '%';
+
+          $('legCogs').textContent = ((withVoucherEval.cogs / orderSubtotal) * 100).toFixed(1) + '%';
+          $('legVoucher').textContent = ((withVoucherEval.voucherCost / orderSubtotal) * 100).toFixed(1) + '%';
+          $('legFees').textContent = ((withVoucherEval.totalFeesAndTax / orderSubtotal) * 100).toFixed(1) + '%';
+          $('legProfit').textContent = ((withVoucherEval.netProfit / orderSubtotal) * 100).toFixed(1) + '%';
+          $('legProfitDot').style.background = withVoucherEval.netProfit >= 0 ? 'var(--profit-color)' : '#dc3545';
+        }
+
+        // Campaign Budget & Min Spend Guardrails
+        $('budgetClaimsBadge').textContent = `${voucherCfg.usageQty.toLocaleString()} Claims`;
+        // Use actual voucher cost if eligible, else nominal max voucher cost per claim
+        const perClaimVoucherCost = vCalc.eligible
+          ? withVoucherEval.voucherCost
+          : computeVoucherAmount(Math.max(orderSubtotal, voucherCfg.minSpend), voucherCfg).voucherAmt;
+
+        const maxCampBudget = perClaimVoucherCost * voucherCfg.usageQty;
+        const projSales = orderSubtotal * voucherCfg.usageQty;
+        const projProfit = withVoucherEval.netProfit * voucherCfg.usageQty;
+        const vRoas = perClaimVoucherCost > 0 ? (orderSubtotal / perClaimVoucherCost) : 0;
+
+        $('campTotalVoucherCost').textContent = P(maxCampBudget);
+        $('campTotalSales').textContent = P(projSales);
+        $('campTotalProfit').textContent = projProfit < 0 ? `-${P(Math.abs(projProfit))}` : P(projProfit);
+        $('campTotalProfit').className = projProfit >= 0 ? 'text-success' : 'text-danger';
+        $('campVoucherRoas').textContent = vRoas > 0 ? `${vRoas.toFixed(2)}×` : '—';
+        $('guardMinSpendFloor').textContent = safeMinSpendFloor !== null ? P(safeMinSpendFloor) : 'Unprofitable at any spend';
+
+        if (safeMinSpendFloor === null) {
+          $('guardAdviceText').innerHTML = `<strong>Margin warning:</strong> Your product's cost + Shopee fees + voucher % exceed 100% of selling price. Reduce voucher % or raise SRP.`;
+        } else if (voucherCfg.minSpend > 0 && voucherCfg.minSpend < safeMinSpendFloor) {
+          $('guardAdviceText').innerHTML = `<strong>Raise Min. Spend:</strong> Buyers redeeming right at ${P(voucherCfg.minSpend)} will cause a loss. Set Min. Basket Price to at least <strong>${P(safeMinSpendFloor)}</strong> (or higher for target margin).`;
+        } else if (voucherCfg.rewardType === 'coins') {
+          $('guardAdviceText').innerHTML = `<strong>Coins Cashback note:</strong> Because Shopee charges fees on the full ${P(orderSubtotal)}, a ${voucherCfg.coinsPct}% Coins voucher costs slightly more in total deductions than a ${voucherCfg.coinsPct}% Discount voucher.`;
+        } else {
+          $('guardAdviceText').innerHTML = `<strong>Healthy Min. Spend:</strong> Your Min. Spend (${P(voucherCfg.minSpend)}) is safely above the break-even floor of <strong>${P(safeMinSpendFloor)}</strong>.`;
+        }
+
+        // Breakdown Table
+        $('breakdownMeta').textContent = `${withVoucherEval.catName} • ${settings.vat ? 'VAT (12%)' : 'Non-VAT (3%)'}${settings.mdv ? ' • MDV' : ''}`;
+        const rows = [];
+        rows.push(renderBreakdownRow(`Order Subtotal (${orderQty} pc${orderQty > 1 ? 's' : ''})`, noVoucherEval.subtotal, withVoucherEval.subtotal));
+        if (voucherCfg.rewardType !== 'coins') {
+          rows.push(renderBreakdownRow('Seller Voucher Discount', 0, -withVoucherEval.discountAmt));
+        }
+        rows.push(renderBreakdownRow('Buyer Checkout Price (Shopee Fee Basis)', noVoucherEval.buyerPays, withVoucherEval.buyerPays, { isBold: true }));
+
+        const commLabel = settings.freeComm ? 'Shopee Commission (0% — 90-Day Free)' : `Shopee Commission (${pe(withVoucherEval.commRate)})`;
+        rows.push(renderBreakdownRow(commLabel, noVoucherEval.commFee, withVoucherEval.commFee, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Transaction Fee (2.24%)', noVoucherEval.transFee, withVoucherEval.transFee, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Seller Growth Fee (1.50%)', noVoucherEval.growthFee, withVoucherEval.growthFee, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Shipping Fee (5.60%, max ₱100/order)', noVoucherEval.shipFee, withVoucherEval.shipFee, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Order Processing Fee (₱5/order)', noVoucherEval.opf, withVoucherEval.opf, { isNeg: true, invertDeltaColor: true }));
+        if (settings.mdv) {
+          rows.push(renderBreakdownRow(`Shopee MDV (${pe(withVoucherEval.mdvRate)}, max ₱${withVoucherEval.mdvCap})`, noVoucherEval.mdvFee, withVoucherEval.mdvFee, { isNeg: true, invertDeltaColor: true }));
+        }
+        if (settings.rts) {
+          rows.push(renderBreakdownRow('Free Returns / RTS Protection (₱2/order)', noVoucherEval.rts, withVoucherEval.rts, { isNeg: true, invertDeltaColor: true }));
+        }
+        if (settings.vat) {
+          rows.push(renderBreakdownRow('BIR Output VAT (12/112)', noVoucherEval.outputVat, withVoucherEval.outputVat, { isNeg: true, invertDeltaColor: true }));
+          if (settings.claimVat) {
+            rows.push(renderBreakdownRow('Input VAT Credit on Fees', noVoucherEval.inputVatCredit, withVoucherEval.inputVatCredit));
+          }
+        } else {
+          rows.push(renderBreakdownRow('BIR Percentage Tax (3%)', noVoucherEval.pctTax, withVoucherEval.pctTax, { isNeg: true, invertDeltaColor: true }));
+        }
+        if (settings.wht) {
+          rows.push(renderBreakdownRow('BIR Withholding Tax (0.5%)', noVoucherEval.wht, withVoucherEval.wht, { isNeg: true, invertDeltaColor: true }));
+        }
+        if (voucherCfg.rewardType === 'coins') {
+          rows.push(renderBreakdownRow('Seller Coins Cashback Cost (Deducted from Payout)', 0, withVoucherEval.coinsCost, { isNeg: true, invertDeltaColor: true }));
+        }
+
+        rows.push(renderBreakdownRow('Shopee Order Payout (Take-Home)', noVoucherEval.takeHome, withVoucherEval.takeHome, { isBold: true }));
+        rows.push(renderBreakdownRow('Total COGS & Extra Order Costs', noVoucherEval.cogs, withVoucherEval.cogs, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Net Profit per Order', noVoucherEval.netProfit, withVoucherEval.netProfit, { isHighlight: true }));
+        rows.push(renderBreakdownRow('Net Profit Margin (%)', noVoucherEval.netMargin, withVoucherEval.netMargin, { isBold: true, isPct: true }));
+
+        $('breakdownTableBody').innerHTML = rows.join('');
+
+        // Basket Size / Min Spend Sensitivity Ladder
+        renderSensitivityLadder(inp);
+
+        saveState();
+      }
+
+      function renderSensitivityLadder(inp) {
+        const { voucherCfg, settings, unitPriceAfterDisc, baseCost, orderQty } = inp;
+        $('ladderMinSpendBadge').textContent = voucherCfg.minSpend > 0 ? `Min. Spend: ${P(voucherCfg.minSpend)}` : 'No Min. Spend';
+
+        const cogsRatio = unitPriceAfterDisc > 0 ? (baseCost / unitPriceAfterDisc) : 0;
+        const scenarios = [
+          { label: '1 pc Order', qty: 1, sub: unitPriceAfterDisc * 1, cogs: baseCost * 1 + settings.extraCost },
+          { label: '2 pcs Order', qty: 2, sub: unitPriceAfterDisc * 2, cogs: baseCost * 2 + settings.extraCost },
+          { label: '3 pcs Order', qty: 3, sub: unitPriceAfterDisc * 3, cogs: baseCost * 3 + settings.extraCost },
+          { label: '5 pcs Order', qty: 5, sub: unitPriceAfterDisc * 5, cogs: baseCost * 5 + settings.extraCost }
+        ];
+
+        if (voucherCfg.minSpend > 0) {
+          const estUnits = unitPriceAfterDisc > 0 ? Math.max(1, voucherCfg.minSpend / unitPriceAfterDisc) : 1;
+          scenarios.push({
+            label: `Exact Min. Spend (${P(voucherCfg.minSpend)})`,
+            qty: estUnits,
+            sub: voucherCfg.minSpend,
+            cogs: (voucherCfg.minSpend * cogsRatio) + settings.extraCost,
+            isMinSpendRow: true
+          });
+          scenarios.push({
+            label: `1.5× Min. Spend (${P(voucherCfg.minSpend * 1.5)})`,
+            qty: estUnits * 1.5,
+            sub: voucherCfg.minSpend * 1.5,
+            cogs: (voucherCfg.minSpend * 1.5 * cogsRatio) + settings.extraCost
+          });
+          scenarios.push({
+            label: `2× Min. Spend (${P(voucherCfg.minSpend * 2)})`,
+            qty: estUnits * 2,
+            sub: voucherCfg.minSpend * 2,
+            cogs: (voucherCfg.minSpend * 2 * cogsRatio) + settings.extraCost
+          });
+        }
+
+        // Sort by subtotal ascending
+        scenarios.sort((a, b) => a.sub - b.sub);
+
+        const rows = scenarios.map(sc => {
+          const v = computeVoucherAmount(sc.sub, voucherCfg);
+          const ev = evaluateVoucherOrder(sc.sub, v.discountAmt, v.coinsCost, sc.cogs, sc.qty, settings);
+
+          let statusHtml = '';
+          let rowClass = '';
+          if (!v.eligible) {
+            statusHtml = '<span class="badge bg-secondary-subtle text-secondary-emphasis border">Not Eligible</span>';
+          } else if (ev.netProfit < -0.005) {
+            statusHtml = '<span class="badge bg-danger-subtle text-danger-emphasis border border-danger-subtle">Loss</span>';
+            rowClass = 'roas-row-loss';
+          } else if (ev.netMargin < 0.08) {
+            statusHtml = '<span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">Thin</span>';
+            rowClass = 'roas-row-be';
+          } else if (ev.netMargin >= 0.20) {
+            statusHtml = '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle">Healthy</span>';
+            rowClass = 'roas-row-target';
+          } else {
+            statusHtml = '<span class="badge bg-info-subtle text-info-emphasis border border-info-subtle">Profitable</span>';
+          }
+
+          const isCurrent = Math.abs(sc.sub - inp.orderSubtotal) < 0.5 && !sc.isMinSpendRow;
+          const badgeExtra = sc.isMinSpendRow
+            ? ' <span class="badge badge-shopee ms-1">Worst Case</span>'
+            : (isCurrent ? ' <span class="badge bg-primary ms-1">Active</span>' : '');
+
+          return `
+            <tr class="${rowClass} ${isCurrent ? 'border-start border-4 border-primary' : ''}">
+              <td class="ps-3 fw-semibold">${sc.label}${badgeExtra}</td>
+              <td class="text-end">${P(ev.subtotal)}</td>
+              <td class="text-end" style="color: var(--shopee-color);">${ev.voucherCost > 0 ? '-' + P(ev.voucherCost) : '—'}</td>
+              <td class="text-end text-body-secondary">-${P(ev.totalFeesAndTax)}</td>
+              <td class="text-end">${P(ev.takeHome)}</td>
+              <td class="text-end fw-bold ${ev.netProfit >= 0 ? 'text-success' : 'text-danger'}">${ev.netProfit < 0 ? '-' + P(Math.abs(ev.netProfit)) : P(ev.netProfit)}</td>
+              <td class="text-end fw-semibold ${ev.netProfit >= 0 ? '' : 'text-danger'}">${pe(ev.netMargin)}</td>
+              <td class="text-center pe-3">${statusHtml}</td>
+            </tr>
+          `;
+        });
+
+        $('sensitivityTableBody').innerHTML = rows.join('');
+      }
+
+      function updateOptionVisibility() {
+        document.querySelectorAll('.shopee-promo-tab').forEach(btn => {
+          const isActive = btn.dataset.reward === activeReward;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        $('reward-fixed').classList.toggle('d-none', activeReward !== 'fixed');
+        $('reward-pct').classList.toggle('d-none', activeReward !== 'pct');
+        $('reward-coins').classList.toggle('d-none', activeReward !== 'coins');
+
+        $('claimVatCard').classList.toggle('d-none', !$('taxVat').checked);
+        $('camp').disabled = !$('osh').checked;
+        if (!$('osh').checked) $('camp').checked = false;
+
+        const fVal = String(Number($('voucherFixedAmt').value));
+        document.querySelectorAll('#fixedPresets .preset-chip').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.val === fVal);
+        });
+      }
+
+      function saveState() {
+        try {
+          const st = {
+            activeReward,
+            baseCost: $('baseCost').value,
+            sellingPrice: $('sellingPrice').value,
+            orderQty: $('orderQty').value,
+            listingDiscPct: $('listingDiscPct').value,
+            voucherChannel: $('voucherChannel').value,
+            voucherFixedAmt: $('voucherFixedAmt').value,
+            voucherPct: $('voucherPct').value,
+            voucherPctCap: $('voucherPctCap').value,
+            voucherCoinsPct: $('voucherCoinsPct').value,
+            voucherCoinsCap: $('voucherCoinsCap').value,
+            minSpend: $('minSpend').value,
+            usageQty: $('usageQty').value,
+            shopeeCategory: $('shopeeCategory').value,
+            taxVat: $('taxVat').checked,
+            claim: $('claim').checked,
+            wht: $('wht').checked,
+            osh: $('osh').checked,
+            camp: $('camp').checked,
+            shRts: $('shRts').checked,
+            shFreeComm: $('shFreeComm').checked,
+            extraCost: $('extraCost').value
+          };
+          localStorage.setItem(VOUCHER_STORAGE_KEY, JSON.stringify(st));
+        } catch (e) {}
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(VOUCHER_STORAGE_KEY);
+          if (!raw) {
+            syncFromSimulator(true);
+            return;
+          }
+          const st = JSON.parse(raw);
+          if (st.activeReward) activeReward = st.activeReward;
+          const setVal = (id, v) => { if (v !== undefined && $(id)) $(id).value = v; };
+          const setChk = (id, v) => { if (v !== undefined && $(id)) $(id).checked = Boolean(v); };
+
+          setVal('baseCost', st.baseCost);
+          setVal('sellingPrice', st.sellingPrice);
+          setVal('orderQty', st.orderQty);
+          setVal('listingDiscPct', st.listingDiscPct);
+          setVal('voucherChannel', st.voucherChannel);
+          setVal('voucherFixedAmt', st.voucherFixedAmt);
+          setVal('voucherPct', st.voucherPct);
+          setVal('voucherPctCap', st.voucherPctCap);
+          setVal('voucherCoinsPct', st.voucherCoinsPct);
+          setVal('voucherCoinsCap', st.voucherCoinsCap);
+          setVal('minSpend', st.minSpend);
+          setVal('usageQty', st.usageQty);
+          setVal('shopeeCategory', st.shopeeCategory);
+          setVal('extraCost', st.extraCost);
+
+          setChk('taxVat', st.taxVat);
+          setChk('taxNonVat', !st.taxVat);
+          setChk('claim', st.claim);
+          setChk('wht', st.wht);
+          setChk('osh', st.osh);
+          setChk('camp', st.camp);
+          setChk('shRts', st.shRts);
+          setChk('shFreeComm', st.shFreeComm);
+        } catch (e) {}
+      }
+
+      function syncFromSimulator(silent = false) {
+        const cfg = getStoredConfig();
+        const prof = getStoredProfile();
+        const costVal = Number(cfg.cost) > 0 ? Number(cfg.cost) : 100;
+        const freightVal = Number(cfg.freight) || Number(prof.sourcingFreight) || 0;
+        const packVal = Number(prof.packagingCost) || 0;
+        const opexVal = Number(prof.platforms && prof.platforms.sh && prof.platforms.sh.opex) || 0;
+
+        $('baseCost').value = (costVal + freightVal).toFixed(2);
+        $('extraCost').value = (packVal + opexVal).toFixed(2);
+
+        if (cfg.cs !== undefined) $('shopeeCategory').value = cfg.cs;
+        const isVat = cfg.vat !== undefined ? Boolean(cfg.vat) : (prof.taxStatus === 'vat');
+        $('taxVat').checked = isVat;
+        $('taxNonVat').checked = !isVat;
+        $('claim').checked = cfg.claim !== undefined ? Boolean(cfg.claim) : Boolean(prof.claimInputVat);
+        $('wht').checked = cfg.wht !== undefined ? Boolean(cfg.wht) : Boolean(prof.includeWht);
+        $('osh').checked = cfg.osh !== undefined ? Boolean(cfg.osh) : Boolean(prof.platforms && prof.platforms.sh && prof.platforms.sh.optIn);
+        $('camp').checked = Boolean(cfg.camp);
+        $('shRts').checked = cfg.shRts !== undefined ? Boolean(cfg.shRts) : Boolean(prof.platforms && prof.platforms.sh && prof.platforms.sh.optInRts);
+        $('shFreeComm').checked = Boolean(prof.platforms && prof.platforms.sh && prof.platforms.sh.freeCommission);
+
+        if (Number(cfg.srp) > 0) {
+          $('sellingPrice').value = Number(cfg.srp).toFixed(2);
+        } else {
+          const simRes = calc('sh', {
+            cost: costVal,
+            freight: freightVal,
+            units: 1,
+            m: (Number(cfg.mg) || Number(prof.defaultMargin) || 20) / 100,
+            vat: isVat,
+            claim: $('claim').checked,
+            wht: $('wht').checked,
+            pack: packVal,
+            opex: opexVal,
+            cat: { sh: Number($('shopeeCategory').value) || 0 },
+            opt: { sh: $('osh').checked, shRts: $('shRts').checked },
+            camp: $('camp').checked,
+            freeCommission: { sh: $('shFreeComm').checked }
+          });
+          $('sellingPrice').value = simRes.price.toFixed(2);
+        }
+
+        updateOptionVisibility();
+        render();
+
+        if (!silent) {
+          const btn = $('syncFromSimulatorBtn');
+          const origHtml = btn.innerHTML;
+          btn.innerHTML = '<i class="bi bi-check2"></i><span>Synced!</span>';
+          btn.classList.replace('btn-outline-primary', 'btn-success');
+          setTimeout(() => {
+            btn.innerHTML = origHtml;
+            btn.classList.replace('btn-success', 'btn-outline-primary');
+          }, 1500);
+        }
+      }
+
+      function resetDefaults() {
+        localStorage.removeItem(VOUCHER_STORAGE_KEY);
+        activeReward = 'fixed';
+        $('baseCost').value = 100;
+        $('sellingPrice').value = 220;
+        $('orderQty').value = 2;
+        $('listingDiscPct').value = 0;
+        $('voucherChannel').value = 'Shop Voucher';
+        $('voucherFixedAmt').value = 30;
+        $('voucherPct').value = 10;
+        $('voucherPctCap').value = 50;
+        $('voucherCoinsPct').value = 10;
+        $('voucherCoinsCap').value = 50;
+        $('minSpend').value = 399;
+        $('usageQty').value = 100;
+        $('taxNonVat').checked = true;
+        $('claim').checked = false;
+        $('wht').checked = true;
+        $('osh').checked = false;
+        $('camp').checked = false;
+        $('shRts').checked = false;
+        $('shFreeComm').checked = false;
+        $('extraCost').value = 0;
+        const defIdx = D.sh.findIndex(c => c[0] === 'Food & Beverages');
+        $('shopeeCategory').value = defIdx >= 0 ? defIdx : 0;
+
+        updateOptionVisibility();
+        render();
+      }
+
+      function savePng() {
+        if (typeof html2canvas === 'undefined') return;
+        const btn = $('snapshotBtn');
+        const origHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span><span>Saving...</span>';
+        html2canvas($('captureArea'), {
+          scale: 2,
+          backgroundColor: getComputedStyle(document.body).backgroundColor
+        }).then(canvas => {
+          const link = document.createElement('a');
+          link.download = `shopee-voucher-profitability-${activeReward}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }).finally(() => {
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+        });
+      }
+
+      // Initialize
+      populateCategories();
+      loadState();
+      initTheme();
+      updateOptionVisibility();
+      render();
+
+      document.querySelectorAll('.shopee-promo-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeReward = btn.dataset.reward;
+          updateOptionVisibility();
+          render();
+        });
+      });
+
+      document.querySelectorAll('#fixedPresets .preset-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          $('voucherFixedAmt').value = btn.dataset.val;
+          updateOptionVisibility();
+          render();
+        });
+      });
+
+      $('autoQtyBtn').addEventListener('click', () => {
+        const inp = readInputs();
+        if (inp.unitPriceAfterDisc > 0 && inp.voucherCfg.minSpend > 0) {
+          $('orderQty').value = Math.max(1, Math.ceil(inp.voucherCfg.minSpend / inp.unitPriceAfterDisc));
+          render();
+        }
+      });
+
+      document.querySelectorAll('input, select').forEach(el => {
+        el.addEventListener('input', () => {
+          updateOptionVisibility();
+          render();
+        });
+        el.addEventListener('change', () => {
+          updateOptionVisibility();
+          render();
+        });
+      });
+
+      $('syncFromSimulatorBtn').addEventListener('click', () => syncFromSimulator(false));
+      $('resetBtn').addEventListener('click', resetDefaults);
+      $('snapshotBtn').addEventListener('click', savePng);
+    })();
+  </script>
+</body>
+</html>

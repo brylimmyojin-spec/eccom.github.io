@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Shopee Discount Profitability Calculator | PH Marketplace Fee &amp; Margin Calculator</title>
+  <meta name="description" content="Compute multi-product line profitability for Shopee Discount Promotions, Bundle Deals, and Add-on Deals after Shopee seller fees and BIR taxes.">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="./css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg app-navbar sticky-top shadow-sm py-2">
+      <div class="container-fluid px-3 px-md-4 px-xl-5">
+        <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none flex-shrink-0" href="index.html">
+          <span class="brand-flag">🇵🇭</span>
+          <div class="d-flex flex-column lh-1">
+            <span class="brand-title fw-bold">PH Marketplace</span>
+            <span class="brand-subtitle text-body-secondary">Fee &amp; Margin Calculator</span>
+          </div>
+        </a>
+        <button class="navbar-toggler border-0 shadow-none px-2 py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3 align-items-lg-center">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html"><i class="bi bi-calculator"></i>Pricing Simulator</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-tags"></i>Shopee Promos
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item active" href="discount-calculator.html"><i class="bi bi-tags-fill"></i>Discount, Bundle &amp; Add-on</a></li>
+                <li><a class="dropdown-item" href="voucher-calculator.html"><i class="bi bi-ticket-perforated-fill"></i>Seller Vouchers &amp; Coins</a></li>
+                <li><a class="dropdown-item" href="campaign-calculator.html"><i class="bi bi-megaphone-fill"></i>Campaigns &amp; Flash Deals</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line"></i>Comparison</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="roas-calculator.html"><i class="bi bi-graph-up-arrow"></i>ROAS &amp; Ads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="expenses.html"><i class="bi bi-cash-coin"></i>Expenses</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-journal-bookmark"></i>Guides &amp; Portals
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="opt-in-fees.html"><i class="bi bi-shield-check"></i>Opt-In Fees &amp; RTS</a></li>
+                <li><a class="dropdown-item" href="fee-reference.html"><i class="bi bi-journal-bookmark-fill"></i>Fee Reference</a></li>
+                <li><a class="dropdown-item" href="tax-guide.html"><i class="bi bi-bank"></i>Tax &amp; BIR Guide</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="seller-centers.html"><i class="bi bi-box-arrow-up-right"></i>Seller Portals</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2 pt-2 pt-lg-0 border-top border-lg-0 flex-shrink-0">
+            <button class="btn btn-outline-secondary btn-sm rounded-pill d-flex align-items-center gap-1.5 px-3 py-1.5" id="themeToggle" type="button" title="Toggle dark/light mode">
+              <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+              <span id="themeText">Theme</span>
+            </button>
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub" style="width: 34px; height: 34px;">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-fluid px-3 px-md-4 px-xl-5 py-3 py-xl-4 flex-grow-1">
+
+    <!-- Page Header -->
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-4 gap-3">
+      <div>
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+          <span class="badge badge-shopee px-2.5 py-1 fw-semibold">
+            <i class="bi bi-bag-heart-fill me-1"></i>Shopee Seller Centre Pro
+          </span>
+          <span class="badge bg-body-tertiary text-body-secondary border px-2.5 py-1" style="font-size:0.74rem;">
+            Multi-SKU Cart &bull; Discount &bull; Bundle Deal &bull; Add-on Deal
+          </span>
+        </div>
+        <h1 class="h2 mb-1 fw-bold">Shopee Discount Profitability Checker</h1>
+        <p class="text-body-secondary mb-0">
+          Add one or multiple product lines to simulate Shopee Discounts, mix-and-match Bundles, or Add-on Deals &amp; Free Gifts with exact per-order fee caps.
+        </p>
+      </div>
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        <button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1.5 px-3 py-2" id="syncFromSimulatorBtn" type="button" title="Sync first product line and Shopee settings from Pricing Simulator">
+          <i class="bi bi-arrow-repeat"></i>
+          <span>Sync Simulator</span>
+        </button>
+        <button class="btn btn-primary btn-sm d-flex align-items-center gap-1.5 px-3 py-2 shadow-sm" id="snapshotBtn" type="button" title="Save profitability summary as PNG">
+          <i class="bi bi-camera-fill"></i>
+          <span>Save PNG</span>
+        </button>
+        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-2.5 py-2" id="resetBtn" type="button" title="Reset to default sample">
+          <i class="bi bi-arrow-counterclockwise"></i>
+          <span class="d-none d-sm-inline">Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main 2-Column Dashboard -->
+    <div class="row g-4" id="captureArea">
+
+      <!-- LEFT / MAIN WORKSPACE (8 cols) -->
+      <div class="col-xl-8">
+
+        <!-- 1. PROFITABILITY VERDICT HERO BANNER -->
+        <div class="card shadow-sm border-0 mb-4 verdict-card verdict-profit" id="verdictCard">
+          <div class="card-body p-3 p-md-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3 pb-3 border-bottom">
+              <div class="d-flex align-items-center gap-3">
+                <div class="verdict-icon-box" id="verdictIconBox">
+                  <i class="bi bi-check-circle-fill" id="verdictIcon"></i>
+                </div>
+                <div>
+                  <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+                    <span class="badge fw-bold px-2.5 py-1" id="verdictBadge">STILL PROFITABLE</span>
+                    <span class="badge bg-body text-body-secondary border" id="activePromoBadge">Discount Promotion</span>
+                    <span class="badge bg-body text-body-secondary border" id="lineCountBadge">2 Product Lines</span>
+                  </div>
+                  <h2 class="h4 fw-bold mb-0" id="verdictTitle">Yes — This promo stays profitable!</h2>
+                  <p class="text-body-secondary small mb-0 mt-0.5" id="verdictSubtitle">Combined order keeps healthy net margin after all Shopee fees and BIR taxes.</p>
+                </div>
+              </div>
+              <div class="text-md-end">
+                <div class="text-body-secondary small fw-semibold text-uppercase" style="font-size:0.7rem; letter-spacing:0.05em;">Combined Net Profit</div>
+                <div class="verdict-profit-number" id="heroNetProfit">₱0.00</div>
+                <div class="small fw-semibold" id="heroMarginBadge">0.00% Net Margin</div>
+              </div>
+            </div>
+
+            <!-- 4 KPI Tiles -->
+            <div class="row g-2.5">
+              <div class="col-6 col-md-3">
+                <div class="cmp-kpi-card h-100">
+                  <div class="text-body-secondary small" style="font-size:0.72rem;">Buyer Checkout Total</div>
+                  <div class="fw-bold fs-5 text-body-emphasis" id="kpiBuyerPays">₱0.00</div>
+                  <div class="small text-body-secondary" style="font-size:0.71rem;" id="kpiDiscountGiven">Save ₱0.00 (0%)</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="cmp-kpi-card h-100">
+                  <div class="text-body-secondary small" style="font-size:0.72rem;">Shopee Payout (Take-Home)</div>
+                  <div class="fw-bold fs-5 text-primary" id="kpiTakeHome">₱0.00</div>
+                  <div class="small text-body-secondary" style="font-size:0.71rem;" id="kpiTotalDeductions">Fees &amp; Tax: -₱0.00</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="cmp-kpi-card h-100">
+                  <div class="text-body-secondary small" style="font-size:0.72rem;">Max Safe Discount Floor</div>
+                  <div class="fw-bold fs-5 text-warning-emphasis" id="kpiMaxSafeDisc">0.0%</div>
+                  <div class="small text-body-secondary" style="font-size:0.71rem;" id="kpiMinPrice">Break-Even: ₱0.00</div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="cmp-kpi-card h-100">
+                  <div class="text-body-secondary small" style="font-size:0.72rem;">Profit Impact vs Regular</div>
+                  <div class="fw-bold fs-5" id="kpiProfitDelta">₱0.00</div>
+                  <div class="small text-body-secondary" style="font-size:0.71rem;" id="kpiVolumeNeeded">1.00× orders to match</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. PROMOTION MODE & RULE BAR -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body p-3 p-md-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+              <div>
+                <span class="badge text-white fw-bold me-1.5" style="background-color: var(--shopee-color); font-size:0.68rem;">Step 1</span>
+                <span class="fw-bold fs-6">Choose Applied Shopee Promotion</span>
+              </div>
+              <div class="form-check form-switch mb-0 d-flex align-items-center gap-2">
+                <input class="form-check-input" type="checkbox" id="enableVoucher" style="cursor:pointer;">
+                <label class="form-check-label small fw-semibold" for="enableVoucher" style="cursor:pointer;">
+                  <i class="bi bi-ticket-perforated-fill text-warning me-1"></i>Stack Shop Voucher
+                </label>
+              </div>
+            </div>
+
+            <!-- 3 Shopee Promo Mode Cards -->
+            <div class="shopee-promo-tabs mb-3" role="tablist" aria-label="Shopee Promotion Type">
+              <button type="button" class="shopee-promo-tab active" data-promo="discount" role="tab" aria-selected="true">
+                <i class="bi bi-tag-fill"></i>
+                <span class="promo-tab-title">Discount Promotion</span>
+                <span class="promo-tab-sub">Global % / ₱ Off or Per-SKU Override</span>
+              </button>
+              <button type="button" class="shopee-promo-tab" data-promo="bundle" role="tab" aria-selected="false">
+                <i class="bi bi-boxes"></i>
+                <span class="promo-tab-title">Bundle Deal</span>
+                <span class="promo-tab-sub">Mix &amp; Match Multi-SKU Bundle</span>
+              </button>
+              <button type="button" class="shopee-promo-tab" data-promo="addon" role="tab" aria-selected="false">
+                <i class="bi bi-bag-plus-fill"></i>
+                <span class="promo-tab-title">Add-on Deal / Gift</span>
+                <span class="promo-tab-sub">Main Items + Add-ons / Free Gifts</span>
+              </button>
+            </div>
+
+            <!-- Rule Controls Surface -->
+            <div class="promo-bar-surface p-3">
+
+              <!-- DISCOUNT RULES -->
+              <div id="panel-discount" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                  <label class="form-label small fw-semibold mb-1">Global Discount Method</label>
+                  <div class="btn-group w-100" role="group">
+                    <input type="radio" class="btn-check" name="discMode" id="discModePct" value="pct" checked>
+                    <label class="btn btn-outline-secondary btn-sm" for="discModePct">% Off</label>
+
+                    <input type="radio" class="btn-check" name="discMode" id="discModeAmt" value="amt">
+                    <label class="btn btn-outline-secondary btn-sm" for="discModeAmt">₱ Off / pc</label>
+
+                    <input type="radio" class="btn-check" name="discMode" id="discModeFixed" value="fixed">
+                    <label class="btn btn-outline-secondary btn-sm" for="discModeFixed">Flat ₱ / pc</label>
+                  </div>
+                </div>
+
+                <div class="col-md-4" id="discPctGroup">
+                  <label for="discPct" class="form-label small fw-semibold mb-1">Default Discount (%)</label>
+                  <div class="input-group input-group-sm">
+                    <input type="number" class="form-control fw-bold" id="discPct" value="" placeholder="0" min="0" max="99" step="0.5">
+                    <span class="input-group-text fw-bold">% OFF</span>
+                  </div>
+                </div>
+                <div class="col-md-4 d-none" id="discAmtGroup">
+                  <label for="discAmt" class="form-label small fw-semibold mb-1">Amount Off per Unit (₱)</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">₱</span>
+                    <input type="number" class="form-control fw-bold" id="discAmt" value="" placeholder="0.00" min="0" step="1">
+                    <span class="input-group-text">OFF</span>
+                  </div>
+                </div>
+                <div class="col-md-4 d-none" id="discFixedGroup">
+                  <label for="discFixed" class="form-label small fw-semibold mb-1">Fixed Promo Price per Unit (₱)</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">₱</span>
+                    <input type="number" class="form-control fw-bold" id="discFixed" value="" placeholder="0.00" min="0" step="1">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="small text-body-secondary mb-1">Quick % Presets:</div>
+                  <div class="d-flex flex-wrap gap-1" id="discPctPresets">
+                    <button type="button" class="preset-chip" data-val="5">5%</button>
+                    <button type="button" class="preset-chip" data-val="10">10%</button>
+                    <button type="button" class="preset-chip" data-val="15">15%</button>
+                    <button type="button" class="preset-chip" data-val="20">20%</button>
+                    <button type="button" class="preset-chip" data-val="25">25%</button>
+                    <button type="button" class="preset-chip" data-val="30">30%</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BUNDLE RULES -->
+              <div id="panel-bundle" class="row g-3 align-items-end d-none">
+                <div class="col-md-5">
+                  <label class="form-label small fw-semibold mb-1">Bundle Deal Type (Applies to All Lines)</label>
+                  <div class="btn-group w-100" role="group">
+                    <input type="radio" class="btn-check" name="bundleMode" id="bundleModePct" value="pct" checked>
+                    <label class="btn btn-outline-secondary btn-sm" for="bundleModePct">% Discount</label>
+
+                    <input type="radio" class="btn-check" name="bundleMode" id="bundleModeAmt" value="amt">
+                    <label class="btn btn-outline-secondary btn-sm" for="bundleModeAmt">₱ Off Total</label>
+
+                    <input type="radio" class="btn-check" name="bundleMode" id="bundleModeSpecial" value="special">
+                    <label class="btn btn-outline-secondary btn-sm" for="bundleModeSpecial">Special Price</label>
+                  </div>
+                </div>
+
+                <div class="col-md-4" id="bundlePctGroup">
+                  <label for="bundlePct" class="form-label small fw-semibold mb-1">Bundle Discount (%)</label>
+                  <div class="input-group input-group-sm">
+                    <input type="number" class="form-control fw-bold" id="bundlePct" value="" placeholder="0" min="0" max="99" step="0.5">
+                    <span class="input-group-text fw-bold">% OFF</span>
+                  </div>
+                </div>
+                <div class="col-md-4 d-none" id="bundleAmtGroup">
+                  <label for="bundleAmt" class="form-label small fw-semibold mb-1">Total Bundle Amount Off (₱)</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">₱</span>
+                    <input type="number" class="form-control fw-bold" id="bundleAmt" value="" placeholder="0.00" min="0" step="1">
+                  </div>
+                </div>
+                <div class="col-md-4 d-none" id="bundleSpecialGroup">
+                  <label for="bundleSpecial" class="form-label small fw-semibold mb-1">Special Total Bundle Price (₱)</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">₱</span>
+                    <input type="number" class="form-control fw-bold" id="bundleSpecial" value="" placeholder="0.00" min="0" step="1">
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="p-2 rounded bg-body border small text-body-secondary" style="font-size:0.72rem;">
+                    <i class="bi bi-info-circle-fill text-primary me-1"></i>
+                    <strong id="bundleTotalPcsHint">1 pc</strong> in bundle &bull; 1× ₱5 OPF
+                  </div>
+                </div>
+              </div>
+
+              <!-- ADD-ON RULES -->
+              <div id="panel-addon" class="row g-3 align-items-end d-none">
+                <div class="col-md-4">
+                  <label class="form-label small fw-semibold mb-1">Add-on Item Discount Method</label>
+                  <div class="btn-group w-100" role="group">
+                    <input type="radio" class="btn-check" name="addonDiscMode" id="addonDiscPctMode" value="pct" checked>
+                    <label class="btn btn-outline-secondary btn-sm" for="addonDiscPctMode">% Off</label>
+
+                    <input type="radio" class="btn-check" name="addonDiscMode" id="addonDiscAmtMode" value="amt">
+                    <label class="btn btn-outline-secondary btn-sm" for="addonDiscAmtMode">₱ Off / pc</label>
+
+                    <input type="radio" class="btn-check" name="addonDiscMode" id="addonDiscPriceMode" value="special">
+                    <label class="btn btn-outline-secondary btn-sm" for="addonDiscPriceMode">Add-on ₱</label>
+                  </div>
+                </div>
+
+                <div class="col-md-4" id="addonDiscPctGroup">
+                  <label for="addonDiscPct" class="form-label small fw-semibold mb-1">Add-on Items Discount (%)</label>
+                  <div class="input-group input-group-sm">
+                    <input type="number" class="form-control fw-bold" id="addonDiscPct" value="" placeholder="0" min="0" max="100" step="1">
+                    <span class="input-group-text">% OFF</span>
+                  </div>
+                </div>
+                <div class="col-md-4 d-none" id="addonDiscAmtGroup">
+                  <label for="addonDiscAmt" class="form-label small fw-semibold mb-1">Add-on Amount Off (₱ / pc)</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">₱</span>
+                    <input type="number" class="form-control fw-bold" id="addonDiscAmt" value="" placeholder="0.00" min="0" step="1">
+                  </div>
+                </div>
+                <div class="col-md-4 d-none" id="addonDiscSpecialGroup">
+                  <label for="addonDiscSpecial" class="form-label small fw-semibold mb-1">Add-on Special Price (₱ / pc)</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">₱</span>
+                    <input type="number" class="form-control fw-bold" id="addonDiscSpecial" value="" placeholder="0.00" min="0" step="1">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="p-2 rounded bg-body border small text-body-secondary" style="font-size:0.72rem;">
+                    <i class="bi bi-hand-index-thumb-fill me-1" style="color: var(--shopee-color);"></i>
+                    Click a row's role pill below to switch between <strong>Main</strong>, <strong>Add-on</strong>, or <strong>Free Gift</strong>.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stacked Shop Voucher Row (Optional) -->
+              <div id="voucherPanel" class="row g-2 mt-2 pt-2.5 border-top align-items-end d-none">
+                <div class="col-sm-4">
+                  <label for="voucherType" class="form-label small fw-semibold mb-1">Stacked Shop Voucher Type</label>
+                  <select class="form-select form-select-sm" id="voucherType">
+                    <option value="amt">₱ Fixed Amount Off</option>
+                    <option value="pct">% Off (with Cap)</option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <label for="voucherValue" class="form-label small fw-semibold mb-1" id="voucherValueLabel">Voucher Off (₱)</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text" id="voucherPrefix">₱</span>
+                    <input type="number" class="form-control fw-bold" id="voucherValue" value="" placeholder="0.00" min="0" step="1">
+                  </div>
+                </div>
+                <div class="col-sm-4 d-none" id="voucherCapWrap">
+                  <label for="voucherCap" class="form-label small fw-semibold mb-1">Max Voucher Cap (₱)</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-text">₱</span>
+                    <input type="number" class="form-control" id="voucherCap" value="" placeholder="0.00" min="0" step="1">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. MULTI-PRODUCT LINES TABLE -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-header bg-body-tertiary py-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge text-white fw-bold" style="background-color: var(--shopee-color); font-size:0.68rem;">Step 2</span>
+              <span class="fw-bold fs-6">Product Lines (SKUs in Order)</span>
+            </div>
+            <div class="d-flex flex-wrap gap-1.5">
+              <button type="button" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1" id="savePricelogPngBtn" title="Export Product Discount Pricelog table as PNG">
+                <i class="bi bi-image"></i><span>Save as PNG</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-primary d-flex align-items-center gap-1" id="addLineBtn">
+                <i class="bi bi-plus-lg"></i><span>Add Product Line</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-success d-none align-items-center gap-1" id="addGiftBtn">
+                <i class="bi bi-gift-fill"></i><span>Add Free Gift</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table product-lines-table mb-0">
+              <thead>
+                <tr>
+                  <th class="ps-3" id="colRoleHeader">#</th>
+                  <th>Product / SKU Name</th>
+                  <th class="text-end">Base Cost (₱)</th>
+                  <th class="text-end">Selling Price (₱)</th>
+                  <th class="text-center">Qty</th>
+                  <th class="text-end" id="colOverrideHeader">Custom %</th>
+                  <th class="text-end">Promo Total</th>
+                  <th class="text-end">Line Net Profit</th>
+                  <th class="text-center pe-3">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productLinesBody">
+                <!-- Dynamic product rows -->
+              </tbody>
+              <tfoot class="table-light fw-bold small" id="productLinesFoot">
+                <!-- Dynamic totals row -->
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <!-- 4. TABBED ANALYTICS: FEE BREAKDOWN / DISCOUNT LADDER / PER-SKU STANDALONE -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-header bg-body-tertiary py-2.5 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+            <ul class="nav nav-pills nav-pills-modern gap-1" id="analysisTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab-breakdown-btn" data-bs-toggle="pill" data-bs-target="#tab-breakdown" type="button" role="tab">
+                  <i class="bi bi-receipt-cutoff me-1"></i>Fee Breakdown
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-ladder-btn" data-bs-toggle="pill" data-bs-target="#tab-ladder" type="button" role="tab">
+                  <i class="bi bi-table me-1"></i>Discount Ladder
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-persku-btn" data-bs-toggle="pill" data-bs-target="#tab-persku" type="button" role="tab">
+                  <i class="bi bi-list-check me-1"></i>Per-SKU Check
+                </button>
+              </li>
+            </ul>
+            <span class="badge bg-body text-body-secondary border" id="breakdownMeta">Shopee PH &bull; Non-VAT</span>
+          </div>
+
+          <div class="tab-content">
+            <!-- TAB 1: Before vs After Fee Breakdown -->
+            <div class="tab-pane fade show active" id="tab-breakdown" role="tabpanel">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 small">
+                  <thead class="table-light">
+                    <tr>
+                      <th class="ps-3">Line Item (Combined Order)</th>
+                      <th class="text-end">Regular Price (No Promo)</th>
+                      <th class="text-end" style="color: var(--shopee-color);">With Applied Promo</th>
+                      <th class="text-end pe-3">Difference (Δ)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="breakdownTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- TAB 2: Discount Sensitivity Ladder -->
+            <div class="tab-pane fade" id="tab-ladder" role="tabpanel">
+              <div class="px-3 py-2 border-bottom bg-body-tertiary small text-body-secondary" id="ladderSubtitle">
+                Simulated combined order profitability across discount tiers
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm table-hover align-middle mb-0 small">
+                  <thead class="table-light">
+                    <tr>
+                      <th class="ps-3">Discount Tier</th>
+                      <th class="text-end">Buyer Pays</th>
+                      <th class="text-end">Shopee Fees &amp; Tax</th>
+                      <th class="text-end">Take-Home</th>
+                      <th class="text-end">Net Profit</th>
+                      <th class="text-end">Net Margin</th>
+                      <th class="text-center pe-3">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sensitivityTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- TAB 3: Per-SKU Standalone vs Combined Order Check -->
+            <div class="tab-pane fade" id="tab-persku" role="tabpanel">
+              <div class="px-3 py-2 border-bottom bg-body-tertiary small text-body-secondary">
+                Compare each SKU's profitability <strong>if bought alone</strong> (pays full ₱5 OPF by itself) vs. <strong>inside this combined multi-line order</strong>.
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm table-hover align-middle mb-0 small">
+                  <thead class="table-light">
+                    <tr>
+                      <th class="ps-3">Product / SKU</th>
+                      <th class="text-end">Promo Price</th>
+                      <th class="text-end">COGS</th>
+                      <th class="text-end">If Bought Alone</th>
+                      <th class="text-end">In Combined Order</th>
+                      <th class="text-center pe-3">Health</th>
+                    </tr>
+                  </thead>
+                  <tbody id="perSkuTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT STICKY SIDEBAR (4 cols): Shopee Checkout Preview + Fee Settings -->
+      <div class="col-xl-4">
+        <div class="simulator-sidebar">
+
+          <!-- A. SHOPEE BUYER CHECKOUT RECEIPT PREVIEW -->
+          <div class="shopee-checkout-receipt shadow-sm mb-4">
+            <div class="shopee-checkout-receipt-header d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-bag-check-fill fs-5"></i>
+                <div class="lh-1">
+                  <div class="fw-bold small">Shopee Checkout Preview</div>
+                  <div style="font-size:0.68rem; opacity:0.9;" id="receiptSubtitle">Buyer Cart Summary</div>
+                </div>
+              </div>
+              <span class="badge bg-white fw-bold" style="color: var(--shopee-color);" id="previewTag">-15% OFF</span>
+            </div>
+
+            <div class="p-3">
+              <!-- Mini Item List -->
+              <div id="receiptItemsList" class="mb-2.5"></div>
+
+              <!-- Totals Box -->
+              <div class="p-2.5 rounded-3 bg-body-tertiary border mb-3">
+                <div class="d-flex justify-content-between align-items-baseline mb-1">
+                  <span class="small text-body-secondary">Buyer Total</span>
+                  <div class="text-end">
+                    <span class="text-decoration-line-through text-body-secondary small me-1.5" id="previewOrigPrice">₱0.00</span>
+                    <span class="fw-bold fs-4" style="color: var(--shopee-color);" id="previewFinalPrice">₱0.00</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center small text-body-secondary" style="font-size:0.74rem;">
+                  <span id="previewSummaryLine">0 items</span>
+                  <span class="fw-semibold text-success" id="previewSaveLine">Saves ₱0.00</span>
+                </div>
+              </div>
+
+              <!-- Revenue Split Stacked Bar -->
+              <div class="mb-1.5 d-flex justify-content-between align-items-center small">
+                <span class="fw-semibold text-body-secondary" style="font-size:0.76rem;">Order Peso Breakdown</span>
+                <span class="text-body-secondary" style="font-size:0.72rem;" id="guardEffFeeRate">0% Fees</span>
+              </div>
+              <div class="progress mb-2" style="height: 12px; border-radius: 6px;">
+                <div class="progress-bar bg-secondary" id="barCogs" style="width: 45%;"></div>
+                <div class="progress-bar bg-warning" id="barFees" style="width: 25%;"></div>
+                <div class="progress-bar bg-success" id="barProfit" style="width: 30%;"></div>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between gap-1 small mb-3" style="font-size:0.73rem;">
+                <span><span class="legend-indicator bg-secondary"></span>COGS: <strong id="legCogs">0%</strong></span>
+                <span><span class="legend-indicator bg-warning"></span>Fees: <strong id="legFees">0%</strong></span>
+                <span><span class="legend-indicator" id="legProfitDot" style="background: var(--profit-color);"></span>Profit: <strong id="legProfit">0%</strong></span>
+              </div>
+
+              <!-- Smart Advice Pill -->
+              <div class="p-2.5 rounded-3 bg-body-tertiary border small" style="font-size:0.76rem;">
+                <i class="bi bi-lightbulb-fill text-warning me-1"></i>
+                <span id="guardAdviceText">Add product lines to inspect profitability.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- B. SHOPEE FEE & TAX SETTINGS CARD -->
+          <div class="card shadow-sm border-0">
+            <div class="card-header bg-body-tertiary py-2.5 d-flex justify-content-between align-items-center">
+              <span class="fw-bold small"><i class="bi bi-sliders me-1.5 text-secondary"></i>Shopee Fees &amp; Tax Settings</span>
+              <span class="badge bg-body text-body-secondary border" style="font-size:0.66rem;">2026 Rates</span>
+            </div>
+            <div class="card-body p-3">
+
+              <div class="mb-2.5">
+                <label for="shopeeCategory" class="form-label small fw-semibold mb-1">Shopee Category (Commission)</label>
+                <select class="form-select form-select-sm" id="shopeeCategory"></select>
+              </div>
+
+              <div class="mb-2.5">
+                <label class="form-label small fw-semibold mb-1">BIR Tax Registration</label>
+                <div class="btn-group w-100" role="group">
+                  <input type="radio" class="btn-check" name="taxStatus" id="taxNonVat" value="non-vat" checked>
+                  <label class="btn btn-outline-primary btn-sm" for="taxNonVat">Non-VAT (3%)</label>
+
+                  <input type="radio" class="btn-check" name="taxStatus" id="taxVat" value="vat">
+                  <label class="btn btn-outline-primary btn-sm" for="taxVat">VAT (12%)</label>
+                </div>
+              </div>
+
+              <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('osh'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+                <div class="toggle-card-label">
+                  <span class="toggle-card-title">Shopee MDV <span class="badge badge-shopee" style="font-size:0.6rem;">4% / 5%</span></span>
+                  <span class="toggle-card-subtitle">Max ₱200 per paid item</span>
+                </div>
+                <div class="form-check form-switch mb-0">
+                  <input class="form-check-input" type="checkbox" id="osh">
+                </div>
+              </div>
+
+              <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('camp'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+                <div class="toggle-card-label">
+                  <span class="toggle-card-title">Spike / Double-Double Day <span class="badge bg-warning-subtle text-warning-emphasis" style="font-size:0.6rem;">5%</span></span>
+                  <span class="toggle-card-subtitle">Payday, 11.11, 12.12 campaign rate</span>
+                </div>
+                <div class="form-check form-switch mb-0">
+                  <input class="form-check-input" type="checkbox" id="camp">
+                </div>
+              </div>
+
+              <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('shRts'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+                <div class="toggle-card-label">
+                  <span class="toggle-card-title">Free Returns / RTS Protection</span>
+                  <span class="toggle-card-subtitle">₱2.00 flat fee per order</span>
+                </div>
+                <div class="form-check form-switch mb-0">
+                  <input class="form-check-input" type="checkbox" id="shRts">
+                </div>
+              </div>
+
+              <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('shFreeComm'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+                <div class="toggle-card-label">
+                  <span class="toggle-card-title">90-Day 0% Commission <span class="badge bg-success-subtle text-success-emphasis" style="font-size:0.6rem;">New</span></span>
+                  <span class="toggle-card-subtitle">Waives Shopee category commission</span>
+                </div>
+                <div class="form-check form-switch mb-0">
+                  <input class="form-check-input" type="checkbox" id="shFreeComm">
+                </div>
+              </div>
+
+              <div class="toggle-card" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('wht'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+                <div class="toggle-card-label">
+                  <span class="toggle-card-title">0.5% BIR Withholding Tax</span>
+                  <span class="toggle-card-subtitle">Creditable WHT deducted by Shopee</span>
+                </div>
+                <div class="form-check form-switch mb-0">
+                  <input class="form-check-input" type="checkbox" id="wht" checked>
+                </div>
+              </div>
+
+              <div class="toggle-card d-none" id="claimVatCard" onclick="if(event.target.tagName!=='INPUT'){ const cb=document.getElementById('claim'); cb.checked=!cb.checked; cb.dispatchEvent(new Event('change')); }">
+                <div class="toggle-card-label">
+                  <span class="toggle-card-title">Claim Input VAT on Fees</span>
+                  <span class="toggle-card-subtitle">Offsets 12% VAT inside Shopee fees</span>
+                </div>
+                <div class="form-check form-switch mb-0">
+                  <input class="form-check-input" type="checkbox" id="claim">
+                </div>
+              </div>
+
+              <div class="mt-2">
+                <label for="extraCost" class="form-label small fw-semibold mb-1">Packaging / OPEX / Ads per Order</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">₱</span>
+                  <input type="number" class="form-control" id="extraCost" value="" placeholder="0.00" min="0" step="0.5">
+                  <span class="input-group-text">/ order</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="mt-auto py-3 border-top bg-body-tertiary text-body-secondary small">
+    <div class="container-fluid px-3 px-md-4 px-xl-5 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+      <div>PH Marketplace Fee &amp; Margin Calculator &bull; Multi-Line Shopee Discount Checker</div>
+      <div>Fee rates based on Shopee PH Seller Centre 2026 schedule (Commission, 2.24% Trans, 1.5% Growth, 5.6% FSS max ₱100, ₱5 OPF).</div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- html2canvas -->
+  <script src="./js/html2canvas.min.js"></script>
+  <!-- App Data & Core Engine -->
+  <script src="./js/data.js"></script>
+  <script src="./js/calculator.js"></script>
+
+  <script>
+    (function () {
+      const $ = id => document.getElementById(id);
+      const DISC_STORAGE_KEY = 'ph-marketplace-discount-calc-v3';
+
+      let activePromo = 'discount'; // 'discount' | 'bundle' | 'addon'
+      let nextLineId = 2;
+      let productLines = [
+        { id: 1, name: '', baseCost: '', sellingPrice: '', qty: 1, role: 'main', customDiscPct: '' }
+      ];
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+      }
+
+      function populateCategories() {
+        const sel = $('shopeeCategory');
+        sel.innerHTML = '';
+        D.sh.forEach((item, idx) => {
+          const opt = document.createElement('option');
+          opt.value = idx;
+          opt.textContent = `${item[0]} (${(item[1] * 100).toFixed(1)}%)`;
+          sel.appendChild(opt);
+        });
+        const defIdx = D.sh.findIndex(c => c[0] === 'Food & Beverages');
+        sel.value = defIdx >= 0 ? defIdx : 0;
+      }
+
+      // Shopee PH order evaluation engine
+      function evaluateShopeeOrder(checkoutPrice, totalCogs, paidItemCount, settings) {
+        const pr = Math.max(0, Number(checkoutPrice) || 0);
+        const cogs = Math.max(0, Number(totalCogs) || 0);
+        const itemsForMdvCap = Math.max(1, Number(paidItemCount) || 1);
+
+        const catIdx = Math.max(0, Math.min(D.sh.length - 1, Number(settings.catIdx) || 0));
+        const catEntry = D.sh[catIdx] || ['General', 0.095];
+        const commRate = settings.freeComm ? 0 : catEntry[1];
+        const transRate = 0.0224;
+        const growthRate = 0.015;
+        const shipRate = 0.056;
+        const shipCap = 100;
+        const opf = pr > 0 ? 5.00 : 0;
+        const rts = (settings.rts && pr > 0) ? 2.00 : 0;
+
+        const mdvRate = settings.mdv ? (settings.camp ? 0.05 : 0.04) : 0;
+        const mdvCap = 200 * itemsForMdvCap;
+
+        const commFee = pr * commRate;
+        const transFee = pr * transRate;
+        const growthFee = pr * growthRate;
+        const shipFee = Math.min(pr * shipRate, shipCap);
+        const mdvFee = settings.mdv ? Math.min(pr * mdvRate, mdvCap) : 0;
+
+        const platformFees = commFee + transFee + growthFee + shipFee + opf + mdvFee + rts;
+
+        const isVat = Boolean(settings.vat);
+        const vs = isVat ? (0.12 / 1.12) : 0;
+        const outputVat = pr * vs;
+        const inputVatCredit = (isVat && settings.claimVat) ? (platformFees * vs) : 0;
+        const wht = settings.wht ? (pr * 0.005) : 0;
+        const pctTax = isVat ? 0 : (pr * 0.03);
+
+        const netRevenue = pr - outputVat;
+        const takeHome = pr - outputVat - platformFees + inputVatCredit - wht - pctTax;
+        const totalDeductions = pr - takeHome;
+        const netProfit = takeHome - cogs;
+        const netMargin = netRevenue > 0 ? (netProfit / netRevenue) : (pr > 0 ? (netProfit / pr) : 0);
+        const roi = cogs > 0 ? (netProfit / cogs) : 0;
+
+        return {
+          price: pr,
+          cogs,
+          catName: catEntry[0],
+          commRate,
+          commFee,
+          transFee,
+          growthFee,
+          shipFee,
+          opf,
+          mdvRate,
+          mdvCap,
+          mdvFee,
+          rts,
+          platformFees,
+          outputVat,
+          inputVatCredit,
+          wht,
+          pctTax,
+          totalTaxAndWht: outputVat - inputVatCredit + wht + pctTax,
+          totalDeductions,
+          netRevenue,
+          takeHome,
+          netProfit,
+          netMargin,
+          roi
+        };
+      }
+
+      function findBreakEvenPrice(totalCogs, paidItemCount, settings) {
+        if (totalCogs <= 0) return 0;
+        let low = 0;
+        let high = Math.max(10, totalCogs * 2.5 + 20);
+        while (evaluateShopeeOrder(high, totalCogs, paidItemCount, settings).netProfit < 0 && high < 1e9) {
+          high *= 2;
+        }
+        for (let i = 0; i < 65; i++) {
+          const mid = (low + high) / 2;
+          if (evaluateShopeeOrder(mid, totalCogs, paidItemCount, settings).netProfit >= 0) high = mid;
+          else low = mid;
+        }
+        return Math.ceil(high * 100) / 100;
+      }
+
+      function readSettings() {
+        return {
+          catIdx: Number($('shopeeCategory').value) || 0,
+          vat: $('taxVat').checked,
+          claimVat: $('claim').checked,
+          wht: $('wht').checked,
+          mdv: $('osh').checked,
+          camp: $('camp').checked,
+          rts: $('shRts').checked,
+          freeComm: $('shFreeComm').checked,
+          extraCost: Math.max(0, Number($('extraCost').value) || 0)
+        };
+      }
+
+      function applyVoucher(subtotal) {
+        if (!$('enableVoucher').checked) {
+          return { voucherAmt: 0, afterVoucher: subtotal, voucherDesc: '' };
+        }
+        const vType = $('voucherType').value;
+        const vVal = Math.max(0, Number($('voucherValue').value) || 0);
+        const vCap = Math.max(0, Number($('voucherCap').value) || 0);
+        let voucherAmt = 0;
+        let voucherDesc = '';
+        if (vType === 'amt') {
+          voucherAmt = Math.min(subtotal, vVal);
+          voucherDesc = `Shop Voucher (-${P(voucherAmt)})`;
+        } else {
+          const raw = subtotal * (vVal / 100);
+          voucherAmt = Math.min(subtotal, vCap > 0 ? Math.min(raw, vCap) : raw);
+          voucherDesc = `Shop Voucher (-${vVal}%)`;
+        }
+        return { voucherAmt, afterVoucher: Math.max(0, subtotal - voucherAmt), voucherDesc };
+      }
+
+      // Compute all product lines + combined order metrics
+      function buildScenario() {
+        const settings = readSettings();
+        const safeLines = productLines.length ? productLines : [
+          { id: 1, name: '', baseCost: '', sellingPrice: '', qty: 1, role: 'main', customDiscPct: '' }
+        ];
+
+        const totalQty = safeLines.reduce((sum, l) => sum + Math.max(1, Math.floor(Number(l.qty) || 1)), 0);
+        const rawOrigTotal = safeLines.reduce((sum, l) => sum + Math.max(0, Number(l.sellingPrice) || 0) * Math.max(1, Math.floor(Number(l.qty) || 1)), 0);
+
+        let computedLines = [];
+        let dealLabel = '';
+        let dealTag = '';
+        let regOrigTotalForBaseline = 0;
+        let regCogsForBaseline = settings.extraCost;
+        let paidItemsForMdv = 0;
+
+        if (activePromo === 'discount') {
+          const mode = document.querySelector('input[name="discMode"]:checked').value;
+          const gPct = Math.max(0, Math.min(100, Number($('discPct').value) || 0));
+          const gAmt = Math.max(0, Number($('discAmt').value) || 0);
+          const gFixed = Math.max(0, Number($('discFixed').value) || 0);
+
+          dealLabel = mode === 'pct' ? `Discount Promotion (${gPct}% Off)`
+            : mode === 'amt' ? `Discount Promotion (${P(gAmt)} Off/pc)`
+            : `Discount Promotion (Flat ${P(gFixed)}/pc)`;
+
+          computedLines = safeLines.map(l => {
+            const qty = Math.max(1, Math.floor(Number(l.qty) || 1));
+            const cost = Math.max(0, Number(l.baseCost) || 0);
+            const srp = Math.max(0, Number(l.sellingPrice) || 0);
+            const hasOverride = l.customDiscPct !== '' && l.customDiscPct !== null && !isNaN(Number(l.customDiscPct));
+
+            let promoUnit = srp;
+            if (hasOverride) {
+              const cp = Math.max(0, Math.min(100, Number(l.customDiscPct)));
+              promoUnit = srp * (1 - cp / 100);
+            } else if (mode === 'pct') {
+              promoUnit = srp * (1 - gPct / 100);
+            } else if (mode === 'amt') {
+              promoUnit = Math.max(0, srp - gAmt);
+            } else {
+              promoUnit = gFixed;
+            }
+
+            const origSub = srp * qty;
+            const promoSub = promoUnit * qty;
+            const lineCogs = cost * qty;
+            regOrigTotalForBaseline += origSub;
+            regCogsForBaseline += lineCogs;
+            paidItemsForMdv += qty;
+
+            return { ...l, qty, cost, srp, promoUnit, origSub, promoSub, lineCogs, isGift: false };
+          });
+        } else if (activePromo === 'bundle') {
+          const mode = document.querySelector('input[name="bundleMode"]:checked').value;
+          const bPct = Math.max(0, Math.min(100, Number($('bundlePct').value) || 0));
+          const bAmt = Math.max(0, Number($('bundleAmt').value) || 0);
+          const bSpec = Math.max(0, Number($('bundleSpecial').value) || 0);
+
+          let targetBundleTotal = rawOrigTotal;
+          if (mode === 'pct') {
+            targetBundleTotal = rawOrigTotal * (1 - bPct / 100);
+            dealLabel = `Bundle Deal (${totalQty} pcs, ${bPct}% Off)`;
+            dealTag = `Bundle -${bPct}%`;
+          } else if (mode === 'amt') {
+            targetBundleTotal = Math.max(0, rawOrigTotal - bAmt);
+            dealLabel = `Bundle Deal (${totalQty} pcs, Save ${P(bAmt)})`;
+            dealTag = `Bundle -${P(bAmt)}`;
+          } else {
+            targetBundleTotal = bSpec;
+            dealLabel = `Bundle Deal (${totalQty} pcs for ${P(bSpec)})`;
+            dealTag = `${totalQty} for ${P(bSpec)}`;
+          }
+
+          const ratio = rawOrigTotal > 0 ? (targetBundleTotal / rawOrigTotal) : 0;
+          computedLines = safeLines.map(l => {
+            const qty = Math.max(1, Math.floor(Number(l.qty) || 1));
+            const cost = Math.max(0, Number(l.baseCost) || 0);
+            const srp = Math.max(0, Number(l.sellingPrice) || 0);
+            const origSub = srp * qty;
+            const promoSub = origSub * ratio;
+            const promoUnit = promoSub / qty;
+            const lineCogs = cost * qty;
+
+            regOrigTotalForBaseline += origSub;
+            regCogsForBaseline += lineCogs;
+            paidItemsForMdv += qty;
+
+            return { ...l, qty, cost, srp, promoUnit, origSub, promoSub, lineCogs, isGift: false };
+          });
+        } else {
+          // Add-on Deal
+          const adMode = document.querySelector('input[name="addonDiscMode"]:checked').value;
+          const adPct = Math.max(0, Math.min(100, Number($('addonDiscPct').value) || 0));
+          const adAmt = Math.max(0, Number($('addonDiscAmt').value) || 0);
+          const adSpec = Math.max(0, Number($('addonDiscSpecial').value) || 0);
+
+          let mainCount = 0;
+          let addonCount = 0;
+          let giftCount = 0;
+
+          computedLines = safeLines.map(l => {
+            const qty = Math.max(1, Math.floor(Number(l.qty) || 1));
+            const cost = Math.max(0, Number(l.baseCost) || 0);
+            const srp = Math.max(0, Number(l.sellingPrice) || 0);
+            const role = l.role || 'main';
+            const lineCogs = cost * qty;
+
+            let promoUnit = srp;
+            let origSub = srp * qty;
+            let isGift = false;
+
+            if (role === 'main') {
+              mainCount += qty;
+              promoUnit = srp;
+              regOrigTotalForBaseline += origSub;
+              regCogsForBaseline += lineCogs;
+              paidItemsForMdv += qty;
+            } else if (role === 'addon') {
+              addonCount += qty;
+              if (adMode === 'pct') promoUnit = srp * (1 - adPct / 100);
+              else if (adMode === 'amt') promoUnit = Math.max(0, srp - adAmt);
+              else promoUnit = adSpec;
+              regOrigTotalForBaseline += origSub;
+              regCogsForBaseline += lineCogs;
+              paidItemsForMdv += qty;
+            } else {
+              // Free Gift: buyer pays ₱0, seller absorbs COGS (baseline is without free gift)
+              giftCount += qty;
+              promoUnit = 0;
+              origSub = 0;
+              isGift = true;
+            }
+
+            return { ...l, qty, cost, srp, role, promoUnit, origSub, promoSub: promoUnit * qty, lineCogs, isGift };
+          });
+
+          dealLabel = giftCount > 0 && addonCount === 0
+            ? `Add-on Deal (${mainCount} Main + ${giftCount} Free Gift)`
+            : `Add-on Deal (${mainCount} Main + ${addonCount} Add-on${giftCount > 0 ? ` + ${giftCount} Gift` : ''})`;
+          dealTag = giftCount > 0 && addonCount === 0 ? 'FREE GIFT' : 'ADD-ON DEAL';
+        }
+
+        const promoSubtotalBeforeVoucher = computedLines.reduce((sum, l) => sum + l.promoSub, 0);
+        const totalProductCogs = computedLines.reduce((sum, l) => sum + l.lineCogs, 0);
+        const totalCogs = totalProductCogs + settings.extraCost;
+
+        const voucher = applyVoucher(promoSubtotalBeforeVoucher);
+        const finalCheckoutPrice = voucher.afterVoucher;
+        const promoDiscountAmt = Math.max(0, regOrigTotalForBaseline - promoSubtotalBeforeVoucher);
+        const totalDiscountAmt = Math.max(0, regOrigTotalForBaseline - finalCheckoutPrice);
+        const effectiveDiscountPct = regOrigTotalForBaseline > 0 ? (totalDiscountAmt / regOrigTotalForBaseline) * 100 : 0;
+
+        if (!dealTag) {
+          dealTag = effectiveDiscountPct > 0 ? `-${effectiveDiscountPct.toFixed(1)}% OFF` : '0% OFF';
+        }
+
+        const regularEval = evaluateShopeeOrder(regOrigTotalForBaseline, regCogsForBaseline, Math.max(1, paidItemsForMdv), settings);
+        const promoEval = evaluateShopeeOrder(finalCheckoutPrice, totalCogs, Math.max(1, paidItemsForMdv), settings);
+        const breakEvenPrice = findBreakEvenPrice(totalCogs, Math.max(1, paidItemsForMdv), settings);
+
+        const maxSafeDiscountAmt = Math.max(0, regOrigTotalForBaseline - breakEvenPrice);
+        const maxSafeDiscountPct = regOrigTotalForBaseline > 0 ? Math.max(0, (maxSafeDiscountAmt / regOrigTotalForBaseline) * 100) : 0;
+
+        // Per-line profit attribution (proportional fee allocation + standalone comparison)
+        const extraCostSharePerLine = settings.extraCost / Math.max(1, computedLines.length);
+        computedLines = computedLines.map(l => {
+          const revShare = promoSubtotalBeforeVoucher > 0 ? (l.promoSub / promoSubtotalBeforeVoucher) : 0;
+          const netAfterVoucher = finalCheckoutPrice * revShare;
+          const allocFeesAndTax = promoEval.totalDeductions * revShare;
+          const allocExtra = promoSubtotalBeforeVoucher > 0 ? (settings.extraCost * revShare) : extraCostSharePerLine;
+          const lineTakeHome = netAfterVoucher - allocFeesAndTax;
+          const lineNetProfit = lineTakeHome - l.lineCogs - allocExtra;
+          const lineNetMargin = netAfterVoucher > 0 ? (lineNetProfit / netAfterVoucher) : (l.isGift ? -1 : 0);
+
+          // Standalone evaluation (if buyer bought ONLY this line)
+          const standaloneEval = evaluateShopeeOrder(l.promoSub, l.lineCogs + settings.extraCost, l.qty, settings);
+
+          return {
+            ...l,
+            netAfterVoucher,
+            allocFeesAndTax,
+            lineTakeHome,
+            lineNetProfit,
+            lineNetMargin,
+            standaloneEval
+          };
+        });
+
+        return {
+          settings,
+          lines: computedLines,
+          totalQty,
+          paidItemsForMdv: Math.max(1, paidItemsForMdv),
+          regOrigTotal: regOrigTotalForBaseline,
+          promoSubtotalBeforeVoucher,
+          finalCheckoutPrice,
+          promoDiscountAmt,
+          voucher,
+          totalDiscountAmt,
+          effectiveDiscountPct,
+          totalProductCogs,
+          totalCogs,
+          dealLabel,
+          dealTag,
+          regularEval,
+          promoEval,
+          breakEvenPrice,
+          maxSafeDiscountAmt,
+          maxSafeDiscountPct
+        };
+      }
+
+      // Render product lines table rows (only rebuild DOM when structure changes, or update values cleanly)
+      function renderProductLinesTable(s) {
+        const isAddon = activePromo === 'addon';
+        const isDiscount = activePromo === 'discount';
+
+        $('colRoleHeader').textContent = isAddon ? 'Role' : '#';
+        $('colOverrideHeader').classList.toggle('d-none', !isDiscount);
+        $('addGiftBtn').classList.toggle('d-none', !isAddon);
+        $('addGiftBtn').classList.toggle('d-flex', isAddon);
+
+        const tbody = $('productLinesBody');
+        // Check if row IDs match existing DOM so typing doesn't lose input focus!
+        const existingIds = [...tbody.querySelectorAll('tr[data-id]')].map(tr => Number(tr.dataset.id));
+        const currentIds = s.lines.map(l => l.id);
+        const sameStructure = existingIds.length === currentIds.length && existingIds.every((id, i) => id === currentIds[i]);
+
+        if (!sameStructure) {
+          tbody.innerHTML = s.lines.map((l, idx) => {
+            const roleCell = isAddon
+              ? `<button type="button" class="role-pill-btn role-${l.role}" data-action="cycle-role" data-id="${l.id}" title="Click to switch Main / Add-on / Free Gift">${l.role === 'main' ? 'Main' : l.role === 'addon' ? 'Add-on' : 'Free Gift'}</button>`
+              : `<span class="badge bg-body-tertiary text-body-secondary border">${idx + 1}</span>`;
+
+            return `
+              <tr data-id="${l.id}">
+                <td class="ps-3" data-cell="role">${roleCell}</td>
+                <td data-cell="name" data-label="Product / SKU Name">
+                  <input type="text" class="form-control form-control-sm sku-name-input" data-field="name" data-id="${l.id}" value="${escapeHtml(l.name)}" placeholder="SKU / Item name">
+                </td>
+                <td data-label="Base Cost (₱)">
+                  <input type="number" class="form-control form-control-sm num-input" data-field="baseCost" data-id="${l.id}" value="${l.baseCost === '' || l.baseCost === null || l.baseCost === undefined ? '' : l.baseCost}" placeholder="0.00" min="0" step="0.01">
+                </td>
+                <td data-label="Selling Price (₱)">
+                  <input type="number" class="form-control form-control-sm num-input" data-field="sellingPrice" data-id="${l.id}" value="${l.sellingPrice === '' || l.sellingPrice === null || l.sellingPrice === undefined ? '' : l.sellingPrice}" placeholder="0.00" min="0" step="0.01" ${l.isGift ? 'disabled title="Free Gift is ₱0 to buyer"' : ''}>
+                </td>
+                <td class="text-center" data-label="Qty">
+                  <input type="number" class="form-control form-control-sm qty-input mx-auto" data-field="qty" data-id="${l.id}" value="${l.qty}" min="1" step="1">
+                </td>
+                <td class="${isDiscount ? '' : 'd-none'}" data-cell="override" data-label="Custom % Off">
+                  <input type="number" class="form-control form-control-sm num-input" style="min-width:68px;" data-field="customDiscPct" data-id="${l.id}" value="${l.customDiscPct === '' ? '' : l.customDiscPct}" min="0" max="99" step="1" placeholder="Auto">
+                </td>
+                <td class="text-end fw-semibold text-nowrap" data-cell="promoSub" data-label="Promo Total"></td>
+                <td class="text-end text-nowrap" data-cell="lineProfit" data-label="Line Net Profit"></td>
+                <td class="text-center pe-3 text-nowrap" data-cell="actions">
+                  <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="dup" data-id="${l.id}" title="Duplicate line"><i class="bi bi-copy"></i></button>
+                  <button type="button" class="btn btn-sm btn-link text-danger p-1" data-action="del" data-id="${l.id}" title="Remove line" ${s.lines.length <= 1 ? 'disabled' : ''}><i class="bi bi-trash3"></i></button>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+
+        // Update dynamic cells in-place (preserves cursor focus while typing!)
+        s.lines.forEach((l, idx) => {
+          const tr = tbody.querySelector(`tr[data-id="${l.id}"]`);
+          if (!tr) return;
+
+          const roleTd = tr.querySelector('[data-cell="role"]');
+          if (isAddon) {
+            roleTd.innerHTML = `<button type="button" class="role-pill-btn role-${l.role}" data-action="cycle-role" data-id="${l.id}" title="Click to switch Main / Add-on / Free Gift">${l.role === 'main' ? 'Main' : l.role === 'addon' ? 'Add-on' : 'Free Gift'}</button>`;
+          } else {
+            roleTd.innerHTML = `<span class="badge bg-body-tertiary text-body-secondary border">${idx + 1}</span>`;
+          }
+
+          const srpInput = tr.querySelector('input[data-field="sellingPrice"]');
+          if (srpInput) srpInput.disabled = Boolean(l.isGift);
+
+          const ovTd = tr.querySelector('[data-cell="override"]');
+          if (ovTd) ovTd.classList.toggle('d-none', !isDiscount);
+
+          const delBtn = tr.querySelector('button[data-action="del"]');
+          if (delBtn) delBtn.disabled = s.lines.length <= 1;
+
+          const promoTd = tr.querySelector('[data-cell="promoSub"]');
+          promoTd.innerHTML = l.isGift
+            ? `<span class="badge bg-success-subtle text-success-emphasis">₱0.00 (Gift)</span>`
+            : `<div>${P(l.promoSub)}</div><div class="text-body-secondary" style="font-size:0.68rem;">${P(l.promoUnit)}/pc</div>`;
+
+          const profTd = tr.querySelector('[data-cell="lineProfit"]');
+          if (l.isGift) {
+            profTd.innerHTML = `<span class="fw-bold text-danger">-${P(l.lineCogs)}</span><div class="text-body-secondary" style="font-size:0.68rem;">Gift COGS</div>`;
+          } else {
+            const pCls = l.lineNetProfit < -0.005 ? 'text-danger' : (l.lineNetMargin < 0.08 ? 'text-warning-emphasis' : 'text-success');
+            const pTxt = l.lineNetProfit < 0 ? `-${P(Math.abs(l.lineNetProfit))}` : P(l.lineNetProfit);
+            profTd.innerHTML = `<span class="fw-bold ${pCls}">${pTxt}</span><div class="text-body-secondary" style="font-size:0.68rem;">${pe(l.lineNetMargin)} margin</div>`;
+          }
+        });
+
+        // Footer totals
+        const p = s.promoEval;
+        const pCls = p.netProfit < -0.005 ? 'text-danger' : (p.netMargin < 0.08 ? 'text-warning-emphasis' : 'text-success');
+        $('productLinesFoot').innerHTML = `
+          <tr>
+            <td class="ps-3" colspan="2">Total (${s.lines.length} SKU${s.lines.length > 1 ? 's' : ''})</td>
+            <td class="text-end">${P(s.totalProductCogs)}</td>
+            <td class="text-end">${P(s.regOrigTotal)}</td>
+            <td class="text-center">${s.totalQty}</td>
+            <td class="${isDiscount ? '' : 'd-none'}"></td>
+            <td class="text-end" style="color: var(--shopee-color);">${P(s.finalCheckoutPrice)}</td>
+            <td class="text-end ${pCls}">${p.netProfit < 0 ? '-' + P(Math.abs(p.netProfit)) : P(p.netProfit)}</td>
+            <td></td>
+          </tr>
+        `;
+      }
+
+      function renderBreakdownRow(label, regVal, promoVal, opts = {}) {
+        const { isNeg = false, isBold = false, isHighlight = false, isPct = false, invertDeltaColor = false } = opts;
+        const delta = promoVal - regVal;
+        const fmt = v => isPct ? pe(v) : (isNeg && v > 0 ? `-${P(v)}` : P(v));
+        const fmtDelta = d => {
+          if (Math.abs(d) < 0.0001) return '<span class="text-body-secondary">—</span>';
+          const sign = d > 0 ? '+' : '-';
+          const txt = isPct ? `${sign}${(Math.abs(d) * 100).toFixed(2)}%` : `${sign}${P(Math.abs(d))}`;
+          const cls = invertDeltaColor ? (d < 0 ? 'text-success' : 'text-danger') : (d > 0 ? 'text-success' : 'text-danger');
+          return `<span class="fw-semibold ${cls}">${txt}</span>`;
+        };
+        const rowCls = isHighlight ? 'table-active fw-bold' : (isBold ? 'fw-semibold' : '');
+        return `
+          <tr class="${rowCls}">
+            <td class="ps-3">${label}</td>
+            <td class="text-end">${fmt(regVal)}</td>
+            <td class="text-end">${fmt(promoVal)}</td>
+            <td class="text-end pe-3">${fmtDelta(delta)}</td>
+          </tr>
+        `;
+      }
+
+      function render() {
+        const s = buildScenario();
+        const p = s.promoEval;
+        const r = s.regularEval;
+
+        renderProductLinesTable(s);
+
+        $('bundleTotalPcsHint').textContent = `${s.totalQty} pcs`;
+        $('lineCountBadge').textContent = `${s.lines.length} Product Line${s.lines.length > 1 ? 's' : ''} (${s.totalQty} pcs)`;
+
+        // Verdict Hero Card
+        const card = $('verdictCard');
+        const badge = $('verdictBadge');
+        const icon = $('verdictIcon');
+        const title = $('verdictTitle');
+        const subtitle = $('verdictSubtitle');
+        const heroProfit = $('heroNetProfit');
+        const heroMargin = $('heroMarginBadge');
+
+        card.classList.remove('verdict-profit', 'verdict-thin', 'verdict-loss');
+
+        if (s.regOrigTotal <= 0 && s.totalCogs <= 0) {
+          badge.className = 'badge bg-secondary-subtle text-secondary-emphasis border fw-bold px-2.5 py-1';
+          badge.textContent = 'READY TO CALCULATE';
+          icon.className = 'bi bi-calculator-fill text-secondary';
+          title.textContent = 'Enter your product Base Cost & Selling Price below';
+          subtitle.textContent = 'Add one or more product lines and set your Shopee discount, bundle, or add-on option to see live profitability.';
+          heroProfit.className = 'verdict-profit-number text-body-secondary';
+          heroProfit.textContent = '₱0.00';
+          heroMargin.className = 'small fw-semibold text-body-secondary';
+          heroMargin.textContent = '0.00% Net Margin';
+        } else if (p.netProfit < -0.005) {
+          card.classList.add('verdict-loss');
+          badge.className = 'badge bg-danger text-white fw-bold px-2.5 py-1';
+          badge.textContent = 'UNPROFITABLE (LOSS)';
+          icon.className = 'bi bi-x-octagon-fill';
+          title.textContent = `No — Combined order loses ${P(Math.abs(p.netProfit))}!`;
+          subtitle.textContent = `Checkout total (${P(p.price)}) is below your break-even floor of ${P(s.breakEvenPrice)}. Reduce discount or adjust SKU pricing.`;
+          heroProfit.className = 'verdict-profit-number text-danger';
+          heroProfit.textContent = `-${P(Math.abs(p.netProfit))}`;
+          heroMargin.className = 'small fw-semibold text-danger';
+          heroMargin.textContent = `${pe(p.netMargin)} Net Margin`;
+        } else if (p.netProfit <= 0.005 || p.netMargin < 0.08) {
+          card.classList.add('verdict-thin');
+          badge.className = 'badge bg-warning text-dark fw-bold px-2.5 py-1';
+          badge.textContent = p.netProfit <= 0.005 ? 'BREAK-EVEN' : 'THIN MARGIN (CAUTION)';
+          icon.className = 'bi bi-exclamation-triangle-fill';
+          title.textContent = p.netProfit <= 0.005
+            ? 'Break-Even — ₱0.00 combined net profit'
+            : `Barely Profitable — Only ${P(p.netProfit)} combined profit`;
+          subtitle.textContent = 'Low buffer for ads, returns/RTS, or stacked vouchers. Check Per-SKU Check tab to see which line drags margin down.';
+          heroProfit.className = 'verdict-profit-number text-warning-emphasis';
+          heroProfit.textContent = P(p.netProfit);
+          heroMargin.className = 'small fw-semibold text-warning-emphasis';
+          heroMargin.textContent = `${pe(p.netMargin)} Net Margin`;
+        } else {
+          card.classList.add('verdict-profit');
+          badge.className = 'badge bg-success text-white fw-bold px-2.5 py-1';
+          badge.textContent = p.netMargin >= 0.20 ? 'HIGHLY PROFITABLE' : 'STILL PROFITABLE';
+          icon.className = 'bi bi-check-circle-fill';
+          title.textContent = `Yes — Still profitable at ${P(p.netProfit)} combined profit!`;
+          subtitle.textContent = `You keep ${pe(p.netMargin)} net margin after Shopee fees (${P(p.platformFees)}) and taxes (${P(p.totalTaxAndWht)}).`;
+          heroProfit.className = 'verdict-profit-number text-success';
+          heroProfit.textContent = P(p.netProfit);
+          heroMargin.className = 'small fw-semibold text-success';
+          heroMargin.textContent = `${pe(p.netMargin)} Net Margin`;
+        }
+
+        $('activePromoBadge').textContent = s.dealLabel;
+
+        // 4 KPI Tiles
+        $('kpiBuyerPays').textContent = P(p.price);
+        $('kpiDiscountGiven').textContent = s.totalDiscountAmt > 0
+          ? `Save ${P(s.totalDiscountAmt)} (-${s.effectiveDiscountPct.toFixed(1)}%)`
+          : 'No price discount';
+
+        $('kpiTakeHome').textContent = P(p.takeHome);
+        $('kpiTotalDeductions').textContent = `Fees & Tax: -${P(p.totalDeductions)}`;
+
+        $('kpiMaxSafeDisc').textContent = `${s.maxSafeDiscountPct.toFixed(1)}%`;
+        $('kpiMinPrice').textContent = `Break-Even: ${P(s.breakEvenPrice)}`;
+
+        const profitDelta = p.netProfit - r.netProfit;
+        const deltaEl = $('kpiProfitDelta');
+        if (Math.abs(profitDelta) < 0.01) {
+          deltaEl.className = 'fw-bold fs-5 text-body-secondary';
+          deltaEl.textContent = '₱0.00';
+        } else if (profitDelta > 0) {
+          deltaEl.className = 'fw-bold fs-5 text-success';
+          deltaEl.textContent = `+${P(profitDelta)}`;
+        } else {
+          deltaEl.className = 'fw-bold fs-5 text-danger';
+          deltaEl.textContent = `-${P(Math.abs(profitDelta))}`;
+        }
+        $('kpiVolumeNeeded').textContent = p.netProfit <= 0
+          ? 'Cannot recover via volume'
+          : (r.netProfit > 0 ? `${(r.netProfit / p.netProfit).toFixed(2)}× orders to match` : 'Profitable promo');
+
+        // Shopee Checkout Receipt Preview (Right Sidebar)
+        $('previewTag').textContent = s.dealTag;
+        $('receiptSubtitle').textContent = s.dealLabel;
+        $('receiptItemsList').innerHTML = s.lines.map((l, idx) => {
+          const origHtml = (!l.isGift && l.origSub > l.promoSub + 0.01)
+            ? `<span class="text-decoration-line-through text-body-secondary me-1" style="font-size:0.7rem;">${P(l.origSub)}</span>`
+            : '';
+          const roleTag = activePromo === 'addon'
+            ? `<span class="badge bg-body-tertiary text-body-secondary border me-1" style="font-size:0.6rem;">${l.role === 'main' ? 'Main' : l.role === 'addon' ? 'Add-on' : 'Gift'}</span>`
+            : '';
+          return `
+            <div class="d-flex justify-content-between align-items-center py-1.5 border-bottom small">
+              <div class="text-truncate pe-2" style="max-width: 60%;">
+                ${roleTag}<span class="fw-semibold">${escapeHtml(l.name || 'Item ' + (idx + 1))}</span>
+                <span class="text-body-secondary">×${l.qty}</span>
+              </div>
+              <div class="text-end text-nowrap">
+                ${origHtml}<strong style="color: ${l.isGift ? '#198754' : 'var(--shopee-color)'};">${l.isGift ? 'FREE' : P(l.promoSub)}</strong>
+              </div>
+            </div>
+          `;
+        }).join('') + (s.voucher.voucherAmt > 0
+          ? `<div class="d-flex justify-content-between align-items-center py-1.5 small text-warning-emphasis">
+               <span><i class="bi bi-ticket-perforated-fill me-1"></i>${s.voucher.voucherDesc}</span>
+               <strong>-${P(s.voucher.voucherAmt)}</strong>
+             </div>`
+          : '');
+
+        $('previewOrigPrice').textContent = P(s.regOrigTotal);
+        $('previewOrigPrice').classList.toggle('d-none', s.totalDiscountAmt <= 0.005);
+        $('previewFinalPrice').textContent = P(p.price);
+        $('previewSummaryLine').textContent = `${s.totalQty} pc${s.totalQty > 1 ? 's' : ''} across ${s.lines.length} SKU${s.lines.length > 1 ? 's' : ''}`;
+        $('previewSaveLine').textContent = s.totalDiscountAmt > 0 ? `Saves ${P(s.totalDiscountAmt)}` : 'Regular price';
+
+        const effFeeRate = p.price > 0 ? (p.totalDeductions / p.price) : 0;
+        $('guardEffFeeRate').textContent = `${pe(effFeeRate)} Fees & Tax`;
+
+        if (p.price > 0) {
+          const cPct = Math.min(100, Math.max(0, (p.cogs / p.price) * 100));
+          const fPct = Math.min(100 - cPct, Math.max(0, (p.totalDeductions / p.price) * 100));
+          const pPct = Math.max(0, 100 - cPct - fPct);
+          $('barCogs').style.width = cPct.toFixed(1) + '%';
+          $('barFees').style.width = fPct.toFixed(1) + '%';
+          $('barProfit').style.width = (p.netProfit > 0 ? pPct : 0).toFixed(1) + '%';
+          $('legCogs').textContent = ((p.cogs / p.price) * 100).toFixed(1) + '%';
+          $('legFees').textContent = ((p.totalDeductions / p.price) * 100).toFixed(1) + '%';
+          $('legProfit').textContent = ((p.netProfit / p.price) * 100).toFixed(1) + '%';
+          $('legProfitDot').style.background = p.netProfit >= 0 ? 'var(--profit-color)' : '#dc3545';
+        } else {
+          $('barCogs').style.width = '0%';
+          $('barFees').style.width = '0%';
+          $('barProfit').style.width = '0%';
+          $('legCogs').textContent = '0%';
+          $('legFees').textContent = '0%';
+          $('legProfit').textContent = '0%';
+        }
+
+        const losingLines = s.lines.filter(l => !l.isGift && l.lineNetProfit < -0.005);
+        if (p.netProfit < 0) {
+          $('guardAdviceText').innerHTML = `<strong>Action needed:</strong> Raise checkout total by at least <strong>${P(s.breakEvenPrice - p.price)}</strong> to hit break-even (${P(s.breakEvenPrice)}).`;
+        } else if (losingLines.length > 0) {
+          $('guardAdviceText').innerHTML = `<strong>Watch individual SKUs:</strong> ${escapeHtml(losingLines[0].name)} is negative on its own, subsidized by your other product line(s).`;
+        } else if (s.lines.length > 1) {
+          $('guardAdviceText').innerHTML = `<strong>Multi-SKU efficiency:</strong> Sharing the ₱5.00 Order Processing Fee across ${s.totalQty} items saves <strong>${P((s.lines.length - 1) * 5)}</strong> vs. separate orders!`;
+        } else {
+          $('guardAdviceText').innerHTML = `<strong>Safe promo zone:</strong> You have a <strong>${P(p.price - s.breakEvenPrice)}</strong> buffer above break-even.`;
+        }
+
+        // TAB 1: Breakdown Table
+        $('breakdownMeta').textContent = `${p.catName} • ${s.settings.vat ? 'VAT (12%)' : 'Non-VAT (3%)'}${s.settings.mdv ? ' • MDV' : ''}`;
+        const rows = [];
+        rows.push(renderBreakdownRow(`Original Subtotal (${s.totalQty} pcs)`, s.regOrigTotal, s.regOrigTotal));
+        rows.push(renderBreakdownRow('Promo Discount Applied', 0, -s.promoDiscountAmt));
+        if (s.voucher.voucherAmt > 0) {
+          rows.push(renderBreakdownRow(`Stacked ${s.voucher.voucherDesc}`, 0, -s.voucher.voucherAmt));
+        }
+        rows.push(renderBreakdownRow('Buyer Checkout Price (Fee Basis)', r.price, p.price, { isBold: true }));
+
+        const commLabel = s.settings.freeComm ? 'Shopee Commission (0% — 90-Day Free)' : `Shopee Commission (${pe(p.commRate)})`;
+        rows.push(renderBreakdownRow(commLabel, r.commFee, p.commFee, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Transaction Fee (2.24%)', r.transFee, p.transFee, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Seller Growth Fee (1.50%)', r.growthFee, p.growthFee, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Shipping Fee (5.60%, max ₱100/order)', r.shipFee, p.shipFee, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Order Processing Fee (₱5/order)', r.opf, p.opf, { isNeg: true, invertDeltaColor: true }));
+        if (s.settings.mdv) {
+          rows.push(renderBreakdownRow(`Shopee MDV (${pe(p.mdvRate)}, max ₱${p.mdvCap})`, r.mdvFee, p.mdvFee, { isNeg: true, invertDeltaColor: true }));
+        }
+        if (s.settings.rts) {
+          rows.push(renderBreakdownRow('Free Returns / RTS Protection (₱2/order)', r.rts, p.rts, { isNeg: true, invertDeltaColor: true }));
+        }
+        if (s.settings.vat) {
+          rows.push(renderBreakdownRow('BIR Output VAT (12/112)', r.outputVat, p.outputVat, { isNeg: true, invertDeltaColor: true }));
+          if (s.settings.claimVat) {
+            rows.push(renderBreakdownRow('Input VAT Credit on Fees', r.inputVatCredit, p.inputVatCredit));
+          }
+        } else {
+          rows.push(renderBreakdownRow('BIR Percentage Tax (3%)', r.pctTax, p.pctTax, { isNeg: true, invertDeltaColor: true }));
+        }
+        if (s.settings.wht) {
+          rows.push(renderBreakdownRow('BIR Withholding Tax (0.5%)', r.wht, p.wht, { isNeg: true, invertDeltaColor: true }));
+        }
+
+        rows.push(renderBreakdownRow('Shopee Order Payout (Take-Home)', r.takeHome, p.takeHome, { isBold: true }));
+        rows.push(renderBreakdownRow('Total COGS & Extra Order Costs', r.cogs, p.cogs, { isNeg: true, invertDeltaColor: true }));
+        rows.push(renderBreakdownRow('Combined Net Profit', r.netProfit, p.netProfit, { isHighlight: true }));
+        rows.push(renderBreakdownRow('Combined Net Margin (%)', r.netMargin, p.netMargin, { isBold: true, isPct: true }));
+        $('breakdownTableBody').innerHTML = rows.join('');
+
+        // TAB 2: Sensitivity Ladder
+        const tiers = [0, 5, 10, 15, 20, 25, 30, 35, 40, 50];
+        $('sensitivityTableBody').innerHTML = tiers.map(pct => {
+          const checkout = applyVoucher(s.regOrigTotal * (1 - pct / 100)).afterVoucher;
+          const ev = evaluateShopeeOrder(checkout, s.totalCogs, s.paidItemsForMdv, s.settings);
+          let statusHtml = '', rowClass = '';
+          if (ev.netProfit < -0.005) {
+            statusHtml = '<span class="badge bg-danger-subtle text-danger-emphasis border border-danger-subtle">Loss</span>';
+            rowClass = 'roas-row-loss';
+          } else if (ev.netMargin < 0.08) {
+            statusHtml = '<span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">Thin</span>';
+            rowClass = 'roas-row-be';
+          } else if (ev.netMargin >= 0.20) {
+            statusHtml = '<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle">Healthy</span>';
+            rowClass = 'roas-row-target';
+          } else {
+            statusHtml = '<span class="badge bg-info-subtle text-info-emphasis border border-info-subtle">Profitable</span>';
+          }
+          const isCurrent = Math.abs(checkout - s.finalCheckoutPrice) < 0.5;
+          return `
+            <tr class="${rowClass} ${isCurrent ? 'border-start border-4 border-primary' : ''}">
+              <td class="ps-3 fw-semibold">${pct === 0 ? '0% (Regular)' : `${pct}% Off Total`}${isCurrent ? ' <span class="badge bg-primary ms-1">Active</span>' : ''}</td>
+              <td class="text-end">${P(ev.price)}</td>
+              <td class="text-end text-body-secondary">-${P(ev.totalDeductions)}</td>
+              <td class="text-end">${P(ev.takeHome)}</td>
+              <td class="text-end fw-bold ${ev.netProfit >= 0 ? 'text-success' : 'text-danger'}">${ev.netProfit < 0 ? '-' + P(Math.abs(ev.netProfit)) : P(ev.netProfit)}</td>
+              <td class="text-end fw-semibold">${pe(ev.netMargin)}</td>
+              <td class="text-center pe-3">${statusHtml}</td>
+            </tr>
+          `;
+        }).join('');
+
+        // TAB 3: Per-SKU Standalone vs Combined
+        $('perSkuTableBody').innerHTML = s.lines.map(l => {
+          const stProf = l.standaloneEval.netProfit;
+          const combProf = l.lineNetProfit;
+          const badgeHtml = l.isGift
+            ? '<span class="badge bg-success-subtle text-success-emphasis">Free Gift</span>'
+            : combProf < -0.005
+              ? '<span class="badge bg-danger-subtle text-danger-emphasis">Loss</span>'
+              : l.lineNetMargin < 0.08
+                ? '<span class="badge bg-warning-subtle text-warning-emphasis">Thin</span>'
+                : '<span class="badge bg-success-subtle text-success-emphasis">Profitable</span>';
+          return `
+            <tr>
+              <td class="ps-3 fw-semibold">${escapeHtml(l.name)} <span class="text-body-secondary fw-normal">(×${l.qty})</span></td>
+              <td class="text-end">${l.isGift ? '₱0.00' : P(l.promoSub)}</td>
+              <td class="text-end text-body-secondary">${P(l.lineCogs)}</td>
+              <td class="text-end ${stProf >= 0 ? 'text-body-emphasis' : 'text-danger'}">${stProf < 0 ? '-' + P(Math.abs(stProf)) : P(stProf)}</td>
+              <td class="text-end fw-bold ${combProf >= 0 ? 'text-success' : 'text-danger'}">${combProf < 0 ? '-' + P(Math.abs(combProf)) : P(combProf)}</td>
+              <td class="text-center pe-3">${badgeHtml}</td>
+            </tr>
+          `;
+        }).join('');
+
+        saveState();
+      }
+
+      function updateOptionVisibility() {
+        document.querySelectorAll('.shopee-promo-tab').forEach(btn => {
+          const isActive = btn.dataset.promo === activePromo;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        $('panel-discount').classList.toggle('d-none', activePromo !== 'discount');
+        $('panel-bundle').classList.toggle('d-none', activePromo !== 'bundle');
+        $('panel-addon').classList.toggle('d-none', activePromo !== 'addon');
+
+        const dMode = document.querySelector('input[name="discMode"]:checked').value;
+        $('discPctGroup').classList.toggle('d-none', dMode !== 'pct');
+        $('discAmtGroup').classList.toggle('d-none', dMode !== 'amt');
+        $('discFixedGroup').classList.toggle('d-none', dMode !== 'fixed');
+
+        const bMode = document.querySelector('input[name="bundleMode"]:checked').value;
+        $('bundlePctGroup').classList.toggle('d-none', bMode !== 'pct');
+        $('bundleAmtGroup').classList.toggle('d-none', bMode !== 'amt');
+        $('bundleSpecialGroup').classList.toggle('d-none', bMode !== 'special');
+
+        const adMode = document.querySelector('input[name="addonDiscMode"]:checked').value;
+        $('addonDiscPctGroup').classList.toggle('d-none', adMode !== 'pct');
+        $('addonDiscAmtGroup').classList.toggle('d-none', adMode !== 'amt');
+        $('addonDiscSpecialGroup').classList.toggle('d-none', adMode !== 'special');
+
+        const vOn = $('enableVoucher').checked;
+        $('voucherPanel').classList.toggle('d-none', !vOn);
+        const vType = $('voucherType').value;
+        $('voucherPrefix').textContent = vType === 'pct' ? '%' : '₱';
+        $('voucherValueLabel').textContent = vType === 'pct' ? 'Voucher Off (%)' : 'Voucher Off (₱)';
+        $('voucherCapWrap').classList.toggle('d-none', vType !== 'pct');
+
+        $('claimVatCard').classList.toggle('d-none', !$('taxVat').checked);
+        $('camp').disabled = !$('osh').checked;
+        if (!$('osh').checked) $('camp').checked = false;
+
+        const pctVal = $('discPct').value === '' ? '' : String(Number($('discPct').value));
+        document.querySelectorAll('#discPctPresets .preset-chip').forEach(btn => {
+          btn.classList.toggle('active', pctVal !== '' && btn.dataset.val === pctVal);
+        });
+      }
+
+      function saveState() {
+        try {
+          const state = {
+            activePromo,
+            nextLineId,
+            productLines,
+            discMode: document.querySelector('input[name="discMode"]:checked').value,
+            discPct: $('discPct').value,
+            discAmt: $('discAmt').value,
+            discFixed: $('discFixed').value,
+            bundleMode: document.querySelector('input[name="bundleMode"]:checked').value,
+            bundlePct: $('bundlePct').value,
+            bundleAmt: $('bundleAmt').value,
+            bundleSpecial: $('bundleSpecial').value,
+            addonDiscMode: document.querySelector('input[name="addonDiscMode"]:checked').value,
+            addonDiscPct: $('addonDiscPct').value,
+            addonDiscAmt: $('addonDiscAmt').value,
+            addonDiscSpecial: $('addonDiscSpecial').value,
+            enableVoucher: $('enableVoucher').checked,
+            voucherType: $('voucherType').value,
+            voucherValue: $('voucherValue').value,
+            voucherCap: $('voucherCap').value,
+            shopeeCategory: $('shopeeCategory').value,
+            taxVat: $('taxVat').checked,
+            claim: $('claim').checked,
+            wht: $('wht').checked,
+            osh: $('osh').checked,
+            camp: $('camp').checked,
+            shRts: $('shRts').checked,
+            shFreeComm: $('shFreeComm').checked,
+            extraCost: $('extraCost').value
+          };
+          localStorage.setItem(DISC_STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {}
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(DISC_STORAGE_KEY);
+          if (!raw) return;
+          const st = JSON.parse(raw);
+          if (st.activePromo) activePromo = st.activePromo;
+          if (Array.isArray(st.productLines) && st.productLines.length) {
+            productLines = st.productLines;
+            nextLineId = Math.max(st.nextLineId || 1, ...productLines.map(l => l.id)) + 1;
+          }
+          const setVal = (id, v) => { if (v !== undefined && $(id)) $(id).value = v; };
+          const setChk = (id, v) => { if (v !== undefined && $(id)) $(id).checked = Boolean(v); };
+
+          setVal('discPct', st.discPct);
+          setVal('discAmt', st.discAmt);
+          setVal('discFixed', st.discFixed);
+          setVal('bundlePct', st.bundlePct);
+          setVal('bundleAmt', st.bundleAmt);
+          setVal('bundleSpecial', st.bundleSpecial);
+          setVal('addonDiscPct', st.addonDiscPct);
+          setVal('addonDiscAmt', st.addonDiscAmt);
+          setVal('addonDiscSpecial', st.addonDiscSpecial);
+          setVal('voucherType', st.voucherType);
+          setVal('voucherValue', st.voucherValue);
+          setVal('voucherCap', st.voucherCap);
+          setVal('shopeeCategory', st.shopeeCategory);
+          setVal('extraCost', st.extraCost);
+
+          if (st.discMode) {
+            const el = document.querySelector(`input[name="discMode"][value="${st.discMode}"]`);
+            if (el) el.checked = true;
+          }
+          if (st.bundleMode) {
+            const el = document.querySelector(`input[name="bundleMode"][value="${st.bundleMode}"]`);
+            if (el) el.checked = true;
+          }
+          if (st.addonDiscMode) {
+            const el = document.querySelector(`input[name="addonDiscMode"][value="${st.addonDiscMode}"]`);
+            if (el) el.checked = true;
+          }
+
+          setChk('enableVoucher', st.enableVoucher);
+          setChk('taxVat', st.taxVat);
+          setChk('taxNonVat', !st.taxVat);
+          setChk('claim', st.claim);
+          setChk('wht', st.wht);
+          setChk('osh', st.osh);
+          setChk('camp', st.camp);
+          setChk('shRts', st.shRts);
+          setChk('shFreeComm', st.shFreeComm);
+        } catch (e) {}
+      }
+
+      function syncFromSimulator(silent = false) {
+        const cfg = getStoredConfig();
+        const prof = getStoredProfile();
+        const costVal = Number(cfg.cost) > 0 ? Number(cfg.cost) : 100;
+        const freightVal = Number(cfg.freight) || Number(prof.sourcingFreight) || 0;
+        const packVal = Number(prof.packagingCost) || 0;
+        const opexVal = Number(prof.platforms && prof.platforms.sh && prof.platforms.sh.opex) || 0;
+
+        $('extraCost').value = (packVal + opexVal).toFixed(2);
+        if (cfg.cs !== undefined) $('shopeeCategory').value = cfg.cs;
+        const isVat = cfg.vat !== undefined ? Boolean(cfg.vat) : (prof.taxStatus === 'vat');
+        $('taxVat').checked = isVat;
+        $('taxNonVat').checked = !isVat;
+        $('claim').checked = cfg.claim !== undefined ? Boolean(cfg.claim) : Boolean(prof.claimInputVat);
+        $('wht').checked = cfg.wht !== undefined ? Boolean(cfg.wht) : Boolean(prof.includeWht);
+        $('osh').checked = cfg.osh !== undefined ? Boolean(cfg.osh) : Boolean(prof.platforms && prof.platforms.sh && prof.platforms.sh.optIn);
+        $('camp').checked = Boolean(cfg.camp);
+        $('shRts').checked = cfg.shRts !== undefined ? Boolean(cfg.shRts) : Boolean(prof.platforms && prof.platforms.sh && prof.platforms.sh.optInRts);
+        $('shFreeComm').checked = Boolean(prof.platforms && prof.platforms.sh && prof.platforms.sh.freeCommission);
+
+        let srpVal = Number(cfg.srp) > 0 ? Number(cfg.srp) : 220;
+        if (!(Number(cfg.srp) > 0)) {
+          const simRes = calc('sh', {
+            cost: costVal,
+            freight: freightVal,
+            units: 1,
+            m: (Number(cfg.mg) || Number(prof.defaultMargin) || 20) / 100,
+            vat: isVat,
+            claim: $('claim').checked,
+            wht: $('wht').checked,
+            pack: packVal,
+            opex: opexVal,
+            cat: { sh: Number($('shopeeCategory').value) || 0 },
+            opt: { sh: $('osh').checked, shRts: $('shRts').checked },
+            camp: $('camp').checked,
+            freeCommission: { sh: $('shFreeComm').checked }
+          });
+          srpVal = Number(simRes.price.toFixed(2));
+        }
+
+        if (productLines.length > 0) {
+          productLines[0].baseCost = Number((costVal + freightVal).toFixed(2));
+          productLines[0].sellingPrice = srpVal;
+        }
+        // Force table rebuild so updated values reflect in inputs
+        $('productLinesBody').innerHTML = '';
+        updateOptionVisibility();
+        render();
+
+        if (!silent) {
+          const btn = $('syncFromSimulatorBtn');
+          const origHtml = btn.innerHTML;
+          btn.innerHTML = '<i class="bi bi-check2"></i><span>Synced!</span>';
+          btn.classList.replace('btn-outline-primary', 'btn-success');
+          setTimeout(() => {
+            btn.innerHTML = origHtml;
+            btn.classList.replace('btn-success', 'btn-outline-primary');
+          }, 1500);
+        }
+      }
+
+      function resetDefaults() {
+        localStorage.removeItem(DISC_STORAGE_KEY);
+        activePromo = 'discount';
+        nextLineId = 2;
+        productLines = [
+          { id: 1, name: '', baseCost: '', sellingPrice: '', qty: 1, role: 'main', customDiscPct: '' }
+        ];
+        $('discModePct').checked = true;
+        $('discPct').value = '';
+        $('discAmt').value = '';
+        $('discFixed').value = '';
+        $('bundleModePct').checked = true;
+        $('bundlePct').value = '';
+        $('bundleAmt').value = '';
+        $('bundleSpecial').value = '';
+        $('addonDiscPctMode').checked = true;
+        $('addonDiscPct').value = '';
+        $('addonDiscAmt').value = '';
+        $('addonDiscSpecial').value = '';
+        $('enableVoucher').checked = false;
+        $('voucherType').value = 'amt';
+        $('voucherValue').value = '';
+        $('voucherCap').value = '';
+        $('taxNonVat').checked = true;
+        $('claim').checked = false;
+        $('wht').checked = true;
+        $('osh').checked = false;
+        $('camp').checked = false;
+        $('shRts').checked = false;
+        $('shFreeComm').checked = false;
+        $('extraCost').value = '';
+        const defIdx = D.sh.findIndex(c => c[0] === 'Food & Beverages');
+        $('shopeeCategory').value = defIdx >= 0 ? defIdx : 0;
+
+        $('productLinesBody').innerHTML = '';
+        updateOptionVisibility();
+        render();
+      }
+
+      function savePricelogPng() {
+        if (typeof html2canvas === 'undefined') return;
+        const btn = $('savePricelogPngBtn');
+        const origHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span><span>Saving...</span>';
+
+        const s = buildScenario();
+        const p = s.promoEval;
+        const isAddon = activePromo === 'addon';
+        const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        const bg = isDark ? '#1a1d20' : '#ffffff';
+        const surface = isDark ? '#212529' : '#f8f9fa';
+        const border = isDark ? '#343a40' : '#dee2e6';
+        const textMain = isDark ? '#f8f9fa' : '#212529';
+        const textMuted = isDark ? '#adb5bd' : '#6c757d';
+
+        const now = new Date();
+        const dateStamp = now.toISOString().slice(0, 10);
+        const datePretty = now.toLocaleString('en-PH', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+        const rowsHtml = s.lines.map((l, idx) => {
+          const discPctLine = l.isGift ? '100% (Gift)'
+            : (l.origSub > 0 ? `-${(((l.origSub - l.promoSub) / l.origSub) * 100).toFixed(1)}%` : '0%');
+          const roleOrIdx = isAddon
+            ? (l.role === 'main' ? 'Main' : l.role === 'addon' ? 'Add-on' : 'Free Gift')
+            : String(idx + 1);
+          const profColor = l.isGift ? '#dc3545' : (l.lineNetProfit < -0.005 ? '#dc3545' : (l.lineNetMargin < 0.08 ? '#d97706' : '#198754'));
+          const profText = l.isGift
+            ? `-${P(l.lineCogs)}`
+            : (l.lineNetProfit < 0 ? `-${P(Math.abs(l.lineNetProfit))}` : P(l.lineNetProfit));
+          const subNote = l.isGift ? 'Gift COGS' : `${pe(l.lineNetMargin)} margin`;
+
+          return `
+            <tr style="border-bottom: 1px solid ${border};">
+              <td style="padding: 10px 12px; color: ${textMuted}; font-weight: 600;">${roleOrIdx}</td>
+              <td style="padding: 10px 12px; font-weight: 700; color: ${textMain};">${escapeHtml(l.name || 'Item ' + (idx + 1))}</td>
+              <td style="padding: 10px 12px; text-align: right; color: ${textMain};">${P(l.cost)}</td>
+              <td style="padding: 10px 12px; text-align: right; color: ${textMain};">${l.isGift ? '₱0.00' : P(l.srp)}</td>
+              <td style="padding: 10px 12px; text-align: center; font-weight: 600; color: ${textMain};">${l.qty}</td>
+              <td style="padding: 10px 12px; text-align: right; color: #ee4d2d; font-weight: 600;">${discPctLine}</td>
+              <td style="padding: 10px 12px; text-align: right;">
+                <div style="font-weight: 700; color: ${textMain};">${l.isGift ? 'FREE' : P(l.promoSub)}</div>
+                ${l.isGift ? '' : `<div style="font-size: 11px; color: ${textMuted};">${P(l.promoUnit)}/pc</div>`}
+              </td>
+              <td style="padding: 10px 12px; text-align: right;">
+                <div style="font-weight: 700; color: ${profColor};">${profText}</div>
+                <div style="font-size: 11px; color: ${textMuted};">${subNote}</div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        const totalProfColor = p.netProfit < -0.005 ? '#dc3545' : (p.netMargin < 0.08 ? '#d97706' : '#198754');
+        const statusText = (s.regOrigTotal <= 0 && s.totalCogs <= 0) ? 'NO DATA'
+          : (p.netProfit < -0.005 ? 'UNPROFITABLE' : (p.netMargin < 0.08 ? 'THIN MARGIN' : 'PROFITABLE'));
+        const statusBg = statusText === 'PROFITABLE' ? '#198754' : (statusText === 'UNPROFITABLE' ? '#dc3545' : '#d97706');
+
+        const exportEl = document.createElement('div');
+        exportEl.style.cssText = `position:fixed; left:-99999px; top:0; width:960px; background:${bg}; color:${textMain}; font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; padding:28px; border:1px solid ${border}; border-top:6px solid #ee4d2d; border-radius:14px;`;
+        exportEl.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid ${border};">
+            <div>
+              <div style="font-size:12px; font-weight:700; color:#ee4d2d; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">PH Marketplace &bull; Shopee Seller Pricing</div>
+              <h1 style="margin:0; font-size:26px; font-weight:800; color:${textMain}; letter-spacing:-0.02em;">Product Discount Pricelog</h1>
+              <div style="font-size:13px; color:${textMuted}; margin-top:4px;">
+                ${escapeHtml(s.dealLabel)} &bull; ${escapeHtml(p.catName)} &bull; ${s.settings.vat ? 'VAT (12%)' : 'Non-VAT (3%)'}${s.settings.mdv ? (s.settings.camp ? ' &bull; 5% Spike MDV' : ' &bull; 4% MDV') : ''}${s.voucher.voucherAmt > 0 ? ' &bull; ' + escapeHtml(s.voucher.voucherDesc) : ''}
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <span style="display:inline-block; background:${statusBg}; color:#fff; font-size:11px; font-weight:700; padding:5px 10px; border-radius:999px; letter-spacing:0.04em;">${statusText}</span>
+              <div style="font-size:12px; color:${textMuted}; margin-top:6px;">${datePretty}</div>
+            </div>
+          </div>
+
+          <table style="width:100%; border-collapse:collapse; font-size:13px; margin-bottom:18px;">
+            <thead>
+              <tr style="background:${surface}; border-top:1px solid ${border}; border-bottom:2px solid ${border};">
+                <th style="padding:10px 12px; text-align:left; font-size:11px; text-transform:uppercase; color:${textMuted};">${isAddon ? 'Role' : '#'}</th>
+                <th style="padding:10px 12px; text-align:left; font-size:11px; text-transform:uppercase; color:${textMuted};">Product / SKU Name</th>
+                <th style="padding:10px 12px; text-align:right; font-size:11px; text-transform:uppercase; color:${textMuted};">Base Cost</th>
+                <th style="padding:10px 12px; text-align:right; font-size:11px; text-transform:uppercase; color:${textMuted};">Selling Price</th>
+                <th style="padding:10px 12px; text-align:center; font-size:11px; text-transform:uppercase; color:${textMuted};">Qty</th>
+                <th style="padding:10px 12px; text-align:right; font-size:11px; text-transform:uppercase; color:${textMuted};">Discount</th>
+                <th style="padding:10px 12px; text-align:right; font-size:11px; text-transform:uppercase; color:${textMuted};">Promo Total</th>
+                <th style="padding:10px 12px; text-align:right; font-size:11px; text-transform:uppercase; color:${textMuted};">Line Net Profit</th>
+              </tr>
+            </thead>
+            <tbody>${rowsHtml}</tbody>
+            <tfoot>
+              <tr style="background:${surface}; border-top:2px solid ${border}; font-weight:700;">
+                <td colspan="2" style="padding:11px 12px;">Total (${s.lines.length} SKU${s.lines.length > 1 ? 's' : ''})</td>
+                <td style="padding:11px 12px; text-align:right;">${P(s.totalProductCogs)}</td>
+                <td style="padding:11px 12px; text-align:right;">${P(s.regOrigTotal)}</td>
+                <td style="padding:11px 12px; text-align:center;">${s.totalQty}</td>
+                <td style="padding:11px 12px; text-align:right; color:#ee4d2d;">-${s.effectiveDiscountPct.toFixed(1)}%</td>
+                <td style="padding:11px 12px; text-align:right; color:#ee4d2d;">${P(s.finalCheckoutPrice)}</td>
+                <td style="padding:11px 12px; text-align:right; color:${totalProfColor};">${p.netProfit < 0 ? '-' + P(Math.abs(p.netProfit)) : P(p.netProfit)}</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;">
+            <div style="background:${surface}; border:1px solid ${border}; border-radius:10px; padding:10px 12px;">
+              <div style="font-size:11px; color:${textMuted};">Buyer Checkout Total</div>
+              <div style="font-size:17px; font-weight:800; color:${textMain}; margin-top:2px;">${P(p.price)}</div>
+            </div>
+            <div style="background:${surface}; border:1px solid ${border}; border-radius:10px; padding:10px 12px;">
+              <div style="font-size:11px; color:${textMuted};">Shopee Fees &amp; Tax</div>
+              <div style="font-size:17px; font-weight:800; color:#d97706; margin-top:2px;">-${P(p.totalDeductions)}</div>
+            </div>
+            <div style="background:${surface}; border:1px solid ${border}; border-radius:10px; padding:10px 12px;">
+              <div style="font-size:11px; color:${textMuted};">Shopee Payout (Take-Home)</div>
+              <div style="font-size:17px; font-weight:800; color:#0d6efd; margin-top:2px;">${P(p.takeHome)}</div>
+            </div>
+            <div style="background:${surface}; border:1px solid ${border}; border-radius:10px; padding:10px 12px;">
+              <div style="font-size:11px; color:${textMuted};">Combined Net Profit</div>
+              <div style="font-size:17px; font-weight:800; color:${totalProfColor}; margin-top:2px;">${p.netProfit < 0 ? '-' + P(Math.abs(p.netProfit)) : P(p.netProfit)} <span style="font-size:12px; font-weight:600;">(${pe(p.netMargin)})</span></div>
+            </div>
+          </div>
+        `;
+
+        document.body.appendChild(exportEl);
+        html2canvas(exportEl, {
+          scale: 2,
+          backgroundColor: bg
+        }).then(canvas => {
+          const link = document.createElement('a');
+          link.download = `product-discount-pricelog-${dateStamp}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }).finally(() => {
+          document.body.removeChild(exportEl);
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+        });
+      }
+
+      function savePng() {
+        if (typeof html2canvas === 'undefined') return;
+        const btn = $('snapshotBtn');
+        const origHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span><span>Saving...</span>';
+        html2canvas($('captureArea'), {
+          scale: 2,
+          backgroundColor: getComputedStyle(document.body).backgroundColor
+        }).then(canvas => {
+          const link = document.createElement('a');
+          link.download = `shopee-discount-multi-line-${activePromo}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }).finally(() => {
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+        });
+      }
+
+      // Event Delegation for Multi-Product Line Table
+      $('productLinesBody').addEventListener('input', e => {
+        const el = e.target;
+        const id = Number(el.dataset.id);
+        const field = el.dataset.field;
+        if (!id || !field) return;
+        const line = productLines.find(l => l.id === id);
+        if (!line) return;
+        if (field === 'name') line.name = el.value;
+        else if (field === 'customDiscPct' || field === 'baseCost' || field === 'sellingPrice') {
+          line[field] = el.value === '' ? '' : Number(el.value);
+        } else line[field] = Number(el.value);
+        render();
+      });
+
+      $('productLinesBody').addEventListener('click', e => {
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+        const id = Number(btn.dataset.id);
+        const action = btn.dataset.action;
+        const idx = productLines.findIndex(l => l.id === id);
+        if (idx < 0) return;
+
+        if (action === 'del' && productLines.length > 1) {
+          productLines.splice(idx, 1);
+          render();
+        } else if (action === 'dup') {
+          const src = productLines[idx];
+          productLines.splice(idx + 1, 0, {
+            ...src,
+            id: nextLineId++,
+            name: src.name ? src.name + ' (Copy)' : ''
+          });
+          render();
+        } else if (action === 'cycle-role') {
+          const order = ['main', 'addon', 'gift'];
+          const cur = order.indexOf(productLines[idx].role || 'main');
+          productLines[idx].role = order[(cur + 1) % order.length];
+          render();
+        }
+      });
+
+      $('addLineBtn').addEventListener('click', () => {
+        productLines.push({
+          id: nextLineId++,
+          name: '',
+          baseCost: '',
+          sellingPrice: '',
+          qty: 1,
+          role: activePromo === 'addon' ? 'addon' : 'main',
+          customDiscPct: ''
+        });
+        render();
+      });
+
+      $('addGiftBtn').addEventListener('click', () => {
+        productLines.push({
+          id: nextLineId++,
+          name: '',
+          baseCost: '',
+          sellingPrice: '',
+          qty: 1,
+          role: 'gift',
+          customDiscPct: ''
+        });
+        render();
+      });
+
+      // Promo tab clicks
+      document.querySelectorAll('.shopee-promo-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activePromo = btn.dataset.promo;
+          updateOptionVisibility();
+          render();
+        });
+      });
+
+      document.querySelectorAll('#discPctPresets .preset-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          $('discModePct').checked = true;
+          $('discPct').value = btn.dataset.val;
+          updateOptionVisibility();
+          render();
+        });
+      });
+
+      // Global inputs outside table
+      document.querySelectorAll('input:not([data-field]), select').forEach(el => {
+        el.addEventListener('input', () => { updateOptionVisibility(); render(); });
+        el.addEventListener('change', () => { updateOptionVisibility(); render(); });
+      });
+
+      $('syncFromSimulatorBtn').addEventListener('click', () => syncFromSimulator(false));
+      $('resetBtn').addEventListener('click', resetDefaults);
+      $('snapshotBtn').addEventListener('click', savePng);
+      $('savePricelogPngBtn').addEventListener('click', savePricelogPng);
+
+      // Initialize
+      populateCategories();
+      loadState();
+      initTheme();
+      updateOptionVisibility();
+      render();
+    })();
+  </script>
+</body>
+</html>

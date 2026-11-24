@@ -401,3 +401,13 @@ function setTheme(theme) {
     }
   }
 }
+
+// Auto-load Floating Chat-Style Quick Calculator Widget across all pages
+(function loadFloatingCalcWidget() {
+  if (typeof document === 'undefined' || window.__phFloatingCalcScriptLoaded) return;
+  window.__phFloatingCalcScriptLoaded = true;
+  const s = document.createElement('script');
+  s.src = './js/floating-calc.js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
