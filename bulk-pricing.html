@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bulk Pricing Calculator | PH Marketplace Fee &amp; Margin Calculator</title>
+  <meta name="description" content="Calculate selling prices, take-home pay, and net profit across Shopee, TikTok Shop, and Lazada for multiple product lines with instant per-SKU platform comparison modals.">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="./css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg app-navbar sticky-top shadow-sm py-2">
+      <div class="container-fluid px-3 px-md-4 px-xl-5">
+        <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none flex-shrink-0" href="index.html">
+          <span class="brand-flag">🇵🇭</span>
+          <div class="d-flex flex-column lh-1">
+            <span class="brand-title fw-bold">PH Marketplace</span>
+            <span class="brand-subtitle text-body-secondary">Fee &amp; Margin Calculator</span>
+          </div>
+        </a>
+        <button class="navbar-toggler border-0 shadow-none px-2 py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3 align-items-lg-center">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-calculator"></i>Pricing
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="index.html"><i class="bi bi-calculator-fill"></i>Pricing Simulator (Single)</a></li>
+                <li><a class="dropdown-item active" href="bulk-pricing.html"><i class="bi bi-table"></i>Bulk Multi-Line Pricing</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-tags"></i>Shopee Promos
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="discount-calculator.html"><i class="bi bi-tags-fill"></i>Discount, Bundle &amp; Add-on</a></li>
+                <li><a class="dropdown-item" href="voucher-calculator.html"><i class="bi bi-ticket-perforated-fill"></i>Seller Vouchers &amp; Coins</a></li>
+                <li><a class="dropdown-item" href="campaign-calculator.html"><i class="bi bi-megaphone-fill"></i>Campaigns &amp; Flash Deals</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line"></i>Comparison</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="roas-calculator.html"><i class="bi bi-graph-up-arrow"></i>ROAS &amp; Ads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="expenses.html"><i class="bi bi-cash-coin"></i>Expenses</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-journal-bookmark"></i>Guides &amp; Portals
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="opt-in-fees.html"><i class="bi bi-shield-check"></i>Opt-In Fees &amp; RTS</a></li>
+                <li><a class="dropdown-item" href="fee-reference.html"><i class="bi bi-journal-bookmark-fill"></i>Fee Reference</a></li>
+                <li><a class="dropdown-item" href="tax-guide.html"><i class="bi bi-bank"></i>Tax &amp; BIR Guide</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="seller-centers.html"><i class="bi bi-box-arrow-up-right"></i>Seller Portals</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2 pt-2 pt-lg-0 border-top border-lg-0 flex-shrink-0">
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="seller-centers.html" title="Seller Portals (Shopee, TikTok, Lazada)" aria-label="Seller Portals" style="width: 34px; height: 34px;">
+              <i class="bi bi-shop-window"></i>
+            </a>
+            <button class="btn btn-outline-secondary btn-sm rounded-pill d-flex align-items-center gap-1.5 px-3 py-1.5" id="themeToggle" type="button" title="Toggle dark/light mode">
+              <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+              <span id="themeText">Theme</span>
+            </button>
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub" style="width: 34px; height: 34px;">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-fluid px-3 px-md-4 px-xl-5 py-3 py-xl-4 flex-grow-1">
+
+    <!-- Hero Header -->
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-4 gap-3">
+      <div>
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 fw-semibold">
+            <i class="bi bi-table me-1"></i>Multi-SKU Pricing Sheet
+          </span>
+          <span class="badge bg-body-tertiary text-body-secondary border px-2.5 py-1" style="font-size:0.74rem;">
+            Shopee &bull; TikTok Shop &bull; Lazada PH
+          </span>
+        </div>
+        <h1 class="h2 mb-1 fw-bold">Bulk Multi-Line Pricing Calculator</h1>
+        <p class="text-body-secondary mb-0">
+          Enter multiple product lines to compute suggested prices, take-home pay, and net profit across all 3 marketplaces. Click <strong>View Comparison</strong> on any row for a full fee breakdown modal.
+        </p>
+      </div>
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-3 py-2" id="exportCsvBtn" type="button" title="Export pricing table as CSV">
+          <i class="bi bi-download"></i><span>Export CSV</span>
+        </button>
+        <button class="btn btn-primary btn-sm d-flex align-items-center gap-1.5 px-3 py-2 shadow-sm" id="savePricelogPngBtn" type="button" title="Save pricing table as PNG">
+          <i class="bi bi-image"></i><span>Save PNG</span>
+        </button>
+        <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1.5 px-2.5 py-2" id="resetBtn" type="button" title="Clear all lines and reset">
+          <i class="bi bi-arrow-counterclockwise"></i><span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Global Marketplace & Tax Settings Bar -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-body-tertiary py-2.5 d-flex justify-content-between align-items-center">
+        <span class="fw-bold small"><i class="bi bi-sliders me-1.5 text-primary"></i>Global Store, Category &amp; Fee Settings (Applies to All Product Lines)</span>
+        <button class="btn btn-link btn-sm text-decoration-none p-0 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#globalSettingsBody" aria-expanded="true">
+          Toggle Settings
+        </button>
+      </div>
+      <div class="collapse show" id="globalSettingsBody">
+        <div class="card-body p-3">
+          <div class="row g-3 align-items-end">
+            <div class="col-md-4 col-xl-3">
+              <label for="cs" class="form-label small fw-semibold mb-1" style="color: var(--shopee-color);">Shopee Category</label>
+              <select class="form-select form-select-sm" id="cs"></select>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <label for="ct" class="form-label small fw-semibold mb-1" style="color: var(--tiktok-color);">TikTok Shop Category</label>
+              <select class="form-select form-select-sm" id="ct"></select>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <label for="cl" class="form-label small fw-semibold mb-1 text-primary">Lazada Category</label>
+              <select class="form-select form-select-sm" id="cl"></select>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <label class="form-label small fw-semibold mb-1">BIR Tax Registration</label>
+              <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="tx" id="nv" checked>
+                <label class="btn btn-outline-primary btn-sm" for="nv">Non-VAT (3%)</label>
+                <input type="radio" class="btn-check" name="tx" id="vat">
+                <label class="btn btn-outline-primary btn-sm" for="vat">VAT (12%)</label>
+              </div>
+            </div>
+
+            <!-- Toggle Cards (Exact Match to Main Pricing Simulator) -->
+            <div class="col-12">
+              <div class="row g-3 pt-2 border-top">
+
+                <!-- Group 1: Campaigns & Protection -->
+                <div class="col-lg-4">
+                  <div class="toggle-group-header mt-0">
+                    <span><i class="bi bi-tag-fill me-1 text-danger"></i>Campaigns &amp; Protection</span>
+                    <a href="opt-in-fees.html" class="text-decoration-none text-primary fw-medium" style="font-size:0.68rem; text-transform:none;">Guide &rarr;</a>
+                  </div>
+
+                  <label class="toggle-card" for="osh">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-danger">Shopee MDV <span class="badge badge-shopee" style="font-size:0.62rem;">4%/5%</span></span>
+                      <span class="toggle-card-subtitle">Max ₱200/item &bull; 28-day lock-in</span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="osh">
+                    </div>
+                  </label>
+
+                  <label class="toggle-card" for="shRts">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-danger">Shopee FRS / RTS <span class="badge badge-shopee" style="font-size:0.62rem;">₱2.00</span></span>
+                      <span class="toggle-card-subtitle">Free returns / RTS protection</span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="shRts">
+                    </div>
+                  </label>
+
+                  <label class="toggle-card" for="ott">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-danger-emphasis">TikTok MDP <span class="badge badge-tiktok" style="font-size:0.62rem;">4%/5%</span></span>
+                      <span class="toggle-card-subtitle">Mega Discount Program</span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="ott">
+                    </div>
+                  </label>
+
+                  <label class="toggle-card mb-0" for="camp">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-warning-emphasis">Spike Day Mode <span class="badge bg-warning-subtle text-warning-emphasis" style="font-size:0.62rem;">+1%</span></span>
+                      <span class="toggle-card-subtitle">Double-Double &amp; Payday rate</span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="camp">
+                    </div>
+                  </label>
+                </div>
+
+                <!-- Group 2: 90-Day 0% Commission -->
+                <div class="col-lg-4">
+                  <div class="toggle-group-header mt-0">
+                    <span><i class="bi bi-gift-fill me-1 text-success"></i>90-Day 0% Commission</span>
+                    <span class="badge bg-success-subtle text-success-emphasis border" style="font-size:0.62rem;">New Seller</span>
+                  </div>
+
+                  <label class="toggle-card" for="shFreeComm">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-danger">Shopee 0% Commission</span>
+                      <span class="toggle-card-subtitle">New seller 90-day waiver</span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="shFreeComm">
+                    </div>
+                  </label>
+
+                  <label class="toggle-card" for="ttFreeComm">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-danger-emphasis">TikTok 0% Commission</span>
+                      <span class="toggle-card-subtitle">New seller 90-day waiver</span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="ttFreeComm">
+                    </div>
+                  </label>
+
+                  <label class="toggle-card mb-0" for="lzFreeComm">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-primary">Lazada 0% Commission</span>
+                      <span class="toggle-card-subtitle">New seller 90-day waiver</span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="lzFreeComm">
+                    </div>
+                  </label>
+                </div>
+
+                <!-- Group 3: BIR Tax Options & Pack/OPEX -->
+                <div class="col-lg-4">
+                  <div class="toggle-group-header mt-0">
+                    <span><i class="bi bi-bank me-1 text-primary"></i>BIR Tax Options</span>
+                    <a href="tax-guide.html" class="text-decoration-none text-primary fw-medium" style="font-size:0.68rem; text-transform:none;">Guide &rarr;</a>
+                  </div>
+
+                  <label class="toggle-card" for="wht">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-primary">Withholding Tax (0.5%)</span>
+                      <span class="toggle-card-subtitle">BIR RR 16-2023 creditable WHT</span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="wht" checked>
+                    </div>
+                  </label>
+
+                  <label class="toggle-card" for="claim">
+                    <div class="toggle-card-label">
+                      <span class="toggle-card-title text-body-secondary">Claim Input VAT Credit</span>
+                      <span class="toggle-card-subtitle">VAT-registered sellers only</span>
+                    </div>
+                    <div class="form-check form-switch m-0 p-0">
+                      <input class="form-check-input" type="checkbox" id="claim" disabled>
+                    </div>
+                  </label>
+
+                  <div class="p-2.5 rounded-3 bg-body-tertiary border d-flex align-items-center justify-content-between gap-2 mt-2">
+                    <label for="packOpex" class="small fw-semibold text-body-secondary mb-0">
+                      <i class="bi bi-box me-1"></i>Pack / OPEX / order
+                    </label>
+                    <div class="input-group input-group-sm" style="width: 120px;">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control" id="packOpex" value="" placeholder="0.00" min="0" step="0.5">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multi-Product Lines Input & Results Table -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-body-tertiary py-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+        <div class="d-flex align-items-center gap-2">
+          <span class="fw-bold fs-6"><i class="bi bi-boxes me-1.5 text-primary"></i>Product Lines &amp; Live Marketplace Pricing</span>
+          <span class="badge bg-body text-body-secondary border" id="rowCountBadge">1 Line</span>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1" id="saveTablePngBtn" title="Save pricing table as PNG image">
+            <i class="bi bi-image"></i><span>Save as PNG</span>
+          </button>
+          <button type="button" class="btn btn-sm btn-primary d-flex align-items-center gap-1" id="addLineBtn">
+            <i class="bi bi-plus-lg"></i><span>Add Product Line</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table product-lines-table mb-0 align-middle">
+          <thead>
+            <tr>
+              <th class="ps-3">#</th>
+              <th>Product / SKU Name</th>
+              <th class="text-end">Base Cost (₱)</th>
+              <th class="text-end">Freight (₱)</th>
+              <th class="text-center">Units</th>
+              <th class="text-end">Target %</th>
+              <th class="text-end">Fixed SRP (₱)</th>
+              <th class="text-end" style="color: var(--shopee-color);">Shopee</th>
+              <th class="text-end" style="color: var(--tiktok-color);">TikTok</th>
+              <th class="text-end text-primary">Lazada</th>
+              <th class="text-center pe-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bulkLinesBody">
+            <!-- Dynamic product rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- VIEW COMPARISON MODAL -->
+  <div class="modal fade" id="comparisonModal" tabindex="-1" aria-labelledby="comparisonModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header bg-body-tertiary">
+          <div>
+            <h5 class="modal-title fw-bold mb-0" id="comparisonModalLabel">Platform Pricing Comparison</h5>
+            <div class="small text-body-secondary" id="comparisonModalSub">Shopee vs. TikTok Shop vs. Lazada PH</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-3 p-md-4" id="modalCaptureArea">
+          <!-- Winner Banner -->
+          <div class="alert alert-success d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2 mb-3 border-0 shadow-sm" id="modalWinnerBanner">
+            <div class="d-flex align-items-center gap-2.5">
+              <i class="bi bi-trophy-fill fs-4"></i>
+              <div>
+                <div class="fw-bold" id="modalWinnerTitle">Best Platform</div>
+                <div class="small opacity-75" id="modalWinnerSub">Highest take-home pay and net profit</div>
+              </div>
+            </div>
+            <span class="badge bg-success text-white px-2.5 py-1.5" id="modalModeBadge">Target Margin Mode</span>
+          </div>
+
+          <!-- 3 Platform Cards -->
+          <div class="row g-3 mb-4" id="modalPlatformCards"></div>
+
+          <!-- Full Line-by-Line Fee Comparison Table -->
+          <div class="card border">
+            <div class="card-header bg-body-tertiary py-2.5 fw-bold small">
+              <i class="bi bi-receipt-cutoff me-1.5 text-primary"></i>Complete Fee, Tax &amp; Payout Breakdown
+            </div>
+            <div class="table-responsive">
+              <table class="table table-sm table-hover align-middle mb-0 small">
+                <thead class="table-light">
+                  <tr>
+                    <th class="ps-3">Fee / Metric</th>
+                    <th class="text-end" style="color: var(--shopee-color);">Shopee</th>
+                    <th class="text-end" style="color: var(--tiktok-color);">TikTok Shop</th>
+                    <th class="text-end text-primary pe-3">Lazada</th>
+                  </tr>
+                </thead>
+                <tbody id="modalComparisonTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer bg-body-tertiary">
+          <button type="button" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1.5" id="saveModalPngBtn">
+            <i class="bi bi-camera-fill"></i><span>Save Comparison PNG</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-auto py-3 border-top bg-body-tertiary text-body-secondary small">
+    <div class="container-fluid px-3 px-md-4 px-xl-5 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+      <div>PH Marketplace Fee &amp; Margin Calculator &bull; Bulk Multi-Line Pricing</div>
+      <div>Real-time Shopee, TikTok Shop, and Lazada PH 2026 fee engine.</div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- html2canvas -->
+  <script src="./js/html2canvas.min.js"></script>
+  <!-- App Data & Core Engine -->
+  <script src="./js/data.js"></script>
+  <script src="./js/calculator.js"></script>
+
+  <script>
+    (function () {
+      const $ = id => document.getElementById(id);
+      const BULK_STORAGE_KEY = 'ph-marketplace-bulk-pricing-v1';
+
+      let nextId = 2;
+      let lines = [
+        { id: 1, name: '', cost: '', freight: '', units: 1, margin: 20, srp: '' }
+      ];
+      let activeModalLineId = null;
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+      }
+
+      // Populate Category Dropdowns
+      DEFAULT_CATEGORIES.forEach(([p, def]) => {
+        const sel = $('c' + (p === 'sh' ? 's' : p === 'tt' ? 't' : 'l'));
+        if (!sel) return;
+        sel.innerHTML = '';
+        D[p].forEach((c, i) => sel.add(new Option(`${c[0]} (${(c[1] * 100).toFixed(1)}%)`, i)));
+        const idx = D[p].findIndex(c => c[0] === def);
+        sel.value = idx >= 0 ? idx : 0;
+      });
+
+      function readGlobalOptions() {
+        return {
+          vat: $('vat').checked,
+          claim: $('claim').checked,
+          wht: $('wht').checked,
+          pack: Math.max(0, Number($('packOpex').value) || 0),
+          opex: 0,
+          adcost: 0,
+          cat: {
+            sh: Number($('cs').value) || 0,
+            tt: Number($('ct').value) || 0,
+            lz: Number($('cl').value) || 0
+          },
+          opt: {
+            sh: $('osh').checked,
+            shRts: $('shRts').checked,
+            tt: $('ott').checked
+          },
+          freeCommission: {
+            sh: $('shFreeComm').checked,
+            tt: $('ttFreeComm').checked,
+            lz: $('lzFreeComm').checked
+          },
+          camp: $('camp').checked
+        };
+      }
+
+      function computeLine(line, globalOpts) {
+        const costVal = Number(line.cost) || 0;
+        const freightVal = Number(line.freight) || 0;
+        const unitsVal = Math.max(1, Math.floor(Number(line.units) || 1));
+        const marginVal = Math.max(0, Math.min(85, Number(line.margin) || 0)) / 100;
+        const srpVal = Number(line.srp) || 0;
+        const hasInput = costVal > 0 || srpVal > 0;
+
+        if (!hasInput) {
+          return { line, hasInput: false, sh: null, tt: null, lz: null, bestKey: null };
+        }
+
+        const opts = {
+          ...globalOpts,
+          cost: costVal,
+          freight: freightVal,
+          units: unitsVal,
+          m: marginVal,
+          srp: srpVal
+        };
+
+        const sh = calc('sh', opts);
+        const tt = calc('tt', opts);
+        const lz = calc('lz', opts);
+
+        // Best platform: if Fixed SRP mode -> highest net profit; if Target Margin mode -> lowest competitive selling price (tie-break highest profit)
+        const entries = [['sh', sh], ['tt', tt], ['lz', lz]];
+        let bestKey = 'sh';
+        if (srpVal > 0) {
+          entries.sort((a, b) => b[1].profit - a[1].profit);
+          bestKey = entries[0][0];
+        } else {
+          entries.sort((a, b) => a[1].price - b[1].price || b[1].profit - a[1].profit);
+          bestKey = entries[0][0];
+        }
+
+        return { line, hasInput: true, sh, tt, lz, bestKey, srpVal };
+      }
+
+      function formatPlatformCell(res, isBest) {
+        if (!res) return '<span class="text-body-secondary">—</span>';
+        const profCls = res.profit < -0.005 ? 'text-danger' : 'text-success';
+        const profTxt = res.profit < 0 ? `-${P(Math.abs(res.profit))}` : P(res.profit);
+        const star = isBest ? ' <i class="bi bi-trophy-fill text-warning" title="Best Platform"></i>' : '';
+        return `
+          <div class="fw-bold">${P(res.price)}${star}</div>
+          <div style="font-size:0.7rem;" class="${profCls}">Net: ${profTxt} (${pe(res.mg)})</div>
+        `;
+      }
+
+      function render() {
+        $('claim').disabled = !$('vat').checked;
+        if (!$('vat').checked) $('claim').checked = false;
+        $('camp').disabled = !($('osh').checked || $('ott').checked);
+        if ($('camp').disabled) $('camp').checked = false;
+
+        const globalOpts = readGlobalOptions();
+        const computed = lines.map(l => computeLine(l, globalOpts));
+
+        $('rowCountBadge').textContent = `${lines.length} Line${lines.length > 1 ? 's' : ''}`;
+
+        const tbody = $('bulkLinesBody');
+        const existingIds = [...tbody.querySelectorAll('tr[data-id]')].map(tr => Number(tr.dataset.id));
+        const currentIds = lines.map(l => l.id);
+        const sameStructure = existingIds.length === currentIds.length && existingIds.every((id, i) => id === currentIds[i]);
+
+        if (!sameStructure) {
+          tbody.innerHTML = computed.map((c, idx) => {
+            const l = c.line;
+            return `
+              <tr data-id="${l.id}">
+                <td class="ps-3" data-cell="role"><span class="badge bg-body-tertiary text-body-secondary border">${idx + 1}</span></td>
+                <td data-cell="name" data-label="Product / SKU Name">
+                  <input type="text" class="form-control form-control-sm sku-name-input" data-field="name" data-id="${l.id}" value="${escapeHtml(l.name)}" placeholder="SKU / Product name">
+                </td>
+                <td data-label="Base Cost (₱)">
+                  <input type="number" class="form-control form-control-sm num-input" data-field="cost" data-id="${l.id}" value="${l.cost === '' ? '' : l.cost}" placeholder="0.00" min="0" step="0.01">
+                </td>
+                <td data-label="Freight (₱)">
+                  <input type="number" class="form-control form-control-sm num-input" style="min-width:72px;" data-field="freight" data-id="${l.id}" value="${l.freight === '' ? '' : l.freight}" placeholder="0.00" min="0" step="0.01">
+                </td>
+                <td class="text-center" data-label="Units">
+                  <input type="number" class="form-control form-control-sm qty-input mx-auto" data-field="units" data-id="${l.id}" value="${l.units}" min="1" step="1">
+                </td>
+                <td data-label="Target Margin (%)">
+                  <input type="number" class="form-control form-control-sm num-input" style="min-width:68px;" data-field="margin" data-id="${l.id}" value="${l.margin === '' ? '' : l.margin}" placeholder="20" min="0" max="85" step="0.5">
+                </td>
+                <td data-label="Fixed SRP (₱)">
+                  <input type="number" class="form-control form-control-sm num-input" style="min-width:78px;" data-field="srp" data-id="${l.id}" value="${l.srp === '' ? '' : l.srp}" placeholder="Auto" min="0" step="1">
+                </td>
+                <td class="text-end text-nowrap" data-cell="sh" data-label="Shopee"></td>
+                <td class="text-end text-nowrap" data-cell="tt" data-label="TikTok Shop"></td>
+                <td class="text-end text-nowrap" data-cell="lz" data-label="Lazada"></td>
+                <td class="text-center pe-3 text-nowrap" data-cell="actions">
+                  <button type="button" class="btn btn-sm btn-outline-primary py-1 px-2 me-1" data-action="compare" data-id="${l.id}" title="View full 3-platform comparison">
+                    <i class="bi bi-bar-chart-line me-1"></i>View Comparison
+                  </button>
+                  <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="dup" data-id="${l.id}" title="Duplicate"><i class="bi bi-copy"></i></button>
+                  <button type="button" class="btn btn-sm btn-link text-danger p-1" data-action="del" data-id="${l.id}" title="Remove" ${lines.length <= 1 ? 'disabled' : ''}><i class="bi bi-trash3"></i></button>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+
+        // Update result cells in-place
+        computed.forEach((c, idx) => {
+          const tr = tbody.querySelector(`tr[data-id="${c.line.id}"]`);
+          if (!tr) return;
+          tr.querySelector('[data-cell="role"]').innerHTML = `<span class="badge bg-body-tertiary text-body-secondary border">${idx + 1}</span>`;
+          tr.querySelector('[data-cell="sh"]').innerHTML = formatPlatformCell(c.sh, c.bestKey === 'sh');
+          tr.querySelector('[data-cell="tt"]').innerHTML = formatPlatformCell(c.tt, c.bestKey === 'tt');
+          tr.querySelector('[data-cell="lz"]').innerHTML = formatPlatformCell(c.lz, c.bestKey === 'lz');
+          const delBtn = tr.querySelector('button[data-action="del"]');
+          if (delBtn) delBtn.disabled = lines.length <= 1;
+          const cmpBtn = tr.querySelector('button[data-action="compare"]');
+          if (cmpBtn) cmpBtn.disabled = !c.hasInput;
+        });
+
+        // If modal is open, refresh it live too
+        if (activeModalLineId !== null) {
+          const match = computed.find(c => c.line.id === activeModalLineId);
+          if (match && match.hasInput) populateModal(match);
+        }
+
+        saveState();
+      }
+
+      function populateModal(c) {
+        const l = c.line;
+        const name = l.name ? l.name : `Product Line #${lines.findIndex(x => x.id === l.id) + 1}`;
+        $('comparisonModalLabel').textContent = `Comparison: ${name}`;
+        $('comparisonModalSub').textContent = `Base Cost ${P(Number(l.cost) || 0)} • Freight ${P(Number(l.freight) || 0)} • ${Math.max(1, Number(l.units) || 1)} pc(s) • ${c.srpVal > 0 ? 'Fixed SRP ' + P(c.srpVal) : 'Target ' + (Number(l.margin) || 0) + '% Net Margin'}`;
+
+        const bestPl = PL[c.bestKey];
+        const bestRes = c[c.bestKey];
+        $('modalWinnerTitle').textContent = `${bestPl.n} Wins for "${name}"`;
+        $('modalWinnerSub').textContent = c.srpVal > 0
+          ? `Highest net profit at ${P(bestRes.profit)} (${pe(bestRes.mg)} margin) with ${P(bestRes.take)} payout.`
+          : `Most competitive selling price at ${P(bestRes.price)} while achieving ${P(bestRes.profit)} net profit (${pe(bestRes.mg)} margin).`;
+        $('modalModeBadge').textContent = c.srpVal > 0 ? `Fixed SRP: ${P(c.srpVal)}` : `Target Margin: ${Number(l.margin) || 0}%`;
+
+        // 3 Platform Cards
+        const keys = ['sh', 'tt', 'lz'];
+        $('modalPlatformCards').innerHTML = keys.map(k => {
+          const pl = PL[k];
+          const r = c[k];
+          const isBest = k === c.bestKey;
+          const t = r.price > 0 ? r.price : 1;
+          const cp = Math.min(100, Math.max(0, (r.cost / t) * 100));
+          const dp = Math.min(100 - cp, Math.max(0, (r.ded / t) * 100));
+          const pp = Math.max(0, 100 - cp - dp);
+          const profCls = r.profit < -0.005 ? 'text-danger' : 'text-success';
+
+          return `
+            <div class="col-md-4">
+              <div class="card h-100 shadow-sm ${pl.borderClass} ${isBest ? 'card-best' : ''}">
+                <div class="card-body p-3">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="badge ${pl.badgeClass} fw-bold">${pl.n}</span>
+                    ${isBest ? '<span class="badge bg-success text-white"><i class="bi bi-trophy-fill me-1"></i>Best</span>' : ''}
+                  </div>
+                  <div class="text-body-secondary small" style="font-size:0.72rem;">${c.srpVal > 0 ? 'Fixed Selling Price' : 'Suggested Selling Price'}</div>
+                  <div class="fs-3 fw-bold mb-2">${P(r.price)}</div>
+                  <div class="d-flex justify-content-between small py-1 border-top">
+                    <span class="text-body-secondary">Take-Home Payout</span>
+                    <strong class="text-primary">${P(r.take)}</strong>
+                  </div>
+                  <div class="d-flex justify-content-between small py-1 border-top">
+                    <span class="text-body-secondary">Net Profit</span>
+                    <strong class="${profCls}">${r.profit < 0 ? '-' + P(Math.abs(r.profit)) : P(r.profit)} (${pe(r.mg)})</strong>
+                  </div>
+                  <div class="d-flex justify-content-between small py-1 border-top mb-2">
+                    <span class="text-body-secondary">ROI / Markup</span>
+                    <strong>${pe(r.mk)}</strong>
+                  </div>
+                  <div class="progress" style="height:8px; border-radius:4px;">
+                    <div class="progress-bar bg-secondary" style="width:${cp.toFixed(1)}%"></div>
+                    <div class="progress-bar bg-warning" style="width:${dp.toFixed(1)}%"></div>
+                    <div class="progress-bar ${r.profit >= 0 ? 'bg-success' : 'bg-danger'}" style="width:${(r.profit > 0 ? pp : 0).toFixed(1)}%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Line-by-Line Comparison Table
+        const getFeeVal = (r, prefix) => {
+          const found = r.L.find(x => x[0].toLowerCase().includes(prefix));
+          return found ? found[1] : 0;
+        };
+
+        const row = (label, vSh, vTt, vLz, opts = {}) => {
+          const { isNeg = false, isBold = false, isPct = false, isHighlight = false } = opts;
+          const f = v => isPct ? pe(v) : (isNeg && v > 0 ? `-${P(v)}` : P(v));
+          const cls = isHighlight ? 'table-active fw-bold' : (isBold ? 'fw-semibold' : '');
+          return `<tr class="${cls}"><td class="ps-3">${label}</td><td class="text-end">${f(vSh)}</td><td class="text-end">${f(vTt)}</td><td class="text-end pe-3">${f(vLz)}</td></tr>`;
+        };
+
+        const { sh, tt, lz } = c;
+        const rows = [
+          row('Selling Price (Buyer Pays)', sh.price, tt.price, lz.price, { isBold: true }),
+          row('Marketplace Commission', getFeeVal(sh, 'commission'), getFeeVal(tt, 'commission'), getFeeVal(lz, 'commission'), { isNeg: true }),
+          row('Transaction / Payment Fee (2.24%)', getFeeVal(sh, 'transaction') + getFeeVal(sh, 'payment'), getFeeVal(tt, 'transaction'), getFeeVal(lz, 'payment'), { isNeg: true }),
+          row('Seller Growth Fee', getFeeVal(sh, 'growth'), getFeeVal(tt, 'growth'), getFeeVal(lz, 'growth'), { isNeg: true }),
+          row('Shipping Fee (FSS)', getFeeVal(sh, 'shipping'), getFeeVal(tt, 'shipping'), getFeeVal(lz, 'shipping'), { isNeg: true }),
+          row('Order Processing Fee', getFeeVal(sh, 'order processing'), getFeeVal(tt, 'order processing'), getFeeVal(lz, 'order processing'), { isNeg: true }),
+          row('Opt-In Promo / Promo Pass', getFeeVal(sh, 'mdv'), getFeeVal(tt, 'mdp'), getFeeVal(lz, 'promo pass'), { isNeg: true }),
+          row('Free Returns / RTS Protection', getFeeVal(sh, 'returns'), 0, 0, { isNeg: true }),
+          row('Total Platform Fees', sh.fe, tt.fe, lz.fe, { isNeg: true, isBold: true }),
+          row('BIR Output VAT / 3% Pct. Tax', sh.vat + sh.tx, tt.vat + tt.tx, lz.vat + lz.tx, { isNeg: true }),
+          row('BIR Withholding Tax (0.5%)', sh.wh, tt.wh, lz.wh, { isNeg: true }),
+          row('Total Deductions (Fees + Taxes)', sh.ded, tt.ded, lz.ded, { isNeg: true, isBold: true }),
+          row('Seller Take-Home Payout', sh.take, tt.take, lz.take, { isBold: true }),
+          row('Total Landed Cost + Pack/OPEX', sh.cost, tt.cost, lz.cost, { isNeg: true }),
+          row('Net Profit per Order', sh.profit, tt.profit, lz.profit, { isHighlight: true }),
+          row('Net Profit Margin (%)', sh.mg, tt.mg, lz.mg, { isBold: true, isPct: true })
+        ];
+        $('modalComparisonTableBody').innerHTML = rows.join('');
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(BULK_STORAGE_KEY, JSON.stringify({
+            nextId,
+            lines,
+            cs: $('cs').value,
+            ct: $('ct').value,
+            cl: $('cl').value,
+            vat: $('vat').checked,
+            claim: $('claim').checked,
+            wht: $('wht').checked,
+            osh: $('osh').checked,
+            shRts: $('shRts').checked,
+            ott: $('ott').checked,
+            camp: $('camp').checked,
+            shFreeComm: $('shFreeComm').checked,
+            ttFreeComm: $('ttFreeComm').checked,
+            lzFreeComm: $('lzFreeComm').checked,
+            packOpex: $('packOpex').value
+          }));
+        } catch (e) {}
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(BULK_STORAGE_KEY);
+          if (!raw) return;
+          const st = JSON.parse(raw);
+          if (Array.isArray(st.lines) && st.lines.length) {
+            lines = st.lines;
+            nextId = Math.max(st.nextId || 1, ...lines.map(l => l.id)) + 1;
+          }
+          if (st.cs !== undefined) $('cs').value = st.cs;
+          if (st.ct !== undefined) $('ct').value = st.ct;
+          if (st.cl !== undefined) $('cl').value = st.cl;
+          if (st.vat !== undefined) { $('vat').checked = Boolean(st.vat); $('nv').checked = !st.vat; }
+          if (st.claim !== undefined) $('claim').checked = Boolean(st.claim);
+          if (st.wht !== undefined) $('wht').checked = Boolean(st.wht);
+          if (st.osh !== undefined) $('osh').checked = Boolean(st.osh);
+          if (st.shRts !== undefined) $('shRts').checked = Boolean(st.shRts);
+          if (st.ott !== undefined) $('ott').checked = Boolean(st.ott);
+          if (st.camp !== undefined) $('camp').checked = Boolean(st.camp);
+          if (st.shFreeComm !== undefined) $('shFreeComm').checked = Boolean(st.shFreeComm);
+          if (st.ttFreeComm !== undefined) $('ttFreeComm').checked = Boolean(st.ttFreeComm);
+          if (st.lzFreeComm !== undefined) $('lzFreeComm').checked = Boolean(st.lzFreeComm);
+          if (st.packOpex !== undefined) $('packOpex').value = st.packOpex;
+        } catch (e) {}
+      }
+
+      function exportCsv() {
+        const globalOpts = readGlobalOptions();
+        const header = ['SKU Name', 'Base Cost', 'Freight', 'Units', 'Target Margin %', 'Fixed SRP', 'Shopee Price', 'Shopee Net Profit', 'TikTok Price', 'TikTok Net Profit', 'Lazada Price', 'Lazada Net Profit', 'Best Platform'];
+        const csvRows = [header.join(',')];
+        lines.forEach((l, idx) => {
+          const c = computeLine(l, globalOpts);
+          const name = `"${(l.name || 'Item ' + (idx + 1)).replace(/"/g, '""')}"`;
+          csvRows.push([
+            name,
+            Number(l.cost) || 0,
+            Number(l.freight) || 0,
+            Math.max(1, Number(l.units) || 1),
+            Number(l.margin) || 0,
+            Number(l.srp) || '',
+            c.sh ? c.sh.price.toFixed(2) : '',
+            c.sh ? c.sh.profit.toFixed(2) : '',
+            c.tt ? c.tt.price.toFixed(2) : '',
+            c.tt ? c.tt.profit.toFixed(2) : '',
+            c.lz ? c.lz.price.toFixed(2) : '',
+            c.lz ? c.lz.profit.toFixed(2) : '',
+            c.bestKey ? PL[c.bestKey].n : ''
+          ].join(','));
+        });
+        const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `bulk-pricing-sheet-${new Date().toISOString().slice(0, 10)}.csv`;
+        link.click();
+      }
+
+      function savePricelogPng(triggerBtn) {
+        if (typeof html2canvas === 'undefined') return;
+        const btn = triggerBtn || $('saveTablePngBtn') || $('savePricelogPngBtn');
+        const origHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span><span>Saving...</span>';
+        const globalOpts = readGlobalOptions();
+        const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        const bg = isDark ? '#1a1d20' : '#ffffff';
+        const surface = isDark ? '#212529' : '#f8f9fa';
+        const border = isDark ? '#343a40' : '#dee2e6';
+        const textMain = isDark ? '#f8f9fa' : '#212529';
+        const textMuted = isDark ? '#adb5bd' : '#6c757d';
+
+        const now = new Date();
+        const dateStamp = now.toISOString().slice(0, 10);
+        const datePretty = now.toLocaleString('en-PH', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+        const rowsHtml = lines.map((l, idx) => {
+          const c = computeLine(l, globalOpts);
+          const fCell = (r, isBest) => r
+            ? `<div style="font-weight:700; color:${textMain};">${P(r.price)}${isBest ? ' ★' : ''}</div><div style="font-size:11px; color:${r.profit >= 0 ? '#198754' : '#dc3545'};">Net: ${r.profit < 0 ? '-' + P(Math.abs(r.profit)) : P(r.profit)} (${pe(r.mg)})</div>`
+            : `<span style="color:${textMuted};">—</span>`;
+          const targetCol = Number(l.srp) > 0
+            ? `<span style="font-weight:600;">SRP ${P(Number(l.srp))}</span>`
+            : `${Number(l.margin) || 0}%`;
+          return `
+            <tr style="border-bottom:1px solid ${border};">
+              <td style="padding:10px 10px; color:${textMuted}; font-weight:600;">${idx + 1}</td>
+              <td style="padding:10px 10px; font-weight:700; color:${textMain};">${escapeHtml(l.name || 'Item ' + (idx + 1))}</td>
+              <td style="padding:10px 10px; text-align:right;">${P(Number(l.cost) || 0)}</td>
+              <td style="padding:10px 10px; text-align:right; color:${textMuted};">${P(Number(l.freight) || 0)}</td>
+              <td style="padding:10px 10px; text-align:center; font-weight:600;">${Math.max(1, Number(l.units) || 1)}</td>
+              <td style="padding:10px 10px; text-align:right; color:${textMuted};">${targetCol}</td>
+              <td style="padding:10px 10px; text-align:right;">${fCell(c.sh, c.bestKey === 'sh')}</td>
+              <td style="padding:10px 10px; text-align:right;">${fCell(c.tt, c.bestKey === 'tt')}</td>
+              <td style="padding:10px 10px; text-align:right;">${fCell(c.lz, c.bestKey === 'lz')}</td>
+            </tr>
+          `;
+        }).join('');
+
+        const metaParts = [
+          globalOpts.vat ? 'VAT (12%)' : 'Non-VAT (3%)',
+          globalOpts.wht ? '0.5% WHT' : 'No WHT'
+        ];
+        if (globalOpts.opt.sh) metaParts.push(globalOpts.camp ? 'Shopee 5% MDV' : 'Shopee 4% MDV');
+        if (globalOpts.opt.tt) metaParts.push(globalOpts.camp ? 'TikTok 5% MDP' : 'TikTok 4% MDP');
+        if (globalOpts.opt.shRts) metaParts.push('Shopee RTS ₱2');
+        if (globalOpts.pack > 0) metaParts.push(`Pack/OPEX ${P(globalOpts.pack)}`);
+
+        const el = document.createElement('div');
+        el.style.cssText = `position:fixed; left:-99999px; top:0; width:1040px; background:${bg}; color:${textMain}; font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; padding:28px; border:1px solid ${border}; border-top:6px solid #0d6efd; border-radius:14px;`;
+        el.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid ${border};">
+            <div>
+              <div style="font-size:12px; font-weight:700; color:#0d6efd; text-transform:uppercase; letter-spacing:0.06em;">PH Marketplace Fee &amp; Margin Calculator</div>
+              <h1 style="margin:2px 0 0; font-size:24px; font-weight:800; color:${textMain};">Product Pricing Pricelog</h1>
+              <div style="font-size:12px; color:${textMuted}; margin-top:4px;">${metaParts.join(' &bull; ')}</div>
+            </div>
+            <div style="text-align:right;">
+              <span style="display:inline-block; background:${surface}; border:1px solid ${border}; color:${textMain}; font-size:11px; font-weight:700; padding:4px 10px; border-radius:999px;">${lines.length} Product Line${lines.length > 1 ? 's' : ''}</span>
+              <div style="font-size:11px; color:${textMuted}; margin-top:6px;">${datePretty}</div>
+            </div>
+          </div>
+          <table style="width:100%; border-collapse:collapse; font-size:12.5px;">
+            <thead>
+              <tr style="background:${surface}; border-top:1px solid ${border}; border-bottom:2px solid ${border};">
+                <th style="padding:10px 10px; text-align:left; font-size:11px; text-transform:uppercase; color:${textMuted};">#</th>
+                <th style="padding:10px 10px; text-align:left; font-size:11px; text-transform:uppercase; color:${textMuted};">Product / SKU</th>
+                <th style="padding:10px 10px; text-align:right; font-size:11px; text-transform:uppercase; color:${textMuted};">Base Cost</th>
+                <th style="padding:10px 10px; text-align:right; font-size:11px; text-transform:uppercase; color:${textMuted};">Freight</th>
+                <th style="padding:10px 10px; text-align:center; font-size:11px; text-transform:uppercase; color:${textMuted};">Units</th>
+                <th style="padding:10px 10px; text-align:right; font-size:11px; text-transform:uppercase; color:${textMuted};">Target / SRP</th>
+                <th style="padding:10px 10px; text-align:right; font-size:11px; text-transform:uppercase; color:#ee4d2d;">Shopee</th>
+                <th style="padding:10px 10px; text-align:right; font-size:11px; text-transform:uppercase; color:#fe2c55;">TikTok Shop</th>
+                <th style="padding:10px 10px; text-align:right; font-size:11px; text-transform:uppercase; color:#0d6efd;">Lazada</th>
+              </tr>
+            </thead>
+            <tbody>${rowsHtml}</tbody>
+          </table>
+          <div style="margin-top:12px; font-size:11px; color:${textMuted};">★ Indicates best marketplace for that product line based on lowest competitive SRP (Target Margin mode) or highest net profit (Fixed SRP mode).</div>
+        `;
+        document.body.appendChild(el);
+        html2canvas(el, { scale: 2, backgroundColor: bg }).then(canvas => {
+          const link = document.createElement('a');
+          link.download = `product-pricing-pricelog-${dateStamp}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }).finally(() => {
+          document.body.removeChild(el);
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+        });
+      }
+
+      // Event Listeners
+      $('bulkLinesBody').addEventListener('input', e => {
+        const el = e.target;
+        const id = Number(el.dataset.id);
+        const field = el.dataset.field;
+        if (!id || !field) return;
+        const line = lines.find(l => l.id === id);
+        if (!line) return;
+        if (field === 'name') line.name = el.value;
+        else if (field === 'units') line.units = Math.max(1, Math.floor(Number(el.value) || 1));
+        else line[field] = el.value === '' ? '' : Number(el.value);
+        render();
+      });
+
+      $('bulkLinesBody').addEventListener('click', e => {
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+        const id = Number(btn.dataset.id);
+        const action = btn.dataset.action;
+        const idx = lines.findIndex(l => l.id === id);
+        if (idx < 0) return;
+
+        if (action === 'compare') {
+          const c = computeLine(lines[idx], readGlobalOptions());
+          if (!c.hasInput) return;
+          activeModalLineId = id;
+          populateModal(c);
+          bootstrap.Modal.getOrCreateInstance($('comparisonModal')).show();
+        } else if (action === 'dup') {
+          const src = lines[idx];
+          lines.splice(idx + 1, 0, { ...src, id: nextId++, name: src.name ? src.name + ' (Copy)' : '' });
+          render();
+        } else if (action === 'del' && lines.length > 1) {
+          lines.splice(idx, 1);
+          render();
+        }
+      });
+
+      $('comparisonModal').addEventListener('hidden.bs.modal', () => {
+        activeModalLineId = null;
+      });
+
+      $('saveModalPngBtn').addEventListener('click', () => {
+        if (typeof html2canvas === 'undefined') return;
+        const btn = $('saveModalPngBtn');
+        const origHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span><span>Saving...</span>';
+        html2canvas($('modalCaptureArea'), {
+          scale: 2,
+          backgroundColor: getComputedStyle(document.body).backgroundColor
+        }).then(canvas => {
+          const link = document.createElement('a');
+          link.download = `sku-platform-comparison-${new Date().toISOString().slice(0, 10)}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }).finally(() => {
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+        });
+      });
+
+      $('addLineBtn').addEventListener('click', () => {
+        lines.push({ id: nextId++, name: '', cost: '', freight: '', units: 1, margin: 20, srp: '' });
+        render();
+      });
+
+      $('resetBtn').addEventListener('click', () => {
+        localStorage.removeItem(BULK_STORAGE_KEY);
+        nextId = 2;
+        lines = [{ id: 1, name: '', cost: '', freight: '', units: 1, margin: 20, srp: '' }];
+        $('nv').checked = true;
+        $('claim').checked = false;
+        $('wht').checked = true;
+        $('osh').checked = false;
+        $('shRts').checked = false;
+        $('ott').checked = false;
+        $('camp').checked = false;
+        $('shFreeComm').checked = false;
+        $('ttFreeComm').checked = false;
+        $('lzFreeComm').checked = false;
+        $('packOpex').value = '';
+        $('bulkLinesBody').innerHTML = '';
+        render();
+      });
+
+      $('exportCsvBtn').addEventListener('click', exportCsv);
+      $('savePricelogPngBtn').addEventListener('click', () => savePricelogPng($('savePricelogPngBtn')));
+      $('saveTablePngBtn').addEventListener('click', () => savePricelogPng($('saveTablePngBtn')));
+
+      document.querySelectorAll('input:not([data-field]), select').forEach(el => {
+        el.addEventListener('input', render);
+        el.addEventListener('change', render);
+      });
+
+      // Initialize
+      loadState();
+      initTheme();
+      render();
+    })();
+  </script>
+</body>
+</html>
