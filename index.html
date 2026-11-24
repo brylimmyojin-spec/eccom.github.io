@@ -113,78 +113,65 @@
     <div class="row g-4">
       
       <!-- Left Column: Input Form Controls -->
-      <div class="col-lg-4 col-xl-3 col-xxl-3">
+      <div class="col-lg-5 col-xl-4 col-xxl-4">
         <div class="card shadow-sm border-0 simulator-sidebar">
-          
+
           <!-- Card Header -->
           <div class="card-header bg-body-tertiary py-3 d-flex justify-content-between align-items-center">
-            <span class="fw-bold fs-6"><i class="bi bi-box-seam me-2 text-primary"></i>Pricing Inputs</span>
-            <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Simulator</span>
+            <span class="fw-bold fs-6"><i class="bi bi-sliders me-2 text-primary"></i>Pricing Inputs</span>
+            <span class="small text-body-secondary" id="save-status" style="font-size:0.72rem;"></span>
           </div>
 
-          <div class="card-body p-3 p-md-4">
+          <div class="card-body p-3">
             <div class="row g-3">
-              
-              <!-- 1. PRIMARY PRICING DRIVERS (HERO SECTION) -->
-              <div class="col-12">
-                <div class="pricing-hero-container">
-                  <div class="d-flex align-items-center justify-content-between mb-2">
-                    <div class="d-flex align-items-center gap-1.5">
-                      <span class="badge bg-primary text-white px-2 py-1 fw-bold" style="font-size:0.68rem;">Step 1</span>
-                      <span class="fw-bold fs-6 text-body-emphasis">Core Pricing Drivers</span>
-                    </div>
-                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle" style="font-size:0.65rem;">
-                      Primary Value &amp; Margin
-                    </span>
-                  </div>
-                  <p class="text-body-secondary small mb-3" style="font-size:0.75rem; line-height: 1.35;">
-                    Set your foundation: <strong>Supplier Price</strong> sets the cost floor, and <strong>Target Net Margin</strong> defines required profit before fulfillment and platform deductions.
-                  </p>
 
-                  <div class="row g-2.5">
-                    <!-- Base Product Cost (Supplier Price) -->
+              <!-- 1. CORE PRICING DRIVERS -->
+              <div class="col-12">
+                <div class="pricing-hero-container p-3">
+                  <div class="d-flex align-items-center justify-content-between mb-2.5">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="badge bg-primary text-white px-2 py-1 fw-bold" style="font-size:0.66rem;">Step 1</span>
+                      <span class="fw-bold small text-body-emphasis">Core Pricing Drivers</span>
+                    </div>
+                    <span class="fw-semibold text-primary" id="costPerBatchPreview" style="font-size:0.74rem;">₱100.00 / unit</span>
+                  </div>
+
+                  <div class="row g-2">
+                    <!-- Base Product Cost -->
                     <div class="col-12">
-                      <div class="pricing-driver-card">
+                      <div class="pricing-driver-card p-2.5">
                         <div class="d-flex justify-content-between align-items-center mb-1">
-                          <label for="cost" class="form-label fw-bold text-primary mb-0 d-flex align-items-center gap-1" style="font-size:0.85rem;">
-                            <i class="bi bi-box-seam-fill"></i> Base Product Cost (Supplier Price)
+                          <label for="cost" class="form-label fw-bold text-primary mb-0 small">
+                            <i class="bi bi-box-seam-fill me-1"></i>Base Cost (Supplier)
                           </label>
-                          <span class="badge bg-primary-subtle text-primary" style="font-size:0.63rem;">Primary COGS</span>
+                          <span class="badge bg-primary-subtle text-primary" style="font-size:0.62rem;">COGS</span>
                         </div>
                         <div class="input-group">
-                          <span class="input-group-text bg-primary-subtle text-primary fw-bold fs-6">₱</span>
-                          <input type="number" class="form-control form-control-lg fw-bold text-body-emphasis" id="cost" value="100" min="0" step="0.01" style="font-size:1.25rem;">
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mt-1 text-body-secondary" style="font-size:0.72rem;">
-                          <span>Supplier factory or wholesale item cost</span>
-                          <span class="fw-semibold text-primary" id="costPerBatchPreview">₱100.00 / unit</span>
+                          <span class="input-group-text bg-primary-subtle text-primary fw-bold">₱</span>
+                          <input type="number" class="form-control fw-bold text-body-emphasis" id="cost" value="100" min="0" step="0.01" style="font-size:1.15rem;">
                         </div>
                       </div>
                     </div>
 
-                    <!-- Target Net Margin (%) -->
-                    <div class="col-12 mt-2">
-                      <div class="pricing-driver-card driver-margin">
+                    <!-- Target Net Margin -->
+                    <div class="col-12">
+                      <div class="pricing-driver-card driver-margin p-2.5">
                         <div class="d-flex justify-content-between align-items-center mb-1">
-                          <label for="mg" class="form-label fw-bold text-success mb-0 d-flex align-items-center gap-1" style="font-size:0.85rem;">
-                            <i class="bi bi-graph-up-arrow"></i> Target Net Margin (%)
+                          <label for="mg" class="form-label fw-bold text-success mb-0 small">
+                            <i class="bi bi-graph-up-arrow me-1"></i>Target Net Margin
                           </label>
-                          <span class="badge bg-success-subtle text-success-emphasis" style="font-size:0.63rem;">Profit Goal</span>
+                          <span class="badge bg-success-subtle text-success-emphasis" style="font-size:0.62rem;">Profit Goal</span>
                         </div>
                         <div class="input-group">
-                          <input type="number" class="form-control form-control-lg fw-bold text-success" id="mg" value="20" min="0" max="80" step="0.5" style="font-size:1.25rem;">
-                          <span class="input-group-text bg-success-subtle text-success fw-bold fs-6">%</span>
+                          <input type="number" class="form-control fw-bold text-success" id="mg" value="20" min="0" max="80" step="0.5" style="font-size:1.15rem;">
+                          <span class="input-group-text bg-success-subtle text-success fw-bold">%</span>
                         </div>
-                        <!-- Quick Presets -->
-                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-1 mt-2">
-                          <span class="text-body-secondary small" style="font-size:0.7rem;">Quick presets:</span>
-                          <div class="d-flex gap-1" id="marginPresetContainer">
-                            <button type="button" class="preset-chip" data-preset="15">15%</button>
-                            <button type="button" class="preset-chip active" data-preset="20">20%</button>
-                            <button type="button" class="preset-chip" data-preset="25">25%</button>
-                            <button type="button" class="preset-chip" data-preset="30">30%</button>
-                            <button type="button" class="preset-chip" data-preset="40">40%</button>
-                          </div>
+                        <div class="d-flex flex-wrap gap-1 mt-2" id="marginPresetContainer">
+                          <button type="button" class="preset-chip" data-preset="15">15%</button>
+                          <button type="button" class="preset-chip active" data-preset="20">20%</button>
+                          <button type="button" class="preset-chip" data-preset="25">25%</button>
+                          <button type="button" class="preset-chip" data-preset="30">30%</button>
+                          <button type="button" class="preset-chip" data-preset="40">40%</button>
                         </div>
                       </div>
                     </div>
@@ -192,52 +179,23 @@
                 </div>
               </div>
 
-              <!-- 2. LANDED SOURCING & FULFILLMENT COSTS -->
-              <div class="col-12">
-                <div class="section-divider-title">
-                  <i class="bi bi-truck text-secondary"></i> 2. Landed Logistics &amp; Fulfillment Costs
-                </div>
-              </div>
-
-              <!-- Inbound Sourcing Freight & Logistics -->
-              <div class="col-sm-6 col-lg-12">
-                <label for="freight" class="form-label fw-semibold small mb-1">Inbound Logistics &amp; Freight Cost</label>
+              <!-- 2. LOGISTICS, TAX & OVERRIDE (COMPACT 2-COL) -->
+              <div class="col-6">
+                <label for="freight" class="form-label fw-semibold small mb-1">Inbound Freight</label>
                 <div class="input-group input-group-sm">
                   <span class="input-group-text">₱</span>
                   <input type="number" class="form-control" id="freight" value="0" min="0" step="0.01">
                 </div>
-                <div class="form-text" style="font-size:0.73rem;">Forwarder, sea/air cargo, customs, or supplier delivery / unit</div>
               </div>
 
-              <!-- Units per Bundle -->
-              <div class="col-sm-6 col-lg-12">
-                <label for="units" class="form-label fw-semibold small mb-1">Units Per Bundle / SKU</label>
+              <div class="col-6">
+                <label for="units" class="form-label fw-semibold small mb-1">Units / Bundle</label>
                 <div class="input-group input-group-sm">
                   <input type="number" class="form-control" id="units" value="1" min="1" step="1">
                   <span class="input-group-text">pcs</span>
                 </div>
-                <div class="form-text" style="font-size:0.73rem;">Multiplies supplier base cost and unit freight</div>
               </div>
 
-              <!-- Packaging & Active Expenses Link Indicator -->
-              <div class="col-12">
-                <div class="p-2 rounded bg-body-tertiary border d-flex justify-content-between align-items-center" style="font-size:0.75rem;">
-                  <div>
-                    <span class="fw-semibold text-body-secondary"><i class="bi bi-box me-1"></i>Packaging &amp; OPEX:</span>
-                    <span class="ms-1" id="activePackOpexSummary">₱0.00 pack / unit</span>
-                  </div>
-                  <a href="expenses.html" class="text-primary text-decoration-none fw-semibold">Edit &rarr;</a>
-                </div>
-              </div>
-
-              <!-- 3. TAX STATUS & PRICING MODE -->
-              <div class="col-12">
-                <div class="section-divider-title">
-                  <i class="bi bi-receipt text-info"></i> 3. Tax Status &amp; Pricing Mode
-                </div>
-              </div>
-
-              <!-- Tax Registration -->
               <div class="col-12">
                 <label class="form-label fw-semibold small mb-1">BIR Tax Registration</label>
                 <div class="btn-group w-100" role="group">
@@ -249,216 +207,176 @@
                 </div>
               </div>
 
-              <!-- Fixed Selling Price (Optional) -->
               <div class="col-12">
                 <label for="srp" class="form-label fw-semibold small mb-1 d-flex justify-content-between align-items-center">
-                  <span>Fixed Price Override (Optional)</span>
-                  <span class="badge bg-secondary-subtle text-secondary" style="font-size:0.62rem;">Manual Mode</span>
+                  <span>Fixed Price Override</span>
+                  <span class="text-body-secondary fw-normal" style="font-size:0.7rem;">Optional</span>
                 </label>
                 <div class="input-group input-group-sm">
                   <span class="input-group-text">₱</span>
-                  <input type="number" class="form-control" id="srp" placeholder="Leave empty to auto-solve for target margin" min="0" step="1">
-                </div>
-                <div class="form-text" style="font-size:0.73rem;">Overrides auto-target pricing to stress-test margins</div>
-              </div>
-
-              <!-- 4. MARKETPLACE CATEGORIES & OPT-IN CAMPAIGNS -->
-              <div class="col-12">
-                <div class="section-divider-title">
-                  <i class="bi bi-grid-3x3-gap text-danger"></i> 4. Marketplace Categories &amp; Opt-In Campaigns
-                </div>
-                <div class="mb-2">
-                  <label for="cs" class="form-label fw-semibold small mb-1 text-danger">Shopee Category</label>
-                  <select class="form-select form-select-sm" id="cs"></select>
-                </div>
-                <div class="mb-2">
-                  <label for="ct" class="form-label fw-semibold small mb-1 text-danger-emphasis">TikTok Shop Category</label>
-                  <select class="form-select form-select-sm" id="ct"></select>
-                </div>
-                <div class="mb-1">
-                  <label for="cl" class="form-label fw-semibold small mb-1 text-primary">Lazada Category</label>
-                  <select class="form-select form-select-sm" id="cl"></select>
+                  <input type="number" class="form-control" id="srp" placeholder="Auto-solve for target margin" min="0" step="1">
                 </div>
               </div>
 
-              <!-- Interactive Toggles -->
+              <!-- Saved Packaging & OPEX Strip -->
               <div class="col-12">
-                <hr class="my-2">
-                
-                <!-- Group 1: Marketplace Campaigns & Protection -->
-                <div class="toggle-group-header">
-                  <span><i class="bi bi-tag-fill me-1 text-danger"></i>Opt-In Campaigns &amp; Protection</span>
-                  <a href="opt-in-fees.html" class="text-decoration-none text-primary fw-medium" style="font-size:0.68rem; text-transform:none;">Guide &rarr;</a>
+                <div class="p-2.5 rounded-3 bg-body-tertiary border d-flex justify-content-between align-items-center gap-2" style="font-size:0.75rem;">
+                  <div class="text-truncate">
+                    <span class="fw-semibold text-body-secondary"><i class="bi bi-cash-stack me-1 text-success"></i>Pack &amp; OPEX:</span>
+                    <span class="ms-1" id="activePackOpexSummary">₱0.00 / unit</span>
+                    <div class="text-body-secondary text-truncate mt-0.5" id="activeExpensesSummary" style="font-size:0.7rem;"></div>
+                  </div>
+                  <a href="expenses.html" class="btn btn-outline-secondary btn-sm py-0.5 px-2 flex-shrink-0" style="font-size:0.72rem;">Edit</a>
                 </div>
-
-                <!-- Shopee MDV Toggle -->
-                <label class="toggle-card" for="osh">
-                  <div class="toggle-card-label">
-                    <span class="toggle-card-title text-danger">
-                      <i class="bi bi-tag-fill"></i>Shopee Mega Voucher (MDV)
-                      <span class="badge bg-danger-subtle text-danger-emphasis border" style="font-size:0.65rem;">4% / 5%</span>
-                    </span>
-                    <span class="toggle-card-subtitle">
-                      Campaign 779 &bull; Max ₱200/item &bull; 28-day lock-in
-                    </span>
-                  </div>
-                  <div class="form-check form-switch m-0 p-0">
-                    <input class="form-check-input" type="checkbox" id="osh">
-                  </div>
-                </label>
-
-                <!-- Shopee FRS / RTS Toggle -->
-                <label class="toggle-card" for="shRts">
-                  <div class="toggle-card-label">
-                    <span class="toggle-card-title text-danger">
-                      <i class="bi bi-shield-check"></i>Shopee FRS / RTS Protection
-                      <span class="badge bg-danger-subtle text-danger-emphasis border" style="font-size:0.65rem;">₱2.00</span>
-                    </span>
-                    <span class="toggle-card-subtitle">
-                      Campaign 47000 &bull; 100% Free RSF/FSF (₱1K cap)
-                    </span>
-                  </div>
-                  <div class="form-check form-switch m-0 p-0">
-                    <input class="form-check-input" type="checkbox" id="shRts">
-                  </div>
-                </label>
-
-                <!-- TikTok MDP Toggle -->
-                <label class="toggle-card" for="ott">
-                  <div class="toggle-card-label">
-                    <span class="toggle-card-title text-danger-emphasis">
-                      <i class="bi bi-play-circle-fill"></i>TikTok Mega Discount (MDP)
-                      <span class="badge bg-danger-subtle text-danger-emphasis border" style="font-size:0.65rem;">4% / 5%</span>
-                    </span>
-                    <span class="toggle-card-subtitle">
-                      Mega campaigns &bull; Boosts LIVE &amp; affiliate exposure
-                    </span>
-                  </div>
-                  <div class="form-check form-switch m-0 p-0">
-                    <input class="form-check-input" type="checkbox" id="ott">
-                  </div>
-                </label>
-
-                <!-- Spike Day Toggle -->
-                <label class="toggle-card" for="camp">
-                  <div class="toggle-card-label">
-                    <span class="toggle-card-title text-warning-emphasis">
-                      <i class="bi bi-lightning-charge-fill text-warning"></i>Spike Day Campaign Mode
-                      <span class="badge bg-warning-subtle text-warning-emphasis border" style="font-size:0.65rem;">+1% MDV</span>
-                    </span>
-                    <span class="toggle-card-subtitle">
-                      Double-Double (9.9, etc.) &amp; Paydays (Jan 1, 2026 rule)
-                    </span>
-                  </div>
-                  <div class="form-check form-switch m-0 p-0">
-                    <input class="form-check-input" type="checkbox" id="camp">
-                  </div>
-                </label>
-
-                <!-- Group 2: 90-Day Commission Free -->
-                <div class="toggle-group-header">
-                  <span><i class="bi bi-gift-fill me-1 text-success"></i>90-Day 0% Commission (New Seller)</span>
-                  <span class="badge bg-success-subtle text-success-emphasis border" style="font-size:0.65rem;">Waive Comm</span>
-                </div>
-
-                <!-- Shopee 90-Day Free Comm -->
-                <label class="toggle-card" for="shFreeComm">
-                  <div class="toggle-card-label">
-                    <span class="toggle-card-title text-danger">
-                      <i class="bi bi-shop"></i>Shopee: Exclude Commission
-                    </span>
-                    <span class="toggle-card-subtitle">
-                      0% category commission for first 90 days of store
-                    </span>
-                  </div>
-                  <div class="form-check form-switch m-0 p-0">
-                    <input class="form-check-input" type="checkbox" id="shFreeComm">
-                  </div>
-                </label>
-
-                <!-- TikTok 90-Day Free Comm -->
-                <label class="toggle-card" for="ttFreeComm">
-                  <div class="toggle-card-label">
-                    <span class="toggle-card-title text-danger-emphasis">
-                      <i class="bi bi-tiktok"></i>TikTok: Exclude Commission
-                    </span>
-                    <span class="toggle-card-subtitle">
-                      0% marketplace commission for newly opened shops
-                    </span>
-                  </div>
-                  <div class="form-check form-switch m-0 p-0">
-                    <input class="form-check-input" type="checkbox" id="ttFreeComm">
-                  </div>
-                </label>
-
-                <!-- Lazada 90-Day Free Comm -->
-                <label class="toggle-card" for="lzFreeComm">
-                  <div class="toggle-card-label">
-                    <span class="toggle-card-title text-primary">
-                      <i class="bi bi-bag-check-fill"></i>Lazada: Exclude Commission
-                    </span>
-                    <span class="toggle-card-subtitle">
-                      0% standard commission for first 90 days of store
-                    </span>
-                  </div>
-                  <div class="form-check form-switch m-0 p-0">
-                    <input class="form-check-input" type="checkbox" id="lzFreeComm">
-                  </div>
-                </label>
-
-                <!-- Group 3: Taxes & Compliance -->
-                <div class="toggle-group-header">
-                  <span><i class="bi bi-bank me-1 text-primary"></i>Tax &amp; Compliance (BIR)</span>
-                  <a href="tax-guide.html" class="text-decoration-none text-primary fw-medium" style="font-size:0.68rem; text-transform:none;">Guide &rarr;</a>
-                </div>
-
-                <!-- Withholding Tax -->
-                <label class="toggle-card" for="wht">
-                  <div class="toggle-card-label">
-                    <span class="toggle-card-title text-primary">
-                      <i class="bi bi-file-earmark-check"></i>Withholding Tax (0.5% BIR)
-                    </span>
-                    <span class="toggle-card-subtitle">
-                      BIR RR 16-2023 (1% on 50% gross remittances)
-                    </span>
-                  </div>
-                  <div class="form-check form-switch m-0 p-0">
-                    <input class="form-check-input" type="checkbox" id="wht" checked>
-                  </div>
-                </label>
-
-                <!-- Claim Input VAT -->
-                <label class="toggle-card" for="claim">
-                  <div class="toggle-card-label">
-                    <span class="toggle-card-title text-body-secondary">
-                      <i class="bi bi-receipt"></i>Claim Input VAT Credit
-                    </span>
-                    <span class="toggle-card-subtitle">
-                      Credits 12% VAT on platform fees (VAT sellers only)
-                    </span>
-                  </div>
-                  <div class="form-check form-switch m-0 p-0">
-                    <input class="form-check-input" type="checkbox" id="claim" disabled>
-                  </div>
-                </label>
-
               </div>
 
-              <!-- Separated Expenses Loaded from Local Storage Card -->
+              <!-- 3. ACCORDION: CATEGORIES & OPT-IN TOGGLES -->
               <div class="col-12">
-                <hr class="my-2">
-                <div class="p-2.5 rounded bg-body-tertiary border">
-                  <div class="d-flex justify-content-between align-items-center mb-1">
-                    <span class="fw-semibold small text-body-secondary">
-                      <i class="bi bi-cash-stack me-1 text-success"></i>Saved Expenses:
-                    </span>
-                    <a href="expenses.html" class="btn btn-outline-secondary btn-sm py-0 px-2" style="font-size:0.75rem;">
-                      <i class="bi bi-pencil-square me-1"></i>Edit
-                    </a>
+                <div class="accordion accordion-flush border rounded-3 overflow-hidden" id="sidebarAccordion">
+
+                  <!-- Categories -->
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button py-2.5 px-3 small fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#accCategories" aria-expanded="true">
+                        <i class="bi bi-grid-3x3-gap me-2 text-primary"></i>Marketplace Categories
+                      </button>
+                    </h2>
+                    <div id="accCategories" class="accordion-collapse collapse show">
+                      <div class="accordion-body p-2.5">
+                        <div class="mb-2">
+                          <label for="cs" class="form-label fw-semibold small mb-1" style="color: var(--shopee-color);">Shopee Category</label>
+                          <select class="form-select form-select-sm" id="cs"></select>
+                        </div>
+                        <div class="mb-2">
+                          <label for="ct" class="form-label fw-semibold small mb-1" style="color: var(--tiktok-color);">TikTok Shop Category</label>
+                          <select class="form-select form-select-sm" id="ct"></select>
+                        </div>
+                        <div>
+                          <label for="cl" class="form-label fw-semibold small mb-1 text-primary">Lazada Category</label>
+                          <select class="form-select form-select-sm" id="cl"></select>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="small text-body-secondary" id="activeExpensesSummary" style="font-size:0.75rem;">
-                    Loading locally saved expenses...
+
+                  <!-- Opt-In Campaigns & Protection -->
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed py-2.5 px-3 small fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#accOptIns" aria-expanded="false">
+                        <i class="bi bi-tag-fill me-2 text-danger"></i>Opt-In Fees, 90-Day Free &amp; BIR
+                      </button>
+                    </h2>
+                    <div id="accOptIns" class="accordion-collapse collapse">
+                      <div class="accordion-body p-2.5">
+
+                        <div class="toggle-group-header mt-0">
+                          <span>Campaigns &amp; Protection</span>
+                          <a href="opt-in-fees.html" class="text-decoration-none text-primary fw-medium" style="font-size:0.68rem; text-transform:none;">Guide &rarr;</a>
+                        </div>
+
+                        <label class="toggle-card" for="osh">
+                          <div class="toggle-card-label">
+                            <span class="toggle-card-title text-danger">Shopee MDV <span class="badge badge-shopee" style="font-size:0.62rem;">4%/5%</span></span>
+                            <span class="toggle-card-subtitle">Max ₱200/item &bull; 28-day lock-in</span>
+                          </div>
+                          <div class="form-check form-switch m-0 p-0">
+                            <input class="form-check-input" type="checkbox" id="osh">
+                          </div>
+                        </label>
+
+                        <label class="toggle-card" for="shRts">
+                          <div class="toggle-card-label">
+                            <span class="toggle-card-title text-danger">Shopee FRS / RTS <span class="badge badge-shopee" style="font-size:0.62rem;">₱2.00</span></span>
+                            <span class="toggle-card-subtitle">Free returns / RTS protection</span>
+                          </div>
+                          <div class="form-check form-switch m-0 p-0">
+                            <input class="form-check-input" type="checkbox" id="shRts">
+                          </div>
+                        </label>
+
+                        <label class="toggle-card" for="ott">
+                          <div class="toggle-card-label">
+                            <span class="toggle-card-title text-danger-emphasis">TikTok MDP <span class="badge badge-tiktok" style="font-size:0.62rem;">4%/5%</span></span>
+                            <span class="toggle-card-subtitle">Mega Discount Program</span>
+                          </div>
+                          <div class="form-check form-switch m-0 p-0">
+                            <input class="form-check-input" type="checkbox" id="ott">
+                          </div>
+                        </label>
+
+                        <label class="toggle-card" for="camp">
+                          <div class="toggle-card-label">
+                            <span class="toggle-card-title text-warning-emphasis">Spike Day Mode <span class="badge bg-warning-subtle text-warning-emphasis" style="font-size:0.62rem;">+1%</span></span>
+                            <span class="toggle-card-subtitle">Double-Double &amp; Payday rate</span>
+                          </div>
+                          <div class="form-check form-switch m-0 p-0">
+                            <input class="form-check-input" type="checkbox" id="camp">
+                          </div>
+                        </label>
+
+                        <div class="toggle-group-header">
+                          <span>90-Day 0% Commission</span>
+                        </div>
+
+                        <label class="toggle-card" for="shFreeComm">
+                          <div class="toggle-card-label">
+                            <span class="toggle-card-title text-danger">Shopee 0% Commission</span>
+                            <span class="toggle-card-subtitle">New seller 90-day waiver</span>
+                          </div>
+                          <div class="form-check form-switch m-0 p-0">
+                            <input class="form-check-input" type="checkbox" id="shFreeComm">
+                          </div>
+                        </label>
+
+                        <label class="toggle-card" for="ttFreeComm">
+                          <div class="toggle-card-label">
+                            <span class="toggle-card-title text-danger-emphasis">TikTok 0% Commission</span>
+                            <span class="toggle-card-subtitle">New seller 90-day waiver</span>
+                          </div>
+                          <div class="form-check form-switch m-0 p-0">
+                            <input class="form-check-input" type="checkbox" id="ttFreeComm">
+                          </div>
+                        </label>
+
+                        <label class="toggle-card" for="lzFreeComm">
+                          <div class="toggle-card-label">
+                            <span class="toggle-card-title text-primary">Lazada 0% Commission</span>
+                            <span class="toggle-card-subtitle">New seller 90-day waiver</span>
+                          </div>
+                          <div class="form-check form-switch m-0 p-0">
+                            <input class="form-check-input" type="checkbox" id="lzFreeComm">
+                          </div>
+                        </label>
+
+                        <div class="toggle-group-header">
+                          <span>BIR Tax Options</span>
+                          <a href="tax-guide.html" class="text-decoration-none text-primary fw-medium" style="font-size:0.68rem; text-transform:none;">Guide &rarr;</a>
+                        </div>
+
+                        <label class="toggle-card" for="wht">
+                          <div class="toggle-card-label">
+                            <span class="toggle-card-title text-primary">Withholding Tax (0.5%)</span>
+                            <span class="toggle-card-subtitle">BIR RR 16-2023 creditable WHT</span>
+                          </div>
+                          <div class="form-check form-switch m-0 p-0">
+                            <input class="form-check-input" type="checkbox" id="wht" checked>
+                          </div>
+                        </label>
+
+                        <label class="toggle-card mb-0" for="claim">
+                          <div class="toggle-card-label">
+                            <span class="toggle-card-title text-body-secondary">Claim Input VAT Credit</span>
+                            <span class="toggle-card-subtitle">VAT-registered sellers only</span>
+                          </div>
+                          <div class="form-check form-switch m-0 p-0">
+                            <input class="form-check-input" type="checkbox" id="claim" disabled>
+                          </div>
+                        </label>
+
+                      </div>
+                    </div>
                   </div>
+
                 </div>
               </div>
 
@@ -466,7 +384,7 @@
           </div>
 
           <!-- Quick Action Footer -->
-          <div class="card-footer bg-body-tertiary d-flex justify-content-between align-items-center py-2 px-3">
+          <div class="card-footer bg-body-tertiary d-flex justify-content-between align-items-center py-2.5 px-3">
             <button class="btn btn-link btn-sm text-body-secondary text-decoration-none p-0" id="resetDefaultsBtn">
               <i class="bi bi-arrow-counterclockwise me-1"></i>Reset Defaults
             </button>
@@ -479,7 +397,7 @@
       </div>
 
       <!-- Right Column: Real-Time Platform Result Cards -->
-      <div class="col-lg-8 col-xl-9 col-xxl-9">
+      <div class="col-lg-7 col-xl-8 col-xxl-8">
         
         <!-- Summary Callout -->
         <div class="alert alert-primary d-flex align-items-center justify-content-between shadow-sm mb-4 py-3 px-4 border-0" id="bestPlatformAlert">
@@ -591,7 +509,7 @@
         }
       });
       saveConfigToStorage(saved);
-      $('#save-status').innerHTML = '<i class="bi bi-check2-circle text-success me-1"></i>Saved locally';
+      if ($('#save-status')) $('#save-status').innerHTML = '<i class="bi bi-check2-circle text-success me-1"></i>Saved';
     }
 
     function rowHtml(label, val, isTotal = false) {
