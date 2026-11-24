@@ -70,11 +70,62 @@
         </div>
       </div>
 
-      <!-- Chat-Style Floating Action Button -->
-      <button type="button" class="floating-calc-fab shadow-lg" id="floatingCalcFab" aria-label="Open Quick Calculator" aria-expanded="false" title="Quick Calculator">
-        <i class="bi bi-calculator-fill fc-fab-icon-open"></i>
-        <i class="bi bi-x-lg fc-fab-icon-close"></i>
-      </button>
+      <!-- Floating Seller Portals Popup Panel -->
+      <div class="floating-portals-panel shadow-lg" id="floatingPortalsPanel" role="dialog" aria-label="Seller Portals" aria-hidden="true">
+        <div class="floating-portals-header">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-shop-window"></i>
+            <span class="fw-bold small">PH Seller Portals</span>
+          </div>
+          <button type="button" class="btn btn-sm floating-calc-icon-btn" id="fpCloseBtn" title="Close (Esc)">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="floating-portals-body">
+          <a href="https://seller.shopee.ph/" target="_blank" rel="noopener noreferrer" class="fp-link-card fp-shopee">
+            <span class="fp-icon"><i class="bi bi-bag-fill"></i></span>
+            <span class="fp-text">
+              <span class="fp-title">Shopee Seller Centre</span>
+              <span class="fp-sub">seller.shopee.ph</span>
+            </span>
+            <i class="bi bi-box-arrow-up-right fp-ext"></i>
+          </a>
+          <a href="https://seller-ph.tiktok.com/" target="_blank" rel="noopener noreferrer" class="fp-link-card fp-tiktok">
+            <span class="fp-icon"><i class="bi bi-tiktok"></i></span>
+            <span class="fp-text">
+              <span class="fp-title">TikTok Shop Seller Center</span>
+              <span class="fp-sub">seller-ph.tiktok.com</span>
+            </span>
+            <i class="bi bi-box-arrow-up-right fp-ext"></i>
+          </a>
+          <a href="https://sellercenter.lazada.com.ph/" target="_blank" rel="noopener noreferrer" class="fp-link-card fp-lazada">
+            <span class="fp-icon"><i class="bi bi-shop"></i></span>
+            <span class="fp-text">
+              <span class="fp-title">Lazada Seller Center</span>
+              <span class="fp-sub">sellercenter.lazada.com.ph</span>
+            </span>
+            <i class="bi bi-box-arrow-up-right fp-ext"></i>
+          </a>
+        </div>
+        <div class="floating-portals-footer">
+          <a href="seller-centers.html" class="text-decoration-none small fw-semibold d-flex align-items-center justify-content-between">
+            <span>All Portal &amp; Marketing Links</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Floating Chat-Style Action Stack -->
+      <div class="floating-fab-stack">
+        <button type="button" class="floating-portals-fab shadow-lg" id="floatingPortalsFab" aria-label="Open Seller Portals" aria-expanded="false" title="Seller Portals (Shopee, TikTok, Lazada)">
+          <i class="bi bi-shop-window fp-fab-icon-open"></i>
+          <i class="bi bi-x-lg fp-fab-icon-close"></i>
+        </button>
+        <button type="button" class="floating-calc-fab shadow-lg" id="floatingCalcFab" aria-label="Open Quick Calculator" aria-expanded="false" title="Quick Calculator">
+          <i class="bi bi-calculator-fill fc-fab-icon-open"></i>
+          <i class="bi bi-x-lg fc-fab-icon-close"></i>
+        </button>
+      </div>
     `;
 
     document.body.appendChild(root);
@@ -82,6 +133,9 @@
     const panel = document.getElementById('floatingCalcPanel');
     const fab = document.getElementById('floatingCalcFab');
     const closeBtn = document.getElementById('fcCloseBtn');
+    const portalsPanel = document.getElementById('floatingPortalsPanel');
+    const portalsFab = document.getElementById('floatingPortalsFab');
+    const portalsCloseBtn = document.getElementById('fpCloseBtn');
     const copyBtn = document.getElementById('fcCopyBtn');
     const exprEl = document.getElementById('fcExpr');
     const valEl = document.getElementById('fcVal');
@@ -89,6 +143,7 @@
     const dragHandle = document.getElementById('floatingCalcDragHandle');
 
     let isOpen = false;
+    let isPortalsOpen = false;
     let current = '0';
     let expression = '';
     let justEvaluated = false;
@@ -173,9 +228,18 @@
 
     function setOpen(open) {
       isOpen = open;
+      if (open && isPortalsOpen) setPortalsOpen(false);
       root.classList.toggle('is-open', open);
       panel.setAttribute('aria-hidden', open ? 'false' : 'true');
       fab.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function setPortalsOpen(open) {
+      isPortalsOpen = open;
+      if (open && isOpen) setOpen(false);
+      root.classList.toggle('is-portals-open', open);
+      portalsPanel.setAttribute('aria-hidden', open ? 'false' : 'true');
+      portalsFab.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
 
     function handleKey(key) {
@@ -273,6 +337,8 @@
     // Button listeners
     fab.addEventListener('click', () => setOpen(!isOpen));
     closeBtn.addEventListener('click', () => setOpen(false));
+    portalsFab.addEventListener('click', () => setPortalsOpen(!isPortalsOpen));
+    portalsCloseBtn.addEventListener('click', () => setPortalsOpen(false));
 
     panel.addEventListener('click', e => {
       const keyBtn = e.target.closest('button[data-key]');
@@ -305,11 +371,12 @@
 
     // Keyboard support when calculator is open and user isn't typing in a page form input
     document.addEventListener('keydown', e => {
-      if (!isOpen) return;
       if (e.key === 'Escape') {
-        setOpen(false);
+        if (isPortalsOpen) setPortalsOpen(false);
+        if (isOpen) setOpen(false);
         return;
       }
+      if (!isOpen) return;
       const tag = (document.activeElement && document.activeElement.tagName) || '';
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
 

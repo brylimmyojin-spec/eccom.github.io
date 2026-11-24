@@ -955,6 +955,178 @@ select {
   pointer-events: none;
 }
 
+.floating-fab-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.floating-portals-fab {
+  pointer-events: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #0d6efd 0%, #4c6ef5 100%);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  box-shadow: 0 8px 22px rgba(13, 110, 253, 0.35) !important;
+}
+
+.floating-portals-fab:hover {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 12px 26px rgba(13, 110, 253, 0.45) !important;
+}
+
+.floating-portals-fab:active {
+  transform: scale(0.96);
+}
+
+.floating-portals-fab .fp-fab-icon-close {
+  display: none;
+}
+
+.floating-calc-root.is-portals-open .floating-portals-fab .fp-fab-icon-open {
+  display: none;
+}
+
+.floating-calc-root.is-portals-open .floating-portals-fab .fp-fab-icon-close {
+  display: inline-block;
+  font-size: 1.15rem;
+}
+
+.floating-portals-panel {
+  pointer-events: none;
+  position: fixed;
+  right: 22px;
+  bottom: 148px;
+  width: 286px;
+  max-width: calc(100vw - 24px);
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1.05rem;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(14px) scale(0.92);
+  transform-origin: bottom right;
+  transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  visibility: hidden;
+}
+
+.floating-calc-root.is-portals-open .floating-portals-panel {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+}
+
+.floating-portals-header {
+  background: linear-gradient(135deg, #0d6efd 0%, #4c6ef5 100%);
+  color: #fff;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.floating-portals-body {
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fp-link-card {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--bs-border-color);
+  background-color: var(--bs-tertiary-bg);
+  color: var(--bs-body-color);
+  text-decoration: none;
+  transition: transform 0.14s ease, border-color 0.14s ease, background-color 0.14s ease;
+}
+
+.fp-link-card:hover {
+  transform: translateY(-1px);
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+.fp-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.fp-shopee .fp-icon {
+  background: linear-gradient(135deg, #ee4d2d 0%, #ff6b42 100%);
+}
+.fp-shopee:hover {
+  border-color: rgba(238, 77, 45, 0.5);
+}
+
+.fp-tiktok .fp-icon {
+  background: linear-gradient(135deg, #fe2c55 0%, #ff5c7a 100%);
+}
+.fp-tiktok:hover {
+  border-color: rgba(254, 44, 85, 0.5);
+}
+
+.fp-lazada .fp-icon {
+  background: linear-gradient(135deg, #0f146d 0%, #4c6ef5 100%);
+}
+.fp-lazada:hover {
+  border-color: rgba(76, 110, 245, 0.55);
+}
+
+.fp-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+  flex-grow: 1;
+}
+
+.fp-title {
+  font-size: 0.83rem;
+  font-weight: 700;
+}
+
+.fp-sub {
+  font-size: 0.7rem;
+  color: var(--bs-secondary-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fp-ext {
+  font-size: 0.82rem;
+  color: var(--bs-secondary-color);
+  flex-shrink: 0;
+}
+
+.floating-portals-footer {
+  padding: 0.55rem 0.85rem;
+  border-top: 1px solid var(--bs-border-color);
+  background-color: var(--bs-tertiary-bg);
+}
+
 .floating-calc-fab {
   pointer-events: auto;
   width: 56px;
@@ -1395,10 +1567,22 @@ body {
     height: 50px;
     font-size: 1.3rem;
   }
+  .floating-portals-fab {
+    width: 46px;
+    height: 46px;
+    font-size: 1.15rem;
+  }
   .floating-calc-panel {
     left: 12px;
     right: 12px;
     bottom: 74px;
+    width: auto;
+    max-width: none;
+  }
+  .floating-portals-panel {
+    left: 12px;
+    right: 12px;
+    bottom: 130px;
     width: auto;
     max-width: none;
   }
