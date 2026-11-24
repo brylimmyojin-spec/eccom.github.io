@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Digital CRJ &amp; CDJ (Books of Accounts) | PH Marketplace Calculator</title>
+  <meta name="description" content="Free browser-saved digital Cash Receipts Journal (CRJ) and Cash Disbursements Journal (CDJ) for Philippine e-commerce sellers on Shopee, Lazada, and TikTok Shop.">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="./css/styles.css" rel="stylesheet">
+
+  <style>
+    .selectable-app {
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .ledger-book {
+      border: 1px solid var(--bs-border-color);
+      border-radius: 0.65rem;
+      overflow: hidden;
+    }
+    .ledger-header-bar {
+      background-color: #10203a;
+      color: #ffffff;
+      padding: 0.7rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .ledger-table {
+      margin-bottom: 0;
+      font-size: 0.85rem;
+    }
+    .ledger-table thead th {
+      background-color: #1b2e4b;
+      color: #ffffff;
+      border-color: #2b4266;
+      white-space: nowrap;
+      vertical-align: middle;
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+    .ledger-table tbody td {
+      vertical-align: middle;
+    }
+    .ledger-table tfoot td {
+      font-weight: 700;
+      background-color: var(--bs-tertiary-bg);
+      border-top: 2px solid var(--bs-border-color);
+    }
+    .num-col {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .kpi-card {
+      border-radius: 0.75rem;
+      border: 1px solid var(--bs-border-color);
+      background-color: var(--bs-body-bg);
+    }
+    .kpi-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .books-tabs .nav-link {
+      font-weight: 600;
+      padding: 0.65rem 1.25rem;
+    }
+    .save-pill {
+      font-size: 0.75rem;
+      transition: opacity 0.2s ease;
+    }
+    .amount-strip {
+      background-color: var(--bs-tertiary-bg);
+      border: 1px solid var(--bs-border-color);
+      border-radius: 0.5rem;
+      padding: 0.65rem 0.75rem;
+    }
+    .amount-strip .input-group-text {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.5rem;
+      font-weight: 600;
+    }
+    .form-select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    @media print {
+      header, footer, .no-print {
+        display: none !important;
+      }
+      .card, .ledger-book {
+        box-shadow: none !important;
+        border: 1px solid #dee2e6 !important;
+      }
+      .tab-pane {
+        display: block !important;
+        opacity: 1 !important;
+        margin-bottom: 1.5rem;
+      }
+      .action-col {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg app-navbar sticky-top shadow-sm py-2">
+      <div class="container-fluid px-3 px-md-4 px-xl-5">
+        <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none flex-shrink-0" href="index.html">
+          <span class="brand-flag">🇵🇭</span>
+          <div class="d-flex flex-column lh-1">
+            <span class="brand-title fw-bold">PH Marketplace</span>
+            <span class="brand-subtitle text-body-secondary">Fee &amp; Margin Calculator</span>
+          </div>
+        </a>
+        <button class="navbar-toggler border-0 shadow-none px-2 py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3 align-items-lg-center">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-calculator"></i>Pricing
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="index.html"><i class="bi bi-calculator-fill"></i>Pricing Simulator (Single)</a></li>
+                <li><a class="dropdown-item" href="bulk-pricing.html"><i class="bi bi-table"></i>Bulk Multi-Line Pricing</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-tags"></i>Shopee Promos
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="discount-calculator.html"><i class="bi bi-tags-fill"></i>Discount, Bundle &amp; Add-on</a></li>
+                <li><a class="dropdown-item" href="voucher-calculator.html"><i class="bi bi-ticket-perforated-fill"></i>Seller Vouchers &amp; Coins</a></li>
+                <li><a class="dropdown-item" href="campaign-calculator.html"><i class="bi bi-megaphone-fill"></i>Campaigns &amp; Flash Deals</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line"></i>Comparison</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="roas-calculator.html"><i class="bi bi-graph-up-arrow"></i>ROAS &amp; Ads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="expenses.html"><i class="bi bi-cash-coin"></i>Expenses</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-journal-bookmark"></i>Guides &amp; Portals
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="opt-in-fees.html"><i class="bi bi-shield-check"></i>Opt-In Fees &amp; RTS</a></li>
+                <li><a class="dropdown-item" href="fee-reference.html"><i class="bi bi-journal-bookmark-fill"></i>Fee Reference</a></li>
+                <li><a class="dropdown-item" href="tax-guide.html"><i class="bi bi-bank"></i>Tax &amp; BIR Guide</a></li>
+                <li><a class="dropdown-item" href="bir-invoice-books.html"><i class="bi bi-journal-text"></i>BIR Invoice &amp; Books</a></li>
+                <li><a class="dropdown-item active" href="digital-books.html"><i class="bi bi-journal-check"></i>Digital CRJ &amp; CDJ</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="seller-centers.html"><i class="bi bi-box-arrow-up-right"></i>Seller Portals</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2 pt-2 pt-lg-0 border-top border-lg-0 flex-shrink-0">
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="seller-centers.html" title="Seller Portals (Shopee, TikTok, Lazada)" aria-label="Seller Portals" style="width: 34px; height: 34px;">
+              <i class="bi bi-shop-window"></i>
+            </a>
+            <button class="btn btn-outline-secondary btn-sm rounded-pill d-flex align-items-center gap-1.5 px-3 py-1.5" id="themeToggle" type="button" title="Toggle dark/light mode">
+              <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+              <span id="themeText">Theme</span>
+            </button>
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub" style="width: 34px; height: 34px;">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-xl py-4 flex-grow-1 selectable-app">
+
+    <!-- Page Header -->
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-3 gap-3">
+      <div>
+        <div class="d-inline-flex align-items-center gap-2 mb-1 flex-wrap">
+          <span class="badge bg-success-subtle text-success-emphasis rounded-pill px-3 py-1 save-pill" id="saveStatusBadge">
+            <i class="bi bi-hdd-fill me-1"></i>Saved locally in browser
+          </span>
+          <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill px-2 py-1">
+            Private · Offline-Ready · No Server Upload
+          </span>
+        </div>
+        <h1 class="h2 mb-1 fw-bold">Digital CRJ &amp; CDJ (Books of Accounts)</h1>
+        <p class="text-body-secondary mb-0">
+          Record your daily Sales Invoices in the <strong>Cash Receipts Journal (CRJ)</strong> and expenses in the <strong>Cash Disbursements Journal (CDJ)</strong>. Everything auto-saves in your browser's <code>localStorage</code>.
+        </p>
+      </div>
+      <div class="d-flex flex-wrap gap-2 no-print">
+        <a href="bir-invoice-books.html" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-journal-text me-1"></i>BIR Guide
+        </a>
+        <button type="button" class="btn btn-outline-primary btn-sm" id="btnLoadSample">
+          <i class="bi bi-magic me-1"></i>Load Sample
+        </button>
+        <button type="button" class="btn btn-outline-success btn-sm" id="btnExportJson">
+          <i class="bi bi-download me-1"></i>Backup JSON
+        </button>
+        <label class="btn btn-outline-secondary btn-sm mb-0" for="inputImportJson" role="button">
+          <i class="bi bi-upload me-1"></i>Import JSON
+        </label>
+        <input type="file" id="inputImportJson" accept=".json" class="d-none">
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.print()">
+          <i class="bi bi-printer me-1"></i>Print
+        </button>
+      </div>
+    </div>
+
+    <!-- Business Profile & Period Filter Bar -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body py-3 px-4">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-4">
+            <label for="bizName" class="form-label small fw-semibold mb-1">Registered Business / Trade Name</label>
+            <input type="text" class="form-control form-control-sm" id="bizName" placeholder="e.g., Juan's Online Trading">
+          </div>
+          <div class="col-md-3">
+            <label for="bizTin" class="form-label small fw-semibold mb-1">TIN (Optional)</label>
+            <input type="text" class="form-control form-control-sm font-monospace" id="bizTin" placeholder="000-000-000-00000">
+          </div>
+          <div class="col-md-3">
+            <label for="periodFilter" class="form-label small fw-semibold mb-1">Filter by Month</label>
+            <select class="form-select form-select-sm" id="periodFilter">
+              <option value="all">All Periods</option>
+            </select>
+          </div>
+          <div class="col-md-2 text-md-end no-print">
+            <button type="button" class="btn btn-outline-danger btn-sm w-100" id="btnClearAll" title="Clear all CRJ and CDJ entries">
+              <i class="bi bi-trash3 me-1"></i>Clear Data
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI Summary Row -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-lg-3">
+        <div class="kpi-card p-3 shadow-sm h-100">
+          <div class="small text-body-secondary fw-semibold text-uppercase">Gross Sales (CRJ)</div>
+          <div class="kpi-value text-primary mt-1" id="kpiGrossSales">₱0.00</div>
+          <div class="small text-body-secondary mt-1" id="kpiCrjCount">0 invoices recorded</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="kpi-card p-3 shadow-sm h-100">
+          <div class="small text-body-secondary fw-semibold text-uppercase">Cash in Bank (CRJ)</div>
+          <div class="kpi-value text-success mt-1" id="kpiCashInBank">₱0.00</div>
+          <div class="small text-body-secondary mt-1">CWT 0.5% (2307): <span class="fw-semibold" id="kpiCwtTotal">₱0.00</span></div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="kpi-card p-3 shadow-sm h-100">
+          <div class="small text-body-secondary fw-semibold text-uppercase">CRJ Platform Fees</div>
+          <div class="kpi-value text-warning-emphasis mt-1" id="kpiCrjFees">₱0.00</div>
+          <div class="small text-body-secondary mt-1">Deducted from payouts</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="kpi-card p-3 shadow-sm h-100">
+          <div class="small text-body-secondary fw-semibold text-uppercase">Total Disbursements (CDJ)</div>
+          <div class="kpi-value text-danger mt-1" id="kpiCdjTotal">₱0.00</div>
+          <div class="small text-body-secondary mt-1" id="kpiCdjCount">0 expense rows</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Ledger Tabs -->
+    <ul class="nav nav-tabs books-tabs mb-3 no-print" id="booksTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="crj-tab" data-bs-toggle="tab" data-bs-target="#crj-pane" type="button" role="tab" aria-controls="crj-pane" aria-selected="true">
+          <i class="bi bi-journal-arrow-down me-1 text-primary"></i>Cash Receipts Journal (CRJ)
+          <span class="badge bg-primary-subtle text-primary-emphasis ms-1" id="tabCrjBadge">0</span>
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="cdj-tab" data-bs-toggle="tab" data-bs-target="#cdj-pane" type="button" role="tab" aria-controls="cdj-pane" aria-selected="false">
+          <i class="bi bi-journal-arrow-up me-1 text-danger"></i>Cash Disbursements Journal (CDJ)
+          <span class="badge bg-danger-subtle text-danger-emphasis ms-1" id="tabCdjBadge">0</span>
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="booksTabContent">
+
+      <!-- ========================================================= -->
+      <!-- TAB 1: CASH RECEIPTS JOURNAL (CRJ)                        -->
+      <!-- ========================================================= -->
+      <div class="tab-pane fade show active" id="crj-pane" role="tabpanel" aria-labelledby="crj-tab">
+
+        <!-- Add / Edit CRJ Form -->
+        <div class="card shadow-sm border-0 mb-3 no-print">
+          <div class="card-header bg-body-tertiary fw-bold py-2 px-3 d-flex justify-content-between align-items-center">
+            <span id="crjFormTitle"><i class="bi bi-plus-circle me-1 text-primary"></i>Add CRJ Entry (Sales Invoice &amp; Payout)</span>
+            <button type="button" class="btn btn-sm btn-link text-decoration-none d-none py-0" id="btnCancelCrjEdit">Cancel Edit</button>
+          </div>
+          <div class="card-body p-3">
+            <form id="crjForm">
+              <input type="hidden" id="crjEditId" value="">
+              <!-- Row 1: Invoice & Customer Details -->
+              <div class="row g-2 align-items-end mb-2">
+                <div class="col-6 col-md-2">
+                  <label for="crjDate" class="form-label small fw-semibold mb-1">Date</label>
+                  <input type="date" class="form-control form-control-sm" id="crjDate" required>
+                </div>
+                <div class="col-6 col-md-2">
+                  <label for="crjSiNo" class="form-label small fw-semibold mb-1">SI No.</label>
+                  <input type="text" class="form-control form-control-sm font-monospace" id="crjSiNo" placeholder="000101" required>
+                </div>
+                <div class="col-6 col-md-3">
+                  <label for="crjPlatform" class="form-label small fw-semibold mb-1">Platform</label>
+                  <select class="form-select form-select-sm" id="crjPlatform">
+                    <option value="Shopee">Shopee</option>
+                    <option value="TikTok">TikTok Shop</option>
+                    <option value="Lazada">Lazada</option>
+                    <option value="Direct">Direct / Other</option>
+                  </select>
+                </div>
+                <div class="col-6 col-md-5">
+                  <label for="crjCustomer" class="form-label small fw-semibold mb-1">Customer / Particulars</label>
+                  <input type="text" class="form-control form-control-sm" id="crjCustomer" placeholder="Juan Dela Cruz or Various Customers" required>
+                </div>
+              </div>
+
+              <!-- Row 2: All Amount Fields in One Row -->
+              <div class="amount-strip">
+                <div class="row g-2 align-items-end">
+                  <div class="col-6 col-md-3 col-lg">
+                    <label for="crjGrossSales" class="form-label small fw-semibold mb-1 text-primary">Gross Sales (Cr)</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control form-control-sm font-monospace text-end" id="crjGrossSales" min="0" step="0.01" placeholder="950.00" required>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3 col-lg">
+                    <label for="crjPlatformFees" class="form-label small fw-semibold mb-1">Platform Fees (Dr)</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control form-control-sm font-monospace text-end" id="crjPlatformFees" min="0" step="0.01" value="0.00">
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3 col-lg">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <label for="crjCwt" class="form-label small fw-semibold mb-0">CWT 0.5% (Dr)</label>
+                      <div class="form-check form-check-inline m-0">
+                        <input class="form-check-input" type="checkbox" id="crjAutoCwt" checked>
+                        <label class="form-check-label" for="crjAutoCwt" style="font-size: 0.72rem;">Auto</label>
+                      </div>
+                    </div>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control form-control-sm font-monospace text-end" id="crjCwt" min="0" step="0.01" value="0.00">
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3 col-lg">
+                    <label for="crjCashInBank" class="form-label small fw-semibold mb-1 text-success">Cash in Bank (Dr)</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control form-control-sm font-monospace text-end bg-body-secondary fw-semibold" id="crjCashInBank" step="0.01" readonly>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-auto">
+                    <button type="submit" class="btn btn-primary btn-sm w-100 px-3" id="btnSubmitCrj" style="min-width: 132px;">
+                      <i class="bi bi-plus-lg me-1"></i>Add to CRJ
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- CRJ Toolbar -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2 no-print">
+          <div class="d-flex gap-2 flex-wrap">
+            <input type="search" class="form-control form-control-sm" id="crjSearch" placeholder="Search SI No. or customer..." style="width: 220px;">
+            <select class="form-select form-select-sm" id="crjPlatformFilter" style="width: 150px;">
+              <option value="all">All Platforms</option>
+              <option value="Shopee">Shopee</option>
+              <option value="TikTok">TikTok Shop</option>
+              <option value="Lazada">Lazada</option>
+              <option value="Direct">Direct / Other</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-outline-success btn-sm" id="btnExportCrjCsv">
+            <i class="bi bi-file-earmark-spreadsheet me-1"></i>Export CRJ CSV
+          </button>
+        </div>
+
+        <!-- CRJ Ledger Table -->
+        <div class="ledger-book shadow-sm mb-3">
+          <div class="ledger-header-bar">
+            <div class="fw-bold small text-uppercase">
+              <i class="bi bi-book-half me-1"></i>Cash Receipts Journal (CRJ)
+              <span class="fw-normal opacity-75 ms-2" id="crjHeaderMeta"></span>
+            </div>
+            <span class="badge bg-success" id="crjBalanceBadge">
+              <i class="bi bi-check-circle-fill me-1"></i>Debits = Credits
+            </span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover ledger-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>SI No.</th>
+                  <th>Customer / Platform</th>
+                  <th class="text-end">Gross Sales (Credit)</th>
+                  <th class="text-end">Platform Fees (Debit)</th>
+                  <th class="text-end">CWT 0.5% (Debit)</th>
+                  <th class="text-end">Cash in Bank (Debit)</th>
+                  <th class="text-center action-col" style="width: 92px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="crjTableBody"></tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="text-uppercase small">Total for Shown Period</td>
+                  <td class="num-col text-primary" id="crjTotalSales">0.00</td>
+                  <td class="num-col" id="crjTotalFees">0.00</td>
+                  <td class="num-col" id="crjTotalCwt">0.00</td>
+                  <td class="num-col text-success" id="crjTotalCash">0.00</td>
+                  <td class="action-col"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- TAB 2: CASH DISBURSEMENTS JOURNAL (CDJ)                   -->
+      <!-- ========================================================= -->
+      <div class="tab-pane fade" id="cdj-pane" role="tabpanel" aria-labelledby="cdj-tab">
+
+        <!-- Add / Edit CDJ Form -->
+        <div class="card shadow-sm border-0 mb-3 no-print">
+          <div class="card-header bg-body-tertiary fw-bold py-2 px-3 d-flex justify-content-between align-items-center">
+            <span id="cdjFormTitle"><i class="bi bi-plus-circle me-1 text-danger"></i>Add CDJ Entry (Expenses, Inventory &amp; Fees)</span>
+            <button type="button" class="btn btn-sm btn-link text-decoration-none d-none py-0" id="btnCancelCdjEdit">Cancel Edit</button>
+          </div>
+          <div class="card-body p-3">
+            <form id="cdjForm">
+              <input type="hidden" id="cdjEditId" value="">
+              <!-- Row 1: Supplier & Reference Details -->
+              <div class="row g-2 align-items-end mb-2">
+                <div class="col-6 col-md-2">
+                  <label for="cdjDate" class="form-label small fw-semibold mb-1">Date</label>
+                  <input type="date" class="form-control form-control-sm" id="cdjDate" required>
+                </div>
+                <div class="col-6 col-md-2">
+                  <label for="cdjRefNo" class="form-label small fw-semibold mb-1">Ref / SI No.</label>
+                  <input type="text" class="form-control form-control-sm font-monospace" id="cdjRefNo" placeholder="SI-4410" required>
+                </div>
+                <div class="col-6 col-md-4">
+                  <label for="cdjPayee" class="form-label small fw-semibold mb-1">Payee / Supplier</label>
+                  <input type="text" class="form-control form-control-sm" id="cdjPayee" placeholder="ABC Packaging Corp." required>
+                </div>
+                <div class="col-6 col-md-4">
+                  <label for="cdjParticulars" class="form-label small fw-semibold mb-1">Particulars</label>
+                  <input type="text" class="form-control form-control-sm" id="cdjParticulars" placeholder="Bubble wrap &amp; pouches" required>
+                </div>
+              </div>
+
+              <!-- Row 2: Category & Amount in One Row -->
+              <div class="amount-strip">
+                <div class="row g-2 align-items-end">
+                  <div class="col-6 col-md-5">
+                    <label for="cdjCategory" class="form-label small fw-semibold mb-1">Expense Column (Debit)</label>
+                    <select class="form-select form-select-sm" id="cdjCategory">
+                      <option value="purchases">Purchases / COGS</option>
+                      <option value="platformFees">Platform &amp; Ad Fees</option>
+                      <option value="packaging">Packaging &amp; Supplies</option>
+                      <option value="otherOpex">Other Operating Expenses</option>
+                    </select>
+                  </div>
+                  <div class="col-6 col-md-4">
+                    <label for="cdjAmount" class="form-label small fw-semibold mb-1 text-danger">Amount Paid (Credit)</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">₱</span>
+                      <input type="number" class="form-control form-control-sm font-monospace text-end" id="cdjAmount" min="0.01" step="0.01" placeholder="650.00" required>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-3">
+                    <button type="submit" class="btn btn-danger btn-sm w-100" id="btnSubmitCdj">
+                      <i class="bi bi-plus-lg me-1"></i>Add to CDJ
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- CDJ Toolbar -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2 no-print">
+          <div class="d-flex gap-2 flex-wrap">
+            <input type="search" class="form-control form-control-sm" id="cdjSearch" placeholder="Search ref, payee, particulars..." style="width: 240px;">
+            <select class="form-select form-select-sm" id="cdjCategoryFilter" style="width: 190px;">
+              <option value="all">All Categories</option>
+              <option value="purchases">Purchases / COGS</option>
+              <option value="platformFees">Platform &amp; Ad Fees</option>
+              <option value="packaging">Packaging &amp; Supplies</option>
+              <option value="otherOpex">Other Operating Expenses</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-outline-success btn-sm" id="btnExportCdjCsv">
+            <i class="bi bi-file-earmark-spreadsheet me-1"></i>Export CDJ CSV
+          </button>
+        </div>
+
+        <!-- CDJ Ledger Table -->
+        <div class="ledger-book shadow-sm mb-3">
+          <div class="ledger-header-bar">
+            <div class="fw-bold small text-uppercase">
+              <i class="bi bi-book-half me-1"></i>Cash Disbursements Journal (CDJ)
+              <span class="fw-normal opacity-75 ms-2" id="cdjHeaderMeta"></span>
+            </div>
+            <span class="badge bg-success" id="cdjBalanceBadge">
+              <i class="bi bi-check-circle-fill me-1"></i>Debits = Credits
+            </span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover ledger-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Ref / SI No.</th>
+                  <th>Payee / Supplier</th>
+                  <th>Particulars</th>
+                  <th class="text-end">Purchases / COGS</th>
+                  <th class="text-end">Platform &amp; Ad Fees</th>
+                  <th class="text-end">Packaging &amp; Supplies</th>
+                  <th class="text-end">Other OpEx</th>
+                  <th class="text-end">Cash Paid (Credit)</th>
+                  <th class="text-center action-col" style="width: 92px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="cdjTableBody"></tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4" class="text-uppercase small">Total for Shown Period</td>
+                  <td class="num-col" id="cdjTotalPurchases">0.00</td>
+                  <td class="num-col" id="cdjTotalPlatformFees">0.00</td>
+                  <td class="num-col" id="cdjTotalPackaging">0.00</td>
+                  <td class="num-col" id="cdjTotalOtherOpex">0.00</td>
+                  <td class="num-col text-danger" id="cdjTotalCashPaid">0.00</td>
+                  <td class="action-col"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Local Storage Reminder -->
+    <div class="alert alert-secondary border-0 small mb-0 no-print">
+      <i class="bi bi-info-circle-fill me-1"></i>
+      <strong>Browser Storage Note:</strong> Your CRJ and CDJ records stay 100% on this device inside your browser's <code>localStorage</code>. Use <strong>Backup JSON</strong> or <strong>Export CSV</strong> regularly to save copies for your bookkeeper or BIR filing (and keep records for at least 5 years under RR 7-2024).
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary py-4 border-top mt-auto">
+    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+      <div>
+        <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
+      </div>
+      <div class="d-flex flex-wrap gap-3">
+        <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
+        <a href="comparison.html" class="text-decoration-none text-body-secondary">Comparison</a>
+        <a href="roas-calculator.html" class="text-decoration-none text-body-secondary">ROAS &amp; Ads</a>
+        <a href="expenses.html" class="text-decoration-none text-body-secondary">Expenses &amp; Allotments</a>
+        <a href="opt-in-fees.html" class="text-decoration-none text-body-secondary">Opt-In Fees &amp; RTS</a>
+        <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
+        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax &amp; BIR Guide</a>
+        <a href="bir-invoice-books.html" class="text-decoration-none text-body-secondary">BIR Invoice &amp; Books</a>
+        <a href="digital-books.html" class="text-decoration-none text-body-secondary fw-semibold">Digital CRJ &amp; CDJ</a>
+        <a href="seller-centers.html" class="text-decoration-none text-body-secondary">Seller Portals</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Engine for theme -->
+  <script src="./js/calculator.js"></script>
+  <script>
+    initTheme();
+
+    (function () {
+      const STORAGE_KEY = 'ph_marketplace_digital_books_v1';
+
+      const SAMPLE_DATA = {
+        profile: {
+          bizName: "Juan's Online Trading",
+          tin: '000-000-000-00000'
+        },
+        crj: [
+          {
+            id: 'crj-sample-1',
+            date: '2026-11-24',
+            siNo: '000101',
+            platform: 'Shopee',
+            customer: 'Juan Dela Cruz',
+            grossSales: 950.00,
+            platformFees: 180.00,
+            cwt: 4.75,
+            cashInBank: 765.25
+          },
+          {
+            id: 'crj-sample-2',
+            date: '2026-11-24',
+            siNo: '000102',
+            platform: 'TikTok',
+            customer: 'Various Customers',
+            grossSales: 2400.00,
+            platformFees: 432.00,
+            cwt: 12.00,
+            cashInBank: 1956.00
+          }
+        ],
+        cdj: [
+          {
+            id: 'cdj-sample-1',
+            date: '2026-11-24',
+            refNo: 'PL-8891',
+            payee: 'Shopee Philippines',
+            particulars: 'Commission & Txn Fees',
+            category: 'platformFees',
+            amount: 180.00
+          },
+          {
+            id: 'cdj-sample-2',
+            date: '2026-11-25',
+            refNo: 'SI-4410',
+            payee: 'ABC Packaging Corp.',
+            particulars: 'Bubble wrap & pouches',
+            category: 'packaging',
+            amount: 650.00
+          },
+          {
+            id: 'cdj-sample-3',
+            date: '2026-11-26',
+            refNo: 'SI-9921',
+            payee: 'XYZ Wholesale Trading',
+            particulars: 'Restock desk lamps',
+            category: 'purchases',
+            amount: 5000.00
+          }
+        ]
+      };
+
+      let state = loadState();
+
+      // DOM refs
+      const bizNameEl = document.getElementById('bizName');
+      const bizTinEl = document.getElementById('bizTin');
+      const periodFilterEl = document.getElementById('periodFilter');
+      const saveStatusBadge = document.getElementById('saveStatusBadge');
+
+      // CRJ Form refs
+      const crjForm = document.getElementById('crjForm');
+      const crjEditId = document.getElementById('crjEditId');
+      const crjDate = document.getElementById('crjDate');
+      const crjSiNo = document.getElementById('crjSiNo');
+      const crjPlatform = document.getElementById('crjPlatform');
+      const crjCustomer = document.getElementById('crjCustomer');
+      const crjGrossSales = document.getElementById('crjGrossSales');
+      const crjPlatformFees = document.getElementById('crjPlatformFees');
+      const crjAutoCwt = document.getElementById('crjAutoCwt');
+      const crjCwt = document.getElementById('crjCwt');
+      const crjCashInBank = document.getElementById('crjCashInBank');
+      const crjSearch = document.getElementById('crjSearch');
+      const crjPlatformFilter = document.getElementById('crjPlatformFilter');
+
+      // CDJ Form refs
+      const cdjForm = document.getElementById('cdjForm');
+      const cdjEditId = document.getElementById('cdjEditId');
+      const cdjDate = document.getElementById('cdjDate');
+      const cdjRefNo = document.getElementById('cdjRefNo');
+      const cdjPayee = document.getElementById('cdjPayee');
+      const cdjParticulars = document.getElementById('cdjParticulars');
+      const cdjCategory = document.getElementById('cdjCategory');
+      const cdjAmount = document.getElementById('cdjAmount');
+      const cdjSearch = document.getElementById('cdjSearch');
+      const cdjCategoryFilter = document.getElementById('cdjCategoryFilter');
+
+      function todayISO() {
+        const d = new Date();
+        const pad = n => String(n).padStart(2, '0');
+        return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+      }
+
+      function fmt(n) {
+        return Number(n || 0).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function round2(n) {
+        return Math.round((Number(n) || 0) * 100) / 100;
+      }
+
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function formatDisplayDate(iso) {
+        if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return iso || '';
+        const [y, m, d] = iso.split('-');
+        return `${m}/${d}/${y.slice(2)}`;
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (parsed && Array.isArray(parsed.crj) && Array.isArray(parsed.cdj)) {
+              return {
+                profile: parsed.profile || { bizName: '', tin: '' },
+                crj: parsed.crj,
+                cdj: parsed.cdj
+              };
+            }
+          }
+        } catch (e) {
+          console.warn('Could not load digital books from localStorage:', e);
+        }
+        return { profile: { bizName: '', tin: '' }, crj: [], cdj: [] };
+      }
+
+      function saveState(flashMessage) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          if (flashMessage) {
+            saveStatusBadge.innerHTML = `<i class="bi bi-check-circle-fill me-1"></i>${escapeHtml(flashMessage)}`;
+            clearTimeout(saveState._timer);
+            saveState._timer = setTimeout(() => {
+              saveStatusBadge.innerHTML = '<i class="bi bi-hdd-fill me-1"></i>Saved locally in browser';
+            }, 2200);
+          }
+        } catch (e) {
+          alert('Unable to save to browser localStorage (storage may be full or restricted).');
+        }
+      }
+
+      function nextSiNumber() {
+        if (!state.crj.length) return '000101';
+        let maxNum = 0;
+        let padLen = 6;
+        state.crj.forEach(row => {
+          const m = String(row.siNo || '').match(/(\d+)$/);
+          if (m) {
+            const num = parseInt(m[1], 10);
+            if (num > maxNum) {
+              maxNum = num;
+              padLen = Math.max(m[1].length, 4);
+            }
+          }
+        });
+        return maxNum > 0 ? String(maxNum + 1).padStart(padLen, '0') : '000101';
+      }
+
+      function updateCrjFormCalc() {
+        const gross = Math.max(0, parseFloat(crjGrossSales.value) || 0);
+        const fees = Math.max(0, parseFloat(crjPlatformFees.value) || 0);
+        if (crjAutoCwt.checked) {
+          crjCwt.value = round2(gross * 0.005).toFixed(2);
+        }
+        const cwt = Math.max(0, parseFloat(crjCwt.value) || 0);
+        const cash = round2(gross - fees - cwt);
+        crjCashInBank.value = cash.toFixed(2);
+      }
+
+      function getPlatformBadge(platform) {
+        if (platform === 'Shopee') return '<span class="badge badge-shopee ms-1">Shopee</span>';
+        if (platform === 'TikTok') return '<span class="badge badge-tiktok ms-1">TikTok</span>';
+        if (platform === 'Lazada') return '<span class="badge badge-lazada ms-1">Lazada</span>';
+        return '<span class="badge bg-secondary-subtle text-secondary-emphasis ms-1">Direct</span>';
+      }
+
+      function rebuildPeriodOptions() {
+        const current = periodFilterEl.value;
+        const months = new Set();
+        state.crj.forEach(r => { if (r.date && r.date.length >= 7) months.add(r.date.slice(0, 7)); });
+        state.cdj.forEach(r => { if (r.date && r.date.length >= 7) months.add(r.date.slice(0, 7)); });
+        const sorted = Array.from(months).sort().reverse();
+
+        periodFilterEl.innerHTML = '<option value="all">All Periods</option>' +
+          sorted.map(ym => {
+            const [y, m] = ym.split('-');
+            const label = new Date(Number(y), Number(m) - 1, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            return `<option value="${ym}">${label}</option>`;
+          }).join('');
+
+        if (sorted.includes(current)) {
+          periodFilterEl.value = current;
+        } else {
+          periodFilterEl.value = 'all';
+        }
+      }
+
+      function filterByPeriod(rows) {
+        const period = periodFilterEl.value;
+        if (period === 'all') return rows;
+        return rows.filter(r => String(r.date || '').startsWith(period));
+      }
+
+      function renderAll() {
+        rebuildPeriodOptions();
+
+        const period = periodFilterEl.value;
+        const metaParts = [];
+        if (state.profile.bizName) metaParts.push(state.profile.bizName);
+        if (state.profile.tin) metaParts.push(`TIN: ${state.profile.tin}`);
+        if (period !== 'all') metaParts.push(period);
+        const metaText = metaParts.join(' · ');
+        document.getElementById('crjHeaderMeta').textContent = metaText;
+        document.getElementById('cdjHeaderMeta').textContent = metaText;
+
+        // Period-scoped data for KPIs
+        const periodCrj = filterByPeriod(state.crj);
+        const periodCdj = filterByPeriod(state.cdj);
+
+        const kpiSales = periodCrj.reduce((s, r) => s + Number(r.grossSales || 0), 0);
+        const kpiFees = periodCrj.reduce((s, r) => s + Number(r.platformFees || 0), 0);
+        const kpiCwt = periodCrj.reduce((s, r) => s + Number(r.cwt || 0), 0);
+        const kpiCash = periodCrj.reduce((s, r) => s + Number(r.cashInBank || 0), 0);
+        const kpiCdj = periodCdj.reduce((s, r) => s + Number(r.amount || 0), 0);
+
+        document.getElementById('kpiGrossSales').textContent = '₱' + fmt(kpiSales);
+        document.getElementById('kpiCrjCount').textContent = `${periodCrj.length} ${periodCrj.length === 1 ? 'invoice' : 'invoices'} recorded`;
+        document.getElementById('kpiCashInBank').textContent = '₱' + fmt(kpiCash);
+        document.getElementById('kpiCwtTotal').textContent = '₱' + fmt(kpiCwt);
+        document.getElementById('kpiCrjFees').textContent = '₱' + fmt(kpiFees);
+        document.getElementById('kpiCdjTotal').textContent = '₱' + fmt(kpiCdj);
+        document.getElementById('kpiCdjCount').textContent = `${periodCdj.length} ${periodCdj.length === 1 ? 'expense row' : 'expense rows'}`;
+        document.getElementById('tabCrjBadge').textContent = periodCrj.length;
+        document.getElementById('tabCdjBadge').textContent = periodCdj.length;
+
+        renderCrjTable(periodCrj);
+        renderCdjTable(periodCdj);
+      }
+
+      function renderCrjTable(periodRows) {
+        const q = (crjSearch.value || '').trim().toLowerCase();
+        const plat = crjPlatformFilter.value;
+        const rows = periodRows
+          .filter(r => {
+            if (plat !== 'all' && r.platform !== plat) return false;
+            if (!q) return true;
+            return (
+              String(r.siNo || '').toLowerCase().includes(q) ||
+              String(r.customer || '').toLowerCase().includes(q) ||
+              String(r.platform || '').toLowerCase().includes(q) ||
+              String(r.date || '').includes(q)
+            );
+          })
+          .slice()
+          .sort((a, b) => (a.date || '').localeCompare(b.date || '') || String(a.siNo || '').localeCompare(String(b.siNo || '')));
+
+        const tbody = document.getElementById('crjTableBody');
+        if (!rows.length) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="8" class="text-center text-body-secondary py-4">
+                <i class="bi bi-journal-x fs-4 d-block mb-1 opacity-50"></i>
+                No CRJ entries yet. Add your first Sales Invoice above or click <strong>Load Sample</strong>.
+              </td>
+            </tr>`;
+        } else {
+          tbody.innerHTML = rows.map(r => `
+            <tr>
+              <td class="text-nowrap">${escapeHtml(formatDisplayDate(r.date))}</td>
+              <td class="font-monospace">${escapeHtml(r.siNo)}</td>
+              <td>${escapeHtml(r.customer)} ${getPlatformBadge(r.platform)}</td>
+              <td class="num-col fw-semibold">${fmt(r.grossSales)}</td>
+              <td class="num-col">${fmt(r.platformFees)}</td>
+              <td class="num-col">${fmt(r.cwt)}</td>
+              <td class="num-col fw-semibold ${r.cashInBank < 0 ? 'text-danger' : 'text-success'}">${fmt(r.cashInBank)}</td>
+              <td class="text-center action-col text-nowrap">
+                <button type="button" class="btn btn-outline-primary btn-sm py-0 px-1 me-1" data-crj-edit="${escapeHtml(r.id)}" title="Edit row">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button type="button" class="btn btn-outline-danger btn-sm py-0 px-1" data-crj-del="${escapeHtml(r.id)}" title="Delete row">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>`).join('');
+        }
+
+        const tSales = round2(rows.reduce((s, r) => s + Number(r.grossSales || 0), 0));
+        const tFees = round2(rows.reduce((s, r) => s + Number(r.platformFees || 0), 0));
+        const tCwt = round2(rows.reduce((s, r) => s + Number(r.cwt || 0), 0));
+        const tCash = round2(rows.reduce((s, r) => s + Number(r.cashInBank || 0), 0));
+
+        document.getElementById('crjTotalSales').textContent = fmt(tSales);
+        document.getElementById('crjTotalFees').textContent = fmt(tFees);
+        document.getElementById('crjTotalCwt').textContent = fmt(tCwt);
+        document.getElementById('crjTotalCash').textContent = fmt(tCash);
+
+        const debits = round2(tFees + tCwt + tCash);
+        const balanced = Math.abs(debits - tSales) < 0.01;
+        const badge = document.getElementById('crjBalanceBadge');
+        badge.className = balanced ? 'badge bg-success' : 'badge bg-danger';
+        badge.innerHTML = balanced
+          ? '<i class="bi bi-check-circle-fill me-1"></i>Debits = Credits'
+          : '<i class="bi bi-exclamation-triangle-fill me-1"></i>Out of Balance';
+      }
+
+      function renderCdjTable(periodRows) {
+        const q = (cdjSearch.value || '').trim().toLowerCase();
+        const cat = cdjCategoryFilter.value;
+        const rows = periodRows
+          .filter(r => {
+            if (cat !== 'all' && r.category !== cat) return false;
+            if (!q) return true;
+            return (
+              String(r.refNo || '').toLowerCase().includes(q) ||
+              String(r.payee || '').toLowerCase().includes(q) ||
+              String(r.particulars || '').toLowerCase().includes(q) ||
+              String(r.date || '').includes(q)
+            );
+          })
+          .slice()
+          .sort((a, b) => (a.date || '').localeCompare(b.date || '') || String(a.refNo || '').localeCompare(String(b.refNo || '')));
+
+        const tbody = document.getElementById('cdjTableBody');
+        if (!rows.length) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="10" class="text-center text-body-secondary py-4">
+                <i class="bi bi-journal-x fs-4 d-block mb-1 opacity-50"></i>
+                No CDJ entries yet. Add your first business expense above or click <strong>Load Sample</strong>.
+              </td>
+            </tr>`;
+        } else {
+          tbody.innerHTML = rows.map(r => {
+            const amt = Number(r.amount || 0);
+            const cell = key => r.category === key ? fmt(amt) : '<span class="text-body-secondary">&mdash;</span>';
+            return `
+              <tr>
+                <td class="text-nowrap">${escapeHtml(formatDisplayDate(r.date))}</td>
+                <td class="font-monospace">${escapeHtml(r.refNo)}</td>
+                <td>${escapeHtml(r.payee)}</td>
+                <td>${escapeHtml(r.particulars)}</td>
+                <td class="num-col">${cell('purchases')}</td>
+                <td class="num-col">${cell('platformFees')}</td>
+                <td class="num-col">${cell('packaging')}</td>
+                <td class="num-col">${cell('otherOpex')}</td>
+                <td class="num-col fw-semibold">${fmt(amt)}</td>
+                <td class="text-center action-col text-nowrap">
+                  <button type="button" class="btn btn-outline-primary btn-sm py-0 px-1 me-1" data-cdj-edit="${escapeHtml(r.id)}" title="Edit row">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-danger btn-sm py-0 px-1" data-cdj-del="${escapeHtml(r.id)}" title="Delete row">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>`;
+          }).join('');
+        }
+
+        const sumCat = key => round2(rows.filter(r => r.category === key).reduce((s, r) => s + Number(r.amount || 0), 0));
+        const tPur = sumCat('purchases');
+        const tPlat = sumCat('platformFees');
+        const tPack = sumCat('packaging');
+        const tOther = sumCat('otherOpex');
+        const tCashPaid = round2(rows.reduce((s, r) => s + Number(r.amount || 0), 0));
+
+        document.getElementById('cdjTotalPurchases').textContent = fmt(tPur);
+        document.getElementById('cdjTotalPlatformFees').textContent = fmt(tPlat);
+        document.getElementById('cdjTotalPackaging').textContent = fmt(tPack);
+        document.getElementById('cdjTotalOtherOpex').textContent = fmt(tOther);
+        document.getElementById('cdjTotalCashPaid').textContent = fmt(tCashPaid);
+      }
+
+      function resetCrjForm() {
+        crjEditId.value = '';
+        crjDate.value = todayISO();
+        crjSiNo.value = nextSiNumber();
+        crjCustomer.value = '';
+        crjGrossSales.value = '';
+        crjPlatformFees.value = '0.00';
+        crjAutoCwt.checked = true;
+        crjCwt.value = '0.00';
+        crjCashInBank.value = '0.00';
+        document.getElementById('crjFormTitle').innerHTML = '<i class="bi bi-plus-circle me-1 text-primary"></i>Add CRJ Entry (Sales Invoice &amp; Payout)';
+        document.getElementById('btnSubmitCrj').innerHTML = '<i class="bi bi-plus-lg me-1"></i>Add to CRJ';
+        document.getElementById('btnCancelCrjEdit').classList.add('d-none');
+      }
+
+      function resetCdjForm() {
+        cdjEditId.value = '';
+        cdjDate.value = todayISO();
+        cdjRefNo.value = '';
+        cdjPayee.value = '';
+        cdjParticulars.value = '';
+        cdjCategory.value = 'purchases';
+        cdjAmount.value = '';
+        document.getElementById('cdjFormTitle').innerHTML = '<i class="bi bi-plus-circle me-1 text-danger"></i>Add CDJ Entry (Expenses, Inventory &amp; Fees)';
+        document.getElementById('btnSubmitCdj').innerHTML = '<i class="bi bi-plus-lg me-1"></i>Add to CDJ';
+        document.getElementById('btnCancelCdjEdit').classList.add('d-none');
+      }
+
+      function downloadFile(filename, content, mimeType) {
+        const blob = new Blob([content], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      function csvEscape(v) {
+        const s = String(v == null ? '' : v);
+        return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+      }
+
+      // Event Listeners: Profile & Period
+      bizNameEl.value = state.profile.bizName || '';
+      bizTinEl.value = state.profile.tin || '';
+      bizNameEl.addEventListener('input', () => {
+        state.profile.bizName = bizNameEl.value.trim();
+        saveState('Business name saved');
+        renderAll();
+      });
+      bizTinEl.addEventListener('input', () => {
+        state.profile.tin = bizTinEl.value.trim();
+        saveState('TIN saved');
+        renderAll();
+      });
+      periodFilterEl.addEventListener('change', renderAll);
+
+      // CRJ Live Calculation
+      [crjGrossSales, crjPlatformFees, crjCwt].forEach(el => el.addEventListener('input', updateCrjFormCalc));
+      crjAutoCwt.addEventListener('change', updateCrjFormCalc);
+
+      // CRJ Submit
+      crjForm.addEventListener('submit', e => {
+        e.preventDefault();
+        updateCrjFormCalc();
+        const entry = {
+          id: crjEditId.value || ('crj-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6)),
+          date: crjDate.value,
+          siNo: crjSiNo.value.trim(),
+          platform: crjPlatform.value,
+          customer: crjCustomer.value.trim(),
+          grossSales: round2(crjGrossSales.value),
+          platformFees: round2(crjPlatformFees.value),
+          cwt: round2(crjCwt.value),
+          cashInBank: round2(crjCashInBank.value)
+        };
+        if (crjEditId.value) {
+          const idx = state.crj.findIndex(r => r.id === crjEditId.value);
+          if (idx !== -1) state.crj[idx] = entry;
+          saveState('CRJ entry updated');
+        } else {
+          state.crj.push(entry);
+          saveState('CRJ entry saved');
+        }
+        resetCrjForm();
+        renderAll();
+      });
+
+      document.getElementById('btnCancelCrjEdit').addEventListener('click', resetCrjForm);
+
+      // CRJ Edit / Delete
+      document.getElementById('crjTableBody').addEventListener('click', e => {
+        const editBtn = e.target.closest('[data-crj-edit]');
+        if (editBtn) {
+          const row = state.crj.find(r => r.id === editBtn.dataset.crjEdit);
+          if (!row) return;
+          crjEditId.value = row.id;
+          crjDate.value = row.date;
+          crjSiNo.value = row.siNo;
+          crjPlatform.value = row.platform;
+          crjCustomer.value = row.customer;
+          crjGrossSales.value = Number(row.grossSales).toFixed(2);
+          crjPlatformFees.value = Number(row.platformFees).toFixed(2);
+          crjAutoCwt.checked = Math.abs(row.cwt - round2(row.grossSales * 0.005)) < 0.01;
+          crjCwt.value = Number(row.cwt).toFixed(2);
+          crjCashInBank.value = Number(row.cashInBank).toFixed(2);
+          document.getElementById('crjFormTitle').innerHTML = `<i class="bi bi-pencil-square me-1 text-primary"></i>Editing CRJ SI #${escapeHtml(row.siNo)}`;
+          document.getElementById('btnSubmitCrj').innerHTML = '<i class="bi bi-check-lg me-1"></i>Update CRJ';
+          document.getElementById('btnCancelCrjEdit').classList.remove('d-none');
+          crjForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        const delBtn = e.target.closest('[data-crj-del]');
+        if (delBtn) {
+          state.crj = state.crj.filter(r => r.id !== delBtn.dataset.crjDel);
+          saveState('CRJ entry deleted');
+          renderAll();
+        }
+      });
+
+      // CDJ Submit
+      cdjForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const entry = {
+          id: cdjEditId.value || ('cdj-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6)),
+          date: cdjDate.value,
+          refNo: cdjRefNo.value.trim(),
+          payee: cdjPayee.value.trim(),
+          particulars: cdjParticulars.value.trim(),
+          category: cdjCategory.value,
+          amount: round2(cdjAmount.value)
+        };
+        if (cdjEditId.value) {
+          const idx = state.cdj.findIndex(r => r.id === cdjEditId.value);
+          if (idx !== -1) state.cdj[idx] = entry;
+          saveState('CDJ entry updated');
+        } else {
+          state.cdj.push(entry);
+          saveState('CDJ entry saved');
+        }
+        resetCdjForm();
+        renderAll();
+      });
+
+      document.getElementById('btnCancelCdjEdit').addEventListener('click', resetCdjForm);
+
+      // CDJ Edit / Delete
+      document.getElementById('cdjTableBody').addEventListener('click', e => {
+        const editBtn = e.target.closest('[data-cdj-edit]');
+        if (editBtn) {
+          const row = state.cdj.find(r => r.id === editBtn.dataset.cdjEdit);
+          if (!row) return;
+          cdjEditId.value = row.id;
+          cdjDate.value = row.date;
+          cdjRefNo.value = row.refNo;
+          cdjPayee.value = row.payee;
+          cdjParticulars.value = row.particulars;
+          cdjCategory.value = row.category;
+          cdjAmount.value = Number(row.amount).toFixed(2);
+          document.getElementById('cdjFormTitle').innerHTML = `<i class="bi bi-pencil-square me-1 text-danger"></i>Editing CDJ Ref #${escapeHtml(row.refNo)}`;
+          document.getElementById('btnSubmitCdj').innerHTML = '<i class="bi bi-check-lg me-1"></i>Update CDJ';
+          document.getElementById('btnCancelCdjEdit').classList.remove('d-none');
+          cdjForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        const delBtn = e.target.closest('[data-cdj-del]');
+        if (delBtn) {
+          state.cdj = state.cdj.filter(r => r.id !== delBtn.dataset.cdjDel);
+          saveState('CDJ entry deleted');
+          renderAll();
+        }
+      });
+
+      // Search & Filters
+      [crjSearch, crjPlatformFilter, cdjSearch, cdjCategoryFilter].forEach(el => {
+        el.addEventListener('input', renderAll);
+        el.addEventListener('change', renderAll);
+      });
+
+      // Load Sample Data
+      document.getElementById('btnLoadSample').addEventListener('click', () => {
+        if ((state.crj.length || state.cdj.length) && !confirm('Replace current CRJ and CDJ entries with the BIR guide sample data?')) {
+          return;
+        }
+        state = JSON.parse(JSON.stringify(SAMPLE_DATA));
+        bizNameEl.value = state.profile.bizName;
+        bizTinEl.value = state.profile.tin;
+        saveState('Sample data loaded');
+        resetCrjForm();
+        resetCdjForm();
+        renderAll();
+      });
+
+      // Clear All
+      document.getElementById('btnClearAll').addEventListener('click', () => {
+        if (!confirm('Clear all saved CRJ and CDJ entries from this browser? Make sure you have a JSON/CSV backup first.')) return;
+        state.crj = [];
+        state.cdj = [];
+        saveState('All entries cleared');
+        resetCrjForm();
+        resetCdjForm();
+        renderAll();
+      });
+
+      // Export JSON Backup
+      document.getElementById('btnExportJson').addEventListener('click', () => {
+        const filename = `digital-books-backup-${todayISO()}.json`;
+        downloadFile(filename, JSON.stringify(state, null, 2), 'application/json');
+      });
+
+      // Import JSON Backup
+      document.getElementById('inputImportJson').addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          try {
+            const parsed = JSON.parse(ev.target.result);
+            if (!parsed || !Array.isArray(parsed.crj) || !Array.isArray(parsed.cdj)) {
+              alert('Invalid backup file format. Expected CRJ and CDJ arrays.');
+              return;
+            }
+            state = {
+              profile: parsed.profile || { bizName: '', tin: '' },
+              crj: parsed.crj,
+              cdj: parsed.cdj
+            };
+            bizNameEl.value = state.profile.bizName || '';
+            bizTinEl.value = state.profile.tin || '';
+            saveState('Backup imported');
+            resetCrjForm();
+            resetCdjForm();
+            renderAll();
+          } catch (err) {
+            alert('Failed to read JSON file: ' + err.message);
+          }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+      });
+
+      // Export CRJ CSV
+      document.getElementById('btnExportCrjCsv').addEventListener('click', () => {
+        const rows = filterByPeriod(state.crj);
+        const header = ['Date', 'SI No.', 'Platform', 'Customer', 'Gross Sales (Credit)', 'Platform Fees (Debit)', 'CWT 0.5% (Debit)', 'Cash in Bank (Debit)'];
+        const lines = [header.join(',')].concat(rows.map(r => [
+          r.date, r.siNo, r.platform, r.customer,
+          Number(r.grossSales).toFixed(2),
+          Number(r.platformFees).toFixed(2),
+          Number(r.cwt).toFixed(2),
+          Number(r.cashInBank).toFixed(2)
+        ].map(csvEscape).join(',')));
+        downloadFile(`CRJ-${periodFilterEl.value}-${todayISO()}.csv`, lines.join('\n'), 'text/csv;charset=utf-8;');
+      });
+
+      // Export CDJ CSV
+      document.getElementById('btnExportCdjCsv').addEventListener('click', () => {
+        const rows = filterByPeriod(state.cdj);
+        const header = ['Date', 'Ref / SI No.', 'Payee / Supplier', 'Particulars', 'Purchases / COGS', 'Platform & Ad Fees', 'Packaging & Supplies', 'Other OpEx', 'Cash Paid (Credit)'];
+        const lines = [header.join(',')].concat(rows.map(r => {
+          const amt = Number(r.amount || 0).toFixed(2);
+          return [
+            r.date, r.refNo, r.payee, r.particulars,
+            r.category === 'purchases' ? amt : '0.00',
+            r.category === 'platformFees' ? amt : '0.00',
+            r.category === 'packaging' ? amt : '0.00',
+            r.category === 'otherOpex' ? amt : '0.00',
+            amt
+          ].map(csvEscape).join(',');
+        }));
+        downloadFile(`CDJ-${periodFilterEl.value}-${todayISO()}.csv`, lines.join('\n'), 'text/csv;charset=utf-8;');
+      });
+
+      // Initialize defaults
+      resetCrjForm();
+      resetCdjForm();
+      renderAll();
+    })();
+  </script>
+</body>
+</html>

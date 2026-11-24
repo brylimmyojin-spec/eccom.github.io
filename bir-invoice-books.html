@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>BIR Sales Invoice &amp; Books of Accounts Guide | PH Marketplace Calculator</title>
+  <meta name="description" content="Practical step-by-step BIR Sales Invoice and Books of Accounts (CRJ, CDJ, GJ, GL) guide for Philippine e-commerce sellers on Shopee, Lazada, and TikTok Shop.">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="./css/styles.css" rel="stylesheet">
+
+  <style>
+    /* Allow text selection on reference tables and sample invoices */
+    .selectable-guide {
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    /* Golden Rule Banner */
+    .golden-rule-card {
+      border-left: 5px solid var(--bs-primary) !important;
+      background: linear-gradient(135deg, rgba(13, 110, 253, 0.08), rgba(13, 110, 253, 0.02));
+    }
+
+    /* Realistic BIR Sales Invoice Mockup */
+    .invoice-mockup {
+      border: 2px solid var(--bs-border-color-translucent);
+      border-radius: 0.75rem;
+      background-color: var(--bs-body-bg);
+      overflow: hidden;
+    }
+    .invoice-badge-box {
+      background-color: #10203a;
+      color: #ffffff;
+      padding: 0.45rem 1rem;
+      border-radius: 0.35rem;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: inline-block;
+    }
+    .invoice-number {
+      color: #dc3545;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .invoice-table thead th {
+      background-color: #10203a;
+      color: #ffffff;
+      border-color: #10203a;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Columnar Book of Accounts (CRJ / CDJ) Styling */
+    .ledger-book {
+      border: 1px solid var(--bs-border-color);
+      border-radius: 0.65rem;
+      overflow: hidden;
+    }
+    .ledger-header-bar {
+      background-color: #10203a;
+      color: #ffffff;
+      padding: 0.65rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .ledger-table {
+      margin-bottom: 0;
+      font-size: 0.85rem;
+    }
+    .ledger-table thead th {
+      background-color: #1b2e4b;
+      color: #ffffff;
+      border-color: #2b4266;
+      white-space: nowrap;
+      vertical-align: middle;
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+    .ledger-table tbody td {
+      vertical-align: middle;
+    }
+    .ledger-table tfoot td {
+      font-weight: 700;
+      background-color: var(--bs-tertiary-bg);
+      border-top: 2px solid var(--bs-border-color);
+    }
+    .num-col {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* Jump navigation pills */
+    .guide-jump-nav {
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .guide-jump-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media print {
+      header, footer, .no-print {
+        display: none !important;
+      }
+      .card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #dee2e6 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg app-navbar sticky-top shadow-sm py-2">
+      <div class="container-fluid px-3 px-md-4 px-xl-5">
+        <a class="navbar-brand d-flex align-items-center gap-2 py-1 text-decoration-none flex-shrink-0" href="index.html">
+          <span class="brand-flag">🇵🇭</span>
+          <div class="d-flex flex-column lh-1">
+            <span class="brand-title fw-bold">PH Marketplace</span>
+            <span class="brand-subtitle text-body-secondary">Fee &amp; Margin Calculator</span>
+          </div>
+        </a>
+        <button class="navbar-toggler border-0 shadow-none px-2 py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3 align-items-lg-center">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-calculator"></i>Pricing
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="index.html"><i class="bi bi-calculator-fill"></i>Pricing Simulator (Single)</a></li>
+                <li><a class="dropdown-item" href="bulk-pricing.html"><i class="bi bi-table"></i>Bulk Multi-Line Pricing</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-tags"></i>Shopee Promos
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="discount-calculator.html"><i class="bi bi-tags-fill"></i>Discount, Bundle &amp; Add-on</a></li>
+                <li><a class="dropdown-item" href="voucher-calculator.html"><i class="bi bi-ticket-perforated-fill"></i>Seller Vouchers &amp; Coins</a></li>
+                <li><a class="dropdown-item" href="campaign-calculator.html"><i class="bi bi-megaphone-fill"></i>Campaigns &amp; Flash Deals</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comparison.html"><i class="bi bi-bar-chart-line"></i>Comparison</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="roas-calculator.html"><i class="bi bi-graph-up-arrow"></i>ROAS &amp; Ads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="expenses.html"><i class="bi bi-cash-coin"></i>Expenses</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-journal-bookmark"></i>Guides &amp; Portals
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="opt-in-fees.html"><i class="bi bi-shield-check"></i>Opt-In Fees &amp; RTS</a></li>
+                <li><a class="dropdown-item" href="fee-reference.html"><i class="bi bi-journal-bookmark-fill"></i>Fee Reference</a></li>
+                <li><a class="dropdown-item" href="tax-guide.html"><i class="bi bi-bank"></i>Tax &amp; BIR Guide</a></li>
+                <li><a class="dropdown-item active" href="bir-invoice-books.html"><i class="bi bi-journal-text"></i>BIR Invoice &amp; Books</a></li>
+                <li><a class="dropdown-item" href="digital-books.html"><i class="bi bi-journal-check"></i>Digital CRJ &amp; CDJ</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="seller-centers.html"><i class="bi bi-box-arrow-up-right"></i>Seller Portals</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2 pt-2 pt-lg-0 border-top border-lg-0 flex-shrink-0">
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="seller-centers.html" title="Seller Portals (Shopee, TikTok, Lazada)" aria-label="Seller Portals" style="width: 34px; height: 34px;">
+              <i class="bi bi-shop-window"></i>
+            </a>
+            <button class="btn btn-outline-secondary btn-sm rounded-pill d-flex align-items-center gap-1.5 px-3 py-1.5" id="themeToggle" type="button" title="Toggle dark/light mode">
+              <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+              <span id="themeText">Theme</span>
+            </button>
+            <a class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="https://github.com/brylimmyojin-spec/eccom.github.io" target="_blank" rel="noopener" title="View Source on GitHub" style="width: 34px; height: 34px;">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container-xl py-4 flex-grow-1 selectable-guide">
+
+    <!-- Page Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-3 gap-3">
+      <div>
+        <div class="d-inline-flex align-items-center gap-2 mb-1">
+          <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill px-3 py-1">
+            <i class="bi bi-bank2 me-1"></i>BIR E-Commerce Reference
+          </span>
+          <span class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill px-2 py-1">
+            Shopee · Lazada · TikTok Shop
+          </span>
+        </div>
+        <h1 class="h2 mb-1 fw-bold">BIR Sales Invoice &amp; Books of Accounts Guide</h1>
+        <p class="text-body-secondary mb-0">
+          Practical step-by-step reference on what to write in your Sales Invoice, Cash Receipts Journal (CRJ), and Cash Disbursements Journal (CDJ).
+        </p>
+      </div>
+      <div class="d-flex flex-wrap gap-2 no-print">
+        <a href="digital-books.html" class="btn btn-primary btn-sm">
+          <i class="bi bi-journal-check me-1"></i>Open Digital CRJ &amp; CDJ
+        </a>
+        <a href="tax-guide.html" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-bank me-1"></i>Tax &amp; BIR Guide
+        </a>
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="window.print()">
+          <i class="bi bi-printer me-1"></i>Print Guide
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Jump Pills -->
+    <div class="guide-jump-nav d-flex gap-2 pb-2 mb-3 no-print">
+      <a href="#part-invoice" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="bi bi-receipt me-1"></i>1. Sales Invoice</a>
+      <a href="#sample-invoice" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="bi bi-file-earmark-check me-1"></i>Sample Invoice</a>
+      <a href="#invoice-matrix" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="bi bi-list-check me-1"></i>Include vs. Exclude</a>
+      <a href="#part-books" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="bi bi-book me-1"></i>2. Books of Accounts</a>
+      <a href="#sample-crj" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="bi bi-journal-arrow-down me-1"></i>Sample CRJ</a>
+      <a href="#sample-cdj" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="bi bi-journal-arrow-up me-1"></i>Sample CDJ</a>
+      <a href="#interactive-preview" class="btn btn-sm btn-outline-primary rounded-pill"><i class="bi bi-sliders me-1"></i>Order-to-Books Simulator</a>
+      <a href="#part-compliance" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="bi bi-shield-check me-1"></i>3. Tax Impact &amp; Checklist</a>
+    </div>
+
+    <!-- The #1 Golden Rule -->
+    <div class="card shadow-sm border-0 golden-rule-card mb-4">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-start gap-3">
+          <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 40px; height: 40px;">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div>
+            <h2 class="h5 fw-bold text-primary mb-1">The #1 Golden Rule for E-Commerce BIR Recording</h2>
+            <p class="mb-0 text-body">
+              Your <strong>Gross Sales</strong> on your Sales Invoice and Books of Accounts is the <strong>Buyer's Listed Price minus Seller-Funded Discounts only</strong>. Never deduct platform commissions, transaction fees, ads, or withholding tax from your Sales Invoice amount. Platform fees are recorded separately as <strong>Business Expenses</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- PART 1: WHAT TO WRITE IN YOUR BIR SALES INVOICE           -->
+    <!-- ========================================================= -->
+    <section id="part-invoice" class="mb-4">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-body-tertiary fw-bold py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <span><i class="bi bi-receipt-cutoff me-2 text-primary"></i>Part 1: What to Write in Your BIR Sales Invoice</span>
+          <span class="badge bg-primary-subtle text-primary-emphasis">EOPT Act (RA 11976 / RR 7-2024)</span>
+        </div>
+        <div class="card-body p-4">
+          <p class="text-body-secondary mb-4">
+            Under the <strong>Ease of Paying Taxes (EOPT) Act (RA 11976 / RR 7-2024)</strong>, the <strong>Sales Invoice</strong> is the primary proof of sale for goods. Official Receipts are now only supplementary documents.
+          </p>
+
+          <!-- 1. When Must You Issue a Sales Invoice? -->
+          <h3 class="h6 fw-bold text-primary mb-3">1. When Must You Issue a Sales Invoice?</h3>
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <div class="p-3 rounded-3 border bg-body-tertiary h-100">
+                <div class="fw-bold mb-1 text-warning-emphasis">
+                  <i class="bi bi-shop me-1"></i>Non-VAT Registered Sellers
+                </div>
+                <p class="small text-body-secondary mb-0">
+                  Issue a Sales Invoice for every single order worth <strong>₱500.00 or more</strong>, or for any amount if the buyer requests one. For daily orders below ₱500 where buyers did not request an invoice, consolidate them at the end of the day or payout cutoff into one invoice labeled <strong>"Various Customers"</strong>.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 rounded-3 border bg-body-tertiary h-100">
+                <div class="fw-bold mb-1 text-success-emphasis">
+                  <i class="bi bi-building-check me-1"></i>VAT Registered Sellers
+                </div>
+                <p class="small text-body-secondary mb-0">
+                  Issue a Sales Invoice for <strong>every sale</strong>, regardless of the amount. Make sure VATable Sales and 12% Output VAT are properly broken down on the invoice.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 rounded-3 border bg-body-tertiary h-100">
+                <div class="fw-bold mb-1 text-primary-emphasis">
+                  <i class="bi bi-cpu me-1"></i>2026 E-Invoicing Rule (RMC 98-2026)
+                </div>
+                <p class="small text-body-secondary mb-0">
+                  <strong>Micro taxpayers</strong> (annual gross sales below ₱3M) are exempt from mandatory structured JSON e-invoicing and may continue issuing BIR-registered manual Sales Invoices. <strong>Small, Medium, and Large</strong> e-commerce taxpayers (≥ ₱3M) must transition to BIR-accredited e-invoicing by <strong>December 31, 2026</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Sample Scenario & How to Fill Out the Sales Invoice -->
+          <h3 id="sample-invoice" class="h6 fw-bold text-primary mb-2">2. Sample Scenario &amp; How to Fill Out the Sales Invoice</h3>
+          <div class="alert alert-secondary border-0 small mb-3">
+            <strong>Scenario:</strong> An item is listed at <strong>₱1,000.00</strong>. You gave a <strong>₱50.00 Seller Shop Voucher</strong>. The platform gave a <strong>₱100.00 Platform Voucher</strong>, charged <strong>₱180.00 in platform fees</strong>, and withheld <strong>₱4.75 (0.5% EWT)</strong>. Net bank payout is <strong>₱765.25</strong>.
+          </div>
+
+          <!-- Visual BIR Sales Invoice Mockup -->
+          <div class="invoice-mockup p-3 p-md-4 mb-4 shadow-sm">
+            <div class="row align-items-start justify-content-between g-3 pb-3 mb-3 border-bottom">
+              <div class="col-md-7">
+                <div class="fw-bold fs-6 text-uppercase">Your Registered Business / Trade Name</div>
+                <div class="small text-body-secondary">Registered Business Address, City/Province</div>
+                <div class="small text-body-secondary">Non-VAT Reg. TIN: <code>000-000-000-00000</code></div>
+              </div>
+              <div class="col-md-5 text-md-end">
+                <div class="invoice-badge-box mb-1">SALES INVOICE</div>
+                <div class="invoice-number">No. 000101</div>
+                <div class="small fw-semibold">Date: Nov 24, 2026</div>
+              </div>
+            </div>
+
+            <div class="row g-2 small mb-3">
+              <div class="col-12">
+                <span class="fw-bold">Sold To:</span>
+                <span>Juan Dela Cruz</span>
+                <span class="text-body-secondary fst-italic">(or "Various Customers" for consolidated small B2C orders)</span>
+              </div>
+              <div class="col-md-7">
+                <span class="fw-bold">TIN:</span>
+                <span class="text-body-secondary fst-italic">(Optional for B2C; required only if B2B sale ≥ ₱1,000 to VAT buyer)</span>
+              </div>
+              <div class="col-md-5">
+                <span class="fw-bold">Address:</span>
+                <span class="text-body-secondary fst-italic">(Optional for B2C)</span>
+              </div>
+            </div>
+
+            <div class="table-responsive mb-3">
+              <table class="table table-bordered invoice-table align-middle small mb-0">
+                <thead>
+                  <tr>
+                    <th style="width: 70px;" class="text-center">Qty</th>
+                    <th style="width: 80px;" class="text-center">Unit</th>
+                    <th>Item Description / Platform Order Reference</th>
+                    <th style="width: 130px;" class="text-end">Unit Price</th>
+                    <th style="width: 130px;" class="text-end">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">pc</td>
+                    <td>Wireless Desk Lamp <span class="text-body-secondary">(Order ID: #261124ABC123)</span></td>
+                    <td class="num-col">1,000.00</td>
+                    <td class="num-col">1,000.00</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="text-end bg-body-tertiary text-body">Less: Seller-Funded Voucher / Discount</td>
+                    <td class="num-col bg-body-tertiary text-danger fw-semibold">(50.00)</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="text-end fw-bold bg-primary-subtle text-primary-emphasis">TOTAL SALES (GROSS AMOUNT DUE)</td>
+                    <td class="num-col fw-bold fs-6 bg-primary-subtle text-primary-emphasis">₱ 950.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="small text-body-secondary bg-body-tertiary p-3 rounded border">
+              <strong>Note on Platform Vouchers &amp; Fees:</strong> The <strong>₱100.00 Platform Voucher</strong> is funded by the app and paid to you, so it stays inside the <strong>₱950.00 Gross Sales</strong>. <strong>Do not subtract</strong> the ₱180.00 platform fee here. Under <strong>RR 6-2026 / RMC 112-2026</strong>, if withholding tax applies on a B2B/platform remittance, stamp/indicate <em>"Less: Withholding Tax ₱4.75"</em> separately without altering Gross Sales.
+            </div>
+          </div>
+
+          <!-- 3. What to Include vs Exclude Table -->
+          <h3 id="invoice-matrix" class="h6 fw-bold text-primary mb-3">3. Quick Reference: What to Include vs. Exclude on Your Sales Invoice</h3>
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle small mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Transaction Item</th>
+                  <th scope="col" class="text-center" style="width: 170px;">Include in Sales Invoice?</th>
+                  <th scope="col">Reason / BIR Treatment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-semibold">Listed Selling Price (₱1,000)</td>
+                  <td class="text-center"><span class="badge bg-success-subtle text-success-emphasis px-2 py-1">YES (+)</span></td>
+                  <td>Base gross selling price of the merchandise sold.</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Seller Shop Voucher (₱50)</td>
+                  <td class="text-center"><span class="badge bg-success-subtle text-success-emphasis px-2 py-1">YES (&minus;)</span></td>
+                  <td>Direct price reduction granted by the seller (netted to ₱950).</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Platform-Funded Voucher (₱100)</td>
+                  <td class="text-center"><span class="badge bg-danger-subtle text-danger-emphasis px-2 py-1">DO NOT DEDUCT</span></td>
+                  <td>Subsidized by the marketplace; seller still earns full ₱950.</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Platform Fees &amp; Ads (₱180)</td>
+                  <td class="text-center"><span class="badge bg-danger-subtle text-danger-emphasis px-2 py-1">DO NOT DEDUCT</span></td>
+                  <td>Separate operating expense; record in Cash Disbursements Journal.</td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Buyer-Paid Shipping Fee</td>
+                  <td class="text-center"><span class="badge bg-secondary-subtle text-secondary-emphasis px-2 py-1">EXCLUDE</span></td>
+                  <td>Pass-through courier fee collected and remitted by the platform.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- PART 2: WHAT TO WRITE IN YOUR BIR BOOKS OF ACCOUNTS       -->
+    <!-- ========================================================= -->
+    <section id="part-books" class="mb-4">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-body-tertiary fw-bold py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <span><i class="bi bi-journal-bookmark-fill me-2 text-success"></i>Part 2: What to Write in Your BIR Books of Accounts</span>
+          <span class="badge bg-success-subtle text-success-emphasis">Sample CRJ &amp; CDJ Included</span>
+        </div>
+        <div class="card-body p-4">
+          <p class="text-body-secondary mb-3">
+            Keep your registered books updated at your registered business/home address. The required set of books depends on your chosen income tax option on your <strong>BIR Certificate of Registration (COR / Form 2303)</strong>:
+          </p>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 border bg-body-tertiary h-100">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="fw-bold text-primary">8% Flat Income Tax Rate</span>
+                  <span class="badge bg-primary-subtle text-primary-emphasis">2 Books</span>
+                </div>
+                <p class="small text-body-secondary mb-0">
+                  Usually requires only <strong>2 Books</strong> — <strong>Cash Receipts Journal (CRJ)</strong> and <strong>Cash Disbursements Journal (CDJ)</strong>, or a simplified columnar book per your RDO registration.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 border bg-body-tertiary h-100">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="fw-bold text-success">Graduated Income Tax (OSD or Itemized)</span>
+                  <span class="badge bg-success-subtle text-success-emphasis">4 Books</span>
+                </div>
+                <p class="small text-body-secondary mb-0">
+                  Requires <strong>4 Books</strong> — <strong>Cash Receipts Journal (CRJ)</strong>, <strong>Cash Disbursements Journal (CDJ)</strong>, <strong>General Journal (GJ)</strong>, and <strong>General Ledger (GL)</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1. Sample Cash Receipts Journal (CRJ) -->
+          <div id="sample-crj" class="mb-4">
+            <h3 class="h6 fw-bold text-primary mb-2">
+              <i class="bi bi-journal-arrow-down me-1"></i>1. Sample Cash Receipts Journal (CRJ) — Recording Sales &amp; Bank Payouts
+            </h3>
+            <p class="small text-body-secondary mb-3">
+              Record every Sales Invoice issued (or daily/weekly batch summary matching your issued Sales Invoices). Using our <strong>₱950.00</strong> order example, here is how you record the transaction and reconcile why only <strong>₱765.25</strong> entered your bank:
+            </p>
+
+            <div class="ledger-book mb-2">
+              <div class="ledger-header-bar">
+                <div class="fw-bold small text-uppercase">
+                  <i class="bi bi-book-half me-1"></i>Cash Receipts Journal (CRJ) — Sample Columnar Book
+                </div>
+                <span class="badge bg-light text-dark">Period: Nov 2026</span>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered ledger-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>SI No.</th>
+                      <th>Customer / Platform</th>
+                      <th class="text-end">Gross Sales (Credit)</th>
+                      <th class="text-end">Platform Fees (Debit)</th>
+                      <th class="text-end">CWT 0.5% (Debit)</th>
+                      <th class="text-end">Cash in Bank (Debit)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-nowrap">11/24/26</td>
+                      <td class="font-monospace">000101</td>
+                      <td>Juan Dela Cruz <span class="badge badge-shopee ms-1">Shopee</span></td>
+                      <td class="num-col fw-semibold">950.00</td>
+                      <td class="num-col">180.00</td>
+                      <td class="num-col">4.75</td>
+                      <td class="num-col text-success fw-semibold">765.25</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap">11/24/26</td>
+                      <td class="font-monospace">000102</td>
+                      <td>Various Customers <span class="badge badge-tiktok ms-1">TikTok</span></td>
+                      <td class="num-col fw-semibold">2,400.00</td>
+                      <td class="num-col">432.00</td>
+                      <td class="num-col">12.00</td>
+                      <td class="num-col text-success fw-semibold">1,956.00</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3" class="text-uppercase small">Total for the Day / Period</td>
+                      <td class="num-col text-primary">3,350.00</td>
+                      <td class="num-col">612.00</td>
+                      <td class="num-col">16.75</td>
+                      <td class="num-col text-success">2,721.25</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <div class="alert alert-info border-0 small py-2 px-3 mb-0">
+              <i class="bi bi-lightbulb-fill me-1"></i>
+              <strong>Reconciliation Tip:</strong> Notice how <strong>Debits</strong> (₱612.00 + ₱16.75 + ₱2,721.25 = <strong>₱3,350.00</strong>) always equal <strong>Credits</strong> (Gross Sales <strong>₱3,350.00</strong>). This proves to the BIR examiner why your bank deposits are smaller than your Gross Sales.
+            </div>
+          </div>
+
+          <!-- 2. Sample Cash Disbursements Journal (CDJ) -->
+          <div id="sample-cdj" class="mb-4">
+            <h3 class="h6 fw-bold text-primary mb-2">
+              <i class="bi bi-journal-arrow-up me-1"></i>2. Sample Cash Disbursements Journal (CDJ) — Recording Expenses &amp; Fees
+            </h3>
+            <p class="small text-body-secondary mb-3">
+              Record all business cash outflows and platform charges supported by official Sales Invoices / Billing Statements from suppliers, couriers, and the e-commerce platform.
+            </p>
+
+            <div class="ledger-book mb-2">
+              <div class="ledger-header-bar">
+                <div class="fw-bold small text-uppercase">
+                  <i class="bi bi-book-half me-1"></i>Cash Disbursements Journal (CDJ) — Sample Columnar Book
+                </div>
+                <span class="badge bg-light text-dark">Period: Nov 2026</span>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered ledger-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Ref / SI No.</th>
+                      <th>Payee / Supplier</th>
+                      <th>Particulars</th>
+                      <th class="text-end">Purchases / COGS (Dr)</th>
+                      <th class="text-end">Platform &amp; Ad Fees (Dr)</th>
+                      <th class="text-end">Packaging &amp; Supplies (Dr)</th>
+                      <th class="text-end">Cash Paid (Credit)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-nowrap">11/24/26</td>
+                      <td class="font-monospace">PL-8891</td>
+                      <td>Shopee Philippines</td>
+                      <td>Commission &amp; Txn Fees</td>
+                      <td class="num-col text-muted">&mdash;</td>
+                      <td class="num-col">180.00</td>
+                      <td class="num-col text-muted">&mdash;</td>
+                      <td class="num-col fw-semibold">180.00</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap">11/25/26</td>
+                      <td class="font-monospace">SI-4410</td>
+                      <td>ABC Packaging Corp.</td>
+                      <td>Bubble wrap &amp; pouches</td>
+                      <td class="num-col text-muted">&mdash;</td>
+                      <td class="num-col text-muted">&mdash;</td>
+                      <td class="num-col">650.00</td>
+                      <td class="num-col fw-semibold">650.00</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap">11/26/26</td>
+                      <td class="font-monospace">SI-9921</td>
+                      <td>XYZ Wholesale Trading</td>
+                      <td>Restock desk lamps</td>
+                      <td class="num-col">5,000.00</td>
+                      <td class="num-col text-muted">&mdash;</td>
+                      <td class="num-col text-muted">&mdash;</td>
+                      <td class="num-col fw-semibold">5,000.00</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="4" class="text-uppercase small">Total for the Period</td>
+                      <td class="num-col">5,000.00</td>
+                      <td class="num-col">180.00</td>
+                      <td class="num-col">650.00</td>
+                      <td class="num-col text-danger">5,830.00</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <div class="alert alert-warning border-0 small py-2 px-3 mb-0">
+              <i class="bi bi-exclamation-triangle-fill me-1"></i>
+              <strong>Avoid Double-Counting Fees:</strong> If you already deducted Platform Fees inside your <strong>CRJ</strong> (Method A — Net Payout Reconciliation), do not add the same fee again to your total deductible expenses from the <strong>CDJ</strong>. Alternatively (Method B), record full Gross Sales as Cash/Wallet in CRJ and log the monthly Platform Billing Statement (e.g., <code>PL-8891</code>) once in the CDJ. Stay consistent across the year.
+            </div>
+          </div>
+
+          <!-- 3. General Journal (GJ) & General Ledger (GL) -->
+          <div>
+            <h3 class="h6 fw-bold text-primary mb-2">
+              <i class="bi bi-journals me-1"></i>3. General Journal (GJ) &amp; General Ledger (GL) <span class="fw-normal text-body-secondary">(For 4-Book Taxpayers)</span>
+            </h3>
+            <div class="table-responsive">
+              <table class="table table-bordered align-middle small mb-0">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col" style="width: 240px;">Book Name</th>
+                    <th scope="col">What to Write Inside</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="fw-bold">General Journal (GJ)</td>
+                    <td>Non-cash transactions, returned/refunded orders (Credit Memos), quarterly application of <strong>BIR Form 2307</strong> (0.5% withholding tax credits), depreciation, and year-end closing entries.</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">General Ledger (GL)</td>
+                    <td>Monthly summary totals transferred from your CRJ, CDJ, and GJ grouped by account title (e.g., <em>Cash in Bank</em>, <em>Sales</em>, <em>Platform Commission Expense</em>, <em>Purchases</em>, <em>Creditable Withholding Tax</em>).</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- INTERACTIVE ORDER-TO-INVOICE & CRJ SIMULATOR              -->
+    <!-- ========================================================= -->
+    <section id="interactive-preview" class="mb-4 no-print">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary-subtle text-primary-emphasis fw-bold py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <span><i class="bi bi-sliders me-2"></i>Interactive Order-to-Invoice &amp; CRJ Previewer</span>
+          <span class="badge bg-primary text-white">Test Your Own Order</span>
+        </div>
+        <div class="card-body p-4">
+          <p class="small text-body-secondary mb-3">
+            Enter your actual Shopee, Lazada, or TikTok Shop order breakdown below to instantly see the exact <strong>Sales Invoice</strong> amount and <strong>Cash Receipts Journal (CRJ)</strong> entry.
+          </p>
+          <div class="row g-3 mb-4">
+            <div class="col-6 col-md-4 col-lg-2">
+              <label for="simPrice" class="form-label small fw-semibold mb-1">Listed Price (₱)</label>
+              <input type="number" class="form-control form-control-sm" id="simPrice" value="1000" min="0" step="0.01">
+            </div>
+            <div class="col-6 col-md-4 col-lg-2">
+              <label for="simSellerVoucher" class="form-label small fw-semibold mb-1">Seller Voucher (₱)</label>
+              <input type="number" class="form-control form-control-sm" id="simSellerVoucher" value="50" min="0" step="0.01">
+            </div>
+            <div class="col-6 col-md-4 col-lg-2">
+              <label for="simPlatformVoucher" class="form-label small fw-semibold mb-1">Platform Voucher (₱)</label>
+              <input type="number" class="form-control form-control-sm" id="simPlatformVoucher" value="100" min="0" step="0.01">
+            </div>
+            <div class="col-6 col-md-4 col-lg-2">
+              <label for="simFees" class="form-label small fw-semibold mb-1">Platform Fees (₱)</label>
+              <input type="number" class="form-control form-control-sm" id="simFees" value="180" min="0" step="0.01">
+            </div>
+            <div class="col-6 col-md-4 col-lg-2">
+              <label for="simShipping" class="form-label small fw-semibold mb-1">Buyer Shipping (₱)</label>
+              <input type="number" class="form-control form-control-sm" id="simShipping" value="45" min="0" step="0.01">
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 d-flex align-items-end">
+              <div class="form-check form-switch mb-1">
+                <input class="form-check-input" type="checkbox" id="simApplyEwt" checked>
+                <label class="form-check-label small fw-semibold" for="simApplyEwt">0.5% EWT</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="p-3 rounded-3 border bg-body-tertiary h-100">
+                <div class="small text-body-secondary text-uppercase fw-semibold mb-1">Write on Sales Invoice</div>
+                <div class="fs-4 fw-bold text-primary font-monospace" id="outInvoiceGross">₱950.00</div>
+                <div class="small text-body-secondary mt-1" id="outInvoiceRule">
+                  Listed ₱1,000.00 &minus; Seller Voucher ₱50.00. (Platform Voucher ₱100.00 &amp; Shipping ₱45.00 excluded from deductions.)
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="p-3 rounded-3 border bg-body-tertiary h-100">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="small text-body-secondary text-uppercase fw-semibold">Write in Cash Receipts Journal (CRJ)</span>
+                  <span class="badge bg-success-subtle text-success-emphasis" id="outBalanceBadge">
+                    <i class="bi bi-check-circle-fill me-1"></i>Debits = Credits
+                  </span>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered mb-0 small bg-body">
+                    <thead>
+                      <tr>
+                        <th class="text-end bg-body-secondary text-body">Gross Sales (Cr)</th>
+                        <th class="text-end bg-body-secondary text-body">Platform Fees (Dr)</th>
+                        <th class="text-end bg-body-secondary text-body">CWT 0.5% (Dr)</th>
+                        <th class="text-end bg-body-secondary text-body">Cash in Bank (Dr)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="num-col fw-bold text-primary" id="outCrjSales">950.00</td>
+                        <td class="num-col" id="outCrjFees">180.00</td>
+                        <td class="num-col" id="outCrjCwt">4.75</td>
+                        <td class="num-col fw-bold text-success" id="outCrjCash">765.25</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- PART 3: TAX IMPACT & COMPLIANCE CHECKLIST                 -->
+    <!-- ========================================================= -->
+    <section id="part-compliance" class="mb-4">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-body-tertiary fw-bold py-3">
+          <i class="bi bi-shield-check me-2 text-warning"></i>Part 3: Tax Impact &amp; Compliance Checklist
+        </div>
+        <div class="card-body p-4">
+
+          <!-- How Your Tax Option Treats Platform Fees -->
+          <div class="p-3 p-md-4 rounded-3 border border-warning-subtle bg-warning-subtle bg-opacity-25 mb-4">
+            <h3 class="h6 fw-bold text-warning-emphasis mb-3">
+              <i class="bi bi-calculator me-1"></i>How Your Tax Option Treats Platform Fees
+            </h3>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="bg-body p-3 rounded border h-100">
+                  <div class="fw-bold small mb-1">8% Flat Income Tax</div>
+                  <p class="small text-body-secondary mb-0">
+                    Tax is computed as <strong>8% of Gross Sales</strong> (in excess of ₱250,000). Platform fees <strong>cannot be deducted</strong> from your tax base.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="bg-body p-3 rounded border h-100">
+                  <div class="fw-bold small mb-1">Graduated Tax + OSD (40%)</div>
+                  <p class="small text-body-secondary mb-0">
+                    Automatic <strong>40% deduction</strong> from Gross Sales; actual platform fees <strong>cannot be deducted</strong> separately.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="bg-body p-3 rounded border h-100">
+                  <div class="fw-bold small mb-1 text-success">Graduated Tax + Itemized Deduction</div>
+                  <p class="small text-body-secondary mb-0">
+                    Platform commissions, transaction fees, and ad spend are <strong>fully deductible</strong> as operating expenses, provided you download and keep the monthly BIR Sales Invoices/Billing Statements issued by the platform.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compliance Checklist -->
+          <h3 class="h6 fw-bold mb-3">Monthly, Quarterly &amp; Record-Keeping Checklist</h3>
+          <div class="list-group list-group-flush border rounded-3">
+            <div class="list-group-item p-3 d-flex gap-3 align-items-start">
+              <i class="bi bi-file-earmark-arrow-down-fill text-primary fs-5 mt-1"></i>
+              <div>
+                <div class="fw-bold small">Download Monthly Platform Tax Invoices</div>
+                <p class="small text-body-secondary mb-0">
+                  Always download the BIR-compliant Sales Invoice / Billing Statement generated inside Shopee, Lazada, or TikTok Seller Center for the fees deducted from your payouts.
+                </p>
+              </div>
+            </div>
+            <div class="list-group-item p-3 d-flex gap-3 align-items-start">
+              <i class="bi bi-file-earmark-check-fill text-success fs-5 mt-1"></i>
+              <div>
+                <div class="fw-bold small">Collect Quarterly BIR Form 2307</div>
+                <p class="small text-body-secondary mb-0">
+                  Download your quarterly Certificate of Creditable Tax Withheld at Source (0.5% EWT under RR 16-2023) from Seller Center and attach it to your quarterly/annual Income Tax Return (1701Q / 1701A / 1701) to reduce your tax payable peso-for-peso.
+                </p>
+              </div>
+            </div>
+            <div class="list-group-item p-3 d-flex gap-3 align-items-start">
+              <i class="bi bi-archive-fill text-warning fs-5 mt-1"></i>
+              <div>
+                <div class="fw-bold small">5-Year Record Retention</div>
+                <p class="small text-body-secondary mb-0">
+                  Under <strong>RR 7-2024</strong>, preserve all manual/electronic books, issued Sales Invoices, platform billing statements, and Form 2307 copies for at least <strong>5 years</strong> from the filing deadline.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary py-4 border-top mt-auto">
+    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-body-secondary small">
+      <div>
+        <span>© 2026 PH Marketplace Fee &amp; Margin Calculator. Built for Filipino E-commerce Sellers.</span>
+      </div>
+      <div class="d-flex flex-wrap gap-3">
+        <a href="index.html" class="text-decoration-none text-body-secondary">Pricing Simulator</a>
+        <a href="comparison.html" class="text-decoration-none text-body-secondary">Comparison</a>
+        <a href="roas-calculator.html" class="text-decoration-none text-body-secondary">ROAS &amp; Ads</a>
+        <a href="expenses.html" class="text-decoration-none text-body-secondary">Expenses &amp; Allotments</a>
+        <a href="opt-in-fees.html" class="text-decoration-none text-body-secondary">Opt-In Fees &amp; RTS</a>
+        <a href="fee-reference.html" class="text-decoration-none text-body-secondary">Fee Reference</a>
+        <a href="tax-guide.html" class="text-decoration-none text-body-secondary">Tax &amp; BIR Guide</a>
+        <a href="bir-invoice-books.html" class="text-decoration-none text-body-secondary fw-semibold">BIR Invoice &amp; Books</a>
+        <a href="digital-books.html" class="text-decoration-none text-body-secondary">Digital CRJ &amp; CDJ</a>
+        <a href="seller-centers.html" class="text-decoration-none text-body-secondary">Seller Portals</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Engine for theme -->
+  <script src="./js/calculator.js"></script>
+  <script>
+    initTheme();
+
+    // Interactive Order-to-Invoice & CRJ Previewer
+    (function () {
+      const ids = ['simPrice', 'simSellerVoucher', 'simPlatformVoucher', 'simFees', 'simShipping', 'simApplyEwt'];
+      const els = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+
+      function fmt(n) {
+        return n.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function updatePreview() {
+        const price = Math.max(0, parseFloat(els.simPrice.value) || 0);
+        const sellerVoucher = Math.max(0, parseFloat(els.simSellerVoucher.value) || 0);
+        const platformVoucher = Math.max(0, parseFloat(els.simPlatformVoucher.value) || 0);
+        const fees = Math.max(0, parseFloat(els.simFees.value) || 0);
+        const shipping = Math.max(0, parseFloat(els.simShipping.value) || 0);
+        const applyEwt = els.simApplyEwt.checked;
+
+        const grossSales = Math.max(0, price - sellerVoucher);
+        const cwt = applyEwt ? Math.round(grossSales * 0.005 * 100) / 100 : 0;
+        const cashInBank = grossSales - fees - cwt;
+
+        document.getElementById('outInvoiceGross').textContent = '₱' + fmt(grossSales);
+        document.getElementById('outInvoiceRule').textContent =
+          `Listed ₱${fmt(price)} − Seller Voucher ₱${fmt(sellerVoucher)}. (Platform Voucher ₱${fmt(platformVoucher)} stays in Gross Sales; Shipping ₱${fmt(shipping)} excluded.)`;
+
+        document.getElementById('outCrjSales').textContent = fmt(grossSales);
+        document.getElementById('outCrjFees').textContent = fmt(fees);
+        document.getElementById('outCrjCwt').textContent = fmt(cwt);
+        document.getElementById('outCrjCash').textContent = fmt(cashInBank);
+
+        const cashEl = document.getElementById('outCrjCash');
+        cashEl.classList.toggle('text-danger', cashInBank < 0);
+        cashEl.classList.toggle('text-success', cashInBank >= 0);
+      }
+
+      ids.forEach(id => {
+        els[id].addEventListener('input', updatePreview);
+        els[id].addEventListener('change', updatePreview);
+      });
+      updatePreview();
+    })();
+  </script>
+</body>
+</html>
